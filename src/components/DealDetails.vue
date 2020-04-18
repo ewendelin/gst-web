@@ -274,14 +274,14 @@
 </template>
 
 <script>
-	import axios from 'axios';
+	// import axios from 'axios';
 	export default {
 		name: 'DealDetails',
 		created() {
-			axios
+			this.$api
 				.get('http://localhost:3000/api/v1/promotions')
 				.then(response => {
-					this.details = response.data.cards;
+					this.details = response.data;
 					this.details = this.details.map(details => ({
 						...details,
 						show: false,
@@ -301,7 +301,7 @@
 			getCoupon(promotion) {
 				// post api
 				var customer_id = 1;
-				axios
+				this.$api
 					.post(
 						`http://localhost:3000/api/v1/customers/${customer_id}/get_coupon`,
 						{

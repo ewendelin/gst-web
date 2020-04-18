@@ -26,7 +26,7 @@
 					<v-icon right>mdi-pencil</v-icon>
 				</v-btn>
 
-				<v-dialog v-model="dialog" max-width="290">
+				<v-dialog v-model="dialog" max-width="350">
 					<v-card>
 						<v-layout row class="mx-auto">
 							<v-card-title class="headline">Add new Deal</v-card-title>
@@ -39,21 +39,18 @@
 						<v-form ref="form"
 						v-model="valid"
 						lazy-validation
-						class="mx-5">
-							<v-text-field v-model="title"
+						class="mx-5"
+						id="example-3">
+							<v-text-field v-model="newPromotion.title"
 								label="Title"
 								required
 								color="#DFA937">
 							</v-text-field>
-							<v-textarea v-model="description"
-								color="#DFA937">
-								<template v-slot:label>
-									<div>
-										Description 
-									</div>
-								</template>
+							<v-textarea v-model="newPromotion.description"
+								color="#DFA937"
+								label="Description">
 							</v-textarea>
-							<v-textarea v-model="disclaimer"
+							<v-textarea v-model="newPromotion.disclaimer"
 								color="#DFA937">
 								<template v-slot:label>
 									<div>
@@ -61,30 +58,89 @@
 									</div>
 								</template>
 							</v-textarea>
-							<v-checkbox v-model="allday"
-								color="green">
-								<template v-slot:label>
-									<div>
-										All day deal
-									</div>
-								</template>
-							</v-checkbox>
-							<v-text-field v-model="start"
-								label="Start-time"
-								required
-								color="#DFA937">
-							</v-text-field>
-							<v-text-field v-model="end"
-								label="End-time"
-								required
-								color="#DFA937">
-							</v-text-field>
+							<v-menu
+						        ref="menu"
+						        v-model="menu"
+						        :close-on-content-click="false"
+						        :return-value.sync="date"
+						        transition="scale-transition"
+						        offset-y
+						        min-width="290px"
+						        color="#DFA937"
+						      >
+						        <template v-slot:activator="{ on }">
+						          <v-text-field
+						            v-model="start_date"
+						            label="Picker in menu"
+						            prepend-icon="mdi-calendar"
+						            readonly
+						            v-on="on"
+						            color="#DFA937"
+						          ></v-text-field>
+						        </template>
+						        <v-date-picker v-model="start_date" no-title scrollable color="#DFA937">
+						          <v-spacer></v-spacer>
+						          <v-btn text color="#DFA937" @click="menu = false">Cancel</v-btn>
+						          <v-btn text color="#DFA937" @click="$refs.menu.save(start_date)">OK</v-btn>
+						        </v-date-picker>
+						      </v-menu>
+							<v-menu
+						        ref="menu1"
+						        v-model="menu1"
+						        :close-on-content-click="false"
+						        :return-value.sync="date"
+						        transition="scale-transition"
+						        offset-y
+						        min-width="290px"
+						        color="#DFA937"
+						      >
+						        <template v-slot:activator="{ on }">
+						          <v-text-field
+						            v-model="end_date"
+						            label="Picker in menu"
+						            prepend-icon="mdi-calendar"
+						            readonly
+						            v-on="on"
+						            color="#DFA937"
+						          ></v-text-field>
+						        </template>
+						        <v-date-picker v-model="end_date" no-title scrollable color="#DFA937">
+						          <v-spacer></v-spacer>
+						          <v-btn text color="#DFA937" @click="menu1 = false">Cancel</v-btn>
+						          <v-btn text color="#DFA937" @click="$refs.menu1.save(end_date)">OK</v-btn>
+						        </v-date-picker>
+						      </v-menu>
+						      <el-time-select
+								  v-model="newPromotion.start_time"
+								  :picker-options="{
+								    start: '00:00',
+								    step: '00:30',
+								    end: '24:00'
+								  }"
+								  placeholder="Start Time">
+								</el-time-select>
+								 <el-time-select
+								 class="endtime"
+								  v-model="newPromotion.end_time"
+								  :picker-options="{
+								    start: '00:00',
+								    step: '00:30',
+								    end: '24:00'
+								  }"
+								  placeholder="End Time">
+								</el-time-select>
 							<v-file-input label="Deal Photo"
-								prepend-icon="mdi-camera">
+								prepend-icon="mdi-camera"
+								color="#DFA937">
 							</v-file-input>
+							<v-checkbox
+							v-model="newPromotion.status"
+							color="#DFA937"
+							label="Click box to Post Now">
+							</v-checkbox>
 						</v-form>
 						<v-card-actions class="d-flex justify-space-around pb-3">
-							<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="dialog = false">
+							<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="createPromotion">
 								save & post
 							</v-btn>
 							<v-btn width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="dialog = false">
@@ -200,17 +256,17 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 import VendorCard from "../components/VendorCard.vue";
 import VNav from '../components/VNav';
 export default {
   name: "Vendor",
   components: { VendorCard, VNav },
   created() {
-    axios
-      .get("http://localhost:3000/api/v1/vendors/1")
+    this.$api
+      .get("http://localhost:3000/api/v1/vendor_profiles/vendor")
       .then(response => {
-        this.vendor = response.data;
+        this.vendor = response.data.vendor;
       })
       .catch(e => {
         this.error.push(e);
@@ -218,21 +274,36 @@ export default {
   },
   data() {
     return {
+      start_date: new Date().toISOString().substr(0, 10),
+      end_date: new Date().toISOString().substr(0, 10),
+      menu: false,
+      menu1: false,
       vendor: null,
       dialog: false,
       dialog1: false,
       dialog2: false,
       items: ['Restaurant', 'Bar', 'Cafe', 'Store'],
-      newPromotion: {}
+      newPromotion: {
+		title: '',
+		description: '',
+		disclaimer: '',
+		start_date: '',
+		end_date: '',
+		start_time: '',
+      	end_time: '',
+      	status: true,
+      }
     };
   },
   methods: {
-    createPromotion(status) {
+    createPromotion() {
       let promotion = this.newPromotion;
-      promotion["status"] = status;
+      // promotion["status"] = status;
+      promotion['vendor_profile_id'] = this.vendor.id
+      // promotion['title'] = this.data.title
 
-      axios
-        .post(`http://localhost:3000/api/v1/vendors/1/create_promotion`, {
+      this.$api
+        .post(`http://localhost:3000/api/v1/promotions`, {
           promotion: promotion
         })
         .then()
@@ -263,5 +334,9 @@ export default {
   border-radius: 5px;
   background-color: rgba(223, 169, 55, 20%) !important;
   color: #dfa937 !important;
+}
+.endtime {
+	margin-top: 1rem;
+	margin-bottom:.7rem;
 }
 </style>

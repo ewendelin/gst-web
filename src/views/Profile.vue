@@ -218,10 +218,10 @@
 	</div>
 </template>
 <script>
-	import axios from 'axios';
+	// import axios from 'axios';
 	import Navbar from '../components/Navbar';
-	axios.defaults.headers.common['X-Auth-Token'] = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJleHAiOjE1ODkxODUyMTl9.yCeUHSSHkqET1Rbr9wznhKmE_nw62Iztu4RW3H3IBi4";
-	axios.defaults.headers.common['API-key'] = 'gastbyellenapikey';
+	// axios.defaults.headers.common['X-Auth-Token'] = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJleHAiOjE1ODkxODUyMTl9.yCeUHSSHkqET1Rbr9wznhKmE_nw62Iztu4RW3H3IBi4";
+	// axios.defaults.headers.common['API-key'] = 'gastbyellenapikey';
 
 	export default {
 		name: 'Profile',
@@ -230,12 +230,17 @@
 			// this.getProfileInfo();
 		},
 		created() {
-			axios
+			this.$api
 				.get(
 					`http://localhost:3000/api/v1/coupons`
 				)
 				.then(response => {
-					this.deals = response.data
+					this.deals = response.data;
+					this.deals = this.deals.map(deals => ({
+						...deals,
+						dialog: false,
+						dialog3: false
+					}));
 				})
 				.catch(function(error) {
 					alert('fail' + error);
@@ -261,9 +266,8 @@
 			remove(deal_id, index) {
 				// this.deals.splice(id, 1); JavaScript
 				// below VueJS delete helper
-				this.$delete(this.deals, index);
-				axios
-					.put(
+				this.$api(this.deals, index);
+					this.$api.put(
 						`http://localhost:3000/api/v1/customers/${this.customerID}/cancel_coupon`,
 						{
 							deal_id: deal_id
