@@ -129,10 +129,14 @@
 								  }"
 								  placeholder="End Time">
 								</el-time-select>
-							<v-file-input label="Deal Photo"
-								prepend-icon="mdi-camera"
-								color="#DFA937">
-							</v-file-input>
+							<el-upload
+							v-model="image"
+							action="http://localhost:3000/api/v1/promotions"
+								  class="upload-demo"
+								  ref="upload"
+								  :auto-upload="false">
+								  <el-button slot="trigger" size="small" type="primary">select file</el-button>
+								</el-upload>
 							<v-checkbox
 							v-model="newPromotion.status"
 							color="#DFA937"
@@ -140,7 +144,7 @@
 							</v-checkbox>
 						</v-form>
 						<v-card-actions class="d-flex justify-space-around pb-3">
-							<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="createPromotion">
+							<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="createPromotion();submitUpload();">
 								save & post
 							</v-btn>
 							<v-btn width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="dialog = false">
@@ -236,7 +240,7 @@
 				</v-dialog>
 			</v-layout>
 		</v-col>
-		<v-layout row class="mx-9" width="60vw">
+		<v-layout row class="mx-9" max-width="60vw">
 			<v-list-item>
 				<v-list-item-content>
 					<v-list-item-title class="title font-weight-bold mb-1 mt-n4">Description</v-list-item-title>
@@ -284,18 +288,22 @@ export default {
       dialog2: false,
       items: ['Restaurant', 'Bar', 'Cafe', 'Store'],
       newPromotion: {
-		title: '',
-		description: '',
-		disclaimer: '',
+		title: 'hello',
+		description: 'test',
+		disclaimer: 'rreq',
 		start_date: '',
 		end_date: '',
-		start_time: '',
-      	end_time: '',
+		start_time: '08:30',
+      	end_time: '23:00',
       	status: true,
+      	image: '',
       }
     };
   },
   methods: {
+  	submitUpload() {
+        this.$refs.upload.submit();
+      },
     createPromotion() {
       let promotion = this.newPromotion;
       // promotion["status"] = status;
