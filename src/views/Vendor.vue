@@ -20,7 +20,7 @@
 
 			</v-btn>
 			<p class="headline font-weight-medium mb-0">{{ vendor.name }}</p>
-			<p class="subtitle-1">{{ vendor.vendor_type }}</p>
+			<p class="subtitle-1">{{ vendor.type }}</p>
 			<v-layout row class="justify-end mx-5">
 				<v-btn text class="mt-n12 pt-0" @click="dialog2 = true">
 					<v-icon right>mdi-pencil</v-icon>
@@ -130,8 +130,8 @@
 								  placeholder="End Time">
 								</el-time-select>
 							<el-upload
-							v-model="image"
-							action="http://localhost:3000/api/v1/promotions"
+								v-model="image"
+								action="http://localhost:3000/api/v1/promotions"
 								  class="upload-demo"
 								  ref="upload"
 								  :auto-upload="false">
@@ -240,14 +240,14 @@
 				</v-dialog>
 			</v-layout>
 		</v-col>
-		<v-layout row class="mx-9" max-width="60vw">
+		<v-layout row class="mx-5" max-width="90%">
 			<v-list-item>
 				<v-list-item-content>
 					<v-list-item-title class="title font-weight-bold mb-1 mt-n4">Description</v-list-item-title>
 					<v-list-item-subtitle class="body1 font-weight-regular mb-3">
 						{{ vendor.address }}
 					</v-list-item-subtitle>
-					<v-list-item-subtitle class="body1 font-weight-regular mb-3">
+					<v-list-item-subtitle class="body1 font-weight-regular mb-3 text-wrap">
 						{{ vendor.description }}
 					</v-list-item-subtitle>
 					<v-list-item-title class="title font-weight-bold">Saved Deals</v-list-item-title>

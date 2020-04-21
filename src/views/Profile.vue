@@ -156,7 +156,7 @@
 								</v-layout>
 
 								<v-card-text>
-									API fetch
+									{{ deal.token }}
 								</v-card-text>
 							</v-card>
 						</v-dialog>
@@ -188,7 +188,7 @@
 										tile
 										class="buttons"
 										depressed
-										@click="remove(deal.id, index)"
+										@click="remove(deal)"
 									>
 										yes, i am sure
 									</v-btn>
@@ -250,6 +250,7 @@
 			return {
 				customerID: 1,
 				deals: [],
+				res: [],
 				snackbar: false,
 				users: [
 					{
@@ -263,18 +264,30 @@
 			// getProfileInfo() {
 				
 			// },
-			remove(deal_id, index) {
-				// this.deals.splice(id, 1); JavaScript
-				// below VueJS delete helper
-				this.$api(this.deals, index);
-					this.$api.put(
-						`http://localhost:3000/api/v1/customers/${this.customerID}/cancel_coupon`,
-						{
-							deal_id: deal_id
-						}
+			remove(deal) {
+				// this.$api(this.deals, index);
+					this.$api.post(
+						`http://localhost:3000/api/v1/coupons/${deal.id}`,
 					)
 					.then(response => {
 						this.canceled = response
+						
+						this.res = this.deals.filter((x) => {
+							return x.id != deal.id
+						})
+						// this.deals.forEach((x) => {
+						// 	if (x.id != deal.id) {
+						// 		this.res << x
+						// 	}
+						// })
+						this.deals = this.res;
+
+						// this.deals = this.deals.map(deals => ({
+						// 	...deals,
+						// 	dialog: false,
+						// 	dialog3: false
+						// }));
+
 					})
 					.catch(function(error) {
 						alert('fail' + error);

@@ -1,6 +1,6 @@
 <template>
 	<v-container class="px-0">
-		<v-layout row class="mx-auto hidden-sm-and-down" align-center justify-center>
+		<!-- <v-layout row class="mx-auto hidden-sm-and-down" align-center justify-center>
 			<v-flex md6 lg6>
 				<v-card
 					tile
@@ -134,7 +134,7 @@
 					</v-expand-transition>
 				</v-card>
 			</v-flex>
-		</v-layout>
+		</v-layout> -->
 		<v-layout row class="mx-auto hidden-md-and-up" align-center justify-center>
 			<v-flex xs12 sm9>
 				<v-card
@@ -158,7 +158,7 @@
 						</v-card-subtitle>
 						<v-spacer></v-spacer>
 						<v-btn class="mt-0 pt-0" text>
-							<v-icon small>mdi-map-marker</v-icon>200 m
+							<v-icon small>mdi-map-marker</v-icon>{{promotion.area}}
 						</v-btn>
 						<v-card-text class="py-0">
 							{{ promotion.description }}
@@ -264,7 +264,21 @@
 									</v-icon>
 								</v-card-text> -->
 							</v-layout>
-							<v-img src="../assets/storefront.jpg" height="300px"></v-img>
+							<v-row align="center" justify="center">
+								<v-img src="../assets/storefront.jpg" height="300px">
+						          	<v-row align="end" justify="center" class="fill-height">
+						            	<v-btn
+										width="35vw" 
+										tile 
+										dark
+										color="#DFA937"
+										class="buttons" 
+										depressed>
+										reviews
+										</v-btn>
+									</v-row>
+								</v-img>
+							</v-row>
 						</div>
 					</v-expand-transition>
 				</v-card>
@@ -300,14 +314,10 @@
 		methods: {
 			getCoupon(promotion) {
 				// post api
-				var customer_id = 1;
+				// var customer_id = 1;
 				this.$api
 					.post(
-						`http://localhost:3000/api/v1/customers/${customer_id}/get_coupon`,
-						{
-							// @FIXME: customer id should get from this user
-							promotion_id: promotion.id
-						}
+						`http://localhost:3000/api/v1/promotions/${promotion.id}/claim_coupon`
 					)
 					.then(function() {
 						promotion.dialog = true;
