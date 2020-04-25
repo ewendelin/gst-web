@@ -71,7 +71,7 @@
 						        <template v-slot:activator="{ on }">
 						          <v-text-field
 						            v-model="start_date"
-						            label="Picker in menu"
+						            label="Start Date"
 						            prepend-icon="mdi-calendar"
 						            readonly
 						            v-on="on"
@@ -97,7 +97,7 @@
 						        <template v-slot:activator="{ on }">
 						          <v-text-field
 						            v-model="end_date"
-						            label="Picker in menu"
+						            label="End Date"
 						            prepend-icon="mdi-calendar"
 						            readonly
 						            v-on="on"
@@ -135,8 +135,15 @@
 								  class="upload-demo"
 								  ref="upload"
 								  :auto-upload="false">
-								  <el-button slot="trigger" size="small" type="primary">select file</el-button>
-								</el-upload>
+								<el-button slot="trigger" size="small" type="primary">select file</el-button>
+							</el-upload>
+							<v-text-field
+					          label="Amount"
+					          v-model="newPromotion.price"
+					          value=""
+					          color="#DFA937"
+					          prefix="¥"
+					        ></v-text-field>
 							<v-checkbox
 							v-model="newPromotion.status"
 							color="#DFA937"
@@ -296,6 +303,7 @@ export default {
 		start_time: '08:30',
       	end_time: '23:00',
       	status: true,
+      	price: '',
       	image: '',
       }
     };
@@ -314,7 +322,7 @@ export default {
         .post(`http://localhost:3000/api/v1/promotions`, {
           promotion: promotion
         })
-        .then()
+        .then(location.reload())
         .catch(e => {
           this.error.push(e);
         });

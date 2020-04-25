@@ -134,10 +134,13 @@
 				<v-list-item>
 					<v-list-item-content>
 						<v-list-item-title>
-							{{ deal.verified }}
+							{{ deal.promotion.title }}
 						</v-list-item-title>
 						<v-list-item-subtitle>
-							{{ deal.created_at }}
+							{{ deal.vendor_name }}
+						</v-list-item-subtitle>
+						<v-list-item-subtitle>
+							{{ deal.promotion.time_slot }}
 						</v-list-item-subtitle>
 					</v-list-item-content>
 					<v-spacer></v-spacer>
@@ -155,7 +158,7 @@
 									</v-btn>
 								</v-layout>
 
-								<v-card-text>
+								<v-card-text class="headline">
 									{{ deal.token }}
 								</v-card-text>
 							</v-card>
@@ -274,12 +277,7 @@
 						
 						this.res = this.deals.filter((x) => {
 							return x.id != deal.id
-						})
-						// this.deals.forEach((x) => {
-						// 	if (x.id != deal.id) {
-						// 		this.res << x
-						// 	}
-						// })
+						});
 						this.deals = this.res;
 
 						// this.deals = this.deals.map(deals => ({

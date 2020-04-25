@@ -5,7 +5,7 @@
               class="mb-6"
               width="85vw"
               xs12 md6 lg4
-              v-for="(promotion, index) in promotions"
+              v-for="(promotion) in promotions"
               :key="promotion.id">		
         <v-img src="../assets/cross.jpg"
               height="200px">
@@ -18,20 +18,19 @@
 
         <v-layout row class="ml-3 mr-3 mt-0 px-1 pt-0">
           <v-card-subtitle class="font-weight-bold mt-1 pt-1">
-            {{ promotion.time }}
+            {{ promotion.time_slot }}
             <!-- {{deal.time1}} -->
           </v-card-subtitle>
           <v-spacer></v-spacer>
-          <v-card-text class="py-0">
+          <v-card-text class="py-0 mt-n3">
             {{ promotion.description }}
           </v-card-text>
-          <v-card-text class="mt-2 pt-0">
-            <v-span class="font-weight-bold">
+          <v-card-text class="mt-2 pt-0 font-weight-medium">
               Disclaimer
-            </v-span>
-            <br>
-            promotion.disclaimer
-            <!-- {{deal.disclaimer}} -->
+          </v-card-text>
+          <v-card-text class="mt-n6">
+            {{promotion.disclaimer}}
+            <!-- {{deal.time1}} -->
           </v-card-text>
           <v-row justify="space-around" class="mx-2 align-center">
             <v-switch inset @change="promotion.dialog3 = true" color="success"></v-switch>
@@ -105,12 +104,12 @@
                         lazy-validation
                         class="mx-5">
 
-                  <v-text-field v-model="title"
+                  <v-text-field v-model="promotion.title"
                                 label="Title"
                                 required
                                 color="#DFA937">
                   </v-text-field>
-                  <v-textarea v-model="description"
+                  <v-textarea v-model="promotion.description"
                               color="#DFA937">
                     <template v-slot:label>
                       <div>
@@ -118,7 +117,7 @@
                       </div>
                     </template>
                   </v-textarea>
-                  <v-textarea v-model="disclaimer"
+                  <v-textarea v-model="promotion.disclaimer"
                               color="#DFA937">
                     <template v-slot:label>
                       <div>
@@ -126,25 +125,6 @@
                       </div>
                     </template>
                   </v-textarea>
-                  <v-checkbox v-model="allday"
-                              color="green">
-                    <template  v-slot:label>
-                      <div>
-                        All day promotion
-                      </div>
-                    </template>
-                  </v-checkbox>
-                  <v-text-field v-model="start"
-                                label="Start-time"
-                                required
-                                color="#DFA937">
-                  </v-text-field>
-                  <v-text-field v-model="end"
-                                label="End-time"
-                                required
-                                color="#DFA937">
-                  </v-text-field>
-                  
                   <v-file-input label="Promotion Photo"
                                 prepend-icon="mdi-camera">
                   </v-file-input>
@@ -153,11 +133,11 @@
                 <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn
                     width="50%" dark color="#DFA937" tile class="buttons" depressed @click="promotion.dialog2 = false">
-                    save & post
+                    save
                   </v-btn>
                   <v-btn
                     width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="promotion.dialog2 = false">
-                    save
+                    cancel
                   </v-btn>
                   <v-snackbar v-model="snackbar">
                     You have successfully edited this promotion. Toggle the switch to make the promotion live and visable for customers!
@@ -193,7 +173,7 @@
                 </v-card-text>
 
                 <v-card-actions class="d-flex justify-center pb-3">
-                  <v-btn width="80%" dark color="#DFA937" tile class="buttons" depressed @click="remove(index)">
+                  <v-btn width="80%" dark color="#DFA937" tile class="buttons" depressed @click="remove(promotion)">
                     yes, i am sure
                   </v-btn>
                 </v-card-actions>
@@ -219,7 +199,6 @@
 
 <script>
 
-	import axios from 'axios';
 	export default {
 		name: 'VendorCard',
 		props: {
@@ -229,9 +208,9 @@
 			}
 		},
 		created() {
-			axios
+			this.$api
 				.get(
-					`http://localhost:3000/api/v1/vendors/${this.vendorId}/saved_promotions.json`
+					`http://localhost:3000/api/v1/vendor_profiles/${this.vendorId}/promotions`
 				)
 				.then(response => {
 					this.promotions = response.data.promotions;
@@ -249,9 +228,31 @@
 		},
 
 		methods: {
-			remove(id) {
-				this.$delete(this.promotions, id);
-			}
+      remove(promotion) {
+        // this.$api(this.deals, index);
+          this.$api.post(
+            `http://localhost:3000/api/v1/vendor_profiles/destroy_promotion`,
+            {id: promotion.id}
+          )
+          .then(response => {
+            this.canceled = response
+            
+            this.res = this.promotions.filter((x) => {
+              return x.id != promotion.id
+            });
+            this.promotions = this.res;
+
+            // this.deals = this.deals.map(deals => ({
+            //  ...deals,
+            //  dialog: false,
+            //  dialog3: false
+            // }));
+
+          })
+          .catch(function(error) {
+            alert('fail' + error);
+          });
+      }
 		},
 		data() {
 			return {
