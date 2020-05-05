@@ -57,16 +57,77 @@
                       </div>
                     </template>
                   </v-checkbox>
-                  <v-text-field v-model="start"
-                              label="Start-time"
-                              required
-                              color="#DFA937">
-                  </v-text-field>
-                  <v-text-field v-model="end"
-                                label="End-time"
-                                required
-                                color="#DFA937">
-                  </v-text-field>
+                  <v-menu
+                    ref="menu"
+                    v-model="menu"
+                    :close-on-content-click="false"
+                    :return-value.sync="date"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="290px"
+                    color="#DFA937"
+                  >
+                    <template v-slot:activator="{ on }">
+                      <v-text-field
+                       
+                        label="Start Date"
+                        prepend-icon="mdi-calendar"
+                        readonly
+                        v-on="on"
+                        color="#DFA937"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker  no-title scrollable color="#DFA937">
+                      <v-spacer></v-spacer>
+                      <v-btn text color="#DFA937" @click="menu = false">Cancel</v-btn>
+                      <v-btn text color="#DFA937" @click="$refs.menu.save(start_date)">OK</v-btn>
+                    </v-date-picker>
+                  </v-menu>
+              <v-menu
+                    ref="menu1"
+                    
+                    :close-on-content-click="false"
+                    :return-value.sync="date"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="290px"
+                    color="#DFA937"
+                  >
+                    <template v-slot:activator="{ on }">
+                      <v-text-field
+                        
+                        label="End Date"
+                        prepend-icon="mdi-calendar"
+                        readonly
+                        v-on="on"
+                        color="#DFA937"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker v-model="end_date" no-title scrollable color="#DFA937">
+                      <v-spacer></v-spacer>
+                      <v-btn text color="#DFA937" @click="menu1 = false">Cancel</v-btn>
+                      <v-btn text color="#DFA937" @click="$refs.menu1.save(end_date)">OK</v-btn>
+                    </v-date-picker>
+                  </v-menu>
+                  <el-time-select
+                  
+                  :picker-options="{
+                    start: '00:00',
+                    step: '00:30',
+                    end: '24:00'
+                  }"
+                  placeholder="Start Time">
+                </el-time-select>
+                 <el-time-select
+                 class="endtime"
+                 
+                  :picker-options="{
+                    start: '00:00',
+                    step: '00:30',
+                    end: '24:00'
+                  }"
+                  placeholder="End Time">
+                </el-time-select>
                 </v-form>
 
                 <v-card-actions class="d-flex justify-space-around pb-3">
@@ -74,13 +135,14 @@
                     width="90%" dark color="#DFA937" tile class="buttons" depressed @click="promotion.dialog3 = false, snackbar = true">
                     save & post
                   </v-btn>
-                  <v-snackbar v-model="snackbar" color="success">
+                  <!--@FIXME - the snackbar should only popup when you have successfully activated, not when you turn it off, write a method for that -->
+                  <!-- <v-snackbar v-model="snackbar" color="success">
                     You have successfully activated this promotion. It is now live and is viseble for customers!
                     <v-btn vertical text dark
                           @click="promotion.snackbar = false">
                       close
                     </v-btn>
-                  </v-snackbar>
+                  </v-snackbar> -->
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -131,12 +193,14 @@
                 </v-form>
 
                 <v-card-actions class="d-flex justify-space-around pb-3">
+                  <!-- @FIXME this one needs to be connected to the edit api -->
                   <v-btn
-                    width="50%" dark color="#DFA937" tile class="buttons" depressed @click="promotion.dialog2 = false">
+                    width="50%" dark color="#DFA937" tile class="buttons" depressed @click="edit(promotion)">
                     save
                   </v-btn>
+                  <!--@FIXME to discharge changes --> 
                   <v-btn
-                    width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="promotion.dialog2 = false">
+                    width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="canceledit(promotion)">
                     cancel
                   </v-btn>
                   <v-snackbar v-model="snackbar">
@@ -254,6 +318,15 @@
           });
       }
 		},
+    // edit(promotion){
+      
+    // },
+
+    // canceledit(promotion) {
+    //   this.dialog2 = false;
+    //   then(location.reload())
+    // },
+
 		data() {
 			return {
 				snackbar: false,

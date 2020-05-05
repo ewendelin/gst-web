@@ -271,7 +271,7 @@
 									tile 
 									dark
 									color="#DFA937"
-									class="buttons" 
+									class="buttons mb-4" 
 									depressed
 									@click="dialograting = true">
 									Add rating
@@ -307,9 +307,10 @@
 								</v-dialog>
 							</v-row>
 							</v-layout>
-							<v-row align="center" justify="center">
-								<v-img src="../assets/storefront.jpg" height="300px">{{promotion.vendor.main_img}}
-						          	<v-row align="end" justify="center" class="fill-height">
+							<v-layout class="mx-auto">
+								<!-- <v-row align="center" justify="center"> -->
+									<v-img src="../assets/storefront.jpg" height="300" width="100vw">{{promotion.vendor.main_img}}
+						          		<!-- <v-row align="end" justify="center" class="fill-height"> -->
 						          		<!-- FIXME SHOW THE SPECIFIC VENDOR -->
 						            	<!-- <v-btn
 										width="35vw" 
@@ -321,9 +322,10 @@
 										@click="jump(promotion)">
 										Add rating
 										</v-btn> -->
-									</v-row>
-								</v-img>
-							</v-row>
+										<!-- </v-row> -->
+									</v-img>
+								<!-- </v-row> -->
+							</v-layout>
 						</div>
 					</v-expand-transition>
 				</v-card>
@@ -360,45 +362,45 @@
 				rating: '',
 			};
 		},
-		// methods: {
-		// 	getCoupon(promotion) {
-		// 		// post api
-		// 		// var customer_id = 1;
-		// 		this.$api
-		// 			.post(
-		// 				`http://localhost:3000/api/v1/promotions/${promotion.id}/claim_coupon`
-		// 			)
-		// 			.then(function() {
-		// 				promotion.dialog = true;
-		// 			})
-		// 			.catch(function(error) {
-		// 				alert('fail' + error);
-		// 		});
-		// 	},
-		// 	methods: {
-		//   	submitUpload() {
-		//         this.$refs.upload.submit();
-		//       },
-		//     createRating() {
-		//       let rating = this.newRating;
-		//       // promotion["status"] = status;
-		//       promotion['vendor_profile_id'] = this.vendor.id
-		//       // promotion['title'] = this.data.title
+		methods: {
+			getCoupon(promotion) {
+				// post api
+				// var customer_id = 1;
+				this.$api
+					.post(
+						`http://localhost:3000/api/v1/promotions/${promotion.id}/claim_coupon`
+					)
+					.then(function() {
+						promotion.dialog = true;
+					})
+					.catch(function(error) {
+						alert('fail' + error);
+				});
+			},
+			methods: {
+		  	submitUpload() {
+		        this.$refs.upload.submit();
+		      },
+		    // createRating() {
+		    //   let rating = this.newRating;
+		    //   // promotion["status"] = status;
+		    //   promotion['vendor_profile_id'] = this.vendor.id
+		    //   // promotion['title'] = this.data.title
 
-		//       this.$api
-		//         .post(`http://localhost:3000/api/v1/promotions`, {
-		//           promotion: promotion
-		//         })
-		//         .then(location.reload())
-		//         .catch(e => {
-		//           this.error.push(e);
-		//         });
+		    //   this.$api
+		    //     .post(`http://localhost:3000/api/v1/promotions`, {
+		    //       promotion: promotion
+		    //     })
+		    //     .then(location.reload())
+		    //     .catch(e => {
+		    //       this.error.push(e);
+		    //     });
 
-		//       this.newRating = {};
-		//       this.dialograting = false;
-		//     }
-		//   }
-		// }
+		    //   this.newRating = {};
+		    //   this.dialograting = false;
+		    // }
+		  }
+		}
 	};
 </script>
 
