@@ -32,21 +32,34 @@
             {{promotion.disclaimer}}
             <!-- {{deal.time1}} -->
           </v-card-text>
+          <v-card-text class="mt-2 pt-0 font-weight-medium">
+              Status
+          </v-card-text>
+          <v-card-text class="mt-n6">
+            {{promotion.status}}
+            <!-- {{deal.time1}} -->
+          </v-card-text>
           <v-row justify="space-around" class="mx-2 align-center">
-            <v-switch inset @change="promotion.dialog3 = true" color="success"></v-switch>
-            <v-dialog v-model="promotion.dialog3"
+            <v-btn fab text @click="promotion.dialog3 = true">
+              <v-icon right>mdi-cog</v-icon>
+            </v-btn>
+            
+            <v-dialog  v-model="promotion.dialog3"
                       max-width="290">
               <v-card>
                 <v-layout row class="mx-auto">
-                  <v-card-title class="headline">Activate promotion</v-card-title>
+                  <v-card-title class="headline">Promotion</v-card-title>
                   <v-spacer></v-spacer>
                     <v-btn icon @click="promotion.dialog3 = false">
                       <v-icon>mdi-close</v-icon>
                     </v-btn>
                 </v-layout>
-
-                <v-form ref="form"
-                        v-model="valid"
+                  <v-card-text>{{promotion.status}}</v-card-text>
+                
+                <v-form 
+                 v-if="promotion.status == 'archive' || promotion.status == 'draft'"
+                  ref="form2"
+                  v-model="valid"
                         lazy-validation
                         class="mx-5">
                   <v-checkbox v-model="allday"
@@ -58,8 +71,8 @@
                     </template>
                   </v-checkbox>
                   <v-menu
-                    ref="menu"
-                    v-model="menu"
+                    ref="menu3"
+                    v-model="menu3"
                     :close-on-content-click="false"
                     :return-value.sync="date"
                     transition="scale-transition"
@@ -69,7 +82,7 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
-                       
+                        v-model="promotion.start_date"
                         label="Start Date"
                         prepend-icon="mdi-calendar"
                         readonly
@@ -77,15 +90,15 @@
                         color="#DFA937"
                       ></v-text-field>
                     </template>
-                    <v-date-picker  no-title scrollable color="#DFA937">
+                    <v-date-picker v-model="start_date" no-title scrollable color="#DFA937">
                       <v-spacer></v-spacer>
-                      <v-btn text color="#DFA937" @click="menu = false">Cancel</v-btn>
-                      <v-btn text color="#DFA937" @click="$refs.menu.save(start_date)">OK</v-btn>
+                      <v-btn text color="#DFA937" @click="menu3 = false">Cancel</v-btn>
+                      <v-btn text color="#DFA937" @click="$refs.menu3.save(start_date)">OK</v-btn>
                     </v-date-picker>
                   </v-menu>
               <v-menu
-                    ref="menu1"
-                    
+                    ref="menu4"
+                    v-model="menu4"
                     :close-on-content-click="false"
                     :return-value.sync="date"
                     transition="scale-transition"
@@ -95,7 +108,7 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
-                        
+                        v-model="promotion.end_date"
                         label="End Date"
                         prepend-icon="mdi-calendar"
                         readonly
@@ -103,14 +116,14 @@
                         color="#DFA937"
                       ></v-text-field>
                     </template>
-                    <v-date-picker v-model="end_date" no-title scrollable color="#DFA937">
+                    <v-date-picker v-model="end_date2" no-title scrollable color="#DFA937">
                       <v-spacer></v-spacer>
-                      <v-btn text color="#DFA937" @click="menu1 = false">Cancel</v-btn>
-                      <v-btn text color="#DFA937" @click="$refs.menu1.save(end_date)">OK</v-btn>
+                      <v-btn text color="#DFA937" @click="menu4 = false">Cancel</v-btn>
+                      <v-btn text color="#DFA937" @click="$refs.menu4.save(end_date2)">OK</v-btn>
                     </v-date-picker>
                   </v-menu>
                   <el-time-select
-                  
+                  v-model="promotion.start_time"
                   :picker-options="{
                     start: '00:00',
                     step: '00:30',
@@ -120,7 +133,7 @@
                 </el-time-select>
                  <el-time-select
                  class="endtime"
-                 
+                  v-model="promotion.end_time"
                   :picker-options="{
                     start: '00:00',
                     step: '00:30',
@@ -128,22 +141,25 @@
                   }"
                   placeholder="End Time">
                 </el-time-select>
+                <v-card-actions class="d-flex justify-space-around pb-3">
+                  <v-btn v-if="promotion.status == 'draft'"
+                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'onsale')">
+                    Activate
+                  </v-btn>
+                  <v-btn v-else-if="promotion.status == 'archive'"
+                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'onsale')">
+                    Reactivate
+                  </v-btn>
+                </v-card-actions>
+                </v-form>
+                <v-form v-else-if="promotion.status == 'onsale'">
+                  <v-btn
+                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'archive')">
+                    archive
+                  </v-btn>
                 </v-form>
 
-                <v-card-actions class="d-flex justify-space-around pb-3">
-                  <v-btn
-                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="promotion.dialog3 = false, snackbar = true">
-                    save & post
-                  </v-btn>
-                  <!--@FIXME - the snackbar should only popup when you have successfully activated, not when you turn it off, write a method for that -->
-                  <!-- <v-snackbar v-model="snackbar" color="success">
-                    You have successfully activated this promotion. It is now live and is viseble for customers!
-                    <v-btn vertical text dark
-                          @click="promotion.snackbar = false">
-                      close
-                    </v-btn>
-                  </v-snackbar> -->
-                </v-card-actions>
+                
               </v-card>
             </v-dialog>
 
@@ -195,12 +211,12 @@
                 <v-card-actions class="d-flex justify-space-around pb-3">
                   <!-- @FIXME this one needs to be connected to the edit api -->
                   <v-btn
-                    width="50%" dark color="#DFA937" tile class="buttons" depressed @click="edit(promotion)">
+                    width="50%" dark color="#DFA937" tile class="buttons" depressed @click="editPromotion(promotion);">
                     save
                   </v-btn>
                   <!--@FIXME to discharge changes --> 
                   <v-btn
-                    width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="canceledit(promotion)">
+                    width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="cancelEdit();">
                     cancel
                   </v-btn>
                   <v-snackbar v-model="snackbar">
@@ -214,6 +230,25 @@
                     </v-btn>
                   </v-snackbar>
                 </v-card-actions>
+              </v-card>
+            </v-dialog>
+             <v-btn fab text @click="promotion.dialogstats = true">
+              <v-icon right>mdi-chart-areaspline-variant</v-icon>
+            </v-btn>
+            <v-dialog v-model="promotion.dialogstats"
+                      max-width="290">
+              <v-card>
+                <v-layout row class="mx-auto">
+                  <v-card-title class="headline">Statistics</v-card-title>
+                  <v-spacer></v-spacer>
+                  <v-btn icon @click="promotion.dialogstats = false">
+                    <v-icon>mdi-close</v-icon>
+                  </v-btn>
+                </v-layout>
+
+                <v-card-text>
+                  50 Claimed coupons 
+                </v-card-text>
               </v-card>
             </v-dialog>
 
@@ -255,6 +290,7 @@
               </v-btn>
             </v-snackbar>
           </v-row>	
+
         </v-layout>
       </v-card>
     </v-layout>
@@ -274,7 +310,7 @@
 		created() {
 			this.$api
 				.get(
-					`http://localhost:3000/api/v1/vendor_profiles/${this.vendorId}/promotions`
+					`/vendor_profiles/${this.vendorId}/promotions`
 				)
 				.then(response => {
 					this.promotions = response.data.promotions;
@@ -283,7 +319,8 @@
 						dialog: false,
 						switch: false,
 						dialog2: false,
-						dialog3: false
+						dialog3: false,
+            dialogstats: false
 					}));
 				})
 				.catch(e => {
@@ -295,7 +332,7 @@
       remove(promotion) {
         // this.$api(this.deals, index);
           this.$api.post(
-            `http://localhost:3000/api/v1/vendor_profiles/destroy_promotion`,
+            `/vendor_profiles/destroy_promotion`,
             {id: promotion.id}
           )
           .then(response => {
@@ -316,11 +353,55 @@
           .catch(function(error) {
             alert('fail' + error);
           });
+      },
+      editPromotion(promotion) {
+        let id = promotion.id
+        let updated_promotion = promotion;
+        delete updated_promotion.id
+        delete updated_promotion.image
+        delete updated_promotion.switch
+        delete updated_promotion.dialog
+        delete updated_promotion.dialog2
+        delete updated_promotion.dialog3
+        delete updated_promotion.dialogstats
+       
+        this.$api
+          .post(`/promotions/${id}`, 
+            {promotion: updated_promotion})
+          .then(location.reload())
+          .catch(e => {
+            this.error.push(e);
+          });
+      },
+      update(promotion, status) {
+        let id = promotion.id
+        if (status == 'archive') {
+          this.$api
+          .post(`/promotions/${id}/archive`)
+          .then(location.reload())
+          .catch(e => {
+            this.error.push(e);
+          });
+        } else if (promotion.status == 'archive' && status == 'onsale') {
+          promotion.status = status
+          this.$api
+          .post(`/promotions/${id}/renew`, {promotion: promotion})
+          .then(location.reload())
+          .catch(e => {
+            this.error.push(e);
+          });
+        } else if (promotion.status == 'draft' && status == 'onsale') {
+          this.$api
+          .post(`/promotions/${id}/activate`, {promotion: promotion})
+          .then(location.reload())
+          .catch(e => {
+            this.error.push(e);
+          });
+        }
+        
       }
 		},
-    // edit(promotion){
       
-    // },
 
     // canceledit(promotion) {
     //   this.dialog2 = false;
@@ -330,7 +411,11 @@
 		data() {
 			return {
 				snackbar: false,
-				promotions: []
+				promotions: [],
+        start_date: new Date().toISOString().substr(0, 10),
+        end_date2: new Date().toISOString().substr(0, 10),
+        menu3: false,
+        menu4: false,
 			};
 		}
 	};

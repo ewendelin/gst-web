@@ -151,10 +151,10 @@
 							</v-checkbox>
 						</v-form>
 						<v-card-actions class="d-flex justify-space-around pb-3">
-							<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="createPromotion();submitUpload();">
+							<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="createPromotion('onsale');submitUpload();">
 								save & post
 							</v-btn>
-							<v-btn width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="dialog = false">
+							<v-btn width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="createPromotion('draft');">
 								save
 							</v-btn>
 						</v-card-actions>
@@ -170,17 +170,17 @@
 							</v-btn>
 						</v-layout>
 						<v-form ref="form"
-						v-model="verify"
+						v-model="valid"
 						lazy-validation
 						class="mx-5">
-							<v-text-field v-model="code"
+							<v-text-field v-model="coupon.token"
 								label="Coupon Code"
 								required
 								color="#DFA937">
 							</v-text-field>
 						</v-form>
 						<v-card-actions class="d-flex justify-space-around pb-3">
-							<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="dialog1 = false">
+							<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="verify(coupon.token);">
 								verify
 							</v-btn>
 						</v-card-actions>
@@ -197,20 +197,20 @@
 						</v-layout>
 
 						<v-form ref="form"
-						v-model="editprofile"
+						v-model="valid"
 						lazy-validation
 						class="mx-5">
-							<v-text-field v-model="vname"
+							<v-text-field v-model="vendor.name"
 								label="Company Name"
 								required
 								color="#DFA937">
 							</v-text-field>
-							<v-text-field v-model="address"
+							<v-text-field v-model="vendor.address"
 								label="Address"
 								required
 								color="#DFA937">
 							</v-text-field>
-							<v-textarea v-model="description"
+							<v-textarea v-model="vendor.description"
 								required
 								color="#DFA937">
 								<template v-slot:label>
@@ -220,7 +220,7 @@
 								</template>
 							</v-textarea>
 							<v-select
-								v-model="value"
+								v-model="vendor.type"
 								:items="items"
 								attach
 								label="Type of Establishment"
@@ -236,7 +236,7 @@
 							</v-file-input>
 						</v-form>
 						<v-card-actions class="d-flex justify-space-around pb-3">
-							<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="dialog2 = false">
+							<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="editVendor();">
 								save
 							</v-btn>
 							<v-btn width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="dialog2 = false">
@@ -275,7 +275,7 @@ export default {
   components: { VendorCard, VNav },
   created() {
     this.$api
-      .get("http://localhost:3000/api/v1/vendor_profiles/vendor")
+      .get("/vendor_profiles/vendor")
       .then(response => {
         this.vendor = response.data.vendor;
       })
@@ -294,6 +294,7 @@ export default {
       dialog1: false,
       dialog2: false,
       items: ['Restaurant', 'Bar', 'Cafe', 'Store'],
+      coupon: {token: 'ACVBFF'},
       newPromotion: {
 		title: 'hello',
 		description: 'test',
@@ -302,9 +303,11 @@ export default {
 		end_date: '',
 		start_time: '08:30',
       	end_time: '23:00',
-      	status: true,
+      	status: '',
       	price: '',
       	image: '',
+      },
+      updateVendor: {
       }
     };
   },
@@ -312,14 +315,14 @@ export default {
   	submitUpload() {
         this.$refs.upload.submit();
       },
-    createPromotion() {
+    createPromotion(status) {
       let promotion = this.newPromotion;
       // promotion["status"] = status;
       promotion['vendor_profile_id'] = this.vendor.id
       // promotion['title'] = this.data.title
-
+      promotion.status = status;
       this.$api
-        .post(`http://localhost:3000/api/v1/promotions`, {
+        .post(`/promotions`, {
           promotion: promotion
         })
         .then(location.reload())
@@ -329,9 +332,44 @@ export default {
 
       this.newPromotion = {};
       this.dialog = false;
+    },
+    editVendor() {
+    	let updated_vendor = this.vendor;
+    	let id = updated_vendor.id
+    	delete updated_vendor.id;
+    	delete updated_vendor.user_id;
+    	delete updated_vendor.verified;
+    	delete updated_vendor.average_stars;
+    	delete updated_vendor.total_reviews;
+
+    	// vendor['vendor_profile_id'] = this.vendor.id
+    	this.$api
+    		.post(`/vendor_profiles/${id}`, 
+    			{vendor: updated_vendor})
+    		.then(location.reload())
+    		.catch(e => {
+    			this.error.push(e);
+    		});
+    	this.updateVendor = {};
+    	this.dialog2 = false;
+    },
+    verify(token) {
+    	// let token = this.data;
+    	this.$api
+    		.post(`/users/verify_coupon`, 
+    			{token: token})
+    		.then(
+    			location.reload()
+    			)
+    		.catch(e => {
+    			this.error.push(e);
+    		});
+    	this.dialog1 = false;
+    },
+
     }
-  }
-};
+  
+}
 
 </script>
 

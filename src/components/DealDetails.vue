@@ -340,7 +340,7 @@
 		name: 'DealDetails',
 		created() {
 			this.$api
-				.get('http://localhost:3000/api/v1/promotions')
+				.get('/promotions')
 				.then(response => {
 					this.details = response.data;
 					this.details = this.details.map(details => ({
@@ -368,7 +368,7 @@
 				// var customer_id = 1;
 				this.$api
 					.post(
-						`http://localhost:3000/api/v1/promotions/${promotion.id}/claim_coupon`
+						`/promotions/${promotion.id}/claim_coupon`
 					)
 					.then(function() {
 						promotion.dialog = true;
@@ -388,7 +388,7 @@
 		    //   // promotion['title'] = this.data.title
 
 		    //   this.$api
-		    //     .post(`http://localhost:3000/api/v1/promotions`, {
+		    //     .post(`/promotions`, {
 		    //       promotion: promotion
 		    //     })
 		    //     .then(location.reload())

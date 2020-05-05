@@ -235,7 +235,7 @@
 		created() {
 			this.$api
 				.get(
-					`http://localhost:3000/api/v1/coupons`
+					`/coupons`
 				)
 				.then(response => {
 					this.deals = response.data;
@@ -270,7 +270,7 @@
 			remove(deal) {
 				// this.$api(this.deals, index);
 					this.$api.post(
-						`http://localhost:3000/api/v1/coupons/${deal.id}`,
+						`/coupons/${deal.id}`,
 					)
 					.then(response => {
 						this.canceled = response
