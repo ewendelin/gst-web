@@ -33,6 +33,13 @@
             <!-- {{deal.time1}} -->
           </v-card-text>
           <v-card-text class="mt-2 pt-0 font-weight-medium">
+              Price
+          </v-card-text>
+          <v-card-text class="mt-n6">
+            {{promotion.price}}
+            <!-- {{deal.time1}} -->
+          </v-card-text>
+          <v-card-text class="mt-2 pt-0 font-weight-medium">
               Status
           </v-card-text>
           <v-card-text class="mt-n6">
@@ -44,8 +51,9 @@
               <v-icon right>mdi-cog</v-icon>
             </v-btn>
             
-            <v-dialog  v-model="promotion.dialog3"
-                      max-width="290">
+            <v-dialog  
+              v-model="promotion.dialog3"
+              max-width="290">
               <v-card>
                 <v-layout row class="mx-auto">
                   <v-card-title class="headline">Promotion</v-card-title>
@@ -55,7 +63,6 @@
                     </v-btn>
                 </v-layout>
                   <v-card-text>{{promotion.status}}</v-card-text>
-                
                 <v-form 
                  v-if="promotion.status == 'archive' || promotion.status == 'draft'"
                   ref="form2"
@@ -141,6 +148,13 @@
                   }"
                   placeholder="End Time">
                 </el-time-select>
+                <v-text-field
+                    label="Amount"
+                    v-model="promotion.price"
+                    value=""
+                    color="#DFA937"
+                    prefix="¥"
+                  ></v-text-field>
                 <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn v-if="promotion.status == 'draft'"
                     width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'onsale')">
@@ -152,11 +166,13 @@
                   </v-btn>
                 </v-card-actions>
                 </v-form>
-                <v-form v-else-if="promotion.status == 'onsale'">
+                <v-form class="mx-5" v-else-if="promotion.status == 'onsale'">
+                  <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn
                     width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'archive')">
                     archive
                   </v-btn>
+                  </v-card-actions>
                 </v-form>
 
                 
@@ -206,7 +222,15 @@
                   <v-file-input label="Promotion Photo"
                                 prepend-icon="mdi-camera">
                   </v-file-input>
+                  <v-text-field
+                    label="Amount"
+                    v-model="promotion.price"
+                    value=""
+                    color="#DFA937"
+                    prefix="¥"
+                  ></v-text-field>
                 </v-form>
+
 
                 <v-card-actions class="d-flex justify-space-around pb-3">
                   <!-- @FIXME this one needs to be connected to the edit api -->
@@ -219,7 +243,7 @@
                     width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="cancelEdit();">
                     cancel
                   </v-btn>
-                  <v-snackbar v-model="snackbar">
+                  <!-- <v-snackbar v-model="snackbar">
                     You have successfully edited this promotion. Toggle the switch to make the promotion live and visable for customers!
                     <v-btn color="success"
                           vertical
@@ -228,7 +252,7 @@
                           @click="promotion.snackbar = false">
                       close
                     </v-btn>
-                  </v-snackbar>
+                  </v-snackbar> -->
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -245,7 +269,6 @@
                     <v-icon>mdi-close</v-icon>
                   </v-btn>
                 </v-layout>
-
                 <v-card-text>
                   50 Claimed coupons 
                 </v-card-text>
@@ -256,8 +279,9 @@
               <v-icon right>mdi-delete</v-icon>
             </v-btn>
 
-            <v-dialog v-model="promotion.dialog"
-                      max-width="290">
+            <v-dialog 
+              v-model="promotion.dialog"
+              max-width="290">
               <v-card>
                 <v-layout row class="mx-auto">
                   <v-card-title class="headline">Delete promotion</v-card-title>
@@ -266,11 +290,9 @@
                     <v-icon>mdi-close</v-icon>
                   </v-btn>
                 </v-layout>
-
                 <v-card-text>
                   Are you sure you want to cancel this promotion? This action is permanent.
                 </v-card-text>
-
                 <v-card-actions class="d-flex justify-center pb-3">
                   <v-btn width="80%" dark color="#DFA937" tile class="buttons" depressed @click="remove(promotion)">
                     yes, i am sure
@@ -278,19 +300,7 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-
-            <v-snackbar v-model="snackbar">
-              You have successfully activated this promotion. It is now live and is viseble for customers!
-              <v-btn color="success"
-                      vertical
-                      text
-                      dark
-                      @click="snackbar = false">
-                close
-              </v-btn>
-            </v-snackbar>
           </v-row>	
-
         </v-layout>
       </v-card>
     </v-layout>
@@ -298,7 +308,6 @@
 </template>
 
 <script>
-
 	export default {
 		name: 'VendorCard',
 		props: {
@@ -327,7 +336,6 @@
 					this.error.push(e);
 				});
 		},
-
 		methods: {
       remove(promotion) {
         // this.$api(this.deals, index);
@@ -401,13 +409,6 @@
         
       }
 		},
-      
-
-    // canceledit(promotion) {
-    //   this.dialog2 = false;
-    //   then(location.reload())
-    // },
-
 		data() {
 			return {
 				snackbar: false,

@@ -279,15 +279,13 @@
 								<v-dialog v-model="dialograting" max-width="350">
 									<v-card>
 										<v-layout row class="mx-auto">
-											<v-card-title class="headline">Add Review</v-card-title>
+											<v-card-title class="headline">Add Rating</v-card-title>
 											<v-spacer></v-spacer>
 											<v-btn icon @click="dialograting = false">
 												<v-icon>mdi-close</v-icon>
 											</v-btn>
 										</v-layout>
 										<v-form ref="form"
-										v-model="valid"
-										lazy-validation
 										class="mx-5"
 										id="example-3">
 											<v-rating v-model="rating"
@@ -296,7 +294,7 @@
 				      						</v-rating>
 										</v-form>
 										<v-card-actions class="d-flex justify-space-around pb-3">
-											<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="createReview();submitReview();">
+											<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="dialograting = false">
 												post
 											</v-btn>
 											<v-btn width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="dialograting = false">
@@ -360,6 +358,7 @@
 				rating1: 5,
 				valid: '',
 				rating: '',
+				dialograting: false
 			};
 		},
 		methods: {
