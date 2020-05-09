@@ -2,7 +2,7 @@
 	<div class="vendor">
 		<v-img height="300px" src="../assets/cross.jpg">
 		</v-img>
-		
+
 		<v-col align="center">
 			<v-avatar class="mt-n12" size="170" color="gray">
 				<img src="../assets/avatar.png" alt="John"/>
@@ -57,7 +57,7 @@
 								color="#DFA937">
 								<template v-slot:label>
 									<div>
-										Disclaimer 
+										Disclaimer
 									</div>
 								</template>
 							</v-textarea>
@@ -134,9 +134,11 @@
 								</el-time-select>
 							<el-upload
 								v-model="image"
-								action="http://localhost:3000/api/v1/promotions"
+								action="http://localhost:3000/api/v1/promotions/images/upload"
 								  class="upload-demo"
 								  ref="upload"
+                  :on-change="handleChange"
+                  :file-list="fileList"
 								  :auto-upload="false">
 								<el-button slot="trigger" size="small" type="primary">select file</el-button>
 							</el-upload>
@@ -154,7 +156,7 @@
 							</v-checkbox>
 						</v-form>
 						<v-card-actions class="d-flex justify-space-around pb-3">
-							<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="createPromotion('onsale');submitUpload();">
+							<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="createPromotion('onsale');">
 								save & post
 							</v-btn>
 							<v-btn width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="createPromotion('draft');">
@@ -234,7 +236,7 @@
 								color="#DFA937">
 								<template v-slot:label>
 									<div>
-										Company description 
+										Company description
 									</div>
 								</template>
 							</v-textarea>
@@ -250,7 +252,7 @@
 								prepend-icon="mdi-camera">
 							</v-file-input>
 							<v-file-input label="Logo"
-								required	
+								required
 								prepend-icon="mdi-camera">
 							</v-file-input>
 						</v-form>
@@ -343,6 +345,9 @@ export default {
       menu: false,
       menu1: false,
       vendor: null,
+      error: [],
+      formData: new FormData(),
+      createdPromotion: null,
       dialog: false,
       dialog1: false,
       dialog2: false,
@@ -356,6 +361,8 @@ export default {
       tokenFailed: false,
       items: ['Restaurant', 'Bar', 'Cafe', 'Store'],
       coupon: {token: 'ACVBFF'},
+      fileList: [
+      ],
       newPromotion: {
 		title: 'hello',
 		description: 'test',
@@ -374,8 +381,22 @@ export default {
   },
   methods: {
   	submitUpload() {
-        this.$refs.upload.submit();
-      },
+      let formData = new FormData();
+      formData.append("file", this.formData.files[1]);
+      // formData.append("promotion", JSON.stringify(this.createdPromotion));
+      this.$api.post(`promotions/images/upload?id=${this.createdPromotion.id}`, formData, {headers: { "Content-Type": "multipart/form-data" }})
+      .then(() => {
+        this.fileList = [];
+        this.uploadFile =[];
+      })
+      .catch();
+      // this.$refs.upload.submit();
+    },
+    handleChange(file, fileList) {
+      this.fileList = fileList.slice(-3);
+      this.formData.files = {}
+      this.formData.files[1] = file.raw;
+    },
     createPromotion(status) {
       let promotion = this.newPromotion;
       // promotion["status"] = status;
@@ -386,7 +407,12 @@ export default {
         .post(`/promotions`, {
           promotion: promotion
         })
-        .then(location.reload())
+        .then(res => {
+          this.createdPromotion = res.data.data
+          this.submitUpload();
+          // this.promotions = this.promotions.push(res)
+          // location.reload()
+        })
         .catch(e => {
           this.error.push(e);
         });
@@ -405,7 +431,7 @@ export default {
 
     	// vendor['vendor_profile_id'] = this.vendor.id
     	this.$api
-    		.post(`/vendor_profiles/${id}`, 
+    		.post(`/vendor_profiles/${id}`,
     			{vendor: updated_vendor})
     		.then(location.reload())
     		.catch(e => {
@@ -417,7 +443,7 @@ export default {
     verify(token) {
     	// let token = this.data;
     	this.$api
-    		.post(`/users/verify_coupon`, 
+    		.post(`/users/verify_coupon`,
     			{token: token})
     		.then((res) => {
     			if (res) {
