@@ -388,6 +388,7 @@ export default {
       .then(() => {
         this.fileList = [];
         this.uploadFile =[];
+        location.reload();
       })
       .catch();
       // this.$refs.upload.submit();
@@ -411,7 +412,6 @@ export default {
           this.createdPromotion = res.data.data
           this.submitUpload();
           // this.promotions = this.promotions.push(res)
-          // location.reload()
         })
         .catch(e => {
           this.error.push(e);
