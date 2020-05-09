@@ -134,10 +134,13 @@
 				<v-list-item>
 					<v-list-item-content>
 						<v-list-item-title>
-							{{ deal.verified }}
+							{{ deal.promotion.title }}
 						</v-list-item-title>
 						<v-list-item-subtitle>
-							{{ deal.created_at }}
+							{{ deal.vendor_name }}
+						</v-list-item-subtitle>
+						<v-list-item-subtitle>
+							{{ deal.promotion.time_slot }}
 						</v-list-item-subtitle>
 					</v-list-item-content>
 					<v-spacer></v-spacer>
@@ -155,8 +158,8 @@
 									</v-btn>
 								</v-layout>
 
-								<v-card-text>
-									API fetch
+								<v-card-text class="headline">
+									{{ deal.token }}
 								</v-card-text>
 							</v-card>
 						</v-dialog>
@@ -188,7 +191,7 @@
 										tile
 										class="buttons"
 										depressed
-										@click="remove(deal.id, index)"
+										@click="remove(deal)"
 									>
 										yes, i am sure
 									</v-btn>
@@ -218,10 +221,10 @@
 	</div>
 </template>
 <script>
-	import axios from 'axios';
+	// import axios from 'axios';
 	import Navbar from '../components/Navbar';
-	axios.defaults.headers.common['X-Auth-Token'] = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJleHAiOjE1ODkxODUyMTl9.yCeUHSSHkqET1Rbr9wznhKmE_nw62Iztu4RW3H3IBi4";
-	axios.defaults.headers.common['API-key'] = 'gastbyellenapikey';
+	// axios.defaults.headers.common['X-Auth-Token'] = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJleHAiOjE1ODkxODUyMTl9.yCeUHSSHkqET1Rbr9wznhKmE_nw62Iztu4RW3H3IBi4";
+	// axios.defaults.headers.common['API-key'] = 'gastbyellenapikey';
 
 	export default {
 		name: 'Profile',
@@ -230,12 +233,17 @@
 			// this.getProfileInfo();
 		},
 		created() {
-			axios
+			this.$api
 				.get(
-					`http://localhost:3000/api/v1/coupons`
+					`/coupons`
 				)
 				.then(response => {
-					this.deals = response.data
+					this.deals = response.data;
+					this.deals = this.deals.map(deals => ({
+						...deals,
+						dialog: false,
+						dialog3: false
+					}));
 				})
 				.catch(function(error) {
 					alert('fail' + error);
@@ -245,6 +253,7 @@
 			return {
 				customerID: 1,
 				deals: [],
+				res: [],
 				snackbar: false,
 				users: [
 					{
@@ -258,19 +267,25 @@
 			// getProfileInfo() {
 				
 			// },
-			remove(deal_id, index) {
-				// this.deals.splice(id, 1); JavaScript
-				// below VueJS delete helper
-				this.$delete(this.deals, index);
-				axios
-					.put(
-						`http://localhost:3000/api/v1/customers/${this.customerID}/cancel_coupon`,
-						{
-							deal_id: deal_id
-						}
+			remove(deal) {
+				// this.$api(this.deals, index);
+					this.$api.post(
+						`/coupons/${deal.id}`,
 					)
 					.then(response => {
 						this.canceled = response
+						
+						this.res = this.deals.filter((x) => {
+							return x.id != deal.id
+						});
+						this.deals = this.res;
+
+						// this.deals = this.deals.map(deals => ({
+						// 	...deals,
+						// 	dialog: false,
+						// 	dialog3: false
+						// }));
+
 					})
 					.catch(function(error) {
 						alert('fail' + error);

@@ -30,7 +30,7 @@
 
       <v-divider></v-divider>
       <v-card-text class="white--text mb-n5">
-        <strong>沪 ICP 备 XXXXXXXX 号-X</strong>
+        <strong><a style="color:white; text-decoration: none;" href="http://www.beian.miit.gov.cn">沪ICP备20010509号</a></strong>
       </v-card-text>
 
       <v-card-text class="white--text">
