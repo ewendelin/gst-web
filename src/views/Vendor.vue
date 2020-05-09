@@ -16,7 +16,10 @@
 			<v-btn depressed dark class="button mb-2" width="80%" @click="dialog = true">add new deal
 
 			</v-btn>
-			<v-btn depressed dark class="buttonst mb-6" width="80%" @click="dialog1 = true">verify cuopon
+			<v-btn depressed dark class="buttonst mb-2" width="80%" @click="dialog1 = true">verify cuopon
+
+			</v-btn>
+			<v-btn depressed dark class="buttonst mb-6" width="80%" @click="dialogtotalstat = true">monthly statistics
 
 			</v-btn>
 			<p class="headline font-weight-medium mb-0">{{ vendor.name }}</p>
@@ -261,6 +264,40 @@
 						</v-card-actions>
 					</v-card>
 				</v-dialog>
+				<v-dialog v-model="dialogtotalstat" max-width="350">
+					<v-card>
+						<v-layout row class="mx-auto">
+							<v-card-title class="headline">Monthly Statistics</v-card-title>
+							<v-spacer></v-spacer>
+							<v-btn icon @click="dialogtotalstat = false">
+								<v-icon>mdi-close</v-icon>
+							</v-btn>
+						</v-layout>
+						<v-card-title class="title font-weight-regular mb-1 mt-n4">
+							Coupons claimed this month:
+						</v-card-title>
+						<v-card-text class="body1 font-weight-regular mb-3">
+							23
+						</v-card-text>
+						<v-card-title class="title font-weight-regular mb-1 mt-n4">
+							Amount saved:
+						</v-card-title>
+						<v-card-text class="body1 font-weight-regular mb-3">
+							1000
+						</v-card-text>
+						<v-card-title class="title font-weight-regular mb-1 mt-n4">
+							Bill:
+						</v-card-title>
+						<v-card-text class="body1 font-weight-regular mb-3">
+							15
+						</v-card-text>
+						<v-card-actions class="d-flex justify-space-around pb-3">
+							<v-btn width="90%" dark color="#DFA937" tile class="buttons" depressed @click="dialogtotalstat = false">
+								close
+							</v-btn>
+						</v-card-actions>
+					</v-card>
+				</v-dialog>
 			</v-layout>
 		</v-col>
 		<v-layout row class="mx-5" max-width="90%">
@@ -310,6 +347,7 @@ export default {
       dialog1: false,
       dialog2: false,
       snackbar: false,
+      dialogtotalstat: false,
       text: {
       	error: 'Ops, the code can not be verified, please try again.',
       	ok: 'Coupon has been verified!'
