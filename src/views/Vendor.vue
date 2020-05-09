@@ -173,19 +173,35 @@
 						v-model="valid"
 						lazy-validation
 						class="mx-5">
-							<v-text-field v-model="coupon.token"
+							<v-text-field v-model="token"
 								label="Coupon Code"
 								required
 								color="#DFA937">
 							</v-text-field>
 						</v-form>
 						<v-card-actions class="d-flex justify-space-around pb-3">
-							<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="verify(coupon.token);">
+							<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="verify(token), snackbar = true">
 								verify
 							</v-btn>
 						</v-card-actions>
 					</v-card>
 				</v-dialog>
+				<v-snackbar
+				v-model="snackbar"
+				top
+				multi-line
+				color="#FFF"
+				>
+				<p class="black--text" v-if="tokenValid">
+				{{text.ok}}</p>
+				<p class="black--text" v-else-if="tokenFailed">
+				{{text.error}}</p>
+					<v-btn text color="#DFA937" @click="snackbar = false">
+						close
+					</v-btn>
+				</v-snackbar>
+				
+
 				<v-dialog v-model="dialog2" max-width="290">
 					<v-card>
 						<v-layout row class="mx-auto">
@@ -293,6 +309,13 @@ export default {
       dialog: false,
       dialog1: false,
       dialog2: false,
+      snackbar: false,
+      text: {
+      	error: 'Ops, the code can not be verified, please try again.',
+      	ok: 'Coupon has been verified!'
+      },
+      tokenValid: false,
+      tokenFailed: false,
       items: ['Restaurant', 'Bar', 'Cafe', 'Store'],
       coupon: {token: 'ACVBFF'},
       newPromotion: {
@@ -358,20 +381,27 @@ export default {
     	this.$api
     		.post(`/users/verify_coupon`, 
     			{token: token})
-    		.then(
-    			location.reload()
-    			)
+    		.then((res) => {
+    			if (res) {
+    				this.tokenValid = true;
+    				this.tokenFailed = false;
+    			} else {
+    				this.tokenFailed = true;
+    				this.tokenValid = false;
+    			}
+    		})
     		.catch(e => {
+    			this.tokenFailed = true;
+    			this.tokenValid = false;
     			this.error.push(e);
     		});
     	this.dialog1 = false;
     },
-
-    }
-  
+   }
 }
 
 </script>
+
 
 <style>
 .vendor {

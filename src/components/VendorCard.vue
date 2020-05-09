@@ -219,7 +219,7 @@
                     width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="cancelEdit();">
                     cancel
                   </v-btn>
-                  <v-snackbar v-model="snackbar">
+                  <!-- <v-snackbar v-model="snackbar">
                     You have successfully edited this promotion. Toggle the switch to make the promotion live and visable for customers!
                     <v-btn color="success"
                           vertical
@@ -228,7 +228,7 @@
                           @click="promotion.snackbar = false">
                       close
                     </v-btn>
-                  </v-snackbar>
+                  </v-snackbar> -->
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -245,19 +245,19 @@
                     <v-icon>mdi-close</v-icon>
                   </v-btn>
                 </v-layout>
-
                 <v-card-text>
                   50 Claimed coupons 
                 </v-card-text>
               </v-card>
             </v-dialog>
-
+            
             <v-btn fab text @click="promotion.dialog = true">
               <v-icon right>mdi-delete</v-icon>
             </v-btn>
 
-            <v-dialog v-model="promotion.dialog"
-                      max-width="290">
+            <v-dialog 
+              v-model="promotion.dialog"
+              max-width="290">
               <v-card>
                 <v-layout row class="mx-auto">
                   <v-card-title class="headline">Delete promotion</v-card-title>
@@ -266,11 +266,9 @@
                     <v-icon>mdi-close</v-icon>
                   </v-btn>
                 </v-layout>
-
                 <v-card-text>
                   Are you sure you want to cancel this promotion? This action is permanent.
                 </v-card-text>
-
                 <v-card-actions class="d-flex justify-center pb-3">
                   <v-btn width="80%" dark color="#DFA937" tile class="buttons" depressed @click="remove(promotion)">
                     yes, i am sure
@@ -278,19 +276,7 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-
-            <v-snackbar v-model="snackbar">
-              You have successfully activated this promotion. It is now live and is viseble for customers!
-              <v-btn color="success"
-                      vertical
-                      text
-                      dark
-                      @click="snackbar = false">
-                close
-              </v-btn>
-            </v-snackbar>
           </v-row>	
-
         </v-layout>
       </v-card>
     </v-layout>
@@ -298,7 +284,6 @@
 </template>
 
 <script>
-
 	export default {
 		name: 'VendorCard',
 		props: {
@@ -327,7 +312,6 @@
 					this.error.push(e);
 				});
 		},
-
 		methods: {
       remove(promotion) {
         // this.$api(this.deals, index);
@@ -401,13 +385,6 @@
         
       }
 		},
-      
-
-    // canceledit(promotion) {
-    //   this.dialog2 = false;
-    //   then(location.reload())
-    // },
-
 		data() {
 			return {
 				snackbar: false,
