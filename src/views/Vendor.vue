@@ -290,22 +290,16 @@
 							</v-btn>
 						</v-layout>
 						<v-card-title class="title font-weight-regular mb-1 mt-n4">
-							Coupons claimed this month:
+							Coupons claimed:
 						</v-card-title>
 						<v-card-text class="body1 font-weight-regular mb-3">
-							23
+							{{}}
 						</v-card-text>
 						<v-card-title class="title font-weight-regular mb-1 mt-n4">
-							Amount saved:
+							Coupons verified:
 						</v-card-title>
 						<v-card-text class="body1 font-weight-regular mb-3">
-							1000
-						</v-card-text>
-						<v-card-title class="title font-weight-regular mb-1 mt-n4">
-							Bill:
-						</v-card-title>
-						<v-card-text class="body1 font-weight-regular mb-3">
-							15
+							{{}}
 						</v-card-text>
 						<v-card-actions class="d-flex justify-space-around pb-3">
 							<v-btn width="90%" dark color="#DFA937" tile class="buttons" depressed @click="dialogtotalstat = false">
@@ -316,7 +310,7 @@
 				</v-dialog>
 			</v-layout>
 		</v-col>
-		<v-layout row class="mx-5" max-width="90%">
+		<v-layout row class="mx-auto">
 			<v-list-item>
 				<v-list-item-content>
 					<v-list-item-title class="title font-weight-bold mb-1 mt-n4">Description</v-list-item-title>

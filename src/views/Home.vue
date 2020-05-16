@@ -20,7 +20,7 @@
 				tile
 				class="buttons"
 				depressed
-				@click="dialog1 = true"
+				@click="wxLogin()"
 			>
 				user login to find deals
 				<v-icon right>mdi-wechat</v-icon>
@@ -37,7 +37,7 @@
 				Log out
 				<!-- <v-icon right>mdi-wechat</v-icon> -->
 			</v-btn>
-			<v-dialog v-model="dialog1" max-width="300">
+			<!-- <v-dialog v-model="dialog1" max-width="300">
 				<v-card>
 					<v-layout row class="mx-3">
 						<v-card-title>Login</v-card-title>
@@ -80,7 +80,7 @@
 						</v-btn>
 					</v-layout>
 				</v-card>
-			</v-dialog>
+			</v-dialog> -->
 			<v-dialog v-model="dialog2" max-width="300">
 				<v-card>
 					<v-layout row class="mx-3">
@@ -197,7 +197,7 @@
 				tile
 				class="buttons"
 				depressed
-				@click="dialog1 = true"
+				@click="wxLogin()"
 			>
 				user login to find deals
 				<v-icon right>mdi-wechat</v-icon>
@@ -258,7 +258,7 @@
 					</v-layout>
 				</v-card>
 			</v-dialog>
-			<v-dialog v-model="dialog2" max-width="300">
+			<!-- <v-dialog v-model="dialog2" max-width="300">
 				<v-card>
 					<v-layout row class="mx-3">
 						<v-card-title>Register</v-card-title>
@@ -322,7 +322,7 @@
 						</v-btn>
 					</v-layout>
 				</v-card>
-			</v-dialog>
+			</v-dialog> -->
 			<v-btn tile class="buttonst" block depressed to="/vendors">
 				vendors click here to start
 				<v-icon right>mdi-store</v-icon>
@@ -366,8 +366,17 @@
 </template>
 <script>
 	import Navbar from '../components/Navbar';
+	// function getUrlParams(name) {
+	//     let reg = new RegExp("(\\?|&)" + name + "=([^&]*)(&|$)", "i");
+	//     let r = window.location.search.match(reg);
+	//     if (r != null) return unescape(r[2]);
+	// 	    return null;
+	//   }
+  	// localStorage.wxCode = getUrlParams("code")
 	
 	// import Gast from '../assets/rac1.svg'
+  		// window.location.href = window.location.origin
+
 	export default {
 		name: 'Home',
 		components: { Navbar },
@@ -388,7 +397,31 @@
 				dialog1: false,
 				snackbar: false
 			};
-		}
+		},
+		methods: {
+			wxLogin() {
+			  window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.$config.appID}&redirect_uri=${encodeURIComponent(this.$config.loginUrl)}&response_type=code&scope=snsapi_userinfo&state=succ`
+			},
+		},
+		created() {
+
+			if (window.location.href.includes('?code=')) {
+	  			this.$api
+						.post(
+							'/users/wx_web_login',
+							{data: window.location.href}
+						)
+						.then()
+						.catch();
+				window.location.href = window.location.origin;
+	  		}
+
+			// if (this.$api.defaults.headers.common['X-Auth-Token'] != undefined) {
+			// 	// login
+			// } else if () {
+			//   // go to login page
+			// }
+		  },
 	};
 </script>
 

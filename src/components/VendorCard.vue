@@ -1,11 +1,9 @@
 <template>
-	<div class="vendorcard">
+	<v-container class="px-0">
     <v-layout row class="mx-auto" align-center justify-center>
       <v-flex xs12 sm8 md7>
       <v-card tile
               class="mb-6"
-              width="85vw"
-              xs12 md6 lg4
               v-for="(promotion) in promotions"
               :key="promotion.id">		
         <v-img :src="promotion.image"
@@ -311,7 +309,7 @@
       </v-card>
     </v-flex>
     </v-layout>
-	</div>
+	</v-container>
 </template>
 
 <script>
