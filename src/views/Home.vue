@@ -2,10 +2,10 @@
 	<div class="home">
 		<Navbar />
 		<v-layout class="mt-12 pt-12" hidden-sm-and-down>
-			<img height="350px" src="../assets/broc.jpg">
+			<v-img height="350px" src="../assets/broc.jpg"></v-img>
 		</v-layout>
 		<v-layout hidden-md-and-up>
-			<img height="200px" src="../assets/broc.jpg">
+			<v-img height="200px" src="../assets/broc.jpg"></v-img>
 		</v-layout>
 		<v-layout row class="mx-9 my-8" hidden-sm-and-down justify-center align-center>
 			<v-flex md6 lg6>

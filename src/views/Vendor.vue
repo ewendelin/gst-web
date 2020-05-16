@@ -1,11 +1,11 @@
 <template>
 	<div class="vendor">
-		<v-img height="300px" src="../assets/cross.jpg">
+		<v-img height="300px" :src="vendor.main_img">
 		</v-img>
 
 		<v-col align="center">
-			<v-avatar class="mt-n12" size="170" color="gray">
-				<img src="../assets/avatar.png" alt="John"/>
+			<v-avatar class="mt-n12 mb-4" size="170" color="gray">
+				<v-img :src="vendor.logo_img" alt="John"/>
 			</v-avatar>
 
 			<v-layout row class="justify-end mx-5">
@@ -23,7 +23,7 @@
 
 			</v-btn>
 			<p class="headline font-weight-medium mb-0">{{ vendor.name }}</p>
-			<p class="subtitle-1">{{ vendor.type }}</p>
+			<p class="subtitle-1">{{ vendor.vendor_type }}</p>
 			<v-layout row class="justify-end mx-5">
 				<v-btn text class="mt-n12 pt-0" @click="dialog2 = true">
 					<v-icon right>mdi-pencil</v-icon>
@@ -241,20 +241,34 @@
 								</template>
 							</v-textarea>
 							<v-select
-								v-model="vendor.type"
+								v-model="vendor.vendor_type"
 								:items="items"
 								attach
 								label="Type of Establishment"
 								color="#DFA937"
 							></v-select>
-							<v-file-input label="Photo of Venue"
-								required
-								prepend-icon="mdi-camera">
-							</v-file-input>
-							<v-file-input label="Logo"
-								required
-								prepend-icon="mdi-camera">
-							</v-file-input>
+							
+							<el-upload
+								v-model="mainimage"
+								action="http://localhost:3000/api/v1/promotions/images/upload"
+								  class="upload-demo mb-2"
+								  ref="upload"
+                  :on-change="handleChangeMain"
+                  :file-list="fileList"
+								  :auto-upload="false">
+								<el-button slot="trigger" size="small" type="primary">Upload Vendor Image</el-button>
+							</el-upload>
+							
+							<el-upload
+								v-model="logo"
+								action="http://localhost:3000/api/v1/promotions/images/upload"
+								  class="upload-demo"
+								  ref="upload"
+                  :on-change="handleChangeLogo"
+                  :file-list="fileList"
+								  :auto-upload="false">
+								<el-button slot="trigger" size="small" type="primary">Upload Logo</el-button>
+							</el-upload>
 						</v-form>
 						<v-card-actions class="d-flex justify-space-around pb-3">
 							<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="editVendor();">
@@ -347,6 +361,11 @@ export default {
       vendor: null,
       error: [],
       formData: new FormData(),
+      fileList: [],
+      formDataMain: new FormData(),
+      fileListMain: [],
+      formDataLogo: new FormData(),
+      fileListLogo: [],
       createdPromotion: null,
       dialog: false,
       dialog1: false,
@@ -360,13 +379,11 @@ export default {
       tokenValid: false,
       tokenFailed: false,
       items: ['Restaurant', 'Bar', 'Cafe', 'Store'],
-      coupon: {token: 'ACVBFF'},
-      fileList: [
-      ],
+      coupon: {token: ''},
       newPromotion: {
-		title: 'hello',
-		description: 'test',
-		disclaimer: 'rreq',
+		title: '',
+		description: '',
+		disclaimer: '',
 		start_date: '',
 		end_date: '',
 		start_time: '08:30',
@@ -393,10 +410,46 @@ export default {
       .catch();
       // this.$refs.upload.submit();
     },
+    submitUploadVendorLogo(id) {
+      let formData = new FormData();
+      formData.append("file", this.formDataLogo.files[1]);
+      // formData.append("promotion", JSON.stringify(this.createdPromotion));
+      this.$api.post(`files/upload?id=${id}&model=vendor_profile&field=logo_img`, formData, {headers: { "Content-Type": "multipart/form-data" }})
+      .then(() => {
+        this.fileListLogo = [];
+        // this.uploadFile =[];
+        // location.reload();
+      })
+      .catch();
+      // this.$refs.upload.submit();
+    },
+    submitUploadVendorMain(id) {
+      let formData = new FormData();
+      formData.append("file", this.formDataMain.files[1]);
+      // formData.append("promotion", JSON.stringify(this.createdPromotion));
+      this.$api.post(`files/upload?id=${id}&model=vendor_profile&field=main_img`, formData, {headers: { "Content-Type": "multipart/form-data" }})
+      .then(() => {
+        this.fileListMain = [];
+        // this.uploadFile =[];
+        location.reload();
+      })
+      .catch();
+      // this.$refs.upload.submit();
+    },
     handleChange(file, fileList) {
       this.fileList = fileList.slice(-3);
       this.formData.files = {}
       this.formData.files[1] = file.raw;
+    },
+    handleChangeMain(file, fileList) {
+      this.fileListMain = fileList.slice(-3);
+      this.formDataMain.files = {}
+      this.formDataMain.files[1] = file.raw;
+    },
+    handleChangeLogo(file, fileList) {
+      this.fileListLogo = fileList.slice(-3);
+      this.formDataLogo.files = {}
+      this.formDataLogo.files[1] = file.raw;
     },
     createPromotion(status) {
       let promotion = this.newPromotion;
@@ -428,12 +481,17 @@ export default {
     	delete updated_vendor.verified;
     	delete updated_vendor.average_stars;
     	delete updated_vendor.total_reviews;
+    	delete updated_vendor.statistics;
 
     	// vendor['vendor_profile_id'] = this.vendor.id
     	this.$api
     		.post(`/vendor_profiles/${id}`,
     			{vendor: updated_vendor})
-    		.then(location.reload())
+    		.then( () => {
+    			this.submitUploadVendorLogo(id);
+    			this.submitUploadVendorMain(id);
+    		}
+    	    )
     		.catch(e => {
     			this.error.push(e);
     		});

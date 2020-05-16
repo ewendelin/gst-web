@@ -35,7 +35,7 @@
 				<!-- <v-layout class="mx-5" width="90vw"> -->
 					<v-card-actions>
 						<!-- <v-spacer></v-spacer> -->
-					<v-row align="center" justify="center">
+					<v-row align="center" justify="center" class="mx-auto">
 						<v-btn
 							width="90%" 
 							text
@@ -53,7 +53,7 @@
 				<!-- </v-layout> -->
 					<v-expand-transition>
 						<div v-show="promotion.show">
-							<v-layout row class="mx-3 px-1 mb-0 pb-0">
+							<v-layout row class="mx-3 mb-0 pb-0">
 								<v-card-text class="mt-n1.5 pt-0">
 									<v-span class="font-weight-bold">Disclaimer</v-span>
 									<br />
@@ -114,7 +114,7 @@
 							<v-layout row class="mx-5">
 								<v-list-item>
 									<v-list-item-avatar size="54" color="grey">
-										<img src="../assets/avatar.png" alt="John" />{{promotion.vendor.logo_img}}
+										<v-img :src="promotion.vendor.logo_img" alt="Logo" />
 									</v-list-item-avatar>
 									<v-list-item-content>
 										<v-list-item-title class="headline">{{
@@ -125,8 +125,7 @@
 								<v-rating class="ml-3" readonly dense v-model="rating1"
 									background-color="orange lighten-3"
 						      		color="orange"></v-rating>
-								<v-card-text text class="pb-0 mb-n3">{{promotion.vendor.address}}
-									<v-icon class="ml-12" right>mdi-map</v-icon>
+								<v-card-text text class="pb-0 mb-n3 font-weight-bold">{{promotion.vendor.address}}
 								</v-card-text>
 								<v-card-text class="mb-3">
 									{{ promotion.vendor.description }}
@@ -173,7 +172,7 @@
 							</v-layout>
 							<v-layout class="mx-auto">
 								<!-- <v-row align="center" justify="center"> -->
-									<v-img src="../assets/storefront.jpg" height="300" width="100vw">{{promotion.vendor.main_img}}
+									<v-img :src="promotion.vendor.main_img" height="300" width="100vw">
 						          		<!-- <v-row align="end" justify="center" class="fill-height"> -->
 						          		<!-- FIXME SHOW THE SPECIFIC VENDOR -->
 						            	<!-- <v-btn
