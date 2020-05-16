@@ -10,7 +10,7 @@ import axios from 'axios';
 var api = axios.create({
   baseURL: 'http://localhost:3000/api/v1'
 });
-api.defaults.headers.common['X-Auth-Token'] = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJleHAiOjE1ODkxODUyMTl9.yCeUHSSHkqET1Rbr9wznhKmE_nw62Iztu4RW3H3IBi4";
+api.defaults.headers.common['X-Auth-Token'] = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJleHAiOjE1OTIyMDUxODF9.VpqYUcItU_bBFtksqWH-HPB0Xit_2nZopVQICivGmAA";
 api.defaults.headers.common['API-key'] = 'gastbyellenapikey';
 // axios.defaults.withCredentials = false;
 

@@ -68,16 +68,9 @@
                  v-if="promotion.status == 'archive' || promotion.status == 'draft'"
                   ref="form2"
                   v-model="valid"
-                        lazy-validation
-                        class="mx-5">
-                  <v-checkbox v-model="allday"
-                              color="green">
-                    <template v-slot:label>
-                      <div>
-                        All day promotion
-                      </div>
-                    </template>
-                  </v-checkbox>
+                  lazy-validation
+                  class="mx-5">
+                  
                   <v-menu
                     ref="menu3"
                     v-model="menu3"
@@ -90,7 +83,7 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
-                        v-model="promotion.start_date"
+                        v-model="start_date"
                         label="Start Date"
                         prepend-icon="mdi-calendar"
                         readonly
@@ -101,7 +94,7 @@
                     <v-date-picker v-model="start_date" no-title scrollable color="#DFA937">
                       <v-spacer></v-spacer>
                       <v-btn text color="#DFA937" @click="menu3 = false">Cancel</v-btn>
-                      <v-btn text color="#DFA937" @click="$refs.menu3.save(start_date)">OK</v-btn>
+                      <v-btn text color="#DFA937" @click="saveToToggle('start_date', start_date),menu3 = false">OK</v-btn>
                     </v-date-picker>
                   </v-menu>
               <v-menu
@@ -116,7 +109,7 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
-                        v-model="promotion.end_date"
+                        v-model="end_date"
                         label="End Date"
                         prepend-icon="mdi-calendar"
                         readonly
@@ -124,10 +117,10 @@
                         color="#DFA937"
                       ></v-text-field>
                     </template>
-                    <v-date-picker v-model="end_date2" no-title scrollable color="#DFA937">
+                    <v-date-picker v-model="end_date" no-title scrollable color="#DFA937">
                       <v-spacer></v-spacer>
                       <v-btn text color="#DFA937" @click="menu4 = false">Cancel</v-btn>
-                      <v-btn text color="#DFA937" @click="$refs.menu4.save(end_date2)">OK</v-btn>
+                      <v-btn text color="#DFA937" @click="saveToToggle('end_date', end_date),menu4 = false">OK</v-btn>
                     </v-date-picker>
                   </v-menu>
                   <el-time-select
@@ -137,7 +130,8 @@
                     step: '00:30',
                     end: '24:00'
                   }"
-                  placeholder="Start Time">
+                  placeholder="Start Time"
+                  :change="saveToToggle('start_time', promotion.start_time)">
                 </el-time-select>
                  <el-time-select
                  class="endtime"
@@ -147,7 +141,8 @@
                     step: '00:30',
                     end: '24:00'
                   }"
-                  placeholder="End Time">
+                  placeholder="End Time"
+                  :change="saveToToggle('end_time', promotion.end_time)">
                 </el-time-select>
                 <v-text-field
                     label="Amount"
@@ -220,9 +215,16 @@
                       </div>
                     </template>
                   </v-textarea>
-                  <v-file-input label="Promotion Photo"
-                                prepend-icon="mdi-camera">
-                  </v-file-input>
+                  <el-upload
+                v-model="image"
+                action="http://localhost:3000/api/v1/promotions/images/upload"
+                  class="upload-demo"
+                  ref="upload"
+                  :on-change="handleChange"
+                  :file-list="fileList"
+                  :auto-upload="false">
+                <el-button slot="trigger" size="small" type="primary">select file</el-button>
+              </el-upload>
                   <v-text-field
                     label="Amount"
                     v-model="promotion.price"
@@ -271,7 +273,10 @@
                   </v-btn>
                 </v-layout>
                 <v-card-text>
-                  50 Claimed coupons 
+                  Verified: {{ promotion.statistics.verified }}
+                </v-card-text>
+                <v-card-text>
+                  Claimed: {{ promotion.statistics.issued }}
                 </v-card-text>
               </v-card>
             </v-dialog>
@@ -364,6 +369,32 @@
             alert('fail' + error);
           });
       },
+      saveToToggle(type, value) {
+        // this.$refs.menu3.save(start_date)
+        this.togglePromotion[type] = value;
+      },
+      saveEnd(end_date) {
+        this.togglePromotion.end_date = end_date;
+       // this.$refs.menu4.save(end_date)
+      },
+      submitUpload(id) {
+        let formData = new FormData();
+        formData.append("file", this.formData.files[1]);
+        // formData.append("promotion", JSON.stringify(this.createdPromotion));
+        this.$api.post(`files/upload?id=${id}&model=promotion&field=image`, formData, {headers: { "Content-Type": "multipart/form-data" }})
+        .then(() => {
+          this.fileList = [];
+          this.uploadFile =[];
+          location.reload();
+        })
+        .catch();
+        // this.$refs.upload.submit();
+      },
+      handleChange(file, fileList) {
+        this.fileList = fileList.slice(-3);
+        this.formData.files = {}
+        this.formData.files[1] = file.raw;
+      },
       editPromotion(promotion) {
         let id = promotion.id
         let updated_promotion = promotion;
@@ -374,14 +405,17 @@
         delete updated_promotion.dialog2
         delete updated_promotion.dialog3
         delete updated_promotion.dialogstats
+        delete updated_promotion.statistics
        
         this.$api
           .post(`/promotions/${id}`, 
             {promotion: updated_promotion})
-          .then(location.reload())
-          .catch(e => {
-            this.error.push(e);
-          });
+          .then( () => {
+            this.submitUpload(id);
+            // location.reload() 
+             }
+          )
+          .catch();
       },
       update(promotion, status) {
         let id = promotion.id
@@ -394,6 +428,10 @@
           });
         } else if (promotion.status == 'archive' && status == 'onsale') {
           promotion.status = status
+          promotion.start_date = this.togglePromotion.start_date
+          promotion.end_date = this.togglePromotion.end_date
+          promotion.start_time = this.togglePromotion.start_time
+          promotion.end_time = this.togglePromotion.end_time
           this.$api
           .post(`/promotions/${id}/renew`, {promotion: promotion})
           .then(location.reload())
@@ -401,6 +439,10 @@
             this.error.push(e);
           });
         } else if (promotion.status == 'draft' && status == 'onsale') {
+          promotion.start_date = this.togglePromotion.start_date
+          promotion.end_date = this.togglePromotion.end_date
+          promotion.start_time = this.togglePromotion.start_time
+          promotion.end_time = this.togglePromotion.end_time
           this.$api
           .post(`/promotions/${id}/activate`, {promotion: promotion})
           .then(location.reload())
@@ -416,9 +458,13 @@
 				snackbar: false,
 				promotions: [],
         start_date: new Date().toISOString().substr(0, 10),
-        end_date2: new Date().toISOString().substr(0, 10),
+        end_date: new Date().toISOString().substr(0, 10),
         menu3: false,
         menu4: false,
+        fileList: [],
+        formData: new FormData(),
+        togglePromotion: {},
+
 			};
 		}
 	};
