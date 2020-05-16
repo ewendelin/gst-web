@@ -7,7 +7,7 @@
               xs12 md6 lg4
               v-for="(promotion) in promotions"
               :key="promotion.id">		
-        <v-img src="../assets/cross.jpg"
+        <v-img :src="promotion.image"
               height="200px">
         </v-img>
         <v-layout row class="mx-3 px-1 mb-0 pb-0">

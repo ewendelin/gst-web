@@ -146,7 +146,7 @@
 					v-for="promotion in details"
 					:key="promotion.id"
 				>
-					<v-img src="../assets/cross.jpg" height="250px"></v-img>
+					<v-img :src="promotion.image" height="250px"></v-img>
 					<v-layout row class="mx-3 px-1 mb-0 pb-0">
 						<v-card-title class="mb-0 pb-0">
 							{{ promotion.title }}
