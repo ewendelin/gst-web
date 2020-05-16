@@ -2,10 +2,10 @@
 	<div class="home">
 		<Navbar />
 		<v-layout class="mt-12 pt-12" hidden-sm-and-down>
-			<v-img height="350px" src="../assets/broc.jpg"> </v-img>
+			<img height="350px" src="../assets/broc.jpg">
 		</v-layout>
 		<v-layout hidden-md-and-up>
-			<v-img height="200px" src="../assets/broc.jpg"> </v-img>
+			<img height="200px" src="../assets/broc.jpg">
 		</v-layout>
 		<v-layout row class="mx-9 my-8" hidden-sm-and-down justify-center align-center>
 			<v-flex md6 lg6>
@@ -24,6 +24,18 @@
 			>
 				user login to find deals
 				<v-icon right>mdi-wechat</v-icon>
+			</v-btn>
+			<v-btn
+				dark
+				block
+				color="#DFA937"
+				tile
+				class="buttons"
+				depressed
+				
+			>
+				Log out
+				<!-- <v-icon right>mdi-wechat</v-icon> -->
 			</v-btn>
 			<v-dialog v-model="dialog1" max-width="300">
 				<v-card>
@@ -189,6 +201,18 @@
 			>
 				user login to find deals
 				<v-icon right>mdi-wechat</v-icon>
+			</v-btn>
+			<v-btn
+				dark
+				block
+				color="#DFA937"
+				tile
+				class="buttons"
+				depressed
+				
+			>
+				Log out
+				<!-- <v-icon right>mdi-wechat</v-icon> -->
 			</v-btn>
 			<v-dialog v-model="dialog1" max-width="300">
 				<v-card>
