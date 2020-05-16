@@ -1,6 +1,7 @@
 <template>
 	<div class="vendorcard">
     <v-layout row class="mx-auto" align-center justify-center>
+      <v-flex xs12 sm8 md7>
       <v-card tile
               class="mb-6"
               width="85vw"
@@ -303,6 +304,7 @@
           </v-row>	
         </v-layout>
       </v-card>
+    </v-flex>
     </v-layout>
 	</div>
 </template>
