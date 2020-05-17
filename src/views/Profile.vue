@@ -125,7 +125,6 @@
 			<h3 class="mx-4 mt-3">Today's claims</h3>
 
 			<v-list
-				row
 				two-line
 				v-for="(deal, index) in deals"
 				:key="index"

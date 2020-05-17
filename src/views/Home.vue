@@ -7,7 +7,7 @@
 		<v-layout hidden-md-and-up>
 			<v-img height="200px" src="../assets/broc.jpg"></v-img>
 		</v-layout>
-		<v-layout row class="mx-9 my-8" hidden-sm-and-down justify-center align-center>
+		<!-- <v-layout row class="mx-9 my-8" hidden-sm-and-down justify-center align-center>
 			<v-flex md6 lg6>
 			<p class="font-weight-medium text-center">
 				Find deals on food that needs to be consumed today!
@@ -35,8 +35,8 @@
 				
 			>
 				Log out
-				<!-- <v-icon right>mdi-wechat</v-icon> -->
-			</v-btn>
+				<v-icon right>mdi-wechat</v-icon>
+			</v-btn> -->
 			<!-- <v-dialog v-model="dialog1" max-width="300">
 				<v-card>
 					<v-layout row class="mx-3">
@@ -81,7 +81,7 @@
 					</v-layout>
 				</v-card>
 			</v-dialog> -->
-			<v-dialog v-model="dialog2" max-width="300">
+			<!-- <v-dialog v-model="dialog2" max-width="300">
 				<v-card>
 					<v-layout row class="mx-3">
 						<v-card-title>Register</v-card-title>
@@ -184,15 +184,17 @@
 				</v-list-item>
 			</v-list>
 		</v-flex>
-		</v-layout>
-		<v-layout row class="mx-9 my-8" hidden-md-and-up>
+		</v-layout> -->
+
+
+		<v-layout row class="mx-9 my-8">
 			<p class="font-weight-medium text-center">
 				Find deals on food that needs to be consumed today!
 			</p>
 
 			<v-btn
-				dark
 				block
+				dark
 				color="#DFA937"
 				tile
 				class="buttons"
@@ -209,12 +211,10 @@
 				tile
 				class="buttons"
 				depressed
-				
 			>
 				Log out
-				<!-- <v-icon right>mdi-wechat</v-icon> -->
 			</v-btn>
-			<v-dialog v-model="dialog1" max-width="300">
+			<!-- <v-dialog v-model="dialog1" max-width="300">
 				<v-card>
 					<v-layout row class="mx-3">
 						<v-card-title>Login</v-card-title>
@@ -257,7 +257,7 @@
 						</v-btn>
 					</v-layout>
 				</v-card>
-			</v-dialog>
+			</v-dialog> -->
 			<!-- <v-dialog v-model="dialog2" max-width="300">
 				<v-card>
 					<v-layout row class="mx-3">
@@ -327,23 +327,9 @@
 				vendors click here to start
 				<v-icon right>mdi-store</v-icon>
 			</v-btn>
+			
 			<v-list>
-				<p class="font-weight-medium">Our partners are not allowed to sell:</p>
-				<v-list-item v-for="item1 in items1" :key="item1.title">
-					<v-list-item-icon>
-						<v-icon v-if="item1.icon" color="red">mdi-cancel</v-icon>
-					</v-list-item-icon>
-
-					<v-list-item-content>
-						<v-list-item-title
-							v-text="item1.title"
-							class="font-weight-medium"
-						></v-list-item-title>
-					</v-list-item-content>
-				</v-list-item>
-			</v-list>
-			<v-list>
-				<p class="font-weight-medium">
+				<p class="font-weight-medium mt-5">
 					The reasons why food end up on our site could be one of the following
 					reasons:
 				</p>
@@ -355,6 +341,21 @@
 					<v-list-item-content>
 						<v-list-item-title
 							v-text="item.title"
+							class="font-weight-medium"
+						></v-list-item-title>
+					</v-list-item-content>
+				</v-list-item>
+			</v-list>
+			<v-list>
+				<p class="font-weight-medium">Our partners are not allowed to sell:</p>
+				<v-list-item v-for="item1 in items1" :key="item1.title">
+					<v-list-item-icon>
+						<v-icon v-if="item1.icon" color="red">mdi-cancel</v-icon>
+					</v-list-item-icon>
+
+					<v-list-item-content>
+						<v-list-item-title
+							v-text="item1.title"
 							class="font-weight-medium"
 						></v-list-item-title>
 					</v-list-item-content>

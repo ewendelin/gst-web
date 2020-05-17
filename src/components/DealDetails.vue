@@ -122,16 +122,16 @@
 										}}</v-list-item-title>
 									</v-list-item-content>
 								</v-list-item>
-								<v-rating class="ml-3" readonly dense v-model="rating1"
+								<!-- <v-rating class="ml-3" readonly dense v-model="rating1"
 									background-color="orange lighten-3"
-						      		color="orange"></v-rating>
+						      		color="orange"></v-rating> -->
 								<v-card-text text class="pb-0 mb-n3 font-weight-bold">{{promotion.vendor.address}}
 								</v-card-text>
 								<v-card-text class="mb-3">
 									{{ promotion.vendor.description }}
 								</v-card-text>
-							<v-row align="center" justify="center">
-								<v-btn
+							<!-- <v-row align="center" justify="center"> -->
+								<!-- <v-btn
 									width="35vw" 
 									tile 
 									dark
@@ -140,8 +140,8 @@
 									depressed
 									@click="dialograting = true">
 									Add rating
-								</v-btn>
-								<v-dialog v-model="dialograting" max-width="350">
+								</v-btn> -->
+								<!-- <v-dialog v-model="dialograting" max-width="350">
 									<v-card>
 										<v-layout row class="mx-auto">
 											<v-card-title class="headline">Add Rating</v-card-title>
@@ -167,8 +167,8 @@
 											</v-btn>
 										</v-card-actions>
 									</v-card>
-								</v-dialog>
-							</v-row>
+								</v-dialog> -->
+							<!-- </v-row> -->
 							</v-layout>
 							<v-layout class="mx-auto">
 								<!-- <v-row align="center" justify="center"> -->
