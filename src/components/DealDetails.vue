@@ -54,11 +54,13 @@
 					<v-expand-transition>
 						<div v-show="promotion.show">
 							<v-layout row class="mx-3 mb-0 pb-0">
+								<v-card-text class="mt-n1.5 pt-0 font-weight-bold">
+									Disclaimer
+								</v-card-text>
 								<v-card-text class="mt-n1.5 pt-0">
-									<v-span class="font-weight-bold">Disclaimer</v-span>
-									<br />
 									{{ promotion.disclaimer }}
 								</v-card-text>
+								
 								<v-layout row class="d-flex justify-space-around">
 									<v-btn
 										width="35vw"
@@ -198,7 +200,6 @@
 </template>
 
 <script>
-	// import axios from 'axios';
 	export default {
 		name: 'DealDetails',
 		created() {
