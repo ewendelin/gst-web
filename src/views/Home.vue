@@ -32,7 +32,7 @@
 				tile
 				class="buttons"
 				depressed
-				
+
 			>
 				Log out
 				<v-icon right>mdi-wechat</v-icon>
@@ -365,7 +365,7 @@
 			</v-list>
 		</v-col>
 		</v-layout>
-		
+
 	</div>
 </template>
 <script>
@@ -377,7 +377,7 @@
 	// 	    return null;
 	//   }
   	// localStorage.wxCode = getUrlParams("code")
-	
+
 	// import Gast from '../assets/rac1.svg'
   		// window.location.href = window.location.origin
 
@@ -404,7 +404,7 @@
 		},
 		methods: {
 			wxLogin() {
-			  window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.$config.appID}&redirect_uri=${encodeURIComponent(this.$config.loginUrl)}&response_type=code&scope=snsapi_userinfo&state=succ`
+			  window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.$config.appID}&redirect_uri=${encodeURIComponent(this.$config.loginUrl)}&response_type=code&scope=snsapi_userinfo&state=${new Date().getTime()}`
 			},
 		},
 		created() {
@@ -417,7 +417,7 @@
 						)
 						.then()
 						.catch();
-				window.location.href = window.location.origin;
+				  window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
 	  		}
 
 			// if (this.$api.defaults.headers.common['X-Auth-Token'] != undefined) {
