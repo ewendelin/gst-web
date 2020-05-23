@@ -392,7 +392,8 @@ export default {
   },
   methods: {
   	submitUpload() {
-      let formData = new FormData();
+  	  if (this.formData.files != undefined) {
+  	  	let formData = new FormData();
       formData.append("file", this.formData.files[1]);
       // formData.append("promotion", JSON.stringify(this.createdPromotion));
       this.$api.post(`promotions/images/upload?id=${this.createdPromotion.id}`, formData, {headers: { "Content-Type": "multipart/form-data" }})
@@ -402,10 +403,13 @@ export default {
         location.reload();
       })
       .catch();
+  	  }
+      
       // this.$refs.upload.submit();
     },
     submitUploadVendorLogo(id) {
-      let formData = new FormData();
+	  if (this.formDataLogo.files != undefined) {
+	  	let formData = new FormData();
       formData.append("file", this.formDataLogo.files[1]);
       // formData.append("promotion", JSON.stringify(this.createdPromotion));
       this.$api.post(`files/upload?id=${id}&model=vendor_profile&field=logo_img`, formData, {headers: { "Content-Type": "multipart/form-data" }})
@@ -415,6 +419,8 @@ export default {
         // location.reload();
       })
       .catch();
+	  }
+      
       // this.$refs.upload.submit();
     },
     submitUploadVendorMain(id) {
