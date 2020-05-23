@@ -1,8 +1,8 @@
 <template>
 	<nav>
-		<v-layout>
+		<!-- <v-layout>
 			
-			<v-app-bar app text prominent hide-on-scroll class="hidden-sm-and-down" >
+			<v-app-bar app text prominent hide-on-scroll class="mb-5" >
 				<v-layout col style="margin-top: 1rem;">
 					<v-btn color="#FFF" icon x-large to="/">
 						<Gast class="lgb"/>
@@ -25,7 +25,7 @@
 					</v-btn>
 				
 			</v-app-bar>
-		</v-layout>
+		</v-layout> -->
 
 
 		<v-bottom-navigation
@@ -34,7 +34,7 @@
 			color="#DFA937"
 			width
 			height
-			class="hidden-md-and-up"
+			
 		>
 			<v-btn to="/deals">
 				<span>Coupons</span>
