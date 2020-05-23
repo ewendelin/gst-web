@@ -415,7 +415,7 @@
 						)
 						.then()
 						.catch();
-				window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
+				  window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
 	  		}
 
 			// if (this.$api.defaults.headers.common['X-Auth-Token'] != undefined) {
