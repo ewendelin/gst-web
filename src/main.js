@@ -6,12 +6,16 @@ import vuetify from './plugins/vuetify';
 import ElementUI from 'element-ui';
 import axios from 'axios';
 
-const testURL =  'http://localhost:3000/api/v1';
-// const testURL =  'https://api.gast.world/api/v1';
+const ENV = 'production'
+// const ENV = 'development'
+const apiURLDev =  'http://localhost:3000/api/v1';
+const apiURLProd =  'https://api.gast.world/api/v1';
+
+const apiURL = ENV == 'productiono' ? apiURLProd : apiURLDev ;
 const loginURL =  'https://www.gast.world';
 // login logic,
 var api = axios.create({
-  baseURL: testURL
+  baseURL: apiURL
 });
 api.defaults.headers.common['X-Auth-Token'] = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJleHAiOjE1OTI4MDI3NTR9.uv2T1ndNoq9OE-NPDXiRG00EovBFESXxPVoBbE843qc";
 api.defaults.headers.common['API-key'] = 'gastbyellenapikey';
