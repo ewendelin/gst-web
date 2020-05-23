@@ -193,7 +193,7 @@
 			</p>
 		<v-col justify="center" align="center">
 			<v-btn
-				width="80%"
+				width="95%"
 				dark
 				color="#DFA937"
 				tile
@@ -201,12 +201,12 @@
 				depressed
 				@click="wxLogin()"
 			>
-				user login to find deals
+				user login
 				<v-icon right>mdi-wechat</v-icon>
 			</v-btn>
 			<v-btn
 				dark
-			width="80%"
+			width="95%"
 				color="#DFA937"
 				tile
 				class="buttons"
@@ -324,11 +324,12 @@
 					</v-layout>
 				</v-card>
 			</v-dialog> -->
-			<v-btn tile class="buttonst" width="80%" depressed to="/vendors">
-				vendors click here to start
+			<v-btn tile class="buttonst" width="95%" depressed to="/vendors">
+				for vendors
 				<v-icon right>mdi-store</v-icon>
 			</v-btn>
 			</v-col>
+			<v-col>
 			<v-list>
 				<p class="font-weight-medium mt-5">
 					Why food end up on our site could be one of the following
@@ -362,6 +363,7 @@
 					</v-list-item-content>
 				</v-list-item>
 			</v-list>
+		</v-col>
 		</v-layout>
 		
 	</div>
