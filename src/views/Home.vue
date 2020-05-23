@@ -1,7 +1,7 @@
 <template>
 	<div class="home">
 		<Navbar />
-		<v-layout class="mt-12 pt-12" hidden-sm-and-down>
+		<v-layout class="" hidden-sm-and-down>
 			<v-img height="350px" src="../assets/broc.jpg"></v-img>
 		</v-layout>
 		<v-layout hidden-md-and-up>
@@ -187,13 +187,13 @@
 		</v-layout> -->
 
 
-		<v-layout row class="mx-9 my-8">
+		<v-layout row class="mx-8 my-8">
 			<p class="font-weight-medium text-center">
 				Find deals on food that needs to be consumed today!
 			</p>
-
+		<v-col justify="center" align="center">
 			<v-btn
-				block
+				width="80%"
 				dark
 				color="#DFA937"
 				tile
@@ -206,7 +206,7 @@
 			</v-btn>
 			<v-btn
 				dark
-				block
+			width="80%"
 				color="#DFA937"
 				tile
 				class="buttons"
@@ -214,6 +214,7 @@
 			>
 				Log out
 			</v-btn>
+
 			<!-- <v-dialog v-model="dialog1" max-width="300">
 				<v-card>
 					<v-layout row class="mx-3">
@@ -323,11 +324,11 @@
 					</v-layout>
 				</v-card>
 			</v-dialog> -->
-			<v-btn tile class="buttonst" block depressed to="/vendors">
+			<v-btn tile class="buttonst" width="80%" depressed to="/vendors">
 				vendors click here to start
 				<v-icon right>mdi-store</v-icon>
 			</v-btn>
-			
+			</v-col>
 			<v-list>
 				<p class="font-weight-medium mt-5">
 					Why food end up on our site could be one of the following
@@ -406,7 +407,7 @@
 		},
 		created() {
 
-			if (window.location.href.includes('?code=')) {
+			if (window.location.search.substr(0).includes('?code')) {
 	  			this.$api
 						.post(
 							'/users/wx_web_login',
