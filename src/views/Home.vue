@@ -408,8 +408,8 @@
 			},
 		},
 		created() {
-
-			if (window.location.search.substr(0).includes('?code')) {
+      // window.location.search.substr(0).includes('?code')
+			if (this.$route.query.code != null || this.$route.query.code != undefined) {
 	  			this.$api
 						.post(
 							'/users/wx_web_login',
