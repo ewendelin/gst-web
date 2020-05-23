@@ -6,10 +6,10 @@ import vuetify from './plugins/vuetify';
 import ElementUI from 'element-ui';
 import axios from 'axios';
 
-// const baseURL =  'http://localhost:3000/api/v1';
-const testURL =  'https://api.gast.world/api/v1';
+const testURL =  'http://localhost:3000/api/v1';
+// const testURL =  'https://api.gast.world/api/v1';
 const loginURL =  'https://www.gast.world';
-// login logic, 
+// login logic,
 var api = axios.create({
   baseURL: testURL
 });

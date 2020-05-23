@@ -415,9 +415,12 @@
 							'/users/wx_web_login',
 							{data: window.location.href}
 						)
-						.then()
-						.catch();
-				  window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
+						.then(() => {
+              window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
+            })
+						.catch(() => {
+              window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
+            });
 	  		}
 
 			// if (this.$api.defaults.headers.common['X-Auth-Token'] != undefined) {
