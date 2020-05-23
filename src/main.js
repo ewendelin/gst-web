@@ -8,6 +8,7 @@ import axios from 'axios';
 
 // const baseURL =  'http://localhost:3000/api/v1';
 const testURL =  'https://api.gast.world/api/v1';
+const loginURL =  'https://www.gast.world';
 // login logic, 
 var api = axios.create({
   baseURL: testURL
@@ -19,7 +20,7 @@ api.defaults.headers.common['API-key'] = 'gastbyellenapikey';
 Vue.config.productionTip = false;
 Vue.prototype.$config = {};
 Vue.prototype.$config.appID = 'wx8d177cf445f8365e';
-Vue.prototype.$config.loginUrl = `${testURL}`;
+Vue.prototype.$config.loginUrl = `${loginURL}`;
 Vue.use(ElementUI);
 Vue.prototype.$api = api;
 

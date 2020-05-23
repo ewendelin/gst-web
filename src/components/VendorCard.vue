@@ -376,7 +376,8 @@
        // this.$refs.menu4.save(end_date)
       },
       submitUpload(id) {
-        let formData = new FormData();
+        if (this.formData.files != undefined) {
+          let formData = new FormData();
         formData.append("file", this.formData.files[1]);
         // formData.append("promotion", JSON.stringify(this.createdPromotion));
         this.$api.post(`files/upload?id=${id}&model=promotion&field=image`, formData, {headers: { "Content-Type": "multipart/form-data" }})
@@ -387,6 +388,8 @@
         })
         .catch();
         // this.$refs.upload.submit();
+        }
+        
       },
       handleChange(file, fileList) {
         this.fileList = fileList.slice(-3);
@@ -410,10 +413,16 @@
             {promotion: updated_promotion})
           .then( () => {
             this.submitUpload(id);
-            // location.reload() 
+            this.dialog2 = false;
+            // this.promotions.find((x) => {
+            //   return x.id = res.id
+            // })
+
+            location.reload() 
              }
           )
           .catch();
+          this.dialog2 = false;
       },
       update(promotion, status) {
         let id = promotion.id
