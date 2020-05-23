@@ -57,6 +57,7 @@ task :deploy do
     on :launch do
       in_path(fetch(:current_path)) do
         command %{npm install}
+        command %{npm audit fix}
         command %{NODE_ENV=production npm run build}
       end
     end
