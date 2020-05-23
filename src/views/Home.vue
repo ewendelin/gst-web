@@ -330,7 +330,7 @@
 			
 			<v-list>
 				<p class="font-weight-medium mt-5">
-					The reasons why food end up on our site could be one of the following
+					Why food end up on our site could be one of the following
 					reasons:
 				</p>
 				<v-list-item v-for="item in items" :key="item.title">
