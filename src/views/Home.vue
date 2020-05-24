@@ -408,15 +408,14 @@
 			},
 		},
 		created() {
-      alert('wx login');
+      // alert('wx login');
       // window.location.search.substr(0).includes('?code')
 			if (this.$route.query.code != null || this.$route.query.code != undefined) {
 	  			alert(this.$route.query.code);
-          this.$api.defaults.headers.common['X-Auth-Token'] = ''
+          // this.$api.defaults.headers.common['X-Auth-Token'] = ''
           this.$api
-						.post(
-							'/users/wx_web_login',
-							{data: window.location.href}
+						.get(
+							`/users/wx_web_login?code=${window.location.href}`
 						)
 						.then((res) => {
               alert('res');
