@@ -425,6 +425,7 @@
               alert(`${res}`);
               alert(`${res.user}`);
               alert(`${res.user.token}`);
+              alert(`${JSON.stringify(res)}`)
               this.$api.defaults.headers.common['X-Auth-Token'] = res.user.token
               window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
             })
