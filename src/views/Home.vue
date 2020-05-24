@@ -427,8 +427,8 @@
               // alert(`${res.data.user.token}`);
               // alert(`${JSON.stringify(res)}`)
               // alert(`${JSON.stringify(res.data)}`)
-              this.$api.defaults.headers.common['X-Auth-Token'] = res.data.user.token
-              Vue.prototype.$api = this.$api;
+              $api.defaults.headers.common['X-Auth-Token'] = res.data.user.token
+              // Vue.prototype.$api = this.$api;
               window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
             })
 						.catch(() => {
