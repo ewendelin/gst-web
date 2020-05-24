@@ -5,7 +5,7 @@
 			<v-img height="200px" src="../assets/cross.jpg" ></v-img>
 		</v-layout>
 		<v-layout hidden-sm-and-down class="">
-		
+
 		</v-layout>
 		<!-- <v-layout column class="mx-12 my-12 mt-12" width="60vw" min-height="500px" hidden-sm-and-down justify-center>
 			<v-list v-for="user in users" :key="user.username">
@@ -224,6 +224,7 @@
 	import Navbar from '../components/Navbar';
 	// axios.defaults.headers.common['X-Auth-Token'] = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJleHAiOjE1ODkxODUyMTl9.yCeUHSSHkqET1Rbr9wznhKmE_nw62Iztu4RW3H3IBi4";
 	// axios.defaults.headers.common['API-key'] = 'gastbyellenapikey';
+  this.$api.defaults.headers.common['X-Auth-Token'] = sessionStorage.setItem('token', res.data.user.token);
 
 	export default {
 		name: 'Profile',
@@ -264,7 +265,7 @@
 		},
 		methods: {
 			// getProfileInfo() {
-				
+
 			// },
 			remove(deal) {
 				// this.$api(this.deals, index);
@@ -273,7 +274,7 @@
 					)
 					.then(response => {
 						this.canceled = response
-						
+
 						this.res = this.deals.filter((x) => {
 							return x.id != deal.id
 						});

@@ -205,7 +205,7 @@
 						close
 					</v-btn>
 				</v-snackbar>
-				
+
 
 				<v-dialog v-model="dialog2" max-width="290">
 					<v-card>
@@ -247,7 +247,7 @@
 								label="Type of Establishment"
 								color="#DFA937"
 							></v-select>
-							
+
 							<el-upload
 								v-model="mainimage"
 								action="http://localhost:3000/api/v1/promotions/images/upload"
@@ -258,7 +258,7 @@
 								  :auto-upload="false">
 								<el-button slot="trigger" size="small" type="primary">Upload Vendor Image</el-button>
 							</el-upload>
-							
+
 							<el-upload
 								v-model="logo"
 								action="http://localhost:3000/api/v1/promotions/images/upload"
@@ -333,6 +333,8 @@
 // import axios from "axios";
 import VendorCard from "../components/VendorCard.vue";
 import VNav from '../components/VNav';
+this.$api.defaults.headers.common['X-Auth-Token'] = sessionStorage.setItem('token', res.data.user.token);
+
 export default {
   name: "Vendor",
   components: { VendorCard, VNav },
@@ -404,7 +406,7 @@ export default {
       })
       .catch();
   	  }
-      
+
       // this.$refs.upload.submit();
     },
     submitUploadVendorLogo(id) {
@@ -420,7 +422,7 @@ export default {
       })
       .catch();
 	  }
-      
+
       // this.$refs.upload.submit();
     },
     submitUploadVendorMain(id) {
