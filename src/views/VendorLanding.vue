@@ -218,7 +218,7 @@
 </template>
 <script>
 	import VNav from '../components/VNav';
-  this.$api.defaults.headers.common['X-Auth-Token'] = sessionStorage.setItem('token', res.data.user.token);
+  // this.$api.defaults.headers.common['X-Auth-Token'] = sessionStorage.getItem('token');
 
 	export default {
 	components: { VNav },

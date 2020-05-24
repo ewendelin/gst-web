@@ -224,7 +224,7 @@
 	import Navbar from '../components/Navbar';
 	// axios.defaults.headers.common['X-Auth-Token'] = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJleHAiOjE1ODkxODUyMTl9.yCeUHSSHkqET1Rbr9wznhKmE_nw62Iztu4RW3H3IBi4";
 	// axios.defaults.headers.common['API-key'] = 'gastbyellenapikey';
-  this.$api.defaults.headers.common['X-Auth-Token'] = sessionStorage.setItem('token', res.data.user.token);
+  this.$api.defaults.headers.common['X-Auth-Token'] = sessionStorage.getItem('token');
 
 	export default {
 		name: 'Profile',
