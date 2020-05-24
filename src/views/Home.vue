@@ -186,12 +186,16 @@
 		</v-flex>
 		</v-layout> -->
 
-
-		<v-layout row class="mx-8 my-8">
-			<p class="font-weight-medium text-center">
+		
+		<v-layout row class="mx-8 my-8" justify-center align-center>
+			
+		<v-col cols="12"
+            sm="8"
+            md="6"
+            lg="6">
+            <p class="font-weight-medium text-center">
 				Find deals on food that needs to be consumed today!
 			</p>
-		<v-col justify="center" align="center">
 			<v-btn
 				width="95%"
 				dark
@@ -328,8 +332,7 @@
 				for vendors
 				<v-icon right>mdi-store</v-icon>
 			</v-btn>
-			</v-col>
-			<v-col>
+			
 			<v-list>
 				<p class="font-weight-medium mt-5">
 					Why food end up on our site could be one of the following

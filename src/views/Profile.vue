@@ -4,7 +4,7 @@
 		<v-layout hidden-md-and-up>
 			<v-img height="200px" src="../assets/cross.jpg" ></v-img>
 		</v-layout>
-		<v-layout hidden-sm-and-down class="mt-12 pt-12">
+		<v-layout hidden-sm-and-down class="">
 		
 		</v-layout>
 		<!-- <v-layout column class="mx-12 my-12 mt-12" width="60vw" min-height="500px" hidden-sm-and-down justify-center>
