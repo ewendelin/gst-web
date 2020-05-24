@@ -21,6 +21,7 @@ var api = axios.create({
 api.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 api.defaults.headers.common['API-key'] = 'gastbyellenapikey';
 // axios.defaults.withCredentials = false;
+// api.defaults.headers.common['X-Auth-Token'] = sessionStorage.getItem('token');
 
 Vue.config.productionTip = false;
 Vue.prototype.$config = {};

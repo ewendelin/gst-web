@@ -10,12 +10,18 @@
 	import DealDetails from '../components/DealDetails';
 	import Carousel from '../components/Carousel';
 	import Navbar from '../components/Navbar';
-  this.$api.defaults.headers.common['X-Auth-Token'] = sessionStorage.getItem('token');
+
 
 
 
 	export default {
 		name: 'Deals',
-		components: { DealDetails, Carousel, Navbar }
+		components: { DealDetails, Carousel, Navbar },
+    created () {
+      let storedToken = sessionStorage.getItem('token');
+      if (storedToken != undefined || storedToken != null) {
+        this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+      }
+    }
 	};
 </script>

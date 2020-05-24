@@ -333,12 +333,17 @@
 // import axios from "axios";
 import VendorCard from "../components/VendorCard.vue";
 import VNav from '../components/VNav';
-this.$api.defaults.headers.common['X-Auth-Token'] = sessionStorage.getItem('token');
+// this.$api.defaults.headers.common['X-Auth-Token'] = sessionStorage.getItem('token');
 
 export default {
   name: "Vendor",
   components: { VendorCard, VNav },
   created() {
+    let storedToken = sessionStorage.getItem('token');
+    if (storedToken != undefined || storedToken != null) {
+      this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+    }
+
     this.$api
       .get("/vendor_profiles/vendor")
       .then(response => {
