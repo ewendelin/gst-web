@@ -408,9 +408,11 @@
 			},
 		},
 		created() {
+      alert('wx login');
       // window.location.search.substr(0).includes('?code')
 			if (this.$route.query.code != null || this.$route.query.code != undefined) {
-	  			this.$api
+	  			alert(this.$route.query.code);
+          this.$api
 						.post(
 							'/users/wx_web_login',
 							{data: window.location.href}

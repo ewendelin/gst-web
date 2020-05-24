@@ -8,10 +8,10 @@ import axios from 'axios';
 
 const ENV = 'production'
 // const ENV = 'development'
-const apiURLDev =  'http://localhost:3000/api/v1';
 const apiURLProd =  'https://api.gast.world/api/v1';
+const apiURLDev =  'http://localhost:3000/api/v1';
 
-const apiURL = ENV == 'productiono' ? apiURLProd : apiURLDev ;
+const apiURL = ENV == 'production' ? apiURLProd : apiURLDev ;
 const loginURL =  'https://www.gast.world';
 // login logic,
 var api = axios.create({
