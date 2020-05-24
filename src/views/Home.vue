@@ -412,12 +412,15 @@
       // window.location.search.substr(0).includes('?code')
 			if (this.$route.query.code != null || this.$route.query.code != undefined) {
 	  			alert(this.$route.query.code);
+          this.$api.defaults.headers.common['X-Auth-Token'] = ''
           this.$api
 						.post(
 							'/users/wx_web_login',
 							{data: window.location.href}
 						)
-						.then(() => {
+						.then((res) => {
+              alert('res');
+              this.$api.defaults.headers.common['X-Auth-Token'] = res.user.token
               window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
             })
 						.catch(() => {
