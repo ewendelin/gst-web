@@ -415,7 +415,7 @@
           // this.$api.defaults.headers.common['X-Auth-Token'] = ''
           this.$api
 						.get(
-							`/users/login/wx_web_login?code=${window.location.href}`
+							`/users/login/wx_web_login?code=${this.$route.query.code}`
 						)
 						.then((res) => {
               alert('res');
