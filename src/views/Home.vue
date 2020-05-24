@@ -186,9 +186,9 @@
 		</v-flex>
 		</v-layout> -->
 
-		
+
 		<v-layout row class="mx-8 my-8" justify-center align-center>
-			
+
 		<v-col cols="12"
             sm="8"
             md="6"
@@ -332,7 +332,7 @@
 				for vendors
 				<v-icon right>mdi-store</v-icon>
 			</v-btn>
-			
+
 			<v-list>
 				<p class="font-weight-medium mt-5">
 					Why food end up on our site could be one of the following
@@ -421,7 +421,10 @@
 							`/users/login/wx_web_login?code=${this.$route.query.code}`
 						)
 						.then((res) => {
-              alert('res');
+              alert('res.user.token');
+              alert(`${res}`);
+              alert(`${res.user}`);
+              alert(`${res.user.token}`);
               this.$api.defaults.headers.common['X-Auth-Token'] = res.user.token
               window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
             })
