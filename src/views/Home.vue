@@ -414,7 +414,7 @@
       // alert('wx login');
       // window.location.search.substr(0).includes('?code')
 			if (this.$route.query.code != null || this.$route.query.code != undefined) {
-	  			alert(this.$route.query.code);
+	  			// alert(this.$route.query.code);
           // this.$api.defaults.headers.common['X-Auth-Token'] = ''
           this.$api
 						.get(
