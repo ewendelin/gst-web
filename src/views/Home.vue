@@ -423,10 +423,11 @@
 						.then((res) => {
               alert('res.user.token');
               alert(`${res}`);
-              alert(`${res.user}`);
-              alert(`${res.user.token}`);
+              alert(`${res.data.user}`);
+              alert(`${res.data.user.token}`);
               alert(`${JSON.stringify(res)}`)
-              this.$api.defaults.headers.common['X-Auth-Token'] = res.user.token
+              alert(`${JSON.stringify(res.data)}`)
+              this.$api.defaults.headers.common['X-Auth-Token'] = res.data.user.token
               window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
             })
 						.catch(() => {
