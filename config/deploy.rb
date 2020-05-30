@@ -19,7 +19,7 @@ set :deploy_to, '/home/production/web'
 # set :branch, 'master'
 
 set :repository, 'git@github.com:ewendelin/gst-web.git'
-set :branch, 'production'
+# set :branch, 'production'
 
 # Optional settings:
 #   set :user, 'foobar'          # Username in the server to SSH to.
