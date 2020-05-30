@@ -54,7 +54,7 @@
 					<v-expand-transition>
 						<div v-show="promotion.show">
 							<v-layout row class="mx-3 mb-0 pb-0">
-								<v-card-text class="mt-n1.5 pt-0 font-weight-bold">
+								<v-card-text class="mt-n1.5 mb-n3 pt-0 font-weight-bold">
 									Disclaimer
 								</v-card-text>
 								<v-card-text class="mt-n1.5 pt-0">
@@ -63,7 +63,7 @@
 								
 								<v-layout row class="d-flex justify-space-around">
 									<v-btn
-										width="35vw"
+										width="80%"
 										dark
 										color="#DFA937"
 										tile
@@ -102,13 +102,6 @@
 											</v-card-actions>
 										</v-card>
 									</v-dialog>
-									<v-btn 
-										width="35vw" 
-										tile 
-										class="buttonst" 
-										depressed>
-										share
-									</v-btn>
 								</v-layout>
 							</v-layout>
 							<v-divider class="my-5"></v-divider>

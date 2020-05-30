@@ -9,14 +9,14 @@
 		</v-layout>
 		
 		<v-layout column class="mx-5 my-5">
-			<v-list v-for="user in users" :key="user.username">
+			<v-list v-for="user in user" :key="user.wx_nickname">
 				<v-list-item>
 					<v-list-item-avatar size="54" color="grey">
-						<img :src="user.avatar" />
+						<img :src="user.wx_avatar" />
 					</v-list-item-avatar>
 					<v-list-item-content>
 						<v-list-item-title class="headline">{{
-							user.username
+							user.wx_nickname
 						}}</v-list-item-title>
 					</v-list-item-content>
 					<v-list-item-icon>
@@ -169,12 +169,7 @@
 				res: [],
 				snackbar: false,
 				//what is the data we get from the api? to put the username and avatar?
-				users: [
-					{
-						username: 'Jim Halpert',
-						avatar: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg'
-					}
-				]
+				user: JSON.parse(sessionStorage.getItem('user'))
 			};
 		},
 		methods: {

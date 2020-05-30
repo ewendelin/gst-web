@@ -161,6 +161,8 @@
 				.then((res) => {
               this.$api.defaults.headers.common['X-Auth-Token'] = res.data.user.token
               sessionStorage.setItem('token', res.data.user.token);
+              sessionStorage.setItem('user', JSON.stringify(res.data.user));
+
               // Vue.prototype.$api = this.$api;
               window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
             })

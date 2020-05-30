@@ -1,14 +1,14 @@
 <template>
 	<div class="home">
 		<Navbar />
-		<Carousel />
+		<!-- <Carousel /> -->
 		<DealDetails />
 	</div>
 </template>
 
 <script>
 	import DealDetails from '../components/DealDetails';
-	import Carousel from '../components/Carousel';
+	// import Carousel from '../components/Carousel';
 	import Navbar from '../components/Navbar';
 
 
@@ -16,7 +16,7 @@
 
 	export default {
 		name: 'Deals',
-		components: { DealDetails, Carousel, Navbar },
+		components: { DealDetails, Navbar },
     created () {
       let storedToken = sessionStorage.getItem('token');
       if (storedToken != undefined || storedToken != null) {
