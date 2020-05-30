@@ -9,7 +9,7 @@
 		</v-layout>
 		
 		<v-layout column class="mx-5 my-5">
-			<v-list v-for="user in user" :key="user.wx_nickname">
+			<v-list>
 				<v-list-item>
 					<v-list-item-avatar size="54" color="grey">
 						<img :src="user.wx_avatar" />
