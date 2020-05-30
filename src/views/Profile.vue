@@ -22,7 +22,6 @@
 					<v-list-item-icon>
 						<!-- @@@@ FIXME - CAN I DO THIS????@@@@@--> 
 						<v-btn fab text @click="logout()"
-							to="/"
 						>
 							<v-icon>mdi-logout</v-icon>
 						</v-btn>
@@ -138,13 +137,11 @@
 		name: 'Profile',
 		components: { Navbar },
 		
-		mounted() {
-      let storedToken = sessionStorage.getItem('token');
-      if (storedToken != undefined || storedToken != null) {
-        this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-      }
-
-			this.$api
+		created() {
+      		let storedToken = sessionStorage.getItem('token');
+		    if ((storedToken != undefined || storedToken != null) && storedToken != 'logout') {
+		        this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+		        this.$api
 				.get(
 					`/coupons`
 				)
@@ -159,6 +156,11 @@
 				.catch(function(error) {
 					alert('fail' + error);
 				});
+		    } else {
+				window.location.href = "https://gast.world"
+		    }
+
+			
 		},
 		data() {
 			return {
@@ -180,6 +182,7 @@
 			logout() {
 				// sessionStorage.clear();
               	sessionStorage.setItem('token', 'logout');
+				window.location.href = "https://gast.world"
 				// redirect('/');
 			},
 			// getProfileInfo() {
