@@ -145,6 +145,10 @@
 		},
 		created() {
 			let storedToken = sessionStorage.getItem('token');
+
+			let login = !(storedToken != undefined && storedToken != 'logout')
+			this.login = login;
+
 			if ((storedToken != null || storedToken != undefined) && storedToken != 'logout') {
         		this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
 				// redirect('/deals')
@@ -164,7 +168,8 @@
               window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
             });
 	  		}
-		  },
+
+		 },
 	};
 </script>
 
