@@ -6,16 +6,22 @@ import vuetify from './plugins/vuetify';
 import ElementUI from 'element-ui';
 import axios from 'axios';
 
-// const baseURL =  'http://localhost:3000/api/v1';
-const testURL =  'https://api.gast.world/api/v1';
+const ENV = 'production'
+// const ENV = 'development'
+const apiURLProd =  'https://api.gast.world/api/v1';
+const apiURLDev =  'http://localhost:3000/api/v1';
+
+const apiURL = ENV == 'production' ? apiURLProd : apiURLDev ;
 const loginURL =  'https://www.gast.world';
-// login logic, 
+// login logic,
 var api = axios.create({
-  baseURL: testURL
+  baseURL: apiURL
 });
-api.defaults.headers.common['X-Auth-Token'] = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJleHAiOjE1OTI4MDI3NTR9.uv2T1ndNoq9OE-NPDXiRG00EovBFESXxPVoBbE843qc";
+// api.defaults.headers.common['X-Auth-Token'] = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJleHAiOjE1OTI4MDI3NTR9.uv2T1ndNoq9OE-NPDXiRG00EovBFESXxPVoBbE843qc";
+api.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 api.defaults.headers.common['API-key'] = 'gastbyellenapikey';
 // axios.defaults.withCredentials = false;
+// api.defaults.headers.common['X-Auth-Token'] = sessionStorage.getItem('token');
 
 Vue.config.productionTip = false;
 Vue.prototype.$config = {};

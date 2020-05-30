@@ -9,13 +9,17 @@ require 'mina/deploy'
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
+set :user, 'root'          # Username in the server to SSH to.
+set :forward_agent, true     # SSH forward_agent.
 set :application_name, 'gast-web'
 set :domain, 'gast.world'
 set :deploy_to, '/home/production/web'
-set :repository, 'git@gitee.com:ellenwendelin/gst-web.git'
-set :branch, 'master'
-set :user, 'root'          # Username in the server to SSH to.
-set :forward_agent, true     # SSH forward_agent.
+
+# set :repository, 'git@gitee.com:ellenwendelin/gst-web.git'
+# set :branch, 'master'
+
+set :repository, 'git@github.com:ewendelin/gst-web.git'
+set :branch, 'production'
 
 # Optional settings:
 #   set :user, 'foobar'          # Username in the server to SSH to.
@@ -57,6 +61,7 @@ task :deploy do
     on :launch do
       in_path(fetch(:current_path)) do
         command %{npm install}
+        command %{npm audit fix}
         command %{NODE_ENV=production npm run build}
       end
     end

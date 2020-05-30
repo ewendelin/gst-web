@@ -9,7 +9,7 @@
 			</v-avatar>
 
 			<v-layout row class="justify-end mx-5">
-				<v-btn text class="mt-n12 pt-0" to="/vendors">
+				<v-btn text class="mt-n12 pt-0" @click="logout()">
 					<v-icon right>mdi-logout</v-icon>
 				</v-btn>
 			</v-layout>
@@ -205,7 +205,7 @@
 						close
 					</v-btn>
 				</v-snackbar>
-				
+
 
 				<v-dialog v-model="dialog2" max-width="290">
 					<v-card>
@@ -247,7 +247,7 @@
 								label="Type of Establishment"
 								color="#DFA937"
 							></v-select>
-							
+
 							<el-upload
 								v-model="mainimage"
 								action="http://localhost:3000/api/v1/promotions/images/upload"
@@ -258,7 +258,7 @@
 								  :auto-upload="false">
 								<el-button slot="trigger" size="small" type="primary">Upload Vendor Image</el-button>
 							</el-upload>
-							
+
 							<el-upload
 								v-model="logo"
 								action="http://localhost:3000/api/v1/promotions/images/upload"
@@ -333,10 +333,17 @@
 // import axios from "axios";
 import VendorCard from "../components/VendorCard.vue";
 import VNav from '../components/VNav';
+// this.$api.defaults.headers.common['X-Auth-Token'] = sessionStorage.getItem('token');
+
 export default {
   name: "Vendor",
   components: { VendorCard, VNav },
   created() {
+    let storedToken = sessionStorage.getItem('token');
+    if (storedToken != undefined || storedToken != null) {
+      this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+    }
+
     this.$api
       .get("/vendor_profiles/vendor")
       .then(response => {
@@ -404,7 +411,7 @@ export default {
       })
       .catch();
   	  }
-      
+
       // this.$refs.upload.submit();
     },
     submitUploadVendorLogo(id) {
@@ -420,7 +427,7 @@ export default {
       })
       .catch();
 	  }
-      
+
       // this.$refs.upload.submit();
     },
     submitUploadVendorMain(id) {
@@ -519,6 +526,10 @@ export default {
     		});
     	this.dialog1 = false;
     },
+    logout() {
+        sessionStorage.setItem('token', 'logout');
+		// return redirect('/');
+	},
    }
 }
 

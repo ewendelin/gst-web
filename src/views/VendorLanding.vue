@@ -2,7 +2,7 @@
 	<div class="vendorlanding">
 		<v-img height="200px" src="../assets/cross.jpg"></v-img>
 		<v-layout row class="d-flex justify-space-around mx-9 my-8">
-			<v-btn
+			<!-- <v-btn
 				width="35vw"
 				dark
 				color="#DFA937"
@@ -164,7 +164,7 @@
 						</v-btn>
 					</v-layout>
 				</v-card>
-			</v-dialog>
+			</v-dialog> -->
 		</v-layout>
 		<v-layout row class="mx-9 my-8">
 			<v-list>
@@ -218,6 +218,7 @@
 </template>
 <script>
 	import VNav from '../components/VNav';
+  // this.$api.defaults.headers.common['X-Auth-Token'] = sessionStorage.getItem('token');
 
 	export default {
 	components: { VNav },

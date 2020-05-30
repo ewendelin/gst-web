@@ -34,17 +34,13 @@ const routes = [
 		path: '/vendor',
 		name: 'vendor',
 		component: () => import('../views/Vendor.vue')
-	},
-	{
-		path: '/vendorreview/:id',
-		name: 'reviews',
-		component: () => import('../views/VProfile.vue')
 	}
 ];
 
 const router = new VueRouter({
 	mode: 'history',
-	base: process.env.BASE_URL,
+  // base: process.env.BASE_URL,
+	base: '/',
 	routes
 });
 
