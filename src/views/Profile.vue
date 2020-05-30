@@ -1,13 +1,6 @@
 <template>
 	<div class="profile" >
 		<Navbar />
-		<v-layout hidden-md-and-up>
-			<v-img height="200px" src="../assets/cross.jpg" ></v-img>
-		</v-layout>
-		<v-layout hidden-sm-and-down class="">
-
-		</v-layout>
-		
 		<v-layout column class="mx-5 my-5">
 			<v-list>
 				<v-list-item>

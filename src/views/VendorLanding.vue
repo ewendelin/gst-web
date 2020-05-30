@@ -167,51 +167,12 @@
 			</v-dialog> -->
 		</v-layout>
 		<v-layout row class="mx-9 my-8">
-			<v-list>
-				<p class="font-weight-medium">Our partners are not allowed to sell:</p>
-				<v-list-item v-for="item1 in items1" :key="item1.title">
-					<v-list-item-icon>
-						<v-icon v-if="item1.icon" color="red">mdi-cancel</v-icon>
-					</v-list-item-icon>
-
-					<v-list-item-content>
-						<v-list-item-title
-							v-text="item1.title"
-							class="font-weight-medium"
-						></v-list-item-title>
-					</v-list-item-content>
+			<v-list v-for="vendor in vendors" :key="vendor.id">
+				<p class="font-weight-medium">Your Venues:</p>
+				<v-list-item>
+					{{vendor.vendor_name}}	
 				</v-list-item>
 			</v-list>
-			<v-list>
-				<p class="font-weight-medium">
-					The reasons why food end up on our site could be one of the following
-					reasons:
-				</p>
-				<v-list-item v-for="item in items2" :key="item.title">
-					<v-list-item-icon>
-						<v-icon v-if="item.icon" color="orange">mdi-carrot</v-icon>
-					</v-list-item-icon>
-
-					<v-list-item-content>
-						<v-list-item-title
-							v-text="item.title"
-							class="font-weight-medium"
-						></v-list-item-title>
-					</v-list-item-content>
-				</v-list-item>
-			</v-list>
-		</v-layout>
-		<v-col class="mx-auto" width="100vw">
-			<p class="font-weight-medium headline text-capitalize mx-8">contact us</p>
-			<p class="body font-weight-medium mx-8">
-				<v-icon class="pr-2" width="100vw">mdi-email</v-icon>gast@gmail.com
-			</p>
-			<p class="body font-weight-medium mx-8">
-				<v-icon class="pr-2" width="100vw">mdi-phone</v-icon>+86 188 1737 3070
-			</p>
-		</v-col>
-		<v-layout justify-center>
-			<v-icon color="grey darken-4" size="200">mdi-qrcode</v-icon>
 		</v-layout>
 		<VNav />
 	</div>
@@ -244,7 +205,23 @@
 					{ icon: true, title: 'Food waste' }
 				]
 			};
-		}
+		},
+
+		created() {
+		    let storedToken = sessionStorage.getItem('token');
+		    if (storedToken != undefined || storedToken != null) {
+		      this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+		    }
+
+		    this.$api
+		      .get("/vendor_profiles/vendor")
+		      .then(response => {
+		        this.vendors = response.data;
+		      })
+		      .catch(e => {
+		        this.error.push(e);
+		      });
+		  },
 	};
 </script>
 <style scoped>

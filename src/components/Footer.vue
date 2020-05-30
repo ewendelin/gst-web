@@ -12,19 +12,9 @@
       class="white--text text-center"
       color="#DFA937"
     >
-      
-      <v-card-actions class="text-center">
-		<v-card-text class="font-weight-bold body">
-			<v-icon right>mdi-phone</v-icon>
-			+86 18817373070
-		</v-card-text>
-		<v-card-text class="font-weight-bold body">
-			<v-icon right>mdi-email</v-icon>
-			gast@gmail.com
-		</v-card-text>
-	</v-card-actions>
+   
 
-      <v-card-text class="white--text pt-0">
+      <v-card-text class="white--text pt-3">
         Gast aims to reduce food waste by providing a platform for F&B establishments to promote deals on food that needs to be consumed. Everything promoted on Gast is perfectly fine to eat, nothing has expired or gone bad.
       </v-card-text>
 
