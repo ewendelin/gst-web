@@ -34,11 +34,6 @@ const routes = [
 		path: '/vendor',
 		name: 'vendor',
 		component: () => import('../views/Vendor.vue')
-	},
-	{
-		path: '/vendorreview/:id',
-		name: 'reviews',
-		component: () => import('../views/VProfile.vue')
 	}
 ];
 

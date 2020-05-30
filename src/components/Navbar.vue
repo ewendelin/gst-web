@@ -37,7 +37,7 @@
 			
 		>
 			<v-btn to="/deals">
-				<span>Coupons</span>
+				<span>Deals</span>
 				<v-icon>mdi-sale</v-icon>
 			</v-btn>
 			<v-btn to="/">

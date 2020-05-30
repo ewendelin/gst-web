@@ -9,7 +9,7 @@
 			</v-avatar>
 
 			<v-layout row class="justify-end mx-5">
-				<v-btn text class="mt-n12 pt-0" to="/vendors">
+				<v-btn text class="mt-n12 pt-0" @click="logout()">
 					<v-icon right>mdi-logout</v-icon>
 				</v-btn>
 			</v-layout>
@@ -526,6 +526,10 @@ export default {
     		});
     	this.dialog1 = false;
     },
+    logout() {
+        sessionStorage.setItem('token', 'logout');
+		// return redirect('/');
+	},
    }
 }
 
