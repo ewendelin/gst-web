@@ -32,17 +32,17 @@
 			>
 				<v-list-item>
 					<v-list-item-content>
-						<v-list-item-title>
+						<v-list-item-title class="text-no-wrap">
 							{{ deal.promotion.title }}
 						</v-list-item-title>
-						<v-list-item-subtitle>
+						<v-list-item-subtitle class="text-no-wrap">
 							{{ deal.vendor_name }}
 						</v-list-item-subtitle>
-						<v-list-item-subtitle>
+						<v-list-item-subtitle class="text-no-wrap">
 							{{ deal.promotion.time_slot }}
 						</v-list-item-subtitle>
 					</v-list-item-content>
-					<v-spacer></v-spacer>
+					<!-- <v-spacer></v-spacer> -->
 					<v-list-item-icon @click="deal.dialog3 = true" class="my-0">
 						<v-btn fab text>
 							<v-icon>mdi-key</v-icon>
@@ -78,8 +78,7 @@
 								</v-layout>
 
 								<v-card-text>
-									Are you sure you want to cancel this deal? They will no longer
-									be expecting you!
+									Are you sure you want to cancel this deal?
 								</v-card-text>
 
 								<v-card-actions class="d-flex justify-center pb-3">
