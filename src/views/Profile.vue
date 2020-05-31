@@ -1,7 +1,7 @@
 <template>
 	<div class="profile" >
 		<Navbar />
-		<v-layout column class="mx-5 my-5">
+		<v-layout column class="mx-5 mb-5">
 			<v-list>
 				<v-list-item>
 					<v-list-item-avatar size="54" color="grey">

@@ -170,7 +170,7 @@
 			<v-list v-for="vendor in vendors" :key="vendor.id">
 				<p class="font-weight-medium">Your Venues:</p>
 				<v-list-item>
-					{{vendor.vendor_name}}	
+					{{vendor.name}}	
 				</v-list-item>
 			</v-list>
 		</v-layout>
@@ -213,9 +213,12 @@
 		      this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
 		    }
 
+		    this.$api.defaults.headers.common['X-Auth-Token'] = 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxNiwiZXhwIjoxNTkzNDIxOTU5fQ.RQMa9A83CNgtObuyjJXLS8oxlx8uUjxDwmnG5InVVZg'
+
 		    this.$api
 		      .get("/vendor_profiles/vendor")
 		      .then(response => {
+		      	// alert(response.data[0].id)
 		        this.vendors = response.data;
 		      })
 		      .catch(e => {
