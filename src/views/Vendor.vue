@@ -340,12 +340,8 @@ export default {
   components: { VendorCard, VNav },
   created() {
     let storedToken = sessionStorage.getItem('token');
-    if (storedToken != undefined || storedToken != null) {
-      this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-    }
-
-		    this.$api.defaults.headers.common['X-Auth-Token'] = 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxNiwiZXhwIjoxNTkzNDIxOTU5fQ.RQMa9A83CNgtObuyjJXLS8oxlx8uUjxDwmnG5InVVZg'
-    
+    if ((storedToken != undefined || storedToken != null) && storedToken != 'logout') {
+	this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
 
     this.$api
       .get("/vendor_profiles/vendor?only=true")
@@ -355,6 +351,10 @@ export default {
       .catch(e => {
         this.error.push(e);
       });
+  } else {
+  	window.location.href = "https://gast.world"
+  }
+
   },
   data() {
     return {
@@ -482,6 +482,7 @@ export default {
 
       this.newPromotion = {};
       this.dialog = false;
+      location.reload();
     },
     editVendor() {
     	let updated_vendor = this.vendor;
@@ -531,6 +532,7 @@ export default {
     },
     logout() {
         sessionStorage.setItem('token', 'logout');
+        window.location.href = "https://gast.world"
 		// return redirect('/');
 	},
    }
