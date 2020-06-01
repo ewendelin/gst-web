@@ -344,6 +344,8 @@ export default {
       this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
     }
 
+		    this.$api.defaults.headers.common['X-Auth-Token'] = 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxNiwiZXhwIjoxNTkzNDIxOTU5fQ.RQMa9A83CNgtObuyjJXLS8oxlx8uUjxDwmnG5InVVZg'
+
 
     this.$api
       .get("/vendor_profiles/vendor?only=true")
@@ -480,7 +482,6 @@ export default {
 
       this.newPromotion = {};
       this.dialog = false;
-      // location.reload();
     },
     editVendor() {
     	let updated_vendor = this.vendor;
