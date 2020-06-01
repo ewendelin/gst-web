@@ -34,7 +34,7 @@
 				<span>Profile</span>
 				<v-icon>mdi-home</v-icon>
 			</v-btn>
-			<v-btn to="/vendors">
+			<v-btn to="/">
 				<Gast class="logo" />
 			</v-btn>
 		</v-bottom-navigation>
