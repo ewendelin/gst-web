@@ -480,7 +480,7 @@ export default {
 
       this.newPromotion = {};
       this.dialog = false;
-      location.reload();
+      // location.reload();
     },
     editVendor() {
     	let updated_vendor = this.vendor;
