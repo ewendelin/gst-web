@@ -340,8 +340,10 @@ export default {
   components: { VendorCard, VNav },
   created() {
     let storedToken = sessionStorage.getItem('token');
-    if ((storedToken != undefined || storedToken != null) && storedToken != 'logout') {
-	this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+    if (storedToken != undefined || storedToken != null) {
+      this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+    }
+
 
     this.$api
       .get("/vendor_profiles/vendor?only=true")
@@ -351,10 +353,6 @@ export default {
       .catch(e => {
         this.error.push(e);
       });
-  } else {
-  	window.location.href = "https://gast.world"
-  }
-
   },
   data() {
     return {
