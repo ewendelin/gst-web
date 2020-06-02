@@ -1,5 +1,5 @@
 <template>
-	<div :vendorId="vendor.id">
+	<div :vendor="vendor.id">
 		<v-img height="300px" :src="vendor.main_img">
 		</v-img>
 
