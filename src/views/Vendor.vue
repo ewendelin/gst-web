@@ -1,5 +1,5 @@
 <template>
-	<div class="vendor">
+	<div :vendorId="vendor.id">
 		<v-img height="300px" :src="vendor.main_img">
 		</v-img>
 
@@ -350,7 +350,6 @@ export default {
 
 
     this.$api
-    // let vendor = this.vendor
     let id = this.vendor.id
       // .get("/vendor_profiles/vendor?only=true")
       // .get("/vendor_profiles/vendor")
