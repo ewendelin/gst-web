@@ -350,10 +350,12 @@ export default {
 
 
     this.$api
+    let vendor = this.vendor
+    let id = vendor.id
       // .get("/vendor_profiles/vendor?only=true")
       // .get("/vendor_profiles/vendor")
-      .get(`/vendor_profiles/${id}`)
-      
+      .get(`/vendor_profiles/vendor${id}`)
+
 
       .then(response => {
         this.vendor = response.data.vendor;
