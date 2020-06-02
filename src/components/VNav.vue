@@ -4,7 +4,7 @@
 			
 			<v-app-bar app text prominent hide-on-scroll class="hidden-sm-and-down" >
 				<v-layout col style="margin-top: 1rem;">
-					<v-btn color="#FFF" icon x-large to="/vendors">
+					<v-btn color="#FFF" icon x-large to="/">
 						<Gast class="lgb"/>
 					</v-btn>
 				</v-layout>

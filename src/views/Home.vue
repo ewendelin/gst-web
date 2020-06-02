@@ -60,7 +60,7 @@
 			</v-btn> -->
 
 			
-			<v-btn tile class="buttonst" width="95%" depressed to="/vendors">
+			<v-btn tile class="buttonst" width="95%" depressed to="/vendor">
 				for vendors
 				<v-icon right>mdi-store</v-icon>
 			</v-btn>
