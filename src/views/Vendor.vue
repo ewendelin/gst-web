@@ -1,5 +1,99 @@
 <template>
-	<div :vendor="vendor.id">
+	<div>
+		<v-card v-if="user.vendor = true">
+			<v-layout row class="mx-3">
+				<v-card-title>Register Vendor Account</v-card-title>
+					<v-form ref="form" v-model="valid" lazy-validation class="mx-5">
+						<v-text-field
+								v-model="vendorname"
+								label="Name of Establishment"
+								required
+								color="#DFA937"
+							></v-text-field>
+
+							<v-select
+								v-model="value"
+								:items="items"
+								attach
+								label="Type of Establishment"
+								color="#DFA937"
+							></v-select>
+
+							<v-text-field
+								v-model="contactperson"
+								label="Contact Person"
+								required
+								color="#DFA937"
+							></v-text-field>
+							<v-text-field
+								v-model="address"
+								label="Address"
+								required
+								color="#DFA937"
+							></v-text-field>
+
+							<v-text-field
+								v-model="email"
+								label="E-mail"
+								required
+								color="#DFA937"
+							></v-text-field>
+
+							<v-text-field
+								v-model="contactnumber"
+								label="Phone Number"
+								required
+								color="#DFA937"
+							></v-text-field>
+
+							<v-text-field
+								v-model="password"
+								:append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+								:type="show1 ? 'text' : 'password'"
+								name="input-10-1"
+								label="Password"
+								@click:append="show1 = !show1"
+								color="#DFA937"
+							></v-text-field>
+							<v-text-field
+								v-model="password"
+								:append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+								:type="show1 ? 'text' : 'password'"
+								label="Confirm Password"
+								name="input-10-1"
+								@click:append="show1 = !show1"
+								color="#DFA937"
+							></v-text-field>
+							<v-checkbox
+								v-model="checkbox"
+								label="Agree with terms of service"
+								required
+							></v-checkbox>
+						</v-form>
+						<v-btn
+							dark
+							width="95%"
+							color="#DFA937"
+							tile
+							class="buttons mb-3"
+							depressed
+							@click="snackbar = true"
+						>
+							submit for approval
+						</v-btn>
+						<v-snackbar v-model="snackbar" color="success">
+							Successfully submitted. An account manager will contact you
+							shortly to confirm your account
+							<v-btn vertical text dark @click="snackbar = false">close</v-btn>
+						</v-snackbar>
+
+						<v-btn text small class="pt-0 mt-0" @click="dialog = true">
+							<v-card-text class="mr-3 pt-0 text-lowercase"
+							class="text-capitalize">Already have an account? Login</v-card-text>
+						</v-btn>
+				</v-layout>
+			</v-card>
+		<v-layout v-else>
 		<v-img height="300px" :src="vendor.main_img">
 		</v-img>
 
@@ -309,22 +403,23 @@
 					</v-card>
 				</v-dialog>
 			</v-layout>
-		</v-col>
-		<v-layout row class="mx-auto">
-			<v-list-item>
-				<v-list-item-content>
-					<v-list-item-title class="title font-weight-bold mb-1 mt-n4">Description</v-list-item-title>
-					<v-list-item-subtitle class="body1 font-weight-regular mb-3">
-						{{ vendor.address }}
-					</v-list-item-subtitle>
-					<v-list-item-subtitle class="body1 font-weight-regular mb-3 text-wrap">
-						{{ vendor.description }}
-					</v-list-item-subtitle>
-					<v-list-item-title class="title font-weight-bold">Saved Deals</v-list-item-title>
-				</v-list-item-content>
-			</v-list-item>
-			<VendorCard :vendorId="vendor.id" />
-		</v-layout>
+			</v-col>
+				<v-layout row class="mx-auto">
+					<v-list-item>
+						<v-list-item-content>
+							<v-list-item-title class="title font-weight-bold mb-1 mt-n4">Description</v-list-item-title>
+							<v-list-item-subtitle class="body1 font-weight-regular mb-3">
+								{{ vendor.address }}
+							</v-list-item-subtitle>
+							<v-list-item-subtitle class="body1 font-weight-regular mb-3 text-wrap">
+								{{ vendor.description }}
+							</v-list-item-subtitle>
+							<v-list-item-title class="title font-weight-bold">Saved Deals</v-list-item-title>
+						</v-list-item-content>
+					</v-list-item>
+					<VendorCard :vendorId="vendor.id" />
+				</v-layout>
+			</v-layout>
 		<VNav />
 	</div>
 </template>
