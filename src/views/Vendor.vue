@@ -472,7 +472,7 @@ export default {
         .then(response => {
         // let vendor = response.data.vendor;
 
-          // this.vendor = response.data.vendor;
+          this.vendor = response.data.vendor;
           if (Object.keys(response.data.vendor).length == 0 ) {
             this.showForm = true
           } else {
