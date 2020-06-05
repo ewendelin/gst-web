@@ -327,7 +327,7 @@
 					<VendorCard :vendorId="vendor.id" />
 				</v-layout>
 			</v-layout>
-			<template v-else>
+			<v-layout v-else v-model="showForm">
 					<v-card center class="pt-12 pb-12">
 						<v-layout row class="mx-5">
 							<v-card-title>Register Vendor Account</v-card-title>
@@ -437,8 +437,7 @@
 							</v-layout>
 						</v-card>
 					<!-- <VNav /> -->
-				
-			</template>
+			</v-layout>
 		<VNav />
 	</div>
 </template>
