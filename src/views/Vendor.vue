@@ -1,4 +1,4 @@
-<template v-if="user.vendor = true">
+<template v-if="showForm">
 	<div>
 		<v-layout>
 		<v-img height="300px" :src="vendor.main_img">
@@ -470,7 +470,14 @@ export default {
         // .get("/vendor_profiles/vendor")
         .get(`/vendor_profiles/vendor?only=true`)
         .then(response => {
-          this.vendor = response.data.vendor;
+        // let vendor = response.data.vendor;
+
+          // this.vendor = response.data.vendor;
+          if (Object.keys(response.data.vendor).length == 0 ) {
+            this.showForm = true
+          } else {
+            this.showForm = false
+          }
         })
         .catch(e => {
           this.error.push(e);
