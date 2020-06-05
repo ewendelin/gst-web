@@ -327,7 +327,19 @@
 					<VendorCard :vendorId="vendor.id" />
 				</v-layout>
 			</v-layout>
-			<v-layout v-else>
+			<v-layout v-else class="backe" col>
+				
+					<v-btn
+					@click.stop="dialogra = true" 
+					dark
+					width="95%"
+					color="#DFA937"
+					tile
+					class="buttons mb-3 mt-12"
+					depressed>Click here to register a vendor account
+					</v-btn>
+				
+				<v-dialog v-model="dialogra" max-width="300">
 					<v-card center class="pt-12 pb-12">
 						<v-layout row class="mx-5">
 							<v-card-title>Register Vendor Account</v-card-title>
@@ -436,6 +448,7 @@
 									</v-snackbar> -->
 							</v-layout>
 						</v-card>
+					</v-dialog>
 					<!-- <VNav /> -->
 			</v-layout>
 		<VNav />
@@ -485,8 +498,8 @@ export default {
   },
   data() {
     return {
-      showForm: false,
-      valid: false,
+      dialogra: false,
+      valid: true,
       nameRules: [
         v => !!v || 'Name is required',
       ],
@@ -699,5 +712,11 @@ export default {
 .endtime {
 	margin-top: 1rem;
 	margin-bottom:.7rem;
+}
+.backe {
+	height: 100vw;
+	background-color: #fff;
+	justify-content: center;
+	align-content: center;
 }
 </style>
