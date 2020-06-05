@@ -327,7 +327,7 @@
 					<VendorCard :vendorId="vendor.id" />
 				</v-layout>
 			</v-layout>
-			<v-layout v-else v-model="showForm">
+			<v-layout v-else>
 					<v-card center class="pt-12 pb-12">
 						<v-layout row class="mx-5">
 							<v-card-title>Register Vendor Account</v-card-title>
