@@ -1,6 +1,6 @@
-<template v-if="showForm">
+<template>
 	<div>
-		<v-layout>
+		<v-layout v-if="showForm">
 		<v-img height="300px" :src="vendor.main_img">
 		</v-img>
 
@@ -327,122 +327,122 @@
 					<VendorCard :vendorId="vendor.id" />
 				</v-layout>
 			</v-layout>
+			<template v-else>
+					<v-card center class="pt-12 pb-12">
+						<v-layout row class="mx-5">
+							<v-card-title>Register Vendor Account</v-card-title>
+								<v-form ref="form" v-model="valid" lazy-validation class="ml-5">
+									<v-text-field
+											v-model="name"
+											label="Name of Establishment"
+											:rules="nameRules"
+											required
+											color="#DFA937"
+										></v-text-field>
+
+										<v-select
+											v-model="select"
+											:items="items"
+											required
+											:rules="[v => !!v || 'Type is required!']"
+											attach
+											label="Type of Establishment"
+											color="#DFA937"
+										></v-select>
+
+										<v-text-field
+											v-model="contactperson"
+											label="Contact Person"
+											required
+											:rules="[v => !!v || 'Contact person is required!']"
+											color="#DFA937"
+										></v-text-field>
+										<v-text-field
+											:rules="[v => !!v || 'Contact person is required!']"
+											v-model="address"
+											label="Address"
+											required
+											color="#DFA937"
+										></v-text-field>
+
+										<v-text-field
+											v-model="email"
+											label="E-mail"
+											required
+											:rules="emailRules"
+											color="#DFA937"
+										></v-text-field>
+
+										<v-text-field
+											v-model="contactnumber"
+											label="Phone Number"
+											required
+											:rules="[v => !!v || 'Phone number is required!']"
+											color="#DFA937"
+										></v-text-field>
+
+										<v-text-field
+											v-model="password"
+											:append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+											:type="show1 ? 'text' : 'password'"
+											name="input-10-1"
+											label="Password"
+											@click:append="show1 = !show1"
+											color="#DFA937"
+											:rules="[v => !!v || 'Password is required!']"
+										></v-text-field>
+										<v-checkbox
+											v-model="checkbox"
+											label="Agree with terms of service"
+											required
+											:rules="[v => !!v || 'You must agree to continue!']"
+										></v-checkbox>
+										<v-btn dark
+										text
+										color="#DFA937"
+										tile
+										class="mt-n3 ml-0 mb-3 caption"
+										@click.stop="dialogtos = true"
+										depressed>Read terms of service here
+										</v-btn>
+									</v-form>
+									<v-dialog v-model="dialogtos" scrollable>
+										<v-card>
+									        <v-card-title>
+									          <span class="headline">Terms Of Service</span>
+									        </v-card-title>
+									        <v-card-text>Lorem ipsum dolor sit amet, semper quis, sapien id natoque elit. Nostra urna at, magna at neque sed sed ante imperdiet, dolor mauris cursus velit, velit non, sem nec. Volutpat sem ridiculus placerat leo, augue in, duis erat proin condimentum in a eget, sed fermentum sed vestibulum varius ac, vestibulum volutpat orci ut elit eget tortor. Ultrices nascetur nulla gravida ante arcu. Pharetra rhoncus morbi ipsum, nunc tempor debitis, ipsum pellentesque, vitae id quam ut mauris dui tempor, aptent non. Quisque turpis. Phasellus quis lectus luctus orci eget rhoncus. Amet donec vestibulum mattis commodo, nulla aliquet, nibh praesent, elementum nulla. Sit lacus pharetra tempus magna neque pellentesque, nulla vel erat.
+									         </v-card-text>
+									        <v-card-actions>
+									          <v-spacer></v-spacer>
+									          <v-btn color="#DFA937" text @click="dialogtos = false">Close</v-btn>
+									        </v-card-actions>
+									      </v-card>
+									</v-dialog>
+									<v-btn
+										dark
+										width="95%"
+										color="#DFA937"
+										tile
+										class="buttons mb-3"
+										depressed
+									>
+										submit for approval
+									</v-btn>
+									<!-- <v-snackbar v-model="snackbar" color="success">
+										Successfully submitted. An account manager will contact you
+										shortly to confirm your account
+										<v-btn vertical text dark>close</v-btn>
+									</v-snackbar> -->
+							</v-layout>
+						</v-card>
+					<!-- <VNav /> -->
+				
+			</template>
 		<VNav />
 	</div>
 </template>
-<template v-else>
-	<div>
-		<v-card center class="pt-12 pb-12">
-			<v-layout row class="mx-5">
-				<v-card-title>Register Vendor Account</v-card-title>
-					<v-form ref="form" v-model="valid" lazy-validation class="ml-5">
-						<v-text-field
-								v-model="name"
-								label="Name of Establishment"
-								:rules="nameRules"
-								required
-								color="#DFA937"
-							></v-text-field>
 
-							<v-select
-								v-model="select"
-								:items="items"
-								required
-								:rules="[v => !!v || 'Type is required!']"
-								attach
-								label="Type of Establishment"
-								color="#DFA937"
-							></v-select>
-
-							<v-text-field
-								v-model="contactperson"
-								label="Contact Person"
-								required
-								:rules="[v => !!v || 'Contact person is required!']"
-								color="#DFA937"
-							></v-text-field>
-							<v-text-field
-								:rules="[v => !!v || 'Contact person is required!']"
-								v-model="address"
-								label="Address"
-								required
-								color="#DFA937"
-							></v-text-field>
-
-							<v-text-field
-								v-model="email"
-								label="E-mail"
-								required
-								:rules="emailRules"
-								color="#DFA937"
-							></v-text-field>
-
-							<v-text-field
-								v-model="contactnumber"
-								label="Phone Number"
-								required
-								:rules="[v => !!v || 'Phone number is required!']"
-								color="#DFA937"
-							></v-text-field>
-
-							<v-text-field
-								v-model="password"
-								:append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-								:type="show1 ? 'text' : 'password'"
-								name="input-10-1"
-								label="Password"
-								@click:append="show1 = !show1"
-								color="#DFA937"
-								:rules="[v => !!v || 'Password is required!']"
-							></v-text-field>
-							<v-checkbox
-								v-model="checkbox"
-								label="Agree with terms of service"
-								required
-								:rules="[v => !!v || 'You must agree to continue!']"
-							></v-checkbox>
-							<v-btn dark
-							text
-							color="#DFA937"
-							tile
-							class="mt-n3 ml-0 mb-3 caption"
-							@click.stop="dialogtos = true"
-							depressed>Read terms of service here
-							</v-btn>
-						</v-form>
-						<v-dialog v-model="dialogtos" scrollable>
-							<v-card>
-						        <v-card-title>
-						          <span class="headline">Terms Of Service</span>
-						        </v-card-title>
-						        <v-card-text>Lorem ipsum dolor sit amet, semper quis, sapien id natoque elit. Nostra urna at, magna at neque sed sed ante imperdiet, dolor mauris cursus velit, velit non, sem nec. Volutpat sem ridiculus placerat leo, augue in, duis erat proin condimentum in a eget, sed fermentum sed vestibulum varius ac, vestibulum volutpat orci ut elit eget tortor. Ultrices nascetur nulla gravida ante arcu. Pharetra rhoncus morbi ipsum, nunc tempor debitis, ipsum pellentesque, vitae id quam ut mauris dui tempor, aptent non. Quisque turpis. Phasellus quis lectus luctus orci eget rhoncus. Amet donec vestibulum mattis commodo, nulla aliquet, nibh praesent, elementum nulla. Sit lacus pharetra tempus magna neque pellentesque, nulla vel erat.
-						         </v-card-text>
-						        <v-card-actions>
-						          <v-spacer></v-spacer>
-						          <v-btn color="#DFA937" text @click="dialogtos = false">Close</v-btn>
-						        </v-card-actions>
-						      </v-card>
-						</v-dialog>
-						<v-btn
-							dark
-							width="95%"
-							color="#DFA937"
-							tile
-							class="buttons mb-3"
-							depressed
-						>
-							submit for approval
-						</v-btn>
-						<!-- <v-snackbar v-model="snackbar" color="success">
-							Successfully submitted. An account manager will contact you
-							shortly to confirm your account
-							<v-btn vertical text dark>close</v-btn>
-						</v-snackbar> -->
-				</v-layout>
-			</v-card>
-		<VNav />
-	</div>
-</template>
 
 <script>
 // import axios from "axios";
