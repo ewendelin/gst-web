@@ -339,10 +339,10 @@
 					depressed>Click here to register a vendor account
 					</v-btn>
 				
-				<v-dialog v-model="dialogra" max-width="300">
+				<v-dialog v-model="dialogra" max-width="350">
 					<v-card center class="pt-12 pb-12">
 						<v-layout row class="mx-5">
-							<v-card-title>Register Vendor Account</v-card-title>
+							<v-card-title class="headline">Register Vendor Account</v-card-title>
 								<v-form ref="form" v-model="valid" lazy-validation class="ml-5">
 									<v-text-field
 											v-model="name"
