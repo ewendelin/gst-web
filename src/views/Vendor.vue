@@ -486,6 +486,7 @@ export default {
   },
   data() {
     return {
+      showForm: false,
       valid: true,
       nameRules: [
         v => !!v || 'Name is required',
