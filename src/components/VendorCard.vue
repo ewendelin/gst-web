@@ -420,6 +420,7 @@
           this.$api
           .post(`/promotions/${id}/archive`)
           .then(
+            alert('post'),
             location.reload()
           )
           .catch(e => {
@@ -434,6 +435,7 @@
           this.$api
           .post(`/promotions/${id}/renew`, {promotion: promotion})
           .then(
+            alert('post'),
             location.reload()
           )
           .catch(e => {
@@ -448,6 +450,7 @@
           this.$api
           .post(`/promotions/${id}/activate`, {promotion: promotion})
           .then(
+            alert('post'),
             location.reload()
           )
           .catch(e => {
