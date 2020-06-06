@@ -343,7 +343,7 @@
 					color="#DFA937"
 					tile
 					class="buttons mb-3 mt-12"
-					depressed>Click to register vendor account
+					depressed>Register vendor account
 					</v-btn>
 				</v-col>
 				
