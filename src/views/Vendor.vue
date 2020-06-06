@@ -294,13 +294,13 @@
 							Coupons claimed:
 						</v-card-title>
 						<v-card-text class="body1 font-weight-regular mb-3">
-							{{}}
+							{{vendor.statistics.issued}}
 						</v-card-text>
 						<v-card-title class="title font-weight-regular mb-1 mt-n4">
 							Coupons verified:
 						</v-card-title>
 						<v-card-text class="body1 font-weight-regular mb-3">
-							{{}}
+							{{vendor.statistics.verified}}
 						</v-card-text>
 						<v-card-actions class="d-flex justify-space-around pb-3">
 							<v-btn width="90%" dark color="#DFA937" tile class="buttons" depressed @click="dialogtotalstat = false">
@@ -653,6 +653,7 @@ export default {
 
       this.newPromotion = {};
       this.dialog = false;
+
     },
     editVendor() {
     	let updated_vendor = this.vendor;
