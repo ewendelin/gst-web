@@ -310,7 +310,7 @@
 					</v-card>
 				</v-dialog>
 			</v-layout>
-			</v-col>
+			<!-- </v-col> -->
 				<v-layout row class="mx-auto">
 					<v-list-item>
 						<v-list-item-content>
