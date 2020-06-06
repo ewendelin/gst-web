@@ -427,7 +427,7 @@
       update(promotion, status) {
         let id = promotion.id
         // if (status == 'archive') {
-          if (status == 'onsale') {
+          if (promotion.status == 'onsale') {
           this.$api
           .post(`/promotions/${id}/archive`)
           .then(location.reload())
