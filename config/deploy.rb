@@ -60,6 +60,7 @@ task :deploy do
 
     on :launch do
       in_path(fetch(:current_path)) do
+        # command %{sudo rm -rf node_modules package-lock.json}
         command %{npm install}
         command %{npm audit fix}
         command %{NODE_ENV=production npm run build}

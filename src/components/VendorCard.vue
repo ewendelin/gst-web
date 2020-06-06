@@ -46,7 +46,7 @@
             <!-- {{deal.time1}} -->
           </v-card-text>
           <v-row justify="space-around" class="mx-2 align-center">
-            <v-btn fab text @click="promotion.dialog3 = true">
+            <v-btn fab text @click.stop="promotion.dialog3 = true">
               <v-icon right>mdi-cog</v-icon>
             </v-btn>
             
@@ -81,7 +81,7 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
-                        v-model="start_date"
+                        v-model="promotion.start_date"
                         label="Start Date"
                         prepend-icon="mdi-calendar"
                         readonly
@@ -92,7 +92,7 @@
                     <v-date-picker v-model="start_date" no-title scrollable color="#DFA937">
                       <v-spacer></v-spacer>
                       <v-btn text color="#DFA937" @click="menu3 = false">Cancel</v-btn>
-                      <v-btn text color="#DFA937" @click="saveToToggle('start_date', start_date),menu3 = false">OK</v-btn>
+                      <v-btn text color="#DFA937" @click="saveToToggle('start_date', promotion.start_date),menu3 = false">OK</v-btn>
                     </v-date-picker>
                   </v-menu>
               <v-menu
@@ -107,7 +107,7 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
-                        v-model="end_date"
+                        v-model="promotion.end_date"
                         label="End Date"
                         prepend-icon="mdi-calendar"
                         readonly
@@ -118,29 +118,29 @@
                     <v-date-picker v-model="end_date" no-title scrollable color="#DFA937">
                       <v-spacer></v-spacer>
                       <v-btn text color="#DFA937" @click="menu4 = false">Cancel</v-btn>
-                      <v-btn text color="#DFA937" @click="saveToToggle('end_date', end_date),menu4 = false">OK</v-btn>
+                      <v-btn text color="#DFA937" @click="saveToToggle('end_date', promotion.end_date),menu4 = false">OK</v-btn>
                     </v-date-picker>
                   </v-menu>
                   <el-time-select
-                  v-model="promotion.start_time"
+                  v-model="start_time"
                   :picker-options="{
                     start: '00:00',
                     step: '00:30',
                     end: '24:00'
                   }"
                   placeholder="Start Time"
-                  :change="saveToToggle('start_time', promotion.start_time)">
+                  :change="saveToToggle('start_time', start_time)">
                 </el-time-select>
                  <el-time-select
                  class="endtime"
-                  v-model="promotion.end_time"
+                  v-model="end_time"
                   :picker-options="{
                     start: '00:00',
                     step: '00:30',
                     end: '24:00'
                   }"
                   placeholder="End Time"
-                  :change="saveToToggle('end_time', promotion.end_time)">
+                  :change="saveToToggle('end_time', end_time)">
                 </el-time-select>
                 <v-text-field
                     label="Amount"
@@ -151,11 +151,11 @@
                   ></v-text-field>
                 <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn v-if="promotion.status == 'draft'"
-                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'onsale')">
+                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'onsale'), promotion.dialog3 = false">
                     Activate
                   </v-btn>
                   <v-btn v-else-if="promotion.status == 'archive'"
-                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'onsale')">
+                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'onsale'), promotion.dialog3 = false">
                     Reactivate
                   </v-btn>
                 </v-card-actions>
@@ -163,7 +163,7 @@
                 <v-form class="mx-5" v-else-if="promotion.status == 'onsale'">
                   <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn
-                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'archive')">
+                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'archive'), promotion.dialog3 = false">
                     archive
                   </v-btn>
                   </v-card-actions>
@@ -343,7 +343,6 @@
 		},
 		methods: {
       remove(promotion) {
-        // this.$api(this.deals, index);
           this.$api.post(
             `/vendor_profiles/destroy_promotion`,
             {id: promotion.id}
@@ -355,12 +354,6 @@
               return x.id != promotion.id
             });
             this.promotions = this.res;
-
-            // this.deals = this.deals.map(deals => ({
-            //  ...deals,
-            //  dialog: false,
-            //  dialog3: false
-            // }));
 
           })
           .catch(function(error) {
@@ -414,9 +407,6 @@
           .then( () => {
             this.submitUpload(id);
             this.dialog2 = false;
-            // this.promotions.find((x) => {
-            //   return x.id = res.id
-            // })
 
             location.reload() 
              }
@@ -426,15 +416,15 @@
       },
       update(promotion, status) {
         let id = promotion.id
-        // if (status == 'archive') {
           if (promotion.status == 'onsale') {
           this.$api
           .post(`/promotions/${id}/archive`)
-          .then(location.reload())
+          .then(
+            location.reload()
+          )
           .catch(e => {
             this.error.push(e);
           });
-        // } else if (promotion.status == 'archive' && status == 'onsale') {
         } else if (promotion.status == 'archive') {
           promotion.status = status
           promotion.start_date = this.togglePromotion.start_date
@@ -443,24 +433,27 @@
           promotion.end_time = this.togglePromotion.end_time
           this.$api
           .post(`/promotions/${id}/renew`, {promotion: promotion})
-          .then(location.reload())
+          .then(
+            location.reload()
+          )
           .catch(e => {
             this.error.push(e);
           });
-        // } else if (promotion.status == 'draft' && status == 'onsale') {
         } else if (promotion.status == 'draft') {
+          promotion.status = 'onsale'
           promotion.start_date = this.togglePromotion.start_date
           promotion.end_date = this.togglePromotion.end_date
           promotion.start_time = this.togglePromotion.start_time
           promotion.end_time = this.togglePromotion.end_time
           this.$api
           .post(`/promotions/${id}/activate`, {promotion: promotion})
-          .then(location.reload())
+          .then(
+            location.reload()
+          )
           .catch(e => {
             this.error.push(e);
           });
         }
-        
       }
 		},
 		data() {
@@ -469,11 +462,14 @@
 				promotions: [],
         start_date: new Date().toISOString().substr(0, 10),
         end_date: new Date().toISOString().substr(0, 10),
+        start_time: '01:30',
+        end_time: '23:30',
         menu3: false,
         menu4: false,
         fileList: [],
         formData: new FormData(),
-        togglePromotion: {},
+        togglePromotion: {
+        },
 
 			};
 		}

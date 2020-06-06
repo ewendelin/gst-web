@@ -487,7 +487,7 @@ export default {
     //   this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
     // }
 
-		    // this.$api.defaults.headers.common['X-Auth-Token'] = 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxNiwiZXhwIjoxNTkzNDIxOTU5fQ.RQMa9A83CNgtObuyjJXLS8oxlx8uUjxDwmnG5InVVZg'
+		    // this.$api.defaults.headers.common['X-Auth-Token'] = 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxNSwiZXhwIjoxNTk0MDI0MTA4fQ.nysYVF6GQNn7vlhSwUmtq9JqNg1k2ZUtNQb2naTIDvA'
 
     // let user = sessionStorage.getItem('user');
     // let id = this.vendor.id
