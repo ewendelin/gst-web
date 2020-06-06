@@ -1,10 +1,10 @@
 <template>
 	<div>
-		<v-layout v-if="showForm">
+		<v-col align="center" v-if="showForm">
 		<v-img height="300px" :src="vendor.main_img">
 		</v-img>
 
-		<v-col align="center">
+		<!-- <v-col align="center"> -->
 			<v-avatar class="mt-n12 mb-4" size="170" color="gray">
 				<v-img :src="vendor.logo_img" alt="John"/>
 			</v-avatar>
@@ -326,7 +326,7 @@
 					</v-list-item>
 					<VendorCard :vendorId="vendor.id" />
 				</v-layout>
-			</v-layout>
+			</v-col>
 			<v-layout v-else class="backe mx-auto" row justify-center align-center>
 				<v-col cols="12"
 	           	sm="8"
@@ -455,16 +455,16 @@
 									>
 										submit for approval
 									</v-btn>
-									<!-- <v-snackbar v-model="snackbar" color="success">
+									<v-snackbar v-model="snackbar" color="success">
 										Successfully submitted. An account manager will contact you
 										shortly to confirm your account
 										<v-btn vertical text dark>close</v-btn>
-									</v-snackbar> -->
-							</v-layout>
-						</v-card>
-					</v-dialog>
+									</v-snackbar>
+						</v-layout>
+					</v-card>
+				</v-dialog> 
 					<!-- <VNav /> -->
-			</v-layout>
+			</v-layout> -->
 		<VNav />
 	</div>
 </template>
