@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-col v-if="showForm">
+		<v-col class="px-0" v-if="showForm">
 		<v-img height="300px" :src="vendor.main_img">
 		</v-img>
 
