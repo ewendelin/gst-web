@@ -327,7 +327,7 @@
 					<VendorCard :vendorId="vendor.id" />
 				</v-layout>
 			</v-layout>
-			<v-layout v-else class="backe pa-8" row justify-center align-center>
+			<v-layout v-else class="backe mx-auto" row justify-center align-center>
 				<v-col cols="12"
 	           	sm="8"
 	            md="6"
@@ -342,7 +342,7 @@
 					width="95%"
 					color="#DFA937"
 					tile
-					class="buttons mb-3 mt-12"
+					class="buttons mb-3 mt-6"
 					depressed>Register vendor account
 					</v-btn>
 				</v-col>
@@ -722,7 +722,7 @@ export default {
 	margin-bottom:.7rem;
 }
 .backe {
-	height: 100vw;
+	height: 40rem;
 	background-color: #fff;
 }
 </style>
