@@ -1,10 +1,10 @@
 <template>
 	<div>
-		<v-col align="center" v-if="showForm">
+		<v-col v-if="showForm">
 		<v-img height="300px" :src="vendor.main_img">
 		</v-img>
 
-		<!-- <v-col align="center"> -->
+		<v-col align="center">
 			<v-avatar class="mt-n12 mb-4" size="170" color="gray">
 				<v-img :src="vendor.logo_img" alt="John"/>
 			</v-avatar>
@@ -310,7 +310,7 @@
 					</v-card>
 				</v-dialog>
 			</v-layout>
-			<!-- </v-col> -->
+			</v-col>
 				<v-layout row class="mx-auto">
 					<v-list-item>
 						<v-list-item-content>
@@ -464,7 +464,7 @@
 					</v-card>
 				</v-dialog> 
 					<!-- <VNav /> -->
-			</v-layout> -->
+			</v-layout> 
 		<VNav />
 	</div>
 </template>
