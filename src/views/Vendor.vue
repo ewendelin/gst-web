@@ -699,6 +699,7 @@ export default {
     			this.error.push(e);
     		});
     	this.dialog1 = false;
+        location.reload();
     },
     logout() {
         sessionStorage.setItem('token', 'logout');
