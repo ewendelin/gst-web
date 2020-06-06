@@ -78,6 +78,7 @@
 					<v-list-item-content>
 						<v-list-item-title
 							v-text="item.title"
+							no-wrap
 							class="font-weight-medium"
 						></v-list-item-title>
 					</v-list-item-content>
