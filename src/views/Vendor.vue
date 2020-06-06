@@ -41,7 +41,7 @@
 						</v-layout>
 
 						<v-form ref="form"
-						v-model="valid"
+						v-model="valid2"
 						lazy-validation
 						class="mx-5"
 						id="example-3">
@@ -176,7 +176,7 @@
 							</v-btn>
 						</v-layout>
 						<v-form ref="form"
-						v-model="valid"
+						v-model="valid3"
 						lazy-validation
 						class="mx-5">
 							<v-text-field v-model="token"
@@ -219,7 +219,7 @@
 						</v-layout>
 
 						<v-form ref="form"
-						v-model="valid"
+						v-model="valid1"
 						lazy-validation
 						class="mx-5">
 							<v-text-field v-model="vendor.name"
@@ -500,9 +500,9 @@ export default {
 
           this.vendor = response.data.vendor;
           if (Object.keys(response.data.vendor).length == 0 ) {
-            this.showForm = true
-          } else {
             this.showForm = false
+          } else {
+            this.showForm = true
           }
         })
         .catch(e => {
@@ -515,6 +515,9 @@ export default {
       showForm: false,
       dialogra: false,
       valid: true,
+      valid1: true,
+	  valid2: true,
+	  valid3: true,
       nameRules: [
         v => !!v || 'Name is required',
       ],
