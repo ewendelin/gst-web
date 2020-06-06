@@ -327,7 +327,14 @@
 					<VendorCard :vendorId="vendor.id" />
 				</v-layout>
 			</v-layout>
-			<v-layout v-else class="backe" col>
+			<v-layout v-else class="backe pa-8" row justify-center align-center>
+				<v-col cols="12"
+	           	sm="8"
+	            md="6"
+	            lg="6">
+				<p class="font-weight-medium text-center">
+				Hey, it looks like you do not have a vendor account set up yet. Click the button below to register a vendor account!
+				</p>
 				
 					<v-btn
 					@click.stop="dialogra = true" 
@@ -336,8 +343,9 @@
 					color="#DFA937"
 					tile
 					class="buttons mb-3 mt-12"
-					depressed>Click here to register a vendor account
+					depressed>Click to register vendor account
 					</v-btn>
+				</v-col>
 				
 				<v-dialog v-model="dialogra" max-width="350">
 					<v-card center class="pt-12 pb-12">
@@ -370,7 +378,7 @@
 											color="#DFA937"
 										></v-text-field>
 										<v-text-field
-											:rules="[v => !!v || 'Contact person is required!']"
+											:rules="[v => !!v || 'Address is required!']"
 											v-model="address"
 											label="Address"
 											required
@@ -716,7 +724,5 @@ export default {
 .backe {
 	height: 100vw;
 	background-color: #fff;
-	justify-content: center;
-	align-content: center;
 }
 </style>
