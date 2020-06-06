@@ -350,7 +350,7 @@
 				<v-dialog v-model="dialogra" max-width="350">
 					<v-card center class="pt-12 pb-12">
 						<v-layout row class="mx-5">
-							<v-card-title class="headline">Register Vendor Account</v-card-title>
+							<v-card-title class="title">Register Vendor Account</v-card-title>
 								<v-form ref="form" v-model="valid" lazy-validation class="ml-5">
 									<v-text-field
 											v-model="name"
@@ -488,7 +488,7 @@ export default {
       this.$api
         // .get("/vendor_profiles/vendor?only=true")
         // .get("/vendor_profiles/vendor")
-        .get(`/vendor_profiles/vendor?only=true`)
+        .get(`/vendor_profiles/vendor?only=true&state=${new Date().getTime()}`)
         .then(response => {
         // let vendor = response.data.vendor;
 
@@ -506,6 +506,7 @@ export default {
   },
   data() {
     return {
+      showForm: false,
       dialogra: false,
       valid: true,
       nameRules: [
