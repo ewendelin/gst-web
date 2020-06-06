@@ -150,11 +150,11 @@
 					          color="#DFA937"
 					          prefix="¥"
 					        ></v-text-field>
-							<v-checkbox
+							<!-- <v-checkbox
 							v-model="newPromotion.status"
 							color="#DFA937"
 							label="Click box to Post Now">
-							</v-checkbox>
+							</v-checkbox> -->
 						</v-form>
 						<v-card-actions class="d-flex justify-space-around pb-3">
 							<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="createPromotion('onsale');">

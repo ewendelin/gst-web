@@ -364,7 +364,7 @@
 
           })
           .catch(function(error) {
-            alert('fail' + error);
+            alert('There are still customers who are yet to claim the deal! You can delete this deal 24h after the deal expires.' + error);
           });
       },
       saveToToggle(type, value) {
@@ -426,14 +426,16 @@
       },
       update(promotion, status) {
         let id = promotion.id
-        if (status == 'archive') {
+        // if (status == 'archive') {
+          if (status == 'onsale') {
           this.$api
           .post(`/promotions/${id}/archive`)
           .then(location.reload())
           .catch(e => {
             this.error.push(e);
           });
-        } else if (promotion.status == 'archive' && status == 'onsale') {
+        // } else if (promotion.status == 'archive' && status == 'onsale') {
+        } else if (promotion.status == 'archive') {
           promotion.status = status
           promotion.start_date = this.togglePromotion.start_date
           promotion.end_date = this.togglePromotion.end_date
@@ -445,7 +447,8 @@
           .catch(e => {
             this.error.push(e);
           });
-        } else if (promotion.status == 'draft' && status == 'onsale') {
+        // } else if (promotion.status == 'draft' && status == 'onsale') {
+        } else if (promotion.status == 'draft') {
           promotion.start_date = this.togglePromotion.start_date
           promotion.end_date = this.togglePromotion.end_date
           promotion.start_time = this.togglePromotion.start_time

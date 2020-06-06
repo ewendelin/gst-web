@@ -1,5 +1,5 @@
 <template>
-	<v-container class="px-0">
+	<v-container class="px-0 pt-0">
 		<v-layout row class="mx-auto" align-center justify-center>
 			<v-flex xs12 sm8 md7>
 				<v-card
