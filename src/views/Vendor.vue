@@ -367,7 +367,7 @@
 										></v-text-field>
 
 										<v-select
-											v-model="newVendorProfile.name"
+											v-model="newVendorProfile.vendor_type"
 											:items="items"
 											required
 											:rules="[v => !!v || 'Type is required!']"
@@ -402,7 +402,7 @@
 										></v-text-field>
 
 										<v-text-field
-											v-model="newVendorProfile.contactnumber"
+											v-model="newVendorProfile.contact_number"
 											label="Phone Number"
 											required
 											:rules="[v => !!v || 'Phone number is required!']"
@@ -677,10 +677,11 @@ export default {
     	let newVendor = this.newVendorProfile;
 		this.$api
 			.post(`/vendor_profiles`, {
-		    newVendor: newVendor
+		    vendor: newVendor
 		  		})
 		  	.then(res => {
 				this.createdVendorProfile = res.data.data
+				alert('hello')
 		    	this.submitUpload();
 		  	})
 		 	.catch(e => {

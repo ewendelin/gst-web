@@ -5,7 +5,7 @@
 			<v-img height="350px" src="../assets/Rice.png"></v-img>
 		</v-layout>
 		<v-layout hidden-md-and-up class="mb-n12 pt-3">
-			<v-img height="190px" src="../assets/Rice.png"></v-img>
+			<v-img height="150px" src="../assets/Rice.png"></v-img>
 		</v-layout>
 	
 		<v-layout row class="mx-8 my-8" justify-center align-center>
