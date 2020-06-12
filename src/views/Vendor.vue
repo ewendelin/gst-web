@@ -359,7 +359,7 @@
 							
 								<v-form ref="form" v-model="valid" lazy-validation class="ml-5">
 									<v-text-field
-											v-model="name"
+											v-model="newVendorProfile.name"
 											label="Name of Establishment"
 											:rules="nameRules"
 											required
@@ -367,7 +367,7 @@
 										></v-text-field>
 
 										<v-select
-											v-model="select"
+											v-model="newVendorProfile.name"
 											:items="items"
 											required
 											:rules="[v => !!v || 'Type is required!']"
@@ -376,47 +376,59 @@
 											color="#DFA937"
 										></v-select>
 
-										<v-text-field
-											v-model="contactperson"
-											label="Contact Person"
+										<v-textarea v-model="newVendorProfile.description"
 											required
-											:rules="[v => !!v || 'Contact person is required!']"
-											color="#DFA937"
-										></v-text-field>
+											color="#DFA937">
+											<template v-slot:label>
+												<div>
+													Company description
+												</div>
+											</template>
+										</v-textarea>
+
 										<v-text-field
-											:rules="[v => !!v || 'Address is required!']"
-											v-model="address"
+											v-model="newVendorProfile.address"
 											label="Address"
 											required
+											:rules="[v => !!v || 'Address is required!']"
 											color="#DFA937"
 										></v-text-field>
-
 										<v-text-field
-											v-model="email"
-											label="E-mail"
+											:rules="[v => !!v || 'Area is required!']"
+											v-model="newVendorProfile.area"
+											label="Area"
 											required
-											:rules="emailRules"
 											color="#DFA937"
 										></v-text-field>
 
 										<v-text-field
-											v-model="contactnumber"
+											v-model="newVendorProfile.contactnumber"
 											label="Phone Number"
 											required
 											:rules="[v => !!v || 'Phone number is required!']"
 											color="#DFA937"
 										></v-text-field>
+										<el-upload
+											v-model="newVendorProfile.main_img"
+											action="http://localhost:3000/api/v1/promotions/images/upload"
+											  class="upload-demo mb-2"
+											  ref="upload"
+			                  :on-change="handleChangeMain"
+			                  :file-list="fileList"
+											  :auto-upload="false">
+											<el-button slot="trigger" size="small" type="primary">Upload Vendor Image</el-button>
+										</el-upload>
 
-										<v-text-field
-											v-model="password"
-											:append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-											:type="show1 ? 'text' : 'password'"
-											name="input-10-1"
-											label="Password"
-											@click:append="show1 = !show1"
-											color="#DFA937"
-											:rules="[v => !!v || 'Password is required!']"
-										></v-text-field>
+										<el-upload
+											v-model="newVendorProfile.logo_img"
+											action="http://localhost:3000/api/v1/promotions/images/upload"
+											  class="upload-demo"
+											  ref="upload"
+			                  :on-change="handleChangeLogo"
+			                  :file-list="fileList"
+											  :auto-upload="false">
+											<el-button slot="trigger" size="small" type="primary">Upload Logo</el-button>
+										</el-upload>
 										<v-checkbox
 											v-model="checkbox"
 											label="Agree with terms of service"
@@ -452,14 +464,10 @@
 										tile
 										class="buttons mb-3"
 										depressed
+										@click="createVendor()"
 									>
 										submit for approval
 									</v-btn>
-									<v-snackbar v-model="snackbar" color="success">
-										Successfully submitted. An account manager will contact you
-										shortly to confirm your account
-										<v-btn vertical text dark>close</v-btn>
-									</v-snackbar>
 						</v-layout>
 					</v-card>
 				</v-dialog> 
@@ -568,7 +576,17 @@ export default {
       	image: '',
       },
       updateVendor: {
-      }
+      },
+      newVendorProfile: {
+  		name: '',
+  		vendor_type: '',
+  		description: '',
+  		contact_number: '',
+  		address: '',
+  		area: '',
+  		logo_img: '',
+  		main_img: '',
+		}
     };
   },
   methods: {
@@ -655,6 +673,22 @@ export default {
       this.dialog = false;
 
     },
+    createVendor() {
+    	let newVendor = this.newVendorProfile;
+		this.$api
+			.post(`/vendor_profiles`, {
+		    newVendor: newVendor
+		  		})
+		  	.then(res => {
+				this.createdVendorProfile = res.data.data
+		    	this.submitUpload();
+		  	})
+		 	.catch(e => {
+		    	this.error.push(e);
+		});
+		 this.newVendorProfile = {};
+		 this.dialogra = false;
+	},
     editVendor() {
     	let updated_vendor = this.vendor;
     	let id = updated_vendor.id
@@ -680,6 +714,7 @@ export default {
     	this.updateVendor = {};
     	this.dialog2 = false;
     },
+
     verify(token) {
     	// let token = this.data;
     	this.$api
