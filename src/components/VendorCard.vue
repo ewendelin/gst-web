@@ -305,7 +305,7 @@
 		created() {
 			this.$api
 				.get(
-					`/vendor_profiles/${this.vendorId}/promotions`
+					`/vendor_profiles/${this.vendorId}/promotions?time=${new Date().getTime()}`
 				)
 				.then(response => {
 					this.promotions = response.data.promotions;

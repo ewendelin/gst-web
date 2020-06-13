@@ -63,6 +63,7 @@ task :deploy do
         # command %{sudo rm -rf node_modules package-lock.json}
         command %{npm install}
         command %{npm audit fix}
+        command %{yarn upgrade}
         command %{NODE_ENV=production npm run build}
       end
     end
