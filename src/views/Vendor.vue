@@ -623,13 +623,14 @@ export default {
     submitUploadVendorLogo(id) {
 	  if (this.formDataLogo.files != undefined) {
 	  	let formData = new FormData();
-      formData.append("file", this.formDataLogo.files[1]);
-      // formData.append("promotion", JSON.stringify(this.createdPromotion));
+      	formData.append("file", this.formDataLogo.files[1]);
+      	// formData.append("promotion", JSON.stringify(this.createdPromotion));
       this.$api.post(`files/upload?id=${id}&model=vendor_profile&field=logo_img`, formData, {headers: { "Content-Type": "multipart/form-data" }})
       .then(() => {
         this.fileListLogo = [];
         // this.uploadFile =[];
         // location.reload();
+        this.dialog2 = false;
       })
       .catch();
 	  }
@@ -637,17 +638,21 @@ export default {
       // this.$refs.upload.submit();
     },
     submitUploadVendorMain(id) {
-      let formData = new FormData();
-      formData.append("file", this.formDataMain.files[1]);
+      if (this.formDataMain.files != undefined) {
+      	let formData = new FormData();
+      	formData.append("file", this.formDataMain.files[1]);
       // formData.append("promotion", JSON.stringify(this.createdPromotion));
       this.$api.post(`files/upload?id=${id}&model=vendor_profile&field=main_img`, formData, {headers: { "Content-Type": "multipart/form-data" }})
       .then(() => {
         this.fileListMain = [];
         // this.uploadFile =[];
+        this.dialog2 = false;
         location.reload();
       })
       .catch();
       // this.$refs.upload.submit();
+      }
+      
     },
     handleChange(file, fileList) {
       this.fileList = fileList.slice(-3);

@@ -446,7 +446,7 @@
 				promotions: [],
         start_date: new Date().toISOString().substr(0, 10),
         end_date: new Date().toISOString().substr(0, 10),
-        start_time: '01:30',
+        start_time: '13:30',
         end_time: '23:30',
         menu3: false,
         menu4: false,

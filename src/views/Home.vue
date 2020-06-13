@@ -41,25 +41,7 @@
 			>
 				user login
 				<v-icon right>mdi-wechat</v-icon>
-			</v-btn>
-
-			<!-- @@@@@ FIXME MOVE TO PROFILE @@@@@@  -->
-
-			<!-- <v-btn
-				v-else
-				v-el
-				dark
-				width="95%"
-				color="#DFA937"
-				tile
-				class="buttons"
-				depressed
-				@click="wxLogout() == true"
-			>
-				Log out
-			</v-btn> -->
-
-			
+			</v-btn>			
 			<v-btn tile class="buttonst" width="95%" depressed to="/vendor">
 				for vendors
 				<v-icon right>mdi-store</v-icon>
@@ -106,17 +88,7 @@
 </template>
 <script>
 	import Navbar from '../components/Navbar';
-	// function getUrlParams(name) {
-	//     let reg = new RegExp("(\\?|&)" + name + "=([^&]*)(&|$)", "i");
-	//     let r = window.location.search.match(reg);
-	//     if (r != null) return unescape(r[2]);
-	// 	    return null;
-	//   }
-  	// localStorage.wxCode = getUrlParams("code")
-
-	// import Gast from '../assets/rac1.svg'
-  		// window.location.href = window.location.origin
-
+	
 	export default {
 		name: 'Home',
 		components: { Navbar },
