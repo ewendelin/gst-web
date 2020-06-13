@@ -421,7 +421,7 @@
           .put(`/promotions/${id}/archive?time=${new Date().getTime()}`)
           .then(
             alert('post'),
-            // location.reload()
+            location.reload()
           )
           .catch(e => {
             this.error.push(e);
@@ -436,7 +436,7 @@
           .put(`/promotions/${id}/renew?time=${new Date().getTime()}`, {promotion: promotion})
           .then(
             alert('post'),
-            // location.reload()
+            location.reload()
           )
           .catch(e => {
             this.error.push(e);
@@ -451,7 +451,7 @@
           .put(`/promotions/${id}/activate?time=${new Date().getTime()}`, {promotion: promotion})
           .then(
             alert('post'),
-            // location.reload()
+            location.reload()
           )
           .catch(e => {
             this.error.push(e);
