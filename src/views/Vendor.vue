@@ -685,7 +685,7 @@ export default {
 
       this.newPromotion = {};
       this.dialog = false;
-      location.reload();
+      // location.reload();
     },
     createVendor() {
     	let newVendor = this.newVendorProfile;
