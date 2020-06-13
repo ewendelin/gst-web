@@ -401,7 +401,7 @@
         promotion.end_date = this.togglePromotion.end_date
         promotion.start_time = this.togglePromotion.start_time
         promotion.end_time = this.togglePromotion.end_time
-        this.$api.post(`/promotions/${id}/state`, {promotion: promotion})
+        this.$api.post(`/promotions/${id}/state`, {promotion: promotion, status: status})
           .then(
             alert('post'),
             location.reload()
