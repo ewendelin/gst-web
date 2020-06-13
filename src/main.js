@@ -5,6 +5,7 @@ import router from './router';
 import vuetify from './plugins/vuetify';
 import ElementUI from 'element-ui';
 import axios from 'axios';
+import Qs from 'qs'
 
 const ENV = 'production'
 // const ENV = 'development'
@@ -15,12 +16,17 @@ const apiURL = ENV == 'production' ? apiURLProd : apiURLDev ;
 const loginURL =  'https://www.gast.world';
 // login logic,
 var api = axios.create({
-  baseURL: apiURL
+  baseURL: apiURL,
+  transformRequest: [function (data) {
+    data = Qs.stringify(data);
+    return data;
+  }],
+  headers:{'Content-Type':'application/x-www-form-urlencoded'}
 });
 // api.defaults.headers.common['X-Auth-Token'] = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJleHAiOjE1OTI4MDI3NTR9.uv2T1ndNoq9OE-NPDXiRG00EovBFESXxPVoBbE843qc";
 api.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 api.defaults.headers.common['API-key'] = 'gastbyellenapikey';
-api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+// api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 // axios.defaults.withCredentials = false;
 // api.defaults.headers.common['X-Auth-Token'] = sessionStorage.getItem('token');
 
