@@ -418,7 +418,7 @@
         let id = promotion.id
           if (promotion.status == 'onsale') {
           this.$api
-          .post(`/promotions/${id}/archive?time=${new Date().getTime()}`)
+          .put(`/promotions/${id}/archive?time=${new Date().getTime()}`)
           .then(
             alert('post'),
             location.reload()
@@ -433,7 +433,7 @@
           promotion.start_time = this.togglePromotion.start_time
           promotion.end_time = this.togglePromotion.end_time
           this.$api
-          .post(`/promotions/${id}/renew?time=${new Date().getTime()}`, {promotion: promotion})
+          .put(`/promotions/${id}/renew?time=${new Date().getTime()}`, {promotion: promotion})
           .then(
             alert('post'),
             location.reload()
@@ -448,7 +448,7 @@
           promotion.start_time = this.togglePromotion.start_time
           promotion.end_time = this.togglePromotion.end_time
           this.$api
-          .post(`/promotions/${id}/activate?time=${new Date().getTime()}`, {promotion: promotion})
+          .put(`/promotions/${id}/activate?time=${new Date().getTime()}`, {promotion: promotion})
           .then(
             alert('post'),
             location.reload()

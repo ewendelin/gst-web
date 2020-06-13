@@ -470,6 +470,19 @@
 									</v-btn>
 						</v-layout>
 					</v-card>
+				</v-dialog>
+				<v-dialog v-model="confirm">
+					<v-card>
+				        <v-card-title>
+				          <span class="headline">Confirmation!</span>
+				        </v-card-title>
+				        <v-card-text>Your application has been submitted. An account manager will contact you shortly and verify your account. You can start creating your vendor profile and create deals but they will not be visiable until after you have been verified.
+				         </v-card-text>
+				        <v-card-actions>
+				          <v-spacer></v-spacer>
+				          <v-btn color="#DFA937" text @click="confirm = false">Close</v-btn>
+				        </v-card-actions>
+				      </v-card>
 				</v-dialog> 
 					<!-- <VNav /> -->
 			</v-layout> 
@@ -526,6 +539,7 @@ export default {
       valid1: true,
 	  valid2: true,
 	  valid3: true,
+	  confirm: false,
       nameRules: [
         v => !!v || 'Name is required',
       ],
@@ -688,6 +702,7 @@ export default {
 		});
 		 this.newVendorProfile = {};
 		 this.dialogra = false;
+		 this.confirm = true;
 	},
     editVendor() {
     	let updated_vendor = this.vendor;
