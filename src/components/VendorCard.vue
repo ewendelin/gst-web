@@ -43,7 +43,7 @@
           </v-card-text>
           <v-row justify="space-around" class="mx-2 align-center">
             <v-btn fab text @click.stop="promotion.dialog3 = true">
-              <v-icon right>mdi-cog</v-icon>
+              <v-icon>mdi-cog</v-icon>
             </v-btn>
             
             <v-dialog  
@@ -170,7 +170,7 @@
             </v-dialog>
 
             <v-btn fab text @click="promotion.dialog2 = true">
-              <v-icon right>mdi-pencil</v-icon>
+              <v-icon>mdi-pencil</v-icon>
             </v-btn>
 
             <v-dialog v-model="promotion.dialog2"
@@ -240,7 +240,7 @@
               </v-card>
             </v-dialog>
              <v-btn fab text @click="promotion.dialogstats = true">
-              <v-icon right>mdi-chart-areaspline-variant</v-icon>
+              <v-icon>mdi-chart-areaspline-variant</v-icon>
             </v-btn>
             <v-dialog v-model="promotion.dialogstats"
                       max-width="290">
@@ -261,7 +261,7 @@
               </v-card>
             </v-dialog>
             <v-btn fab text @click="promotion.dialog = true">
-              <v-icon right>mdi-delete</v-icon>
+              <v-icon>mdi-delete</v-icon>
             </v-btn>
 
             <v-dialog 
