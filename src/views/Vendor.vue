@@ -721,12 +721,12 @@ export default {
     		.then( () => {
     			this.submitUploadVendorLogo(id);
     			this.submitUploadVendorMain(id);
+    			this.updateVendor = {};
     		}
     	    )
     		.catch(e => {
     			this.error.push(e);
     		});
-    	this.updateVendor = {};
     	this.dialog2 = false;
     },
 
