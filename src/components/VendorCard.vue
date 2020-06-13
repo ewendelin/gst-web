@@ -85,7 +85,7 @@
                         color="#DFA937"
                       ></v-text-field>
                     </template>
-                    <v-date-picker v-model="start_date" no-title scrollable color="#DFA937">
+                    <v-date-picker v-model="promotion.start_date" no-title scrollable color="#DFA937">
                       <v-spacer></v-spacer>
                       <v-btn text color="#DFA937" @click="menu3 = false">Cancel</v-btn>
                       <v-btn text color="#DFA937" @click="saveToToggle('start_date', promotion.start_date),menu3 = false">OK</v-btn>
@@ -103,7 +103,7 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
-                        v-model="promotion.end_date"
+                        v-model="end_date"
                         label="End Date"
                         prepend-icon="mdi-calendar"
                         readonly
@@ -111,7 +111,7 @@
                         color="#DFA937"
                       ></v-text-field>
                     </template>
-                    <v-date-picker v-model="end_date" no-title scrollable color="#DFA937">
+                    <v-date-picker v-model="promotion.end_date" no-title scrollable color="#DFA937">
                       <v-spacer></v-spacer>
                       <v-btn text color="#DFA937" @click="menu4 = false">Cancel</v-btn>
                       <v-btn text color="#DFA937" @click="saveToToggle('end_date', promotion.end_date),menu4 = false">OK</v-btn>

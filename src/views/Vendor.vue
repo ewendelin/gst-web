@@ -82,7 +82,7 @@
 						            color="#DFA937"
 						          ></v-text-field>
 						        </template>
-						        <v-date-picker v-model="start_date" no-title scrollable color="#DFA937">
+						        <v-date-picker v-model="newPromotion.start_date" no-title scrollable color="#DFA937">
 						          <v-spacer></v-spacer>
 						          <v-btn text color="#DFA937" @click="menu = false">Cancel</v-btn>
 						          <v-btn text color="#DFA937" @click="$refs.menu.save(start_date)">OK</v-btn>
@@ -108,7 +108,7 @@
 						            color="#DFA937"
 						          ></v-text-field>
 						        </template>
-						        <v-date-picker v-model="end_date" no-title scrollable color="#DFA937">
+						        <v-date-picker v-model="newPromotion.end_date" no-title scrollable color="#DFA937">
 						          <v-spacer></v-spacer>
 						          <v-btn text color="#DFA937" @click="menu1 = false">Cancel</v-btn>
 						          <v-btn text color="#DFA937" @click="$refs.menu1.save(end_date)">OK</v-btn>
