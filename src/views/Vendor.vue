@@ -727,6 +727,7 @@ export default {
     			this.submitUploadVendorLogo(id);
     			this.submitUploadVendorMain(id);
     			this.updateVendor = {};
+    			this.dialog2 = false;
     		}
     	    )
     		.catch(e => {

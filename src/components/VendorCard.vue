@@ -150,12 +150,15 @@
                     width="90%" dark color="#DFA937" tile class="buttons" depressed @click="toActivate(promotion, 'onsale'), promotion.dialog3 = false">
                     Activate
                   </v-btn>
+                </v-card-actions>
+                <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn v-else-if="promotion.status == 'archive'"
                     width="90%" dark color="#DFA937" tile class="buttons" depressed @click="toOnsale(promotion, 'onsale'), promotion.dialog3 = false">
                     Reactivate
                   </v-btn>
                 </v-card-actions>
                 </v-form>
+                
                 <v-form class="mx-5" v-else-if="promotion.status == 'onsale'">
                   <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn
