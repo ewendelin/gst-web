@@ -16,7 +16,7 @@ set :domain, 'gast.world'
 set :deploy_to, '/home/production/web'
 
 # set :repository, 'git@gitee.com:ellenwendelin/gst-web.git'
-set :branch, 'post'
+# set :branch, 'post'
 
 set :repository, 'git@github.com:ewendelin/gst-web.git'
 # set :branch, 'production'
