@@ -5,7 +5,7 @@
       <v-card tile
               class="mb-6"
               v-for="(promotion) in promotions"
-              :key="promotion.id">		
+              :key="promotion.id">
         <v-img :src="promotion.image"
               height="200px">
         </v-img>
@@ -45,8 +45,8 @@
             <v-btn fab text @click.stop="promotion.dialog3 = true">
               <v-icon right>mdi-cog</v-icon>
             </v-btn>
-            
-            <v-dialog  
+
+            <v-dialog
               v-model="promotion.dialog3"
               max-width="290">
               <v-card>
@@ -58,13 +58,13 @@
                     </v-btn>
                 </v-layout>
                   <v-card-text>{{promotion.status}}</v-card-text>
-                <v-form 
+                <v-form
                  v-if="promotion.status == 'archive' || promotion.status == 'draft'"
                   ref="form2"
                   v-model="valid"
                   lazy-validation
                   class="mx-5">
-                  
+
                   <v-menu
                     ref="menu3"
                     v-model="menu3"
@@ -165,7 +165,7 @@
                   </v-card-actions>
                 </v-form>
 
-                
+
               </v-card>
             </v-dialog>
 
@@ -197,7 +197,7 @@
                               color="#DFA937">
                     <template v-slot:label>
                       <div>
-                        Description 
+                        Description
                       </div>
                     </template>
                   </v-textarea>
@@ -205,7 +205,7 @@
                               color="#DFA937">
                     <template v-slot:label>
                       <div>
-                        Disclaimer 
+                        Disclaimer
                       </div>
                     </template>
                   </v-textarea>
@@ -264,7 +264,7 @@
               <v-icon right>mdi-delete</v-icon>
             </v-btn>
 
-            <v-dialog 
+            <v-dialog
               v-model="promotion.dialog"
               max-width="290">
               <v-card>
@@ -285,7 +285,7 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-          </v-row>	
+          </v-row>
         </v-layout>
       </v-card>
     </v-flex>
@@ -330,7 +330,7 @@
           )
           .then(response => {
             this.canceled = response
-            
+
             this.res = this.promotions.filter((x) => {
               return x.id != promotion.id
             });
@@ -363,7 +363,7 @@
         .catch();
         // this.$refs.upload.submit();
         }
-        
+
       },
       handleChange(file, fileList) {
         this.fileList = fileList.slice(-3);
@@ -381,15 +381,15 @@
         delete updated_promotion.dialog3
         delete updated_promotion.dialogstats
         delete updated_promotion.statistics
-       
+
         this.$api
-          .post(`/promotions/${id}`, 
+          .post(`/promotions/${id}`,
             {promotion: updated_promotion})
           .then( () => {
             this.submitUpload(id);
             this.dialog2 = false;
 
-            location.reload() 
+            location.reload()
              }
           )
           .catch();
@@ -397,9 +397,11 @@
       },
       update(promotion, status) {
         let id = promotion.id
-          if (promotion.status == 'onsale') {
-          this.$api
-          .post(`/promotions/${id}/archive`)
+        promotion.start_date = this.togglePromotion.start_date
+        promotion.end_date = this.togglePromotion.end_date
+        promotion.start_time = this.togglePromotion.start_time
+        promotion.end_time = this.togglePromotion.end_time
+        this.$api.post(`/promotions/${id}/state`, {promotion: promotion})
           .then(
             alert('post'),
             location.reload()
@@ -407,37 +409,6 @@
           .catch(e => {
             this.error.push(e);
           });
-        } else if (promotion.status == 'archive') {
-          promotion.status = status
-          promotion.start_date = this.togglePromotion.start_date
-          promotion.end_date = this.togglePromotion.end_date
-          promotion.start_time = this.togglePromotion.start_time
-          promotion.end_time = this.togglePromotion.end_time
-          this.$api
-          .post(`/promotions/${id}/renew`, {promotion: promotion})
-          .then(
-            alert('post'),
-            location.reload()
-          )
-          .catch(e => {
-            this.error.push(e);
-          });
-        } else if (promotion.status == 'draft') {
-          promotion.status = 'onsale'
-          promotion.start_date = this.togglePromotion.start_date
-          promotion.end_date = this.togglePromotion.end_date
-          promotion.start_time = this.togglePromotion.start_time
-          promotion.end_time = this.togglePromotion.end_time
-          this.$api
-          .post(`/promotions/${id}/activate`, {promotion: promotion})
-          .then(
-            alert('post'),
-            location.reload()
-          )
-          .catch(e => {
-            this.error.push(e);
-          });
-        }
       }
 		},
 		data() {
