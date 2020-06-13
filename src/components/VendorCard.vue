@@ -5,7 +5,7 @@
       <v-card tile
               class="mb-6"
               v-for="(promotion) in promotions"
-              :key="promotion.id">		
+              :key="promotion.id">
         <v-img :src="promotion.image"
               height="200px">
         </v-img>
@@ -45,8 +45,8 @@
             <v-btn fab text @click.stop="promotion.dialog3 = true">
               <v-icon>mdi-cog</v-icon>
             </v-btn>
-            
-            <v-dialog  
+
+            <v-dialog
               v-model="promotion.dialog3"
               max-width="290">
               <v-card>
@@ -58,13 +58,13 @@
                     </v-btn>
                 </v-layout>
                   <v-card-text>{{promotion.status}}</v-card-text>
-                <v-form 
+                <v-form
                  v-if="promotion.status == 'archive' || promotion.status == 'draft'"
                   ref="form2"
                   v-model="valid"
                   lazy-validation
                   class="mx-5">
-                  
+
                   <v-menu
                     ref="menu3"
                     v-model="menu3"
@@ -147,11 +147,11 @@
                   ></v-text-field>
                 <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn v-if="promotion.status == 'draft'"
-                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'onsale'), promotion.dialog3 = false">
+                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="toActivate(promotion, 'onsale'), promotion.dialog3 = false">
                     Activate
                   </v-btn>
                   <v-btn v-else-if="promotion.status == 'archive'"
-                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'onsale'), promotion.dialog3 = false">
+                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="toOnsale(promotion, 'onsale'), promotion.dialog3 = false">
                     Reactivate
                   </v-btn>
                 </v-card-actions>
@@ -159,13 +159,13 @@
                 <v-form class="mx-5" v-else-if="promotion.status == 'onsale'">
                   <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn
-                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'archive'), promotion.dialog3 = false">
+                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="toArchive(promotion, 'archive'), promotion.dialog3 = false">
                     archive
                   </v-btn>
                   </v-card-actions>
                 </v-form>
 
-                
+
               </v-card>
             </v-dialog>
 
@@ -197,7 +197,7 @@
                               color="#DFA937">
                     <template v-slot:label>
                       <div>
-                        Description 
+                        Description
                       </div>
                     </template>
                   </v-textarea>
@@ -205,7 +205,7 @@
                               color="#DFA937">
                     <template v-slot:label>
                       <div>
-                        Disclaimer 
+                        Disclaimer
                       </div>
                     </template>
                   </v-textarea>
@@ -264,7 +264,7 @@
               <v-icon>mdi-delete</v-icon>
             </v-btn>
 
-            <v-dialog 
+            <v-dialog
               v-model="promotion.dialog"
               max-width="290">
               <v-card>
@@ -285,7 +285,7 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-          </v-row>	
+          </v-row>
         </v-layout>
       </v-card>
     </v-flex>
@@ -305,7 +305,7 @@
 		created() {
 			this.$api
 				.get(
-					`/vendor_profiles/${this.vendorId}/promotions`
+					`/vendor_profiles/${this.vendorId}/promotions?time=${new Date().getTime()}`
 				)
 				.then(response => {
 					this.promotions = response.data.promotions;
@@ -330,7 +330,7 @@
           )
           .then(response => {
             this.canceled = response
-            
+
             this.res = this.promotions.filter((x) => {
               return x.id != promotion.id
             });
@@ -352,18 +352,20 @@
       submitUpload(id) {
         if (this.formData.files != undefined) {
           let formData = new FormData();
-        formData.append("file", this.formData.files[1]);
-        // formData.append("promotion", JSON.stringify(this.createdPromotion));
-        this.$api.post(`files/upload?id=${id}&model=promotion&field=image`, formData, {headers: { "Content-Type": "multipart/form-data" }})
-        .then(() => {
-          this.fileList = [];
-          this.uploadFile =[];
-          location.reload();
-        })
-        .catch();
-        // this.$refs.upload.submit();
+          formData.append("file", this.formData.files[1]);
+          // formData.append("promotion", JSON.stringify(this.createdPromotion));
+          this.$api.post(`files/upload?id=${id}&model=promotion&field=image`, formData, {headers: { "Content-Type": "multipart/form-data" }})
+          .then(() => {
+            this.fileList = [];
+            this.uploadFile =[];
+            location.reload();
+          })
+          .catch();
+          // this.$refs.upload.submit();
+        } else {
+          location.reload()
         }
-        
+
       },
       handleChange(file, fileList) {
         this.fileList = fileList.slice(-3);
@@ -381,25 +383,35 @@
         delete updated_promotion.dialog3
         delete updated_promotion.dialogstats
         delete updated_promotion.statistics
-       
+
         this.$api
-          .post(`/promotions/${id}`, 
+          .post(`/promotions/${id}`,
             {promotion: updated_promotion})
           .then( () => {
             this.submitUpload(id);
             this.dialog2 = false;
-
-            location.reload() 
-             }
+            }
           )
           .catch();
           this.dialog2 = false;
       },
+
+      toArchive(promotion, status) {
+        this.update(promotion, status)
+      },
+      toOnsale(promotion, status) {
+        this.update(promotion, status)
+      },
+      toActivate(promotion, status) {
+        this.update(promotion, status)
+      },
       update(promotion, status) {
         let id = promotion.id
-          if (promotion.status == 'onsale') {
-          this.$api
-          .post(`/promotions/${id}/archive`)
+        promotion.start_date = this.togglePromotion.start_date
+        promotion.end_date = this.togglePromotion.end_date
+        promotion.start_time = this.togglePromotion.start_time
+        promotion.end_time = this.togglePromotion.end_time
+        this.$api.post(`/promotions/${id}/state`, {promotion: promotion, status: status})
           .then(
             alert('post'),
             location.reload()
@@ -407,38 +419,7 @@
           .catch(e => {
             this.error.push(e);
           });
-        } else if (promotion.status == 'archive') {
-          promotion.status = status
-          promotion.start_date = this.togglePromotion.start_date
-          promotion.end_date = this.togglePromotion.end_date
-          promotion.start_time = this.togglePromotion.start_time
-          promotion.end_time = this.togglePromotion.end_time
-          this.$api
-          .post(`/promotions/${id}/renew`, {promotion: promotion})
-          .then(
-            alert('post'),
-            location.reload()
-          )
-          .catch(e => {
-            this.error.push(e);
-          });
-        } else if (promotion.status == 'draft') {
-          promotion.status = 'onsale'
-          promotion.start_date = this.togglePromotion.start_date
-          promotion.end_date = this.togglePromotion.end_date
-          promotion.start_time = this.togglePromotion.start_time
-          promotion.end_time = this.togglePromotion.end_time
-          this.$api
-          .post(`/promotions/${id}/activate`, {promotion: promotion})
-          .then(
-            alert('post'),
-            location.reload()
-          )
-          .catch(e => {
-            this.error.push(e);
-          });
-        }
-      }
+      },
 		},
 		data() {
 			return {

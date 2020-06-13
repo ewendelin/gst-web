@@ -16,7 +16,7 @@ set :domain, 'gast.world'
 set :deploy_to, '/home/production/web'
 
 # set :repository, 'git@gitee.com:ellenwendelin/gst-web.git'
-# set :branch, 'master'
+set :branch, 'post'
 
 set :repository, 'git@github.com:ewendelin/gst-web.git'
 # set :branch, 'production'
@@ -63,6 +63,7 @@ task :deploy do
         # command %{sudo rm -rf node_modules package-lock.json}
         command %{npm install}
         command %{npm audit fix}
+        # command %{yarn upgrade}
         command %{NODE_ENV=production npm run build}
       end
     end
