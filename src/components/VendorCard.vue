@@ -18,7 +18,6 @@
         <v-layout row class="ml-3 mr-3 mt-0 px-1 pt-0">
           <v-card-subtitle class="font-weight-bold mt-1 pt-1">
             {{ promotion.time_slot }}
-            <!-- {{deal.time1}} -->
           </v-card-subtitle>
           <v-spacer></v-spacer>
           <v-card-text class="py-0 mt-n3">
@@ -29,21 +28,18 @@
           </v-card-text>
           <v-card-text class="mt-n6">
             {{promotion.disclaimer}}
-            <!-- {{deal.time1}} -->
           </v-card-text>
           <v-card-text class="mt-2 pt-0 font-weight-medium">
               Price
           </v-card-text>
           <v-card-text class="mt-n6">
             {{promotion.price}}
-            <!-- {{deal.time1}} -->
           </v-card-text>
           <v-card-text class="mt-2 pt-0 font-weight-medium">
               Status
           </v-card-text>
           <v-card-text class="mt-n6">
             {{promotion.status}}
-            <!-- {{deal.time1}} -->
           </v-card-text>
           <v-row justify="space-around" class="mx-2 align-center">
             <v-btn fab text @click.stop="promotion.dialog3 = true">
@@ -231,29 +227,15 @@
                     prefix="¥"
                   ></v-text-field>
                 </v-form>
-
-
                 <v-card-actions class="d-flex justify-space-around pb-3">
-                  <!-- @FIXME this one needs to be connected to the edit api -->
                   <v-btn
                     width="50%" dark color="#DFA937" tile class="buttons" depressed @click="editPromotion(promotion);">
                     save
                   </v-btn>
-                  <!--@FIXME to discharge changes --> 
                   <v-btn
-                    width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="cancelEdit();">
+                    width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="promotion.dialog2 = false">
                     cancel
                   </v-btn>
-                  <!-- <v-snackbar v-model="snackbar">
-                    You have successfully edited this promotion. Toggle the switch to make the promotion live and visable for customers!
-                    <v-btn color="success"
-                          vertical
-                          text
-                          dark
-                          @click="promotion.snackbar = false">
-                      close
-                    </v-btn>
-                  </v-snackbar> -->
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -278,7 +260,6 @@
                 </v-card-text>
               </v-card>
             </v-dialog>
-
             <v-btn fab text @click="promotion.dialog = true">
               <v-icon right>mdi-delete</v-icon>
             </v-btn>
