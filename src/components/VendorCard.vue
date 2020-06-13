@@ -404,7 +404,7 @@
       },
       toActivate(promotion, status) {
         this.update(promotion, status)
-      }
+      },
       update(promotion, status) {
         let id = promotion.id
         promotion.start_date = this.togglePromotion.start_date
@@ -419,7 +419,7 @@
           .catch(e => {
             this.error.push(e);
           });
-      }
+      },
 		},
 		data() {
 			return {
