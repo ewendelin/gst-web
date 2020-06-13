@@ -147,11 +147,11 @@
                   ></v-text-field>
                 <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn v-if="promotion.status == 'draft'"
-                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'onsale'), promotion.dialog3 = false">
+                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="toActivate(promotion, 'onsale'), promotion.dialog3 = false">
                     Activate
                   </v-btn>
                   <v-btn v-else-if="promotion.status == 'archive'"
-                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'onsale'), promotion.dialog3 = false">
+                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="toOnsale(promotion, 'onsale'), promotion.dialog3 = false">
                     Reactivate
                   </v-btn>
                 </v-card-actions>
@@ -159,7 +159,7 @@
                 <v-form class="mx-5" v-else-if="promotion.status == 'onsale'">
                   <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn
-                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion, 'archive'), promotion.dialog3 = false">
+                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="toArchive(promotion, 'archive'), promotion.dialog3 = false">
                     archive
                   </v-btn>
                   </v-card-actions>
@@ -352,16 +352,18 @@
       submitUpload(id) {
         if (this.formData.files != undefined) {
           let formData = new FormData();
-        formData.append("file", this.formData.files[1]);
-        // formData.append("promotion", JSON.stringify(this.createdPromotion));
-        this.$api.post(`files/upload?id=${id}&model=promotion&field=image`, formData, {headers: { "Content-Type": "multipart/form-data" }})
-        .then(() => {
-          this.fileList = [];
-          this.uploadFile =[];
-          location.reload();
-        })
-        .catch();
-        // this.$refs.upload.submit();
+          formData.append("file", this.formData.files[1]);
+          // formData.append("promotion", JSON.stringify(this.createdPromotion));
+          this.$api.post(`files/upload?id=${id}&model=promotion&field=image`, formData, {headers: { "Content-Type": "multipart/form-data" }})
+          .then(() => {
+            this.fileList = [];
+            this.uploadFile =[];
+            location.reload();
+          })
+          .catch();
+          // this.$refs.upload.submit();
+        } else {
+          location.reload()
         }
 
       },
@@ -388,13 +390,21 @@
           .then( () => {
             this.submitUpload(id);
             this.dialog2 = false;
-
-            location.reload()
-             }
+            }
           )
           .catch();
           this.dialog2 = false;
       },
+
+      toArchive(promotion, status) {
+        this.update(promotion, status)
+      },
+      toOnsale(promotion, status) {
+        this.update(promotion, status)
+      },
+      toActivate(promotion, status) {
+        this.update(promotion, status)
+      }
       update(promotion, status) {
         let id = promotion.id
         promotion.start_date = this.togglePromotion.start_date
