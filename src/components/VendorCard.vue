@@ -83,6 +83,8 @@
                         readonly
                         v-on="on"
                         color="#DFA937"
+                        required
+                        :rules="[v => !!v || 'You must add start date!']"
                       ></v-text-field>
                     </template>
                     <v-date-picker v-model="promotion.start_date" no-title scrollable color="#DFA937">
@@ -109,6 +111,8 @@
                         readonly
                         v-on="on"
                         color="#DFA937"
+                        required
+                        :rules="[v => !!v || 'You must add end date!']"
                       ></v-text-field>
                     </template>
                     <v-date-picker v-model="promotion.end_date" no-title scrollable color="#DFA937">
@@ -177,6 +181,8 @@
                         readonly
                         v-on="on"
                         color="#DFA937"
+                        required
+                        :rules="[v => !!v || 'You must add start date!']"
                       ></v-text-field>
                     </template>
                     <v-date-picker v-model="promotion.start_date" no-title scrollable color="#DFA937">
@@ -203,6 +209,8 @@
                         readonly
                         v-on="on"
                         color="#DFA937"
+                        required
+                        :rules="[v => !!v || 'You must add end date!']"
                       ></v-text-field>
                     </template>
                     <v-date-picker v-model="promotion.end_date" no-title scrollable color="#DFA937">
