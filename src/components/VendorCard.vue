@@ -59,7 +59,7 @@
                 </v-layout>
                   <v-card-text>{{promotion.status}}</v-card-text>
                 <v-form
-                 v-if="promotion.status == 'archive' || promotion.status == 'draft'"
+                 v-if="promotion.status == 'archive'"
                   ref="form2"
                   v-model="valid"
                   lazy-validation
@@ -145,16 +145,104 @@
                     color="#DFA937"
                     prefix="¥"
                   ></v-text-field>
-                <v-card-actions class="d-flex justify-space-around pb-3" v-if="promotion.status == 'draft'">
-                  <v-btn 
-                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="toActivate(promotion, 'onsale'), promotion.dialog3 = false">
-                    Activate
-                  </v-btn>
-                </v-card-actions>
-                <v-card-actions class="d-flex justify-space-around pb-3" v-else-if="promotion.status == 'archive'">
+                <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn
                     width="90%" dark color="#DFA937" tile class="buttons" depressed @click="toOnsale(promotion, 'onsale'), promotion.dialog3 = false">
                     Reactivate
+                  </v-btn>
+                </v-card-actions>
+                </v-form>
+                <v-form
+                 v-else-if="promotion.status == 'draft'"
+                  ref="form2"
+                  v-model="valid"
+                  lazy-validation
+                  class="mx-5">
+
+                  <v-menu
+                    ref="menu3"
+                    v-model="menu3"
+                    :close-on-content-click="false"
+                    :return-value.sync="date"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="290px"
+                    color="#DFA937"
+                  >
+                    <template v-slot:activator="{ on }">
+                      <v-text-field
+                        v-model="promotion.start_date"
+                        label="Start Date"
+                        prepend-icon="mdi-calendar"
+                        readonly
+                        v-on="on"
+                        color="#DFA937"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker v-model="promotion.start_date" no-title scrollable color="#DFA937">
+                      <v-spacer></v-spacer>
+                      <v-btn text color="#DFA937" @click="menu3 = false">Cancel</v-btn>
+                      <v-btn text color="#DFA937" @click="saveToToggle('start_date', promotion.start_date),menu3 = false">OK</v-btn>
+                    </v-date-picker>
+                  </v-menu>
+              <v-menu
+                    ref="menu4"
+                    v-model="menu4"
+                    :close-on-content-click="false"
+                    :return-value.sync="date"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="290px"
+                    color="#DFA937"
+                  >
+                    <template v-slot:activator="{ on }">
+                      <v-text-field
+                        v-model="end_date"
+                        label="End Date"
+                        prepend-icon="mdi-calendar"
+                        readonly
+                        v-on="on"
+                        color="#DFA937"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker v-model="promotion.end_date" no-title scrollable color="#DFA937">
+                      <v-spacer></v-spacer>
+                      <v-btn text color="#DFA937" @click="menu4 = false">Cancel</v-btn>
+                      <v-btn text color="#DFA937" @click="saveToToggle('end_date', promotion.end_date),menu4 = false">OK</v-btn>
+                    </v-date-picker>
+                  </v-menu>
+                  <el-time-select
+                  v-model="start_time"
+                  :picker-options="{
+                    start: '00:00',
+                    step: '00:30',
+                    end: '24:00'
+                  }"
+                  placeholder="Start Time"
+                  :change="saveToToggle('start_time', start_time)">
+                </el-time-select>
+                 <el-time-select
+                 class="endtime"
+                  v-model="end_time"
+                  :picker-options="{
+                    start: '00:00',
+                    step: '00:30',
+                    end: '24:00'
+                  }"
+                  placeholder="End Time"
+                  :change="saveToToggle('end_time', end_time)">
+                </el-time-select>
+                <v-text-field
+                    label="Amount"
+                    v-model="promotion.price"
+                    value=""
+                    color="#DFA937"
+                    prefix="¥"
+                  ></v-text-field>
+                <v-card-actions class="d-flex justify-space-around pb-3">
+                  <v-btn 
+                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="toActivate(promotion, 'onsale'), promotion.dialog3 = false">
+                    Activate
                   </v-btn>
                 </v-card-actions>
                 </v-form>
