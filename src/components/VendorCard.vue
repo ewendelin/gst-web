@@ -203,7 +203,7 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
-                        v-model="end_date"
+                        v-model="promotion.end_date"
                         label="End Date"
                         prepend-icon="mdi-calendar"
                         readonly
