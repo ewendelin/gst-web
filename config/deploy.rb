@@ -62,6 +62,7 @@ task :deploy do
       in_path(fetch(:current_path)) do
         # command %{sudo rm -rf node_modules package-lock.json}
         command %{npm install}
+        command %{npm install --save vconsole}
         # command %{npm audit fix}
         # command %{yarn upgrade}
         command %{NODE_ENV=production npm run build}

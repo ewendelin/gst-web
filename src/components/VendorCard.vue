@@ -63,6 +63,7 @@
                   ref="form2"
                   v-model="valid"
                   lazy-validation
+                  id="archive"
                   class="mx-5">
 
                   <v-menu
@@ -161,6 +162,7 @@
                   ref="form2"
                   v-model="valid"
                   lazy-validation
+                  id="draft"
                   class="mx-5">
 
                   <v-menu
@@ -248,14 +250,14 @@
                     prefix="¥"
                   ></v-text-field>
                 <v-card-actions class="d-flex justify-space-around pb-3">
-                  <v-btn 
+                  <v-btn
                     width="90%" dark color="#DFA937" tile class="buttons" depressed @click="toActivate(promotion, 'onsale'), promotion.dialog3 = false">
                     Activate
                   </v-btn>
                 </v-card-actions>
                 </v-form>
-                
-                <v-form class="mx-5" v-else-if="promotion.status == 'onsale'">
+
+                <v-form class="mx-5" id="onsale" v-else-if="promotion.status == 'onsale'">
                   <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn
                     width="90%" dark color="#DFA937" tile class="buttons" depressed @click="toArchive(promotion, 'archive'), promotion.dialog3 = false">
@@ -404,7 +406,7 @@
 		created() {
 			this.$api
 				.get(
-					`/vendor_profiles/${this.vendorId}/promotions?time=${new Date().getTime()}`
+					`/vendor_profiles/${this.vendorId}/promotions`
 				)
 				.then(response => {
 					this.promotions = response.data.promotions;
