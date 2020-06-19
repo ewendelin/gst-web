@@ -7,6 +7,12 @@ import ElementUI from 'element-ui';
 import axios from 'axios';
 // import Qs from 'qs'
 
+import VConsole from 'vconsole'
+
+if (process.env.NODE_ENV === 'production') {
+  new VConsole()
+}
+
 const ENV = 'production'
 // const ENV = 'development'
 const apiURLProd =  'https://api.gast.world/api/v1';
