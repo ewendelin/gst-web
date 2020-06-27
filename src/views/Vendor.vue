@@ -633,7 +633,10 @@ export default {
         this.dialog2 = false;
       })
       .catch();
+	  } else {
+	  	this.dialog2 = false;
 	  }
+
 
       // this.$refs.upload.submit();
     },
@@ -651,6 +654,9 @@ export default {
       })
       .catch();
       // this.$refs.upload.submit();
+      } else {
+      	this.dialog2 = false;
+        location.reload();
       }
       
     },
@@ -711,7 +717,7 @@ export default {
 	},
     editVendor() {
     	let updated_vendor = this.vendor;
-    	let id = this.vendor.id
+    	let id = this.vendor.id;
     	delete updated_vendor.id;
     	delete updated_vendor.user_id;
     	delete updated_vendor.verified;
@@ -724,10 +730,12 @@ export default {
     		.post(`/vendor_profiles/${id}`,
     			{vendor: updated_vendor})
     		.then( () => {
-    			this.submitUploadVendorLogo(id);
-    			this.submitUploadVendorMain(id);
+    			
     			this.updateVendor = {};
     			this.dialog2 = false;
+    			this.submitUploadVendorLogo(id);
+    			this.submitUploadVendorMain(id);
+
     		}
     	    )
     		.catch(e => {
