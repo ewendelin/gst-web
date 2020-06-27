@@ -500,14 +500,26 @@
         updatedPromotion.start_time = this.togglePromotion.start_time
         updatedPromotion.end_time = this.togglePromotion.end_time
         updatedPromotion.price = this.togglePromotion.price
-        this.$api.post(`/promotions/${id}/state`, {promotion: updatedPromotion})
-          .then(
-            // alert('post'),
-            location.reload()
+        
+        // this.$api.post(`/promotions/${id}/state`, {promotion: updatedPromotion})
+        //   .then(
+        //     // alert('post'),
+        //     location.reload()
+        //   )
+        //   .catch(e => {
+        //     this.error.push(e);
+        //   });
+
+          this.$api
+          .post(`/promotions/${id}`,
+            {promotion: updatedPromotion})
+          .then( () => {
+            this.submitUpload(id);
+            this.dialog2 = false;
+            }
           )
-          .catch(e => {
-            this.error.push(e);
-          });
+          .catch();
+          this.dialog2 = false;
       },
 		},
 		data() {
