@@ -499,7 +499,7 @@
         updatedPromotion.end_date = this.togglePromotion.end_date
         updatedPromotion.start_time = this.togglePromotion.start_time
         updatedPromotion.end_time = this.togglePromotion.end_time
-        updatedPromotion.price = this.togglePromotion.price
+        updatedPromotion.price = promotion.price
         
         // this.$api.post(`/promotions/${id}/state`, {promotion: updatedPromotion})
         //   .then(
