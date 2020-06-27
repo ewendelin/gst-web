@@ -2,10 +2,10 @@
 	<div class="home">
 		<Navbar />
 		<v-layout class="" hidden-sm-and-down>
-			<v-img height="350px" src="../assets/Rice.png"></v-img>
+			<v-img height="350px" src="https://gast-dev.gast.world/Rice.png"></v-img>
 		</v-layout>
 		<v-layout hidden-md-and-up class="mb-n12 pt-3">
-			<v-img height="150px" src="../assets/Rice.png"></v-img>
+			<v-img height="150px" src="https://gast-dev.gast.world/Rice.png"></v-img>
 		</v-layout>
 	
 		<v-layout row class="mx-8 my-8" justify-center align-center>

@@ -77,7 +77,7 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
-                        v-model="promotion.start_date"
+                        v-model="start_date"
                         label="Start Date"
                         prepend-icon="mdi-calendar"
                         readonly
@@ -175,7 +175,7 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
-                        v-model="promotion.start_date"
+                        v-model="start_date"
                         label="Start Date"
                         prepend-icon="mdi-calendar"
                         readonly
@@ -203,7 +203,7 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
-                        v-model="promotion.end_date"
+                        v-model="end_date"
                         label="End Date"
                         prepend-icon="mdi-calendar"
                         readonly
@@ -512,7 +512,7 @@
         promotion.end_time = this.togglePromotion.end_time
         this.$api.post(`/promotions/${id}/state`, {promotion: promotion, status: status})
           .then(
-            alert('post'),
+            // alert('post'),
             location.reload()
           )
           .catch(e => {

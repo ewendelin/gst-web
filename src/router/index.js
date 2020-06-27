@@ -25,11 +25,11 @@ const routes = [
 		name: 'home',
 		component: Home
 	},
-	{
-		path: '/vendors',
-		name: 'vendors',
-		component: () => import('../views/VendorLanding.vue')
-	},
+	// {
+	// 	path: '/vendors',
+	// 	name: 'vendors',
+	// 	component: () => import('../views/VendorLanding.vue')
+	// },
 	{
 		path: '/vendor',
 		name: 'vendor',
