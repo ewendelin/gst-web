@@ -64,7 +64,6 @@
                   v-model="valid"
                   lazy-validation
                   class="mx-5">
-
                   <v-menu
                     ref="menu3"
                     v-model="menu3"
@@ -151,7 +150,7 @@
                   ></v-text-field>
                 <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn
-                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="toOnsale(promotion, 'onsale'), promotion.dialog3 = false">
+                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion), promotion.dialog3 = false">
                     Reactivate
                   </v-btn>
                 </v-card-actions>
@@ -162,7 +161,6 @@
                   v-model="valid"
                   lazy-validation
                   class="mx-5">
-
                   <v-menu
                     ref="menu3"
                     v-model="menu3"
@@ -249,7 +247,7 @@
                   ></v-text-field>
                 <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn 
-                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="toActivate(promotion, 'onsale'), promotion.dialog3 = false">
+                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion), promotion.dialog3 = false">
                     Activate
                   </v-btn>
                 </v-card-actions>
@@ -258,7 +256,7 @@
                 <v-form class="mx-5" v-else-if="promotion.status == 'onsale'">
                   <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn
-                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="toArchive(promotion, 'archive'), promotion.dialog3 = false">
+                    width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion), promotion.dialog3 = false">
                     archive
                   </v-btn>
                   </v-card-actions>
@@ -494,26 +492,18 @@
           .catch();
           this.dialog2 = false;
       },
-
-      toArchive(promotion, status) {
-        this.update(promotion, status)
-      },
-      toOnsale(promotion, status) {
-        this.update(promotion, status)
-      },
-      toActivate(promotion, status) {
-        this.update(promotion, status)
-      },
-      update(promotion, status) {
+      update(promotion) {
         let id = promotion.id
-        promotion.start_date = this.togglePromotion.start_date
-        promotion.end_date = this.togglePromotion.end_date
-        promotion.start_time = this.togglePromotion.start_time
-        promotion.end_time = this.togglePromotion.end_time
-        this.$api.post(`/promotions/${id}/state`, {promotion: promotion, status: status})
+        let updatedPromotion = {}
+        updatedPromotion.start_date = this.togglePromotion.start_date
+        updatedPromotion.end_date = this.togglePromotion.end_date
+        updatedPromotion.start_time = this.togglePromotion.start_time
+        updatedPromotion.end_time = this.togglePromotion.end_time
+        updatedPromotion.price = this.togglePromotion.price
+        this.$api.post(`/promotions/${id}/state`, {promotion: updatedPromotion})
           .then(
             // alert('post'),
-            location.reload()
+            // location.reload()
           )
           .catch(e => {
             this.error.push(e);
