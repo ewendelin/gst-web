@@ -503,7 +503,7 @@
         this.$api.post(`/promotions/${id}/state`, {promotion: updatedPromotion})
           .then(
             // alert('post'),
-            // location.reload()
+            location.reload()
           )
           .catch(e => {
             this.error.push(e);
