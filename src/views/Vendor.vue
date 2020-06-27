@@ -750,6 +750,7 @@ export default {
     		.post(`/users/verify_coupon`,
     			{token: token})
     		.then((res) => {
+    			this.submitUpload();
     			if (res) {
     				this.tokenValid = true;
     				this.tokenFailed = false;
@@ -764,7 +765,7 @@ export default {
     			this.error.push(e);
     		});
     	this.dialog1 = false;
-        location.reload();
+        // location.reload();
     },
     logout() {
         sessionStorage.setItem('token', 'logout');
