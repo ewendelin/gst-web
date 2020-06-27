@@ -711,7 +711,7 @@ export default {
 	},
     editVendor() {
     	let updated_vendor = this.vendor;
-    	let id = updated_vendor.id
+    	let id = this.vendor.id
     	delete updated_vendor.id;
     	delete updated_vendor.user_id;
     	delete updated_vendor.verified;
