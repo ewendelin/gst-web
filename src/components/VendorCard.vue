@@ -511,15 +511,15 @@
         //   });
 
           this.$api
-          .post(`/promotions/${id}`,
+          .post(`/promotions/${id}/state`,
             {promotion: updatedPromotion})
           .then( () => {
             this.submitUpload(id);
-            this.dialog2 = false;
+            // this.dialog2 = false;
             }
           )
           .catch();
-          this.dialog2 = false;
+          // this.dialog2 = false;
       },
 		},
 		data() {
