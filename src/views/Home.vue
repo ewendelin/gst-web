@@ -48,38 +48,41 @@
 			</v-btn>
 
 			<v-list>
-				<p class="font-weight-medium mt-5">
-					Why food end up on our site could be one of the following
-					reasons:
+				<p class="font-weight-medium mt-5 text-center">
+					We link our community with food that needs to be consumed. Why food end up on our site you may ask?
 				</p>
-				<v-list-item v-for="item in items" :key="item.title">
-					<v-list-item-icon>
-						<v-icon v-if="item.icon" color="orange">mdi-carrot</v-icon>
-					</v-list-item-icon>
-
-					<v-list-item-content>
-						<v-list-item-title
-							v-text="item.title"
-							no-wrap
-							class="font-weight-medium"
-						></v-list-item-title>
-					</v-list-item-content>
-				</v-list-item>
-			</v-list>
-			<v-list>
-				<p class="font-weight-medium">Our partners are not allowed to sell:</p>
-				<v-list-item v-for="item1 in items1" :key="item1.title">
-					<v-list-item-icon>
-						<v-icon v-if="item1.icon" color="red">mdi-cancel</v-icon>
-					</v-list-item-icon>
-
-					<v-list-item-content>
-						<v-list-item-title
-							v-text="item1.title"
-							class="font-weight-medium"
-						></v-list-item-title>
-					</v-list-item-content>
-				</v-list-item>
+				<v-row>
+			      <v-col cols="12">
+			        <v-row
+			        class="mt-4"
+			          align="center"
+			          justify="space-around"
+			        >
+			        	<div class="item">
+    						<v-icon large>mdi-factory</v-icon>
+    						<span class="caption ">Over-production</span>
+						</div>
+			        	<div class="item">
+    						<v-icon large>mdi-clock-alert</v-icon>
+    						<span class="caption ">Short BBD</span>
+						</div>
+			        </v-row>
+					<v-row
+					  class="mt-12"
+			          align="center"
+			          justify="space-around"
+			        >
+			        	<div class="item">
+    						<v-icon large>mdi-barley</v-icon>
+    						<span class="caption ">Season specific</span>
+						</div>
+			        	<div class="item">
+    						<v-icon large>mdi-package-variant</v-icon>
+    						<span class="caption ">Package-deformation</span>
+						</div>
+			        </v-row>
+			      </v-col>
+			    </v-row>
 			</v-list>
 		</v-col>
 		</v-layout>
@@ -117,6 +120,7 @@
 			}
 		},
 		created() {
+
 			let storedToken = sessionStorage.getItem('token');
 
 			let login = !(storedToken != undefined && storedToken != 'logout')
@@ -163,5 +167,19 @@
 	.log {
 		width: 10rem;
 		height: 10rem;
+	}
+	div.item {
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 50px;
+	}
+	/*img {
+    width: 30px;
+    height: 30px;
+    background-color: blue;
+	}*/
+	.caption {
+    display: block;
 	}
 </style>
