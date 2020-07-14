@@ -1,5 +1,5 @@
 <template>
-	<v-container>
+<!-- 	<v-container>
 
     <v-row>
       <v-col cols="12">
@@ -90,8 +90,8 @@
         </v-row>
       </v-col>
      </v-row>
- </v-container>
-	<!-- <v-container class="px-0 pt-0">
+ </v-container> -->
+<v-container class="px-0 pt-0">
 		<v-layout row class="mx-auto" align-center justify-center>
 			<v-flex xs12 sm8 md7>
 				<v-card
@@ -102,9 +102,9 @@
 					lg4
 					v-for="promotion in details"
 					:key="promotion.id"
-				> -->
+				> 
 				<!-- @@FIXME ADD POLYFILL FOR IMAGES/ seems like its not needed... test in more browsers, safari, chrome working -->
-					<!-- <v-img :src="promotion.image" height="250px"></v-img>
+					<v-img :src="promotion.image" height="250px"></v-img>
 					<v-layout row class="mx-3 px-1 mb-0 pb-0">
 						<v-card-title class="mb-0 pb-0">
 							{{ promotion.title }}
@@ -121,13 +121,13 @@
 						<v-card-text class="py-0">
 							{{ promotion.description }}
 						</v-card-text>
-					</v-layout> -->
+					</v-layout>
 					
 
-				<!-- <v-layout class="mx-5" width="90vw"> -->
-					<!-- <v-card-actions> -->
-						<!-- <v-spacer></v-spacer> -->
-				<!-- 	<v-row align="center" justify="center" class="mx-auto">
+				<v-layout class="mx-5" width="90vw">
+					<v-card-actions>
+						<v-spacer></v-spacer>
+					<v-row align="center" justify="center" class="mx-auto">
 						<v-btn
 							width="90%" 
 							text
@@ -141,9 +141,9 @@
 							}}</v-icon>
 						</v-btn>
 					</v-row>
-					</v-card-actions> -->
-				<!-- </v-layout> -->
-					<!-- <v-expand-transition>
+					</v-card-actions>
+				</v-layout>
+					<v-expand-transition>
 						<div v-show="promotion.show">
 							<v-layout row class="mx-3 mb-0 pb-0">
 								<v-card-text class="mt-n1.5 mb-n3 pt-0 font-weight-bold">
@@ -228,7 +228,7 @@
 				</v-card>
 			</v-flex>
 		</v-layout>
-	</v-container -->
+	</v-container>
 </template>
 
 <script>
@@ -254,7 +254,6 @@
 		data() {
 			return {
 				details: [],
-				filter: false,
 				rating1: 5,
 				valid: '',
 				rating: '',

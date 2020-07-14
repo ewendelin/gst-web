@@ -1,13 +1,13 @@
 <template>
 	<div class="home">
 		<Navbar />
-		<v-img height="150px" src="https://gast-dev.gast.world/Rice.png"></v-img>
+		<!-- <v-img height="150px" src="https://gast-dev.gast.world/Rice.png"></v-img>
 		<v-layout row class="mx-auto mt-n10">
 			<v-spacer></v-spacer>
 			<v-btn icon @click.stop="filter = true">
 				<v-icon>mdi-tune</v-icon>
 			</v-btn>
-		</v-layout>
+		</v-layout> -->
 		<!-- <Carousel /> -->
 		<DealDetails />
 	</div>
