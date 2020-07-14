@@ -39,7 +39,7 @@
 				</v-btn>
 
 		    	<v-btn
-		    	class="pa-.5 buttonst"
+		    	class="pa-.5 buttonst ml-n1"
 		        dark
 		        small
 				color="#DFA937"
