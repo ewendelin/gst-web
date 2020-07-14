@@ -9,40 +9,42 @@
     		v-for="promotion in details"
 			:key="promotion.id">
 
-		    <v-card-title style="font-size:.9rem;">
+		    <v-card-title style="font-size:.8rem;">
 		      {{ promotion.title }} 
 		    </v-card-title>
 		    <v-card-subtitle style="font-size:.6rem;">
 		      {{ promotion.time_slot }}
 		    </v-card-subtitle>
 
-    		<v-list-item class="mt-n4">
+    		<v-list-item class="mt-n3">
 				<v-list-item-avatar size="32" color="grey">
 					<v-img :src="promotion.vendor.logo_img" alt="Logo" />
 				</v-list-item-avatar>
 				<v-list-item-content>
-					<v-list-item-title class="body" style="font-size:1rem;">{{promotion.vendor.name}}</v-list-item-title>
+					<v-list-item-title class="body" style="font-size:.8rem;">{{promotion.vendor.name}}</v-list-item-title>
 				</v-list-item-content>
 			</v-list-item>
 
-		    <v-card-actions class="">
+		    <v-card-actions class="mt-n3">
 		    	<v-btn @click.stop="getCoupon(promotion)" 
 				tile 
-				small
+				x-small
 				depressed 
 				dark 
 				style="border-radius: 5px;
-				background-color: rgb(223, 169, 55) !important;
+				background-color: rgb(223, 169, 55) !important; font-size:.6rem;
 				color: !important;"
 				>
 					Claim
 				</v-btn>
 
 		    	<v-btn
+		    	class="pa-.5 buttonst"
 		        dark
-		        small
+		        x-small
 				color="#DFA937"
 		        text
+				style="font-size:.6rem;"
 		        @click="deets = true"
 		    	>
 		        	details
