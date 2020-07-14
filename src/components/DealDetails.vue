@@ -28,7 +28,7 @@
 		    <v-card-actions class="mt-n3">
 		    	<v-btn @click.stop="getCoupon(promotion)" 
 				tile 
-				x-small
+				small
 				depressed 
 				dark 
 				style="border-radius: 5px;
@@ -41,7 +41,7 @@
 		    	<v-btn
 		    	class="pa-.5 buttonst"
 		        dark
-		        x-small
+		        small
 				color="#DFA937"
 		        text
 				style="font-size:.6rem;"
