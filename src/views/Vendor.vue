@@ -17,7 +17,7 @@
 			<v-btn depressed dark class="button mb-2" width="80%" @click="dialog = true">add new deal
 
 			</v-btn>
-			<v-btn depressed dark class="buttonst mb-2" width="80%" @click="dialog1 = true">verify cuopon
+			<v-btn depressed dark class="buttonst mb-2" width="80%" @click="dialog1 = true">verify coupon
 
 			</v-btn>
 			<v-btn depressed dark class="buttonst mb-6" width="80%" @click="dialogtotalstat = true">monthly statistics

@@ -1,5 +1,65 @@
 <template>
-	<v-container class="px-0 pt-0">
+	<v-container fluid>
+    <v-row>
+      <v-col cols="12">
+        <v-row justify="center">
+          <v-card
+    		class="ma-1"
+    		max-width="45%"
+    		v-for="promotion in details"
+			:key="promotion.id">
+
+		    <v-card-title style="font-size:.9rem;">
+		      {{ promotion.title }} 
+		    </v-card-title>
+		    <v-card-subtitle style="font-size:.6rem;">
+		      {{ promotion.time_slot }}
+		    </v-card-subtitle>
+
+    		<v-list-item class="mt-n4">
+				<v-list-item-avatar size="32" color="grey">
+					<v-img :src="promotion.vendor.logo_img" alt="Logo" />
+				</v-list-item-avatar>
+				<v-list-item-content>
+					<v-list-item-title class="body" style="font-size:1rem;">{{promotion.vendor.name}}</v-list-item-title>
+				</v-list-item-content>
+			</v-list-item>
+
+		    <v-card-actions class="">
+		    	<v-btn @click.stop="getCoupon(promotion)" 
+				tile 
+				small
+				depressed 
+				dark 
+				style="border-radius: 5px;
+				background-color: rgb(223, 169, 55) !important;
+				color: !important;"
+				>
+					Claim
+				</v-btn>
+
+		    	<v-btn
+		        dark
+		        small
+				color="#DFA937"
+		        text
+		        @click="deets = true"
+		    	>
+		        	details
+		    	</v-btn>
+		    	<v-dialog v-model="promotion.deets">
+		    	</v-dialog>
+
+		    	<v-spacer></v-spacer>
+		 
+		    	
+		    </v-card-actions>
+		  </v-card>
+        </v-row>
+      </v-col>
+     </v-row>
+ </v-container>
+	<!-- <v-container class="px-0 pt-0">
 		<v-layout row class="mx-auto" align-center justify-center>
 			<v-flex xs12 sm8 md7>
 				<v-card
@@ -10,9 +70,9 @@
 					lg4
 					v-for="promotion in details"
 					:key="promotion.id"
-				>
+				> -->
 				<!-- @@FIXME ADD POLYFILL FOR IMAGES/ seems like its not needed... test in more browsers, safari, chrome working -->
-					<v-img :src="promotion.image" height="250px"></v-img>
+					<!-- <v-img :src="promotion.image" height="250px"></v-img>
 					<v-layout row class="mx-3 px-1 mb-0 pb-0">
 						<v-card-title class="mb-0 pb-0">
 							{{ promotion.title }}
@@ -29,13 +89,13 @@
 						<v-card-text class="py-0">
 							{{ promotion.description }}
 						</v-card-text>
-					</v-layout>
+					</v-layout> -->
 					
 
 				<!-- <v-layout class="mx-5" width="90vw"> -->
-					<v-card-actions>
+					<!-- <v-card-actions> -->
 						<!-- <v-spacer></v-spacer> -->
-					<v-row align="center" justify="center" class="mx-auto">
+				<!-- 	<v-row align="center" justify="center" class="mx-auto">
 						<v-btn
 							width="90%" 
 							text
@@ -49,9 +109,9 @@
 							}}</v-icon>
 						</v-btn>
 					</v-row>
-					</v-card-actions>
+					</v-card-actions> -->
 				<!-- </v-layout> -->
-					<v-expand-transition>
+					<!-- <v-expand-transition>
 						<div v-show="promotion.show">
 							<v-layout row class="mx-3 mb-0 pb-0">
 								<v-card-text class="mt-n1.5 mb-n3 pt-0 font-weight-bold">
@@ -117,79 +177,26 @@
 										}}</v-list-item-title>
 									</v-list-item-content>
 								</v-list-item>
-								<!-- <v-rating class="ml-3" readonly dense v-model="rating1"
-									background-color="orange lighten-3"
-						      		color="orange"></v-rating> -->
+								
 								<v-card-text text class="pb-0 mb-n3 font-weight-bold">{{promotion.vendor.address}}
 								</v-card-text>
 								<v-card-text class="mb-3">
 									{{ promotion.vendor.description }}
 								</v-card-text>
-							<!-- <v-row align="center" justify="center"> -->
-								<!-- <v-btn
-									width="35vw" 
-									tile 
-									dark
-									color="#DFA937"
-									class="buttons mb-4" 
-									depressed
-									@click="dialograting = true">
-									Add rating
-								</v-btn> -->
-								<!-- <v-dialog v-model="dialograting" max-width="350">
-									<v-card>
-										<v-layout row class="mx-auto">
-											<v-card-title class="headline">Add Rating</v-card-title>
-											<v-spacer></v-spacer>
-											<v-btn icon @click="dialograting = false">
-												<v-icon>mdi-close</v-icon>
-											</v-btn>
-										</v-layout>
-										<v-form ref="form"
-										class="mx-5"
-										id="example-3">
-											<v-rating v-model="rating"
-												background-color="orange lighten-3"
-				      							color="orange">
-				      						</v-rating>
-										</v-form>
-										<v-card-actions class="d-flex justify-space-around pb-3">
-											<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="dialograting = false">
-												post
-											</v-btn>
-											<v-btn width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="dialograting = false">
-												cancel
-											</v-btn>
-										</v-card-actions>
-									</v-card>
-								</v-dialog> -->
-							<!-- </v-row> -->
 							</v-layout>
 							<v-layout class="mx-auto">
-								<!-- <v-row align="center" justify="center"> -->
+								
 									<v-img :src="promotion.vendor.main_img" height="300" width="100vw">
-						          		<!-- <v-row align="end" justify="center" class="fill-height"> -->
-						          		<!-- FIXME SHOW THE SPECIFIC VENDOR -->
-						            	<!-- <v-btn
-										width="35vw" 
-										tile 
-										dark
-										color="#DFA937"
-										class="buttons" 
-										depressed
-										@click="jump(promotion)">
-										Add rating
-										</v-btn> -->
-										<!-- </v-row> -->
+						          
 									</v-img>
-								<!-- </v-row> -->
+								
 							</v-layout>
 						</div>
 					</v-expand-transition>
 				</v-card>
 			</v-flex>
 		</v-layout>
-	</v-container>
+	</v-containe -->
 </template>
 
 <script>
@@ -202,6 +209,7 @@
 					this.details = response.data;
 					this.details = this.details.map(details => ({
 						...details,
+						deets: false,
 						show: false,
 						dialog: false,
 						dialograting: false,

@@ -49,7 +49,7 @@
 
 			<v-list>
 				<p class="font-weight-medium mt-5 text-center">
-					We link our community with food that needs to be consumed. Why food end up on our site you may ask?
+					We link our community with food that needs to be consumed. Why food ends up on our site you may ask?
 				</p>
 				<v-row>
 			      <v-col cols="12">

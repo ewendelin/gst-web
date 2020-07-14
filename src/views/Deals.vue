@@ -1,6 +1,7 @@
 <template>
 	<div class="home">
 		<Navbar />
+		<v-img height="150px" src="https://gast-dev.gast.world/Rice.png"></v-img>
 		<!-- <Carousel /> -->
 		<DealDetails />
 	</div>
