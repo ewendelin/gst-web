@@ -393,13 +393,14 @@
 											:rules="[v => !!v || 'Address is required!']"
 											color="#DFA937"
 										></v-text-field>
-										<v-text-field
+										<v-select
 											:rules="[v => !!v || 'Area is required!']"
 											v-model="newVendorProfile.area"
+											:items="areas"
 											label="Area"
 											required
 											color="#DFA937"
-										></v-text-field>
+										></v-select>
 
 										<v-text-field
 											v-model="newVendorProfile.contact_number"
@@ -576,6 +577,7 @@ export default {
       tokenValid: false,
       tokenFailed: false,
       items: ['Restaurant', 'Bar', 'Cafe', 'Store'],
+      areas: ['Xuhui', 'Jingan', 'Huangpu', 'Changning', 'Hongkou', 'Yangpu', 'Putuo', 'Pudong', 'Other'],
       coupon: {token: ''},
       newPromotion: {
 		title: '',

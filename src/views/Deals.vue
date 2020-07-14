@@ -2,6 +2,12 @@
 	<div class="home">
 		<Navbar />
 		<v-img height="150px" src="https://gast-dev.gast.world/Rice.png"></v-img>
+		<v-layout row class="mx-auto mt-n10">
+			<v-spacer></v-spacer>
+			<v-btn icon @click.stop="filter = true">
+				<v-icon>mdi-tune</v-icon>
+			</v-btn>
+		</v-layout>
 		<!-- <Carousel /> -->
 		<DealDetails />
 	</div>
@@ -18,6 +24,11 @@
 	export default {
 		name: 'Deals',
 		components: { DealDetails, Navbar },
+		data() {
+			return {
+				filter: false
+			};
+		},
     created () {
       let storedToken = sessionStorage.getItem('token');
       if (storedToken != undefined || storedToken != null) {
@@ -26,4 +37,8 @@
     }
 	};
 </script>
-
+<style scoped>
+	* {
+		background-color: white;
+	}
+</style>

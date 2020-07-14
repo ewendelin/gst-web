@@ -1,5 +1,6 @@
 <template>
-	<v-container fluid>
+	<v-container>
+
     <v-row>
       <v-col cols="12">
         <v-row justify="center">
@@ -37,6 +38,35 @@
 				>
 					Claim
 				</v-btn>
+				<v-dialog v-model="promotion.dialog" max-width="290">
+					<v-card>
+						<v-layout row class="mx-auto">
+							<v-card-title class="headline">Success!</v-card-title>
+							<v-spacer></v-spacer>
+							<v-btn icon @click="promotion.dialog = false">
+								<v-icon>mdi-close</v-icon>
+							</v-btn>
+						</v-layout>
+						<v-card-text>
+							You have successfully claimed this promotion! Make sure
+							you read the disclaimer and note the time when the
+							coupon can be claimed.
+						</v-card-text>
+						<v-card-actions class="d-flex justify-center pb-3">
+							<v-btn
+								width="80%"
+								dark
+								color="#DFA937"
+								tile
+								class="buttons"
+								depressed
+								to="/profile"
+							>
+								see in profile
+							</v-btn>
+						</v-card-actions>
+					</v-card>
+				</v-dialog>
 
 		    	<v-btn
 		    	class="pa-.5 buttonst ml-n1"
@@ -198,7 +228,7 @@
 				</v-card>
 			</v-flex>
 		</v-layout>
-	</v-containe -->
+	</v-container -->
 </template>
 
 <script>
@@ -224,6 +254,7 @@
 		data() {
 			return {
 				details: [],
+				filter: false,
 				rating1: 5,
 				valid: '',
 				rating: '',
@@ -273,6 +304,9 @@
 </script>
 
 <style scoped>
+	* {
+		background-color: white;
+	}
 	.buttons {
 		border-radius: 5px;
 	}
