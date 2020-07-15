@@ -79,7 +79,8 @@
 		    	>
 		        	details
 		    	</v-btn>
-		    	<v-dialog v-model="promotion.deets" max-width="290">
+		    	<v-dialog v-model="promotion.deets" width="290">
+		    		<v-layout>
 					<v-card>
 					<v-img :src="promotion.image" height="250px">
 					</v-img>
@@ -100,6 +101,7 @@
 					<v-divider class="my-4"></v-divider>
 
 							<v-layout row class="mx-5">
+								<v-list>
 								<v-list-item>
 									<v-list-item-avatar size="42" color="grey">
 										<v-img :src="promotion.vendor.logo_img" alt="Logo" />
@@ -128,7 +130,7 @@
 								<v-card-text class="mb-1 mt-0 pt-0">
 									{{ promotion.vendor.description }}
 								</v-card-text>
-							
+							</v-list>
 							</v-layout>
 						
 						<v-card-actions class="d-flex justify-center pb-3">
@@ -146,6 +148,8 @@
 						</v-card-actions>
 						
 					</v-card>
+		</v-layout>
+
 		    	</v-dialog>
 
 		    	<v-spacer></v-spacer>
@@ -153,6 +157,7 @@
 		    	
 		    </v-card-actions>
 		  </v-card>
+
         </v-row>
       </v-col>
      </v-row>
