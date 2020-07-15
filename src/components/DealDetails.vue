@@ -85,11 +85,12 @@
 					<v-img :src="promotion.image" height="250px">
 					</v-img>
 						<v-layout row class="mx-3 px-1 mb-0 pb-0">
-						<v-card-title class="mb-0 pb-0">
-							{{ promotion.title }}
-						</v-card-title>
-					</v-layout>
-					<v-layout row class="ml-3 mr-3 mt-0 px-1 pt-0">
+							<v-card-title class="mb-0 pb-0">
+								{{ promotion.title }}
+							</v-card-title>
+						</v-layout>
+						<v-layout row class="ml-3 mr-3 mt-0 px-1 pt-0">
+							<v-list>
 						<v-card-subtitle class="font-weight-bold mt-1 pt-1">
 							{{ promotion.time_slot }}
 						</v-card-subtitle>
@@ -97,6 +98,7 @@
 						<v-card-text class="py-0">
 							{{ promotion.description }}
 						</v-card-text>
+					</v-list>
 					</v-layout>
 					<v-divider class="my-4"></v-divider>
 
