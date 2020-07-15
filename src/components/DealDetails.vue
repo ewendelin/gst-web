@@ -1,6 +1,162 @@
 <template>
-	<v-container class="px-0 pt-0">
-		<v-layout row class="mx-auto" align-center justify-center>
+	<v-container>
+		 <v-layout row class="mx-auto" align-center justify-center>
+	<v-row>
+      <v-col cols="12">
+        <v-row justify="center">
+          <v-card
+    		class="ma-1"
+    		max-width="45%"
+    		v-for="promotion in details"
+			:key="promotion.id">
+
+		    <v-card-title style="font-size:.8rem;">
+		      {{ promotion.title }} 
+		    </v-card-title>
+		    <v-card-subtitle style="font-size:.6rem;">
+		      {{ promotion.time_slot }}
+		    </v-card-subtitle>
+
+    		<v-list-item class="mt-n3">
+				<v-list-item-avatar size="32" color="grey">
+					<v-img :src="promotion.vendor.logo_img" alt="Logo" />
+				</v-list-item-avatar>
+				<v-list-item-content>
+					<v-list-item-title class="body" style="font-size:.8rem;">{{promotion.vendor.name}}</v-list-item-title>
+				</v-list-item-content>
+			</v-list-item>
+
+		    <v-card-actions class="mt-n3">
+		    	<v-btn @click.stop="getCoupon(promotion)" 
+				tile 
+				small
+				depressed 
+				dark 
+				style="border-radius: 5px;
+				background-color: rgb(223, 169, 55) !important; font-size:.6rem;
+				color: !important;"
+				>
+					Claim
+				</v-btn>
+				<v-dialog v-model="promotion.dialog" max-width="290">
+					<v-card>
+						<v-layout row class="mx-auto">
+							<v-card-title class="headline">Success!</v-card-title>
+							<v-spacer></v-spacer>
+							<v-btn icon @click="promotion.dialog = false">
+								<v-icon>mdi-close</v-icon>
+							</v-btn>
+						</v-layout>
+						<v-card-text>
+							You have successfully claimed this promotion! Make sure
+							you read the disclaimer and note the time when the
+							coupon can be claimed.
+						</v-card-text>
+						<v-card-actions class="d-flex justify-center pb-3">
+							<v-btn
+								width="80%"
+								dark
+								color="#DFA937"
+								tile
+								class="buttons"
+								depressed
+								to="/profile"
+							>
+								see in profile
+							</v-btn>
+						</v-card-actions>
+					</v-card>
+				</v-dialog>
+
+		    	<v-btn
+		    	class="pa-.5 buttonst ml-n1"
+		        dark
+		        small
+				color="#DFA937"
+		        text
+				style="font-size:.6rem;"
+		        @click.stop="promotion.deets = true"
+		    	>
+		        	details
+		    	</v-btn>
+		    	<v-dialog v-model="promotion.deets" max-width="290">
+					<v-card>
+					<v-img :src="promotion.image" height="250px">
+					</v-img>
+						<v-layout row class="mx-3 px-1 mb-0 pb-0">
+						<v-card-title class="mb-0 pb-0">
+							{{ promotion.title }}
+						</v-card-title>
+					</v-layout>
+					<v-layout row class="ml-3 mr-3 mt-0 px-1 pt-0">
+						<v-card-subtitle class="font-weight-bold mt-1 pt-1">
+							{{ promotion.time_slot }}
+						</v-card-subtitle>
+						<v-spacer></v-spacer>
+						<v-card-text class="py-0">
+							{{ promotion.description }}
+						</v-card-text>
+					</v-layout>
+					<v-divider class="my-4"></v-divider>
+
+							<v-layout row class="mx-5">
+								<v-list-item>
+									<v-list-item-avatar size="42" color="grey">
+										<v-img :src="promotion.vendor.logo_img" alt="Logo" />
+									</v-list-item-avatar>
+									<v-list-item-content>
+										<v-list-item-title>{{
+											promotion.vendor.name
+										}}</v-list-item-title>
+									</v-list-item-content>
+								</v-list-item>
+							
+								<v-list-item class="mt-1">
+							        <v-list-item-icon class="pr-0 mr-0">
+							          <v-icon small>mdi-home</v-icon>
+							        </v-list-item-icon>
+
+							        <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{promotion.vendor.address}}</v-list-item-title>
+							    </v-list-item>
+								<v-list-item class="mb-0 pb-0">
+							        <v-list-item-icon class="pr-0 mr-0">
+							          <v-icon small>mdi-phone</v-icon>
+							        </v-list-item-icon>
+
+							        <v-list-item-title class="font-weight-bold" style="font-size:.8rem;">{{promotion.vendor.contact_number}}</v-list-item-title>
+							    </v-list-item>
+								<v-card-text class="mb-1 mt-0 pt-0">
+									{{ promotion.vendor.description }}
+								</v-card-text>
+							
+							</v-layout>
+						
+						<v-card-actions class="d-flex justify-center pb-3">
+							<v-btn
+								width="80%"
+								dark
+								color="#DFA937"
+								tile
+								class="buttons"
+								depressed
+								@click.stop="getCoupon(promotion)"
+							>
+								claim
+							</v-btn>
+						</v-card-actions>
+						
+					</v-card>
+		    	</v-dialog>
+
+		    	<v-spacer></v-spacer>
+		 
+		    	
+		    </v-card-actions>
+		  </v-card>
+        </v-row>
+      </v-col>
+     </v-row>
+		<!-- <v-layout row class="mx-auto" align-center justify-center>
 			<v-flex xs12 sm8 md7>
 				<v-card
 					tile
@@ -11,7 +167,7 @@
 					v-for="promotion in details"
 					:key="promotion.id"
 				>
-				<!-- @@FIXME ADD POLYFILL FOR IMAGES/ seems like its not needed... test in more browsers, safari, chrome working -->
+				
 					<v-img :src="promotion.image" height="250px"></v-img>
 					<v-layout row class="mx-3 px-1 mb-0 pb-0">
 						<v-card-title class="mb-0 pb-0">
@@ -29,13 +185,13 @@
 						<v-card-text class="py-0">
 							{{ promotion.description }}
 						</v-card-text>
-					</v-layout>
+					</v-layout> -->
 					
 
 				<!-- <v-layout class="mx-5" width="90vw"> -->
-					<v-card-actions>
+					<!-- <v-card-actions> -->
 						<!-- <v-spacer></v-spacer> -->
-					<v-row align="center" justify="center" class="mx-auto">
+					<!-- <v-row align="center" justify="center" class="mx-auto">
 						<v-btn
 							width="90%" 
 							text
@@ -49,9 +205,9 @@
 							}}</v-icon>
 						</v-btn>
 					</v-row>
-					</v-card-actions>
+					</v-card-actions> -->
 				<!-- </v-layout> -->
-					<v-expand-transition>
+					<!-- <v-expand-transition>
 						<div v-show="promotion.show">
 							<v-layout row class="mx-3 mb-0 pb-0">
 								<v-card-text class="mt-n1.5 mb-n3 pt-0 font-weight-bold">
@@ -116,58 +272,20 @@
 											promotion.vendor.name
 										}}</v-list-item-title>
 									</v-list-item-content>
-								</v-list-item>
+								</v-list-item> -->
 								<!-- <v-rating class="ml-3" readonly dense v-model="rating1"
 									background-color="orange lighten-3"
 						      		color="orange"></v-rating> -->
-								<v-card-text text class="pb-0 mb-n3 font-weight-bold">{{promotion.vendor.address}}
+								<!-- <v-card-text text class="pb-0 mb-n3 font-weight-bold">{{promotion.vendor.address}}
 								</v-card-text>
 								<v-card-text class="mb-3">
 									{{ promotion.vendor.description }}
-								</v-card-text>
-							<!-- <v-row align="center" justify="center"> -->
-								<!-- <v-btn
-									width="35vw" 
-									tile 
-									dark
-									color="#DFA937"
-									class="buttons mb-4" 
-									depressed
-									@click="dialograting = true">
-									Add rating
-								</v-btn> -->
-								<!-- <v-dialog v-model="dialograting" max-width="350">
-									<v-card>
-										<v-layout row class="mx-auto">
-											<v-card-title class="headline">Add Rating</v-card-title>
-											<v-spacer></v-spacer>
-											<v-btn icon @click="dialograting = false">
-												<v-icon>mdi-close</v-icon>
-											</v-btn>
-										</v-layout>
-										<v-form ref="form"
-										class="mx-5"
-										id="example-3">
-											<v-rating v-model="rating"
-												background-color="orange lighten-3"
-				      							color="orange">
-				      						</v-rating>
-										</v-form>
-										<v-card-actions class="d-flex justify-space-around pb-3">
-											<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="dialograting = false">
-												post
-											</v-btn>
-											<v-btn width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="dialograting = false">
-												cancel
-											</v-btn>
-										</v-card-actions>
-									</v-card>
-								</v-dialog> -->
-							<!-- </v-row> -->
-							</v-layout>
-							<v-layout class="mx-auto">
+								</v-card-text> -->
+							
+							<!-- </v-layout>
+							<v-layout class="mx-auto"> -->
 								<!-- <v-row align="center" justify="center"> -->
-									<v-img :src="promotion.vendor.main_img" height="300" width="100vw">
+									<!-- <v-img :src="promotion.vendor.main_img" height="300" width="100vw"> -->
 						          		<!-- <v-row align="end" justify="center" class="fill-height"> -->
 						          		<!-- FIXME SHOW THE SPECIFIC VENDOR -->
 						            	<!-- <v-btn
@@ -181,13 +299,13 @@
 										Add rating
 										</v-btn> -->
 										<!-- </v-row> -->
-									</v-img>
+									<!-- </v-img> -->
 								<!-- </v-row> -->
-							</v-layout>
-						</div>
-					</v-expand-transition>
-				</v-card>
-			</v-flex>
+							<!-- </v-layout> -->
+						<!-- </div> -->
+					<!-- </v-expand-transition> -->
+				<!-- </v-card> -->
+			<!-- </v-flex> -->
 		</v-layout>
 	</v-container>
 </template>
@@ -203,6 +321,7 @@
 					this.details = this.details.map(details => ({
 						...details,
 						show: false,
+						deets: false,
 						dialog: false,
 						dialograting: false,
 					}));
@@ -229,6 +348,7 @@
 						`/promotions/${promotion.id}/claim_coupon`
 					)
 					.then(function() {
+						promotion.deets = false;
 						promotion.dialog = true;
 					})
 					.catch(function(error) {
