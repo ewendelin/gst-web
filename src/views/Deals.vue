@@ -50,7 +50,7 @@
 							</v-chip-group> -->
 							<v-list-item-subtitle>Filter by venue</v-list-item-subtitle>
 	        				<!-- <v-chip-group
-	        				
+
 	          				column
 	        				>
 	          					<v-chip filter v-model="filter.restaurant">
@@ -82,7 +82,7 @@
 		    		v-for="promotion in details"
 					:key="promotion.id">
 				    <v-card-title style="font-size:.8rem;">
-				      {{ promotion.title }} 
+				      {{ promotion.title }}
 				    </v-card-title>
 				    <v-card-subtitle style="font-size:.6rem;">
 				      {{ promotion.time_slot }}
@@ -90,18 +90,18 @@
 
 		    		<v-list-item class="mt-n3">
 						<v-list-item-avatar size="32" color="grey">
-							<v-img :src="promotion.vendor.logo_img" alt="Logo" />
+							<!-- <v-img :src="promotion.vendor.logo_img" alt="Logo" /> -->
 						</v-list-item-avatar>
 						<v-list-item-content>
-							<v-list-item-title class="body" style="font-size:.8rem;">{{promotion.vendor.name}}</v-list-item-title>
+							<!-- <v-list-item-title class="body" style="font-size:.8rem;">{{promotion.vendor.name}}</v-list-item-title> -->
 						</v-list-item-content>
 					</v-list-item>
 				    <v-card-actions class="mt-n3">
-				    	<v-btn @click.stop="getCoupon(promotion)" 
-						tile 
+				    	<v-btn @click.stop="getCoupon(promotion)"
+						tile
 						small
-						depressed 
-						dark 
+						depressed
+						dark
 						style="border-radius: 5px;
 						background-color: rgb(223, 169, 55) !important; font-size:.6rem;
 						color: !important;"
@@ -174,11 +174,11 @@
 									<v-list>
 										<v-list-item>
 											<v-list-item-avatar size="42" color="grey">
-												<v-img :src="promotion.vendor.logo_img" alt="Logo" />
+												<!-- <v-img :src="promotion.vendor.logo_img" alt="Logo" /> -->
 											</v-list-item-avatar>
 											<v-list-item-content>
 												<v-list-item-title>{{
-													promotion.vendor.name
+													<!-- promotion.vendor.name -->
 												}}</v-list-item-title>
 											</v-list-item-content>
 										</v-list-item>
@@ -268,20 +268,20 @@
 		<v-layout row class="mx-5">
 			<v-list-item>
 				<v-list-item-avatar size="54" color="grey">
-					<v-img :src="promotion.vendor.logo_img" alt="Logo" />
+					<!-- <v-img :src="promotion.vendor.logo_img" alt="Logo" /> -->
 				</v-list-item-avatar>
 				<v-list-item-content>
 					<v-list-item-title class="headline">{{
-						promotion.vendor.name
+						<!-- promotion.vendor.name -->
 					}}</v-list-item-title>
 				</v-list-item-content>
-			</v-list-item> 
+			</v-list-item>
 		</v-layout>
 	</div>
 </template>
 
 <script>
-	
+
 	import Navbar from '../components/Navbar';
 
 	export default {
@@ -290,6 +290,7 @@
 		data() {
 			return {
 				details: [],
+        promotion: {},
 				rating1: 5,
 				valid: '',
 				rating: '',
