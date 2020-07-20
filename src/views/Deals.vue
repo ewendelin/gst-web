@@ -14,7 +14,7 @@
     				<v-col cols="12" sm="6" md="4" lg="3" class="pa-4">
       					<v-list>
   							<v-list-item-subtitle>Filter by area</v-list-item-subtitle>
-	        				<!-- <v-chip-group
+	        				<v-chip-group
 	          				column
 	        				>
 	          					<v-chip filter v-model="filter.all">
@@ -47,9 +47,9 @@
 	          					<v-chip filter v-model="filter.other">
 	            					Other
 	          					</v-chip>
-							</v-chip-group> -->
+							</v-chip-group>
 							<v-list-item-subtitle>Filter by venue</v-list-item-subtitle>
-	        				<!-- <v-chip-group
+	        				<v-chip-group
 
 	          				column
 	        				>
@@ -66,7 +66,7 @@
 	            					Store
 	          					</v-chip>
 
-							</v-chip-group> -->
+							</v-chip-group>
         				</v-list>
     				</v-col>
   				</v-row>
@@ -144,7 +144,7 @@
 						color="#DFA937"
 				        text
 						style="font-size:.6rem;"
-				        @click.stop="promotion.deets = true"
+				        @click="promotion.deets = true"
 				    	>
 				        	details
 				    	</v-btn>
@@ -222,61 +222,7 @@
 			  </v-card>
 	        </v-row>
 	      </v-col>
-	     <!-- </v-row> -->
-			<!-- <v-layout row class="d-flex justify-space-around">
-				<v-btn
-					width="80%"
-					dark
-					color="#DFA937"
-					tile
-					class="buttons"
-					depressed
-					@click.stop="getCoupon(promotion)"
-				>
-					get coupon
-				</v-btn>
-				<v-dialog v-model="promotion.dialog" max-width="290">
-					<v-card>
-						<v-layout row class="mx-auto">
-							<v-card-title class="headline">Success!</v-card-title>
-							<v-spacer></v-spacer>
-							<v-btn icon @click="promotion.dialog = false">
-								<v-icon>mdi-close</v-icon>
-							</v-btn>
-						</v-layout>
-						<v-card-text>
-							You have successfully claimed this promotion! Make sure
-							you read the disclaimer and note the time when the
-							coupon can be claimed.
-						</v-card-text>
-						<v-card-actions class="d-flex justify-center pb-3">
-							<v-btn
-								width="80%"
-								dark
-								color="#DFA937"
-								tile
-								class="buttons"
-								depressed
-								to="/profile">see in profile
-							</v-btn>
-						</v-card-actions>
-					</v-card>
-				</v-dialog>
-			</v-layout> -->
-		
-		<!-- <v-divider class="my-5"></v-divider>
-		<v-layout row class="mx-5">
-			<v-list-item>
-				<v-list-item-avatar size="54" color="grey">
-					<v-img :src="promotion.vendor.logo_img" alt="Logo" />
-				</v-list-item-avatar>
-				<v-list-item-content>
-					<v-list-item-title class="headline">{{
-						 promotion.vendor.name 
-					}}</v-list-item-title>
-				</v-list-item-content>
-			</v-list-item>
-		</v-layout> -->
+	     
 		</v-layout>
 	</div>
 </template>
@@ -291,13 +237,16 @@
 		data() {
 			return {
 				details: [],
-        promotion: {},
-				rating1: 5,
+        		// promotion: {},
 				valid: '',
-				rating: '',
-				dialograting: false,
 				show: false,
-				filter: ['All areas','Xuhui', 'Jingan', 'Huangpu', 'Changning', 'Hongkou', 'Yangpu', 'Putuo', 'Pudong', 'Other', 'Restaurant', 'Bar', 'Cafe', 'Store']
+				areas: [],
+				vendor_type: [],
+				selected: {
+					areas: [],
+					vendor_type: []
+				}
+				// filter: ['All areas','Xuhui', 'Jingan', 'Huangpu', 'Changning', 'Hongkou', 'Yangpu', 'Putuo', 'Pudong', 'Other', 'Restaurant', 'Bar', 'Cafe', 'Store']
 			};
 		},
 		methods: {
@@ -341,6 +290,13 @@
 					this.error.push(e);
 				});
 	    },
+	    // computed: {
+	    // 	filteredPromotions: function(){
+	    // 		return this.details.filter((promotion) => {
+	    // 			return promotion.area.match(this.filter)
+	    // 		});
+	    // 	}
+	    // }
 	    // mounted () {
 
 	    // }
@@ -348,15 +304,15 @@
 </script>
 
 <style scoped>
-	* {
+	.home {
 		background-color: white;
 	}
 	.buttons {
 		border-radius: 5px;
 	}
-	.buttonst {
+	/*.buttonst {
 		border-radius: 5px;
 		background-color: rgba(223, 169, 55, 20%) !important;
 		color: #dfa937 !important;
-	}
+	}*/
 </style>
