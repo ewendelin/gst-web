@@ -73,7 +73,7 @@
       		</div>
     	</v-expand-transition>
 		<v-layout row class="mx-auto" align-center justify-center>
-		<v-row>
+		<!-- <v-row> -->
 	      <v-col cols="12">
 	        <v-row justify="center">
 	        	<v-card
@@ -90,10 +90,10 @@
 
 		    		<v-list-item class="mt-n3">
 						<v-list-item-avatar size="32" color="grey">
-							<!-- <v-img :src="promotion.vendor.logo_img" alt="Logo" /> -->
+							<v-img :src="promotion.vendor.logo_img" alt="Logo" />
 						</v-list-item-avatar>
 						<v-list-item-content>
-							<!-- <v-list-item-title class="body" style="font-size:.8rem;">{{promotion.vendor.name}}</v-list-item-title> -->
+							<v-list-item-title class="body" style="font-size:.8rem;">{{promotion.vendor.name}}</v-list-item-title>
 						</v-list-item-content>
 					</v-list-item>
 				    <v-card-actions class="mt-n3">
@@ -174,11 +174,11 @@
 									<v-list>
 										<v-list-item>
 											<v-list-item-avatar size="42" color="grey">
-												<!-- <v-img :src="promotion.vendor.logo_img" alt="Logo" /> -->
+												<v-img :src="promotion.vendor.logo_img" alt="Logo" />
 											</v-list-item-avatar>
 											<v-list-item-content>
 												<v-list-item-title>{{
-													<!-- promotion.vendor.name -->
+													 promotion.vendor.name
 												}}</v-list-item-title>
 											</v-list-item-content>
 										</v-list-item>
@@ -222,8 +222,8 @@
 			  </v-card>
 	        </v-row>
 	      </v-col>
-	     </v-row>
-			<v-layout row class="d-flex justify-space-around">
+	     <!-- </v-row> -->
+			<!-- <v-layout row class="d-flex justify-space-around">
 				<v-btn
 					width="80%"
 					dark
@@ -262,20 +262,21 @@
 						</v-card-actions>
 					</v-card>
 				</v-dialog>
-			</v-layout>
-		</v-layout>
-		<v-divider class="my-5"></v-divider>
+			</v-layout> -->
+		
+		<!-- <v-divider class="my-5"></v-divider>
 		<v-layout row class="mx-5">
 			<v-list-item>
 				<v-list-item-avatar size="54" color="grey">
-					<!-- <v-img :src="promotion.vendor.logo_img" alt="Logo" /> -->
+					<v-img :src="promotion.vendor.logo_img" alt="Logo" />
 				</v-list-item-avatar>
 				<v-list-item-content>
 					<v-list-item-title class="headline">{{
-						<!-- promotion.vendor.name -->
+						 promotion.vendor.name 
 					}}</v-list-item-title>
 				</v-list-item-content>
 			</v-list-item>
+		</v-layout> -->
 		</v-layout>
 	</div>
 </template>
@@ -322,7 +323,9 @@
 	      let storedToken = sessionStorage.getItem('token');
 	      if (storedToken != undefined || storedToken != null) {
 	        this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-	        this.$api
+	        
+			}
+			this.$api
 				.get(`/promotions`)
 					.then(response => {
 						this.details = response.data;
@@ -337,8 +340,10 @@
 				.catch(e => {
 					this.error.push(e);
 				});
-			}
-	    }
+	    },
+	    // mounted () {
+
+	    // }
 	};
 </script>
 
