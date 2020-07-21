@@ -13,60 +13,22 @@
         		<v-row justify="space-around">
     				<v-col cols="12" sm="6" md="4" lg="3" class="pa-4">
       					<v-list>
-  							<v-list-item-subtitle>Filter by area</v-list-item-subtitle>
-	        				<v-chip-group
-	          				column
-	        				>
-	          					<v-chip filter v-model="filter.all">
-	            					All
-	          					</v-chip>
-	          					<v-chip filter v-model="filter.xuhui">
-	            					Xuhui
-	          					</v-chip>
-	          					<v-chip filter v-model="filter.jingan">
-	            					Jingan
-	          					</v-chip>
-	          					<v-chip filter v-model="filter.huangpu">
-	            					Huangpu
-	          					</v-chip>
-	          					<v-chip filter v-model="filter.changning">
-	            					Changning
-	          					</v-chip>
-	          					<v-chip filter v-model="filter.hongkou">
-	            					Hongkou
-	          					</v-chip>
-	          					<v-chip filter v-model="filter.yangpu">
-	            					Yangpu
-	          					</v-chip>
-	          					<v-chip filter v-model="filter.putuo">
-	            					Putuo
-	          					</v-chip>
-	          					<v-chip filter v-model="filter.pudong">
-	            					Pudong
-	          					</v-chip>
-	          					<v-chip filter v-model="filter.other">
-	            					Other
-	          					</v-chip>
-							</v-chip-group>
-							<v-list-item-subtitle>Filter by venue</v-list-item-subtitle>
-	        				<v-chip-group
-
-	          				column
-	        				>
-	          					<v-chip filter v-model="filter.restaurant">
-	            					Restaurant
-	          					</v-chip>
-	          					<v-chip filter v-model="filter.bar">
-	            					Bar
-	          					</v-chip>
-	          					<v-chip filter v-model="filter.cafe">
-	            					Cafe
-	          					</v-chip>
-	          					<v-chip filter v-model="filter.store">
-	            					Store
-	          					</v-chip>
-
-							</v-chip-group>
+  							<v-select
+					          v-model="filter.checkedAreas"
+					          :items="areas"
+					          label="Filter by area"
+					          multiple
+					          chips
+					          color="#DFA937"
+					        ></v-select>
+					        <v-select
+					          v-model="filter.checkedTypes"
+					          :items="vendor_type"
+					          label="Filter by venue"
+					          multiple
+					          chips
+					          color="#DFA937"
+					        ></v-select>
         				</v-list>
     				</v-col>
   				</v-row>
@@ -237,16 +199,14 @@
 		data() {
 			return {
 				details: [],
-        		// promotion: {},
+				filter: {
+					checkedAreas: [],
+        			checkedTypes: []
+				},
 				valid: '',
 				show: false,
-				areas: [],
-				vendor_type: [],
-				selected: {
-					areas: [],
-					vendor_type: []
-				}
-				// filter: ['All areas','Xuhui', 'Jingan', 'Huangpu', 'Changning', 'Hongkou', 'Yangpu', 'Putuo', 'Pudong', 'Other', 'Restaurant', 'Bar', 'Cafe', 'Store']
+				areas: ['Xuhui', 'Jingan', 'Huangpu', 'Changning', 'Hongkou', 'Yangpu', 'Putuo', 'Pudong', 'Other'],
+				vendor_type: ['Restaurant', 'Bar', 'Cafe', 'Store']
 			};
 		},
 		methods: {
