@@ -322,9 +322,11 @@
 								{{ vendor.description }}
 							</v-list-item-subtitle>
 							<v-list-item-title class="title font-weight-bold">Saved Deals</v-list-item-title>
-							<VendorCard :vendorId="vendor.id" />
 						</v-list-item-content>
 					</v-list-item>
+				</v-layout>
+				<v-layout row>
+					<VendorCard :vendorId="vendor.id" />
 				</v-layout>
 			</v-col>
 			<v-layout v-else class="backe mx-auto" row justify-center align-center>
