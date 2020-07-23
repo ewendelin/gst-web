@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		 <v-layout row class="mx-auto" align-center justify-center>
+	<v-layout row class="mx-auto" align-center justify-center>
 	<v-row>
       <v-col cols="12">
         <v-row justify="center">
@@ -163,67 +163,7 @@
         </v-row>
       </v-col>
      </v-row>
-		<!-- <v-layout row class="mx-auto" align-center justify-center>
-			<v-flex xs12 sm8 md7>
-				<v-card
-					tile
-					class="mb-6"
-					xs12
-					md6
-					lg4
-					v-for="promotion in details"
-					:key="promotion.id"
-				>
-				
-					<v-img :src="promotion.image" height="250px"></v-img>
-					<v-layout row class="mx-3 px-1 mb-0 pb-0">
-						<v-card-title class="mb-0 pb-0">
-							{{ promotion.title }}
-						</v-card-title>
-					</v-layout>
-					<v-layout row class="ml-3 mr-3 mt-0 px-1 pt-0">
-						<v-card-subtitle class="font-weight-bold mt-1 pt-1">
-							{{ promotion.time_slot }}
-						</v-card-subtitle>
-						<v-spacer></v-spacer>
-						<v-btn class="mt-0 pt-0" text>
-							<v-icon small>mdi-map-marker</v-icon>{{promotion.vendor.area}}
-						</v-btn>
-						<v-card-text class="py-0">
-							{{ promotion.description }}
-						</v-card-text>
-					</v-layout> -->
-					
-
-				<!-- <v-layout class="mx-5" width="90vw"> -->
-					<!-- <v-card-actions> -->
-						<!-- <v-spacer></v-spacer> -->
-					<!-- <v-row align="center" justify="center" class="mx-auto">
-						<v-btn
-							width="90%" 
-							text
-							center
-							large
-							block
-							@click.native="promotion.show = !promotion.show"
-						>
-							<v-icon>{{
-								promotion.show ? 'mdi-chevron-up' : 'mdi-chevron-down'
-							}}</v-icon>
-						</v-btn>
-					</v-row>
-					</v-card-actions> -->
-				<!-- </v-layout> -->
-					<!-- <v-expand-transition>
-						<div v-show="promotion.show">
-							<v-layout row class="mx-3 mb-0 pb-0">
-								<v-card-text class="mt-n1.5 mb-n3 pt-0 font-weight-bold">
-									Disclaimer
-								</v-card-text>
-								<v-card-text class="mt-n1.5 pt-0">
-									{{ promotion.disclaimer }}
-								</v-card-text>
-								
+		
 								<v-layout row class="d-flex justify-space-around">
 									<v-btn
 										width="80%"
@@ -279,40 +219,8 @@
 											promotion.vendor.name
 										}}</v-list-item-title>
 									</v-list-item-content>
-								</v-list-item> -->
-								<!-- <v-rating class="ml-3" readonly dense v-model="rating1"
-									background-color="orange lighten-3"
-						      		color="orange"></v-rating> -->
-								<!-- <v-card-text text class="pb-0 mb-n3 font-weight-bold">{{promotion.vendor.address}}
-								</v-card-text>
-								<v-card-text class="mb-3">
-									{{ promotion.vendor.description }}
-								</v-card-text> -->
-							
-							<!-- </v-layout>
-							<v-layout class="mx-auto"> -->
-								<!-- <v-row align="center" justify="center"> -->
-									<!-- <v-img :src="promotion.vendor.main_img" height="300" width="100vw"> -->
-						          		<!-- <v-row align="end" justify="center" class="fill-height"> -->
-						          		<!-- FIXME SHOW THE SPECIFIC VENDOR -->
-						            	<!-- <v-btn
-										width="35vw" 
-										tile 
-										dark
-										color="#DFA937"
-										class="buttons" 
-										depressed
-										@click="jump(promotion)">
-										Add rating
-										</v-btn> -->
-										<!-- </v-row> -->
-									<!-- </v-img> -->
-								<!-- </v-row> -->
-							<!-- </v-layout> -->
-						<!-- </div> -->
-					<!-- </v-expand-transition> -->
-				<!-- </v-card> -->
-			<!-- </v-flex> -->
+								</v-list-item> 
+						
 		</v-layout>
 	</v-container>
 </template>
@@ -365,23 +273,7 @@
 			methods: {
 		  	submitUpload() {
 		        this.$refs.upload.submit();
-		      },
-		    // createRating() {
-		    //   let rating = this.newRating;
-		    //   // promotion["status"] = status;
-		    //   promotion['vendor_profile_id'] = this.vendor.id
-		    //   // promotion['title'] = this.data.title
-		    //   this.$api
-		    //     .post(`/promotions`, {
-		    //       promotion: promotion
-		    //     })
-		    //     .then(location.reload())
-		    //     .catch(e => {
-		    //       this.error.push(e);
-		    //     });
-		    //   this.newRating = {};
-		    //   this.dialograting = false;
-		    // }
+		    },
 		  }
 		}
 	};

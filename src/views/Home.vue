@@ -1,11 +1,14 @@
 <template>
 	<div class="home">
 		<Navbar />
-		<v-layout class="" hidden-sm-and-down>
-			<v-img height="350px" src="https://gast-dev.gast.world/Rice.png"></v-img>
-		</v-layout>
-		<v-layout hidden-md-and-up class="mb-n12 pt-3">
+		<v-layout>
 			<v-img height="150px" src="https://gast-dev.gast.world/Rice.png"></v-img>
+		</v-layout>
+		<v-layout col>
+		<v-spacer></v-spacer>
+		<v-btn class="my-n5 py-0 mb-n12 mt-n8" text color="grey" to="/vendor">for vendors
+			<v-icon class="pl-1">mdi-store</v-icon>
+		</v-btn>
 		</v-layout>
 	
 		<v-layout row class="mx-8 my-8" justify-center align-center>
@@ -35,17 +38,17 @@
 				dark
 				color="#DFA937"
 				tile
-				class="buttons"
+				class="buttonst"
 				depressed
 				@click="wxLogin()"
 			>
 				user login
 				<v-icon right>mdi-wechat</v-icon>
 			</v-btn>			
-			<v-btn tile class="buttonst" width="95%" depressed to="/vendor">
+			<!-- <v-btn tile class="buttonst" width="95%" depressed to="/vendor">
 				for vendors
 				<v-icon right>mdi-store</v-icon>
-			</v-btn>
+			</v-btn> -->
 
 			<v-list>
 				<p class="font-weight-medium mt-5 text-center">
@@ -59,12 +62,26 @@
 			          justify="space-around"
 			        >
 			        	<div class="item">
+    						<v-icon large>mdi-pot-steam</v-icon>
+    						<span class="caption">Made Fresh</span>
+						</div>
+			        	<div class="item">
+    						<v-icon large>mdi-check-decagram</v-icon>
+    						<span class="caption">Verified vendors</span>
+						</div>
+			        </v-row>
+			        <v-row
+			        class="mt-12"
+			          align="center"
+			          justify="space-around"
+			        >
+			        	<div class="item">
     						<v-icon large>mdi-factory</v-icon>
-    						<span class="caption ">Over-production</span>
+    						<span class="caption">Over-production</span>
 						</div>
 			        	<div class="item">
     						<v-icon large>mdi-clock-alert</v-icon>
-    						<span class="caption ">Short BBD</span>
+    						<span class="caption">Short BBD</span>
 						</div>
 			        </v-row>
 					<v-row
