@@ -1,7 +1,8 @@
 <template>
 	<v-container class="px-0">
-    <v-layout row class="mx-auto" align-center justify-center>
-      <v-flex xs12 sm8 md7>
+    <v-layout row>
+      <v-col>
+        <v-row class="mx-auto" align-center justify-center>
       <v-card tile
               width="90%"
               class="mb-6"
@@ -732,7 +733,8 @@
           <!-- </v-row> -->
         <!-- </v-layout> -->
       </v-card>
-    </v-flex>
+    </v-row>
+    </v-col>
     </v-layout>
 	</v-container>
 </template>
