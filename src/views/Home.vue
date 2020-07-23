@@ -6,8 +6,8 @@
 		</v-layout>
 		<v-layout col>
 		<v-spacer></v-spacer>
-		<v-btn class="my-n5 py-0 mb-n12 mt-n8" fab text color="grey" to="/vendor">
-			<v-icon class="large">mdi-store</v-icon>
+		<v-btn class="my-n5 py-0 mb-n12 mt-n8" text color="grey" to="/vendor">for vendors
+			<v-icon class="pl-1">mdi-store</v-icon>
 		</v-btn>
 		</v-layout>
 	
@@ -62,12 +62,26 @@
 			          justify="space-around"
 			        >
 			        	<div class="item">
+    						<v-icon large>mdi-pot-steam</v-icon>
+    						<span class="caption">Made Fresh</span>
+						</div>
+			        	<div class="item">
+    						<v-icon large>mdi-check-decagram</v-icon>
+    						<span class="caption">Verified vendors</span>
+						</div>
+			        </v-row>
+			        <v-row
+			        class="mt-12"
+			          align="center"
+			          justify="space-around"
+			        >
+			        	<div class="item">
     						<v-icon large>mdi-factory</v-icon>
-    						<span class="caption ">Over-production</span>
+    						<span class="caption">Over-production</span>
 						</div>
 			        	<div class="item">
     						<v-icon large>mdi-clock-alert</v-icon>
-    						<span class="caption ">Short BBD</span>
+    						<span class="caption">Short BBD</span>
 						</div>
 			        </v-row>
 					<v-row

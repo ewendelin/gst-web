@@ -114,7 +114,7 @@
 				    	</v-btn>
 				    	<v-dialog v-model="promotion.deets" width="290">
 				    		<v-layout>
-							<v-card>
+							<v-card width="290">
 							<v-img :src="promotion.image" height="250px">
 							</v-img>
 								<v-layout row class="mx-3 px-1 mb-0 pb-0">
