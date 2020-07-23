@@ -40,7 +40,6 @@
 		<!-- <v-row> -->
 	      <v-col cols="12">
 	        <v-row justify="center">
-	        	<h2>{{filter.checkedAreas}}</h2>
 	        	<v-card
 		    		class="ma-1"
 		    		max-width="45%"
