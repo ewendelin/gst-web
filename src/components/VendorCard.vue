@@ -3,6 +3,7 @@
     <v-layout row class="mx-auto" align-center justify-center>
       <v-flex xs12 sm8 md7>
       <v-card tile
+              width="90%"
               class="mb-6"
               v-for="(promotion) in promotions"
               :key="promotion.id">
@@ -10,14 +11,14 @@
               height="200px">
         </v-img>
           <v-list-item three-line>
-            <v-list-item-content>
+            <v-list-item-content class="mx-auto">
                 <v-list-item-title class="headline mb-1">{{ promotion.title }}</v-list-item-title>
                 <div class="overline mb-4">{{ promotion.time_slot }}</div>
                 <v-list-item-subtitle>{{ promotion.description }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
-            <v-card-actions>
+            <v-card-actions justify="space-around">
               <v-btn fab text @click.stop="promotion.dialog3 = true">
                 <v-icon>mdi-cog</v-icon>
               </v-btn>
