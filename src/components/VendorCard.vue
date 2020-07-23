@@ -278,14 +278,14 @@
                       </div>
                     </template>
                   </v-textarea>
-                  <v-textarea v-model="promotion.disclaimer"
+                  <!-- <v-textarea v-model="promotion.disclaimer"
                               color="#DFA937">
                     <template v-slot:label>
                       <div>
                         Disclaimer
                       </div>
                     </template>
-                  </v-textarea>
+                  </v-textarea> -->
                   <el-upload
                 v-model="image"
                 action="http://localhost:3000/api/v1/promotions/images/upload"

@@ -54,14 +54,14 @@
 								color="#DFA937"
 								label="Description">
 							</v-textarea>
-							<v-textarea v-model="newPromotion.disclaimer"
+							<!-- <v-textarea v-model="newPromotion.disclaimer"
 								color="#DFA937">
 								<template v-slot:label>
 									<div>
 										Disclaimer
 									</div>
 								</template>
-							</v-textarea>
+							</v-textarea> -->
 							<v-menu
 						        ref="menu"
 						        v-model="menu"
