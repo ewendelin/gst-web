@@ -1,10 +1,9 @@
 <template>
-	<v-container class="px-0">
+	<v-container fluid>
     <v-layout row class="mx-auto" align-center justify-center>
       <v-col>
         <!-- <v-row > -->
       <v-card tile
-              width="90%"
               class="mb-6"
               v-for="(promotion) in promotions"
               :key="promotion.id">
