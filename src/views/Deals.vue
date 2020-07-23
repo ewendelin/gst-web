@@ -20,6 +20,7 @@
 					          multiple
 					          chips
 					          color="#DFA937"
+                    @change="filterDeals"
 					        ></v-select>
 					        <v-select
 					          v-model="filter.checkedTypes"
@@ -28,6 +29,7 @@
 					          multiple
 					          chips
 					          color="#DFA937"
+                    @change="filterDeals"
 					        ></v-select>
         				</v-list>
     				</v-col>
@@ -185,7 +187,7 @@
 			  </v-card>
 	        </v-row>
 	      </v-col>
-	     
+
 		</v-layout>
 	</div>
 </template>
@@ -225,43 +227,64 @@
 				});
 			},
 			submitUpload() {
-		        this.$refs.upload.submit();
-		    },
-		},
-	    created () {
+		    this.$refs.upload.submit();
+		  },
+      filterDeals() {
+        let filtedDetails = [];
+        // alert(this.filter.checkedAreas)
+        // alert(this.filter.checkedTypes)
+        if (this.filter.checkedAreas.length > 0 && this.filter.checkedTypes.length > 0) {
+          filtedDetails = this.allDetails.filter((e) => {
+            return this.filter.checkedAreas.includes(e.vendor.area) && this.filter.checkedTypes.includes(e.vendor.vendor_type)
+          })
+        } else if (this.filter.checkedAreas.length > 0) {
+          filtedDetails = this.allDetails.filter((e) => {
+            return this.filter.checkedAreas.includes(e.vendor.area)
+          })
+        } else if (this.filter.checkedTypes.length > 0) {
+          filtedDetails = this.allDetails.filter((e) => {
+            return this.filter.checkedTypes.includes(e.vendor.vendor_type)
+          })
+        }
+        // filtedDetails could be empty, add fallback tell users this
+        this.details = filtedDetails
 
+      }
+		},
+	  created () {
 	      let storedToken = sessionStorage.getItem('token');
 	      if (storedToken != undefined || storedToken != null) {
 	        this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-	        
-			}
-			this.$api
-				.get(`/promotions`)
-					.then(response => {
-						this.details = response.data;
-						this.details = this.details.map(details => ({
-							...details,
-							show: false,
-							deets: false,
-							dialog: false,
-							dialograting: false,
-						}));
-				})
-				.catch(e => {
-					this.error.push(e);
-				});
-	    },
-	    // computed: {
-	    // 	filteredPromotions: function(){
-	    // 		return this.details.filter((promotion) => {
-	    // 			return promotion.area.match(this.filter)
-	    // 		});
-	    // 	}
-	    // }
-	    // mounted () {
+			  }
+  			this.$api
+  				.get(`/promotions`)
+  					.then(response => {
+  						this.details = response.data;
+  						this.details = this.details.map(details => ({
+  							...details,
+  							show: false,
+  							deets: false,
+  							dialog: false,
+  							dialograting: false,
+  						}));
+              // backup all deals
+              this.allDetails = this.details;
+  				})
+  				.catch(e => {
+  					this.error.push(e);
+  				});
+  	    },
+  	    // computed: {
+  	    // 	filteredPromotions: function(){
+  	    // 		return this.details.filter((promotion) => {
+  	    // 			return promotion.area.match(this.filter)
+  	    // 		});
+  	    // 	}
+  	    // }
+  	    // mounted () {
 
-	    // }
-	};
+  	    // }
+	  };
 </script>
 
 <style scoped>
