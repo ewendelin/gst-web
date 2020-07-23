@@ -1,6 +1,6 @@
 <template>
 	<v-container class="px-0">
-    <!-- <v-layout row class="mx-auto" align-center justify-center> -->
+    <v-layout row class="mx-auto" align-center justify-center>
       <v-flex xs12 sm8 md7>
       <v-card tile
               class="mb-6"
@@ -11,8 +11,8 @@
         </v-img>
           <v-list-item three-line>
             <v-list-item-content>
-                <div class="overline mb-4">{{ promotion.title }}</div>
-                <v-list-item-title class="headline mb-1">{{ promotion.time_slot }}</v-list-item-title>
+                <v-list-item-title class="headline mb-1">{{ promotion.title }}</v-list-item-title>
+                <div class="overline mb-4">{{ promotion.time_slot }}</div>
                 <v-list-item-subtitle>{{ promotion.description }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -23,7 +23,7 @@
               </v-btn>
               <v-btn fab text @click="promotion.dialog2 = true">
                 <v-icon>mdi-pencil</v-icon>
-              </v-btn>>
+              </v-btn>
               <v-btn fab text @click="promotion.dialogstats = true">
                 <v-icon>mdi-chart-areaspline-variant</v-icon>
               </v-btn>
@@ -732,7 +732,7 @@
         <!-- </v-layout> -->
       </v-card>
     </v-flex>
-    <!-- </v-layout> -->
+    </v-layout>
 	</v-container>
 </template>
 
