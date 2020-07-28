@@ -144,6 +144,12 @@
 								<el-button slot="trigger" size="small" type="primary">select file</el-button>
 							</el-upload>
 							<v-text-field
+			                    label="Limit *"
+			                    v-model="newPromotion.max_of_total."
+			                    value=""
+			                    color="#DFA937"
+			                ></v-text-field>
+							<v-text-field
 					          label="Amount"
 					          v-model="newPromotion.price"
 					          value=""
