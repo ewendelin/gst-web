@@ -48,7 +48,7 @@
 				    <v-card-title style="font-size:.8rem;">
 				      {{ promotion.title }}
 				    </v-card-title>
-				    <v-card-subtitle style="font-size:.5rem;">
+				    <v-card-subtitle style="font-size:.6rem;">
 				      {{ promotion.time_slot }}
 				    </v-card-subtitle>
 				    <v-card-subtitle class="pt-0 mt-n3" style="font-size:.6rem;">
