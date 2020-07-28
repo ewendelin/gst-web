@@ -48,8 +48,11 @@
 				    <v-card-title style="font-size:.8rem;">
 				      {{ promotion.title }}
 				    </v-card-title>
-				    <v-card-subtitle style="font-size:.6rem;">
+				    <v-card-subtitle style="font-size:.5rem;">
 				      {{ promotion.time_slot }}
+				    </v-card-subtitle>
+				    <v-card-subtitle class="pt-0 mt-n3" style="font-size:.6rem;">
+				      {{ promotion.statistics.available }} - available
 				    </v-card-subtitle>
 
 		    		<v-list-item class="mt-n3">
@@ -102,7 +105,7 @@
 							</v-card>
 						</v-dialog>
 				    	<v-btn
-				    	class="pa-.5 buttonst ml-n1"
+				    	class="pa-.5 ml-n1"
 				        dark
 				        small
 						color="#DFA937"
@@ -128,7 +131,7 @@
 									{{ promotion.time_slot }}
 								</v-card-subtitle>
 								<v-card-subtitle class="font-weight-bold mt-1 pt-1">
-									{{ promotion.statistics.avaliable }} - left
+									{{ promotion.statistics.available }} - available
 								</v-card-subtitle>
 								<v-spacer></v-spacer>
 								<v-card-text class="py-0">
