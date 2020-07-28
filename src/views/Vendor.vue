@@ -145,7 +145,7 @@
 							</el-upload>
 							<v-text-field
 			                    label="Limit *"
-			                    v-model="newPromotion.max_of_total."
+			                    v-model="newPromotion.max_of_total"
 			                    value=""
 			                    color="#DFA937"
 			                ></v-text-field>

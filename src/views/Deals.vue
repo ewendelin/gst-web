@@ -127,6 +127,9 @@
 								<v-card-subtitle class="font-weight-bold mt-1 pt-1">
 									{{ promotion.time_slot }}
 								</v-card-subtitle>
+								<v-card-subtitle class="font-weight-bold mt-1 pt-1">
+									{{ promotion.statistics.avaliable }} - left
+								</v-card-subtitle>
 								<v-spacer></v-spacer>
 								<v-card-text class="py-0">
 									{{ promotion.description }}
