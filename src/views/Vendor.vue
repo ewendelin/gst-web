@@ -590,7 +590,7 @@ export default {
       },
       tokenValid: false,
       tokenFailed: false,
-      items: ['Restaurant', 'Bar', 'Cafe', 'Store'],
+      items: ['Restaurant', 'Bakery', 'Bar', 'Cafe', 'Store'],
       areas: ['Xuhui', 'Jingan', 'Huangpu', 'Changning', 'Hongkou', 'Yangpu', 'Putuo', 'Pudong', 'Other'],
       coupon: {token: ''},
       newPromotion: {
