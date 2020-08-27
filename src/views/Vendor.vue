@@ -353,7 +353,7 @@
 					class="buttons mb-3 mt-6"
 					depressed>Register vendor account
 					</v-btn>
-				</v-col>
+				
 				
 				<v-dialog v-model="dialogra" max-width="350">
 					<v-card center class="pt-12 pb-12">
@@ -494,6 +494,7 @@
 				      </v-card>
 				</v-dialog> 
 					<!-- <VNav /> -->
+					</v-col>
 			</v-layout> 
 		<VNav />
 	</div>
