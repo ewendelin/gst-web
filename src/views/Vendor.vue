@@ -339,7 +339,7 @@
 	            md="6"
 	            lg="6">
 				<p class="font-weight-medium text-center">
-				Hey, it looks like you do not have a vendor account set up yet. Click the button below to register a vendor account!
+				Hey it looks like you do not have a vendor account set up yet. Click the button below to register a vendor account!
 				</p>
 				
 					<v-btn
