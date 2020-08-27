@@ -333,13 +333,13 @@
 				<VendorCard :vendorId="vendor.id" />
 			</v-col>
 
-			<v-col v-else class="backe mx-auto" justify-center align-center>
+			<v-col v-else class="backe mx-auto pt-12">
 				<v-col cols="12"
 	           	sm="8"
 	            md="6"
 	            lg="6">
-					<p class="font-weight-medium text-center">
-					Hey, it looks like you do not have a vendor account set up yet. Contact 
+					<p class="font-weight-medium text-center pt-12">
+					Hey, it looks like you do not have a vendor account set up yet. Create a vendor account and submit for approval.
 					</p>
 				
 					<v-btn
@@ -363,10 +363,9 @@
 							<v-btn class="mt-n4" icon @click="dialogra = false">
 									<v-icon>mdi-close</v-icon>
 								</v-btn>
-								
 							<v-card-title class="title mt-n3">Register Vendor Account</v-card-title>
-							
-								<v-form ref="form" v-model="valid" lazy-validation class="ml-5">
+							</v-layout>
+								<v-form ref="form" v-model="valid" lazy-validation class="mx-8">
 									<v-text-field
 											v-model="newVendorProfile.name"
 											label="Name of Establishment"
@@ -478,7 +477,7 @@
 									>
 										submit for approval
 									</v-btn>
-						</v-layout>
+						<!-- </v-layout> -->
 					<!-- </v-col> -->
 					</v-card>
 				</v-dialog>
