@@ -357,6 +357,7 @@
 				
 				<v-dialog v-model="dialogra" max-width="350">
 					<v-card center class="pt-12 pb-12">
+						<v-col>
 						<v-layout row class="mx-5">
 							<v-spacer></v-spacer>
 							<v-btn class="mt-n4" icon @click="dialogra = false">
@@ -478,6 +479,7 @@
 										submit for approval
 									</v-btn>
 						</v-layout>
+					</v-col>
 					</v-card>
 				</v-dialog>
 				<v-dialog v-model="confirm">
