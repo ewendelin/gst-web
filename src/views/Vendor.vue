@@ -333,14 +333,14 @@
 				<VendorCard :vendorId="vendor.id" />
 			</v-col>
 
-			<v-layout v-else class="backe mx-auto" row justify-center align-center>
+			<v-col v-else class="backe mx-auto" justify-center align-center>
 				<v-col cols="12"
 	           	sm="8"
 	            md="6"
 	            lg="6">
-				<p class="font-weight-medium text-center">
-				Hey it looks like you do not have a vendor account set up yet. Click the button below to register a vendor account!
-				</p>
+					<p class="font-weight-medium text-center">
+					Hey, it looks like you do not have a vendor account set up yet. Contact 
+					</p>
 				
 					<v-btn
 					@click.stop="dialogra = true" 
@@ -352,12 +352,12 @@
 					depressed>Register vendor account
 					</v-btn>
 				</v-col>
-			</v-layout>
+			<!-- </v-layout> -->
 				
 				
 				<v-dialog v-model="dialogra" max-width="350">
 					<v-card center class="pt-12 pb-12">
-						<v-col>
+						<!-- <v-col> -->
 						<v-layout row class="mx-5">
 							<v-spacer></v-spacer>
 							<v-btn class="mt-n4" icon @click="dialogra = false">
@@ -453,7 +453,7 @@
 										@click.stop="dialogtos = true"
 										depressed>Read terms of service here
 										</v-btn>
-									</v-form>
+								</v-form>
 									<v-dialog v-model="dialogtos" scrollable>
 										<v-card>
 									        <v-card-title>
@@ -479,7 +479,7 @@
 										submit for approval
 									</v-btn>
 						</v-layout>
-					</v-col>
+					<!-- </v-col> -->
 					</v-card>
 				</v-dialog>
 				<v-dialog v-model="confirm">
@@ -496,8 +496,8 @@
 				      </v-card>
 				</v-dialog> 
 					<!-- <VNav /> -->
-					<!-- </v-col>
-			</v-layout>  -->
+			</v-col>
+			<!-- </v-layout>  -->
 		<VNav />
 	</div>
 </template>
