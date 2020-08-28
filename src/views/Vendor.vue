@@ -339,7 +339,7 @@
 	            md="6"
 	            lg="6">
 					<p class="font-weight-medium text-center pt-12">
-					Hey, it looks like you do not have a vendor account set up yet. Create a vendor account and submit for approval.
+					Hey friend, it looks like you do not have a vendor account set up yet. Create a vendor account and submit for approval.
 					</p>
 				
 					<v-btn
