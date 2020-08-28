@@ -420,27 +420,6 @@
 											:rules="[v => !!v || 'Phone number is required!']"
 											color="#DFA937"
 										></v-text-field>
-										<!-- <el-upload
-											v-model="newVendorProfile.main_img"
-											action="http://localhost:3000/api/v1/promotions/images/upload"
-											  class="upload-demo mb-2"
-											  ref="upload"
-			                  :on-change="handleChangeMain"
-			                  :file-list="fileList"
-											  :auto-upload="false">
-											<el-button slot="trigger" size="small" type="primary">Upload Vendor Image</el-button>
-										</el-upload>
-
-										<el-upload
-											v-model="newVendorProfile.logo_img"
-											action="http://localhost:3000/api/v1/promotions/images/upload"
-											  class="upload-demo"
-											  ref="upload"
-			                  :on-change="handleChangeLogo"
-			                  :file-list="fileList"
-											  :auto-upload="false">
-											<el-button slot="trigger" size="small" type="primary">Upload Logo</el-button>
-										</el-upload> -->
 										<v-checkbox
 											v-model="checkbox"
 											label="Agree with terms of service"
