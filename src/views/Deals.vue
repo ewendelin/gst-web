@@ -47,6 +47,7 @@
 	            light
 	            v-for="promotion in details"
 				:key="promotion.id"
+				@click.native="promotion.deets = true"
 	 >
 	            <div class="d-flex flex-no-wrap">
 	            	<v-avatar
@@ -160,7 +161,7 @@
 						color="#DFA937"
 				        text
 						style="font-size:.6rem;"
-				        @click="promotion.deets = true"
+				        
 				    	>
 				        	details
 				    	</v-btn>
