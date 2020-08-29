@@ -45,43 +45,47 @@
 	        >
 	          <v-card
 	            light
+	            v-for="promotion in details"
+				:key="promotion.id"
 	 >
 	            <div class="d-flex flex-no-wrap">
 	            	<v-avatar
 	                class=""
-	                size="125"
+	                size="145"
+	                height=""
 	                tile
 	                >
 	                <v-img 
 	                class="white--text"
               		gradient="to bottom, rgba(0,0,0,0), rgba(0,0,0,.5)"
-              		src="https://cdn.vuetifyjs.com/images/cards/foster.jpg">
+              		:src="promotion.image">
               		<!-- <v-list dense> -->
-              			
+
               			<v-row align="end" justify="center">
               				<v-card-title class="subtitle-2 white--text align-end justify-center pb-1">
 					      		<v-icon small class="white--text align-end justify-center pb-1">mdi-noodles</v-icon>
-					      	23份
+					      	{{ promotion.statistics.available }}份
 							</v-card-title>
 						</v-row>
-					      	<!-- </v-col> -->
-					     
-              			<!-- <v-icon class="white--text align-end pb-1" left>mdi-noodles
-              			</v-icon> -->
-              		<!-- </v-list> -->
-              			<!-- <v-card-title>24 fen</v-card-title> -->
               		</v-img>
               		
 	              </v-avatar>
 	              <div>
-	                <v-card-title
-	                  class="headline"
-	                >hello</v-card-title>
-					
-	                <v-card-subtitle>HELLO</v-card-subtitle>
-	              </div>
+	                <v-card-title class="mt-n2"
+	                >{{ promotion.title }}</v-card-title>
+					<v-spacer></v-spacer>
+              			<v-card-subtitle class="subtitle-2 align-end justify-center mt-3 mb-n8">
+					      	<v-icon small class="align-end justify-center">mdi-clock-time-four</v-icon>
+					      	{{ promotion.time_slot }}
+						</v-card-subtitle>
 
-	             
+						<v-row
+						class="mt-n4 ml-1 mb-n12 pb-n12"
+					        >
+					        <v-card-title class="deep-orange--text">¥{{promotion.price}}</v-card-title>
+					        <v-card-title class="body-1 ml-n5 text--disabled under">¥88</v-card-title>
+					    </v-row>
+	              </div>
 	            </div>
 	          </v-card>
 	        </v-col>
@@ -343,6 +347,9 @@
 	}
 	.buttons {
 		border-radius: 5px;
+	}
+	.under {
+		text-decoration: line-through;
 	}
 	/*.buttonst {
 		border-radius: 5px;
