@@ -40,6 +40,46 @@
 		<!-- <v-row> -->
 	      <v-col cols="12">
 	        <v-row justify="center">
+		    <v-col
+	          cols="12"
+	        >
+	          <v-card
+	            light
+	 >
+	            <div class="d-flex flex-no-wrap">
+	            	<v-avatar
+	                class=""
+	                size="125"
+	                tile
+	                >
+	                <v-img 
+	                class="white--text align-end"
+              		gradient="to bottom, rgba(0,0,0,0), rgba(0,0,0,.5)"
+              		src="https://cdn.vuetifyjs.com/images/cards/foster.jpg">
+              		<!-- <v-list dense> -->
+              			
+					      <v-icon class="white--text align-end pb-1" left>mdi-noodles</v-icon>
+					      	
+					     
+              			<!-- <v-icon class="white--text align-end pb-1" left>mdi-noodles
+              			</v-icon> -->
+              		<!-- </v-list> -->
+              			<!-- <v-card-title>24 fen</v-card-title> -->
+              		</v-img>
+              		
+	              </v-avatar>
+	              <div>
+	                <v-card-title
+	                  class="headline"
+	                >hello</v-card-title>
+					
+	                <v-card-subtitle>HELLO</v-card-subtitle>
+	              </div>
+
+	             
+	            </div>
+	          </v-card>
+	        </v-col>
 	        	<v-card
 		    		class="ma-1"
 		    		max-width="45%"
