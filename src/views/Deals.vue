@@ -53,13 +53,18 @@
 	                tile
 	                >
 	                <v-img 
-	                class="white--text align-end"
+	                class="white--text"
               		gradient="to bottom, rgba(0,0,0,0), rgba(0,0,0,.5)"
               		src="https://cdn.vuetifyjs.com/images/cards/foster.jpg">
               		<!-- <v-list dense> -->
               			
-					      <v-icon class="white--text align-end pb-1" left>mdi-noodles</v-icon>
-					      	
+              			<v-row align="end" justify="center">
+              				<v-card-title class="subtitle-2 white--text align-end justify-center pb-1">
+					      		<v-icon small class="white--text align-end justify-center pb-1">mdi-noodles</v-icon>
+					      	23份
+							</v-card-title>
+						</v-row>
+					      	<!-- </v-col> -->
 					     
               			<!-- <v-icon class="white--text align-end pb-1" left>mdi-noodles
               			</v-icon> -->
