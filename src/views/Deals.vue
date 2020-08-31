@@ -85,7 +85,7 @@
 						class="mt-2 ml-1 mb-n12 pb-n12"
 					        >
 					        <v-card-title class="deep-orange--text">¥{{promotion.price}}</v-card-title>
-					        <v-card-title class="body-1 ml-n5 text--disabled under">¥88</v-card-title>
+					        <v-card-title class="body-1 ml-n5 text--disabled under">¥{{promotion.original_price}}</v-card-title>
 					        <v-spacer></v-spacer>
 					        <v-btn class="white--text mr-n1 mb-7" bottom
               				right
