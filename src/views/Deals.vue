@@ -77,7 +77,7 @@
 	                >{{ promotion.title }}</v-card-title>
 					<!-- <v-spacer></v-spacer> -->
               			<v-card-subtitle class="subtitle-2 align-end justify-center mt-3 mb-n9 d-inline-block text-truncate" style="max-width: 225px; font-size:.5rem;">
-					      	<v-icon small class="align-end justify-center mr-1">mdi-clock-time-four</v-icon>
+					      	<v-icon small class="align-end justify-center mr-1">mdi-clock-outline</v-icon>
 					      	{{ promotion.time_slot }}
 						</v-card-subtitle>
 

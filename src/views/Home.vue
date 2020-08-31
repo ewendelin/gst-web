@@ -56,7 +56,7 @@
 				</p>
 				<v-row>
 			      <v-col cols="12">
-			        <v-row
+			        <!-- <v-row
 			        class="mt-4"
 			          align="center"
 			          justify="space-around"
@@ -69,7 +69,7 @@
     						<v-icon large>mdi-check-decagram</v-icon>
     						<span class="caption">Verified vendors</span>
 						</div>
-			        </v-row>
+			        </v-row> -->
 			        <v-row
 			        class="mt-12"
 			          align="center"
