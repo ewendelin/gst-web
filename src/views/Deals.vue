@@ -73,10 +73,10 @@
               		
 	              </v-avatar>
 	              <div>
-	                <v-card-title class="mt-n2 d-inline-block text-truncate" style="max-width: 225px;"
+	                <v-card-title class="mt-n2 d-inline-block text-truncate" style="max-width: 220px; font-size:1.1rem;"
 	                >{{ promotion.title }}</v-card-title>
 					<!-- <v-spacer></v-spacer> -->
-              			<v-card-subtitle class="subtitle-2 align-end justify-center mt-3 mb-n9 d-inline-block text-truncate" style="max-width: 225px; font-size:.8rem;">
+              			<v-card-subtitle class="subtitle-2 align-end justify-center mt-3 mb-n9 d-inline-block text-truncate" style="max-width: 225px; font-size:.5rem;">
 					      	<v-icon small class="align-end justify-center mr-1">mdi-clock-time-four</v-icon>
 					      	{{ promotion.time_slot }}
 						</v-card-subtitle>
@@ -84,7 +84,7 @@
 						<v-row
 						class="mt-2 ml-1 mb-n12 pb-n12"
 					        >
-					        <v-card-title class="deep-orange--text">¥{{promotion.price}}</v-card-title>
+					        <v-card-title class="deep-orange--text" style="font-size:1.1rem;">¥{{promotion.price}}</v-card-title>
 					        <v-card-title class="body-1 ml-n5 text--disabled under">¥{{promotion.original_price}}</v-card-title>
 					        <v-spacer></v-spacer>
 					        <v-btn class="white--text mr-n1 mb-7" bottom
