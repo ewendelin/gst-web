@@ -76,13 +76,13 @@
 	                <v-card-title class="mt-n2 d-inline-block text-truncate" style="max-width: 225px;"
 	                >{{ promotion.title }}</v-card-title>
 					<!-- <v-spacer></v-spacer> -->
-              			<v-card-subtitle class="subtitle-2 align-end justify-center mt-3 mb-n8">
-					      	<v-icon small class="align-end justify-center mr-1">mdi-clock-time-four</v-icon>Aug 31st 13:00 - 18:00
-					      	<!-- {{ promotion.time_slot }} -->
+              			<v-card-subtitle class="subtitle-2 align-end justify-center mt-3 mb-n9 d-inline-block text-truncate" style="max-width: 225px; font-size:.8rem;">
+					      	<v-icon small class="align-end justify-center mr-1">mdi-clock-time-four</v-icon>
+					      	{{ promotion.time_slot }}
 						</v-card-subtitle>
 
 						<v-row
-						class="mt-3 ml-1 mb-n12 pb-n12"
+						class="mt-2 ml-1 mb-n12 pb-n12"
 					        >
 					        <v-card-title class="deep-orange--text">¥{{promotion.price}}</v-card-title>
 					        <v-card-title class="body-1 ml-n5 text--disabled under">¥88</v-card-title>
@@ -144,7 +144,6 @@
 									        <v-list-item-icon class="pr-0 mr-0">
 									          <v-icon small>mdi-clock-time-four</v-icon>
 									        </v-list-item-icon>
-
 									        <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ promotion.time_slot }}</v-list-item-title>
 									    </v-list-item>
 										<v-list-item class="mb-0 pb-0">
