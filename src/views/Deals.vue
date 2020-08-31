@@ -36,7 +36,7 @@
   				</v-row>
       		</div>
     	</v-expand-transition>
-		<v-layout row class="mx-auto" align-center justify-center>
+		<v-layout row class="mx-auto" style="width: 100vw;" align-center justify-center>
 		<!-- <v-row> -->
 	      <v-col cols="12">
 	        <v-row justify="center">
@@ -44,7 +44,7 @@
 	          cols="12"
 	        >
 	          <v-card
-				class="mb-2"
+				class="mb-2 mx-auto"
 	            light
 	            v-for="promotion in details"
 				:key="promotion.id"
