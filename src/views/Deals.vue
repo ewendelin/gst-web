@@ -36,7 +36,7 @@
   				</v-row>
       		</div>
     	</v-expand-transition>
-		<v-layout row class="mx-auto" style="width: 100vw;" align-center justify-center>
+		<v-layout row class="mx-auto" style="max-width: 100vw;" align-center justify-center>
 		<!-- <v-row> -->
 	      <v-col cols="12">
 	        <v-row justify="center">
