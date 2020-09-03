@@ -5,6 +5,7 @@ import router from './router';
 import vuetify from './plugins/vuetify';
 import ElementUI from 'element-ui';
 import axios from 'axios';
+import i18n from '@/plugins/i18n';
 // import Qs from 'qs'
 
 const ENV = 'production'
@@ -40,5 +41,6 @@ Vue.prototype.$api = api;
 new Vue({
 	router,
 	vuetify,
+	i18n,
 	render: h => h(App)
 }).$mount('#app');
