@@ -6,7 +6,7 @@
 		</v-layout>
 		<v-layout col>
 		<v-spacer></v-spacer>
-		<v-btn class="my-n5 py-0 mb-n12 mt-n8" text color="grey" to="/vendor">for vendors
+		<v-btn class="my-n5 py-0 mb-n12 mt-n8" text color="grey" to="/vendor">{{ $t('forVendors') }}
 			<v-icon class="pl-1">mdi-store</v-icon>
 		</v-btn>
 		</v-layout>
@@ -112,6 +112,9 @@
 	export default {
 		name: 'Home',
 		components: { Navbar },
+		props: {
+            msg: String
+        },
 		data() {
 			return {
 				items: [

@@ -1,6 +1,9 @@
 <template>
   <v-app>
     <v-content>
+    	<v-btn v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">{{entry.title}}
+    	</v-btn>
+    	<h1>{{$t('forVendors')}}</h1>
       <router-view></router-view>
       <Footer />
     </v-content>
@@ -9,6 +12,7 @@
 
 <script>
 import Footer from './components/Footer';
+import i18n from '@/plugins/i18n';
 
 // import axios from 'axios';
 
@@ -32,6 +36,19 @@ import Footer from './components/Footer';
 export default {
   name: 'App',
   components: { Footer },
+  data() {
+            return {
+                languages: [
+                    { language: 'en', title: 'English' },
+                    { language: 'zh_CN', title: '中文' }
+                ]
+            };
+        },
+        methods: {
+            changeLocale(locale) {
+                i18n.locale = locale;
+            }
+        }
 
 }
 </script>
