@@ -22,7 +22,7 @@
 				</v-list-item>
 			</v-list>
 
-			<h3 class="mx-4 mt-3">Today's claims</h3>
+			<h3 class="mx-4 mt-3">{{ $t('todayOrder') }}</h3>
 
 			<v-list
 				two-line

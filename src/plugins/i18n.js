@@ -12,6 +12,8 @@ const messages = {
         forVendors: 'for vendors',
         browseDeals: 'browse Deals',
         madeFresh: 'Made Fresh',
+        findDeal: 'Find deals on food that needs to be consumed today!',
+        whyYouSay: 'Why food ends up on our site you may ask?',
         verifiedVendors: 'Verified Vendors',
         overProduction: 'Overproduction',
         ssll: 'Short Shelf Life',
@@ -142,7 +144,9 @@ const messages = {
         yesIamSure: '是的，我确定',
         claim: '领取',
         details: '详情',
-        available: '份'
+        available: '份',
+        findDeal: '来看看今日的折扣食物！',
+        whyYouSay: '你可能会好奇这些食品为什么最终来到了我们这儿?',
     }
 };
 

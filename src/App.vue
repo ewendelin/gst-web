@@ -1,9 +1,13 @@
 <template>
   <v-app>
     <v-content>
-    	<v-btn v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">{{entry.title}}
-    	</v-btn>
-    	<h1>{{$t('forVendors')}}</h1>
+    	<v-col>
+    		<v-row style="height: 1rem;">
+    			<v-spacer></v-spacer>
+    			<v-btn small text v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">{{entry.title}}
+    			</v-btn>
+    		</v-row>
+    	</v-col>
       <router-view></router-view>
       <Footer />
     </v-content>
@@ -39,7 +43,7 @@ export default {
   data() {
             return {
                 languages: [
-                    { language: 'en', title: 'English' },
+                    { language: 'en', title: 'EN' },
                     { language: 'zh_CN', title: '中文' }
                 ]
             };
@@ -55,5 +59,6 @@ export default {
 <style>
 .v-content {
   padding:0!important;
+  background-color: #fff;
 }
 </style>

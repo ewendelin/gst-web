@@ -52,7 +52,7 @@
 				      {{ promotion.time_slot }}
 				    </v-card-subtitle>
 				    <v-card-subtitle class="pt-0 mt-n3" style="font-size:.6rem;">
-				      {{ promotion.statistics.available }} - available
+				      {{ promotion.statistics.available }} - {{ $t('available') }}
 				    </v-card-subtitle>
 
 		    		<v-list-item class="mt-n3">
@@ -73,7 +73,7 @@
 						background-color: rgb(223, 169, 55) !important; font-size:.6rem;
 						color: !important;"
 						>
-							Claim
+							{{ $t('claim') }}
 						</v-btn>
 						<v-dialog v-model="promotion.dialog" max-width="290">
 							<v-card>
@@ -204,6 +204,9 @@
 	export default {
 		name: 'Deals',
 		components: { Navbar },
+		props: {
+            msg: String
+        },
 		data() {
 			return {
 				details: [],

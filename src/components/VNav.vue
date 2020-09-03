@@ -15,7 +15,7 @@
 				
 				<v-spacer></v-spacer>
 				<v-btn text to="/vendor">
-					<span>Profile</span>
+					<span>{{ $t('profile') }}</span> 
 					<v-icon right>mdi-home</v-icon>
 				</v-btn>
 			</v-app-bar>
@@ -31,7 +31,7 @@
 			class="hidden-md-and-up"
 		>
 			<v-btn to="/vendor">
-				<span>Profile</span>
+				<span>{{ $t('profile') }}</span>
 				<v-icon>mdi-home</v-icon>
 			</v-btn>
 			<v-btn to="/">
@@ -45,7 +45,10 @@
 	import Gast from '../assets/rac1.svg';
 	export default {
 		name: 'VNav',
-		components: { Gast }
+		components: { Gast },
+		props: {
+            msg: String
+        },
 	};
 </script>
 <style>

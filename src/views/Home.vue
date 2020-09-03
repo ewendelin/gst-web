@@ -18,7 +18,7 @@
             md="6"
             lg="6">
             <p class="font-weight-medium text-center">
-				Find deals on food that needs to be consumed today!
+				{{ $t('findDeal') }}
 			</p>
 			<v-btn
 				width="95%"
@@ -28,8 +28,7 @@
 				class="buttons"
 				depressed
 				to="/deals"
-			>
-				browse deals
+			>{{ $t('browseDeals') }}
 				<v-icon right>mdi-sale</v-icon>
 			</v-btn>
 			<v-btn
@@ -41,8 +40,7 @@
 				class="buttonst"
 				depressed
 				@click="wxLogin()"
-			>
-				user login
+			>{{ $t('userLogin') }}
 				<v-icon right>mdi-wechat</v-icon>
 			</v-btn>			
 			<!-- <v-btn tile class="buttonst" width="95%" depressed to="/vendor">
@@ -52,11 +50,11 @@
 
 			<v-list>
 				<p class="font-weight-medium mt-5 text-center">
-					We link our community with food that needs to be consumed. Why food ends up on our site you may ask?
+					{{ $t('whyYouSay') }}
 				</p>
 				<v-row>
 			      <v-col cols="12">
-			        <v-row
+			        <!-- <v-row
 			        class="mt-4"
 			          align="center"
 			          justify="space-around"
@@ -69,7 +67,7 @@
     						<v-icon large>mdi-check-decagram</v-icon>
     						<span class="caption">Verified vendors</span>
 						</div>
-			        </v-row>
+			        </v-row> -->
 			        <v-row
 			        class="mt-12"
 			          align="center"
@@ -77,11 +75,11 @@
 			        >
 			        	<div class="item">
     						<v-icon large>mdi-factory</v-icon>
-    						<span class="caption">Over-production</span>
+    						<span class="caption">{{ $t('overProduction') }}</span>
 						</div>
 			        	<div class="item">
     						<v-icon large>mdi-clock-alert</v-icon>
-    						<span class="caption">Short BBD</span>
+    						<span class="caption">{{ $t('ssll') }}</span>
 						</div>
 			        </v-row>
 					<v-row
@@ -91,11 +89,11 @@
 			        >
 			        	<div class="item">
     						<v-icon large>mdi-barley</v-icon>
-    						<span class="caption ">Season specific</span>
+    						<span class="caption ">{{ $t('seasonSpec') }}</span>
 						</div>
 			        	<div class="item">
     						<v-icon large>mdi-package-variant</v-icon>
-    						<span class="caption ">Package-deformation</span>
+    						<span class="caption ">{{ $t('packageDef') }}</span>
 						</div>
 			        </v-row>
 			      </v-col>

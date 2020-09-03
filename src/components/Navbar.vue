@@ -37,14 +37,14 @@
 			
 		>
 			<v-btn to="/deals">
-				<span>Deals</span>
+				<span>{{ $t('deals') }}</span>
 				<v-icon>mdi-sale</v-icon>
 			</v-btn>
 			<v-btn to="/">
 				<Gast class="logo" />
 			</v-btn>
 			<v-btn to="/profile">
-				<span>Profile</span>
+				<span>{{ $t('profile') }}</span>
 				<v-icon>mdi-account</v-icon>
 			</v-btn>
 		</v-bottom-navigation>
@@ -55,7 +55,10 @@
 	import Gast from '../assets/rac1.svg';
 	export default {
 		name: 'Navbar',
-		components: { Gast }
+		components: { Gast },
+		props: {
+            msg: String
+        },
 	};
 </script>
 <style>
