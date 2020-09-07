@@ -143,14 +143,21 @@
 									<el-button slot="trigger" size="small" type="primary">select file</el-button>
 								</el-upload>
 								<v-text-field
-				                    label="Limit *"
+				                    label="Number available"
 				                    v-model="newPromotion.max_of_total"
 				                    value=""
 				                    color="#DFA937"
 				                ></v-text-field>
 								<v-text-field
-						          label="Amount"
+						          label="New Price"
 						          v-model="newPromotion.price"
+						          value=""
+						          color="#DFA937"
+						          prefix="¥"
+						        ></v-text-field>
+						        <v-text-field
+						          label="Old Price"
+						          v-model="newPromotion.original_price"
 						          value=""
 						          color="#DFA937"
 						          prefix="¥"
@@ -582,6 +589,7 @@ export default {
       	end_time: '23:00',
       	status: '',
       	price: '',
+      	original_price: '',
       	image: '',
       },
       updateVendor: {
