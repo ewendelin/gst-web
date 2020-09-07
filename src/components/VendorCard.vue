@@ -128,14 +128,21 @@
                   :change="saveToToggle('end_time', end_time)">
                 </el-time-select>
                 <v-text-field
-                    label="Limit *"
+                    label="Number available"
                     v-model="promotion.statistics.limit"
                     value=""
                     color="#DFA937"
                   ></v-text-field>
                 <v-text-field
-                    label="Amount"
+                    label="New Price"
                     v-model="promotion.price"
+                    value=""
+                    color="#DFA937"
+                    prefix="¥"
+                  ></v-text-field>
+                  <v-text-field
+                    label="Old Price"
+                    v-model="promotion.original_price"
                     value=""
                     color="#DFA937"
                     prefix="¥"
@@ -231,14 +238,21 @@
                   :change="saveToToggle('end_time', end_time)">
                 </el-time-select>
                 <v-text-field
-                    label="Limit *"
+                    label="Number available"
                     v-model="promotion.statistics.limit"
                     value=""
                     color="#DFA937"
                   ></v-text-field>
                 <v-text-field
-                    label="Amount"
+                    label="New Price"
                     v-model="promotion.price"
+                    value=""
+                    color="#DFA937"
+                    prefix="¥"
+                  ></v-text-field>
+                  <v-text-field
+                    label="Old Price"
+                    v-model="promotion.original_price"
                     value=""
                     color="#DFA937"
                     prefix="¥"
@@ -309,8 +323,21 @@
                     <el-button slot="trigger" size="small" type="primary">  select file</el-button>
                   </el-upload>
                   <v-text-field
-                    label="Amount"
+                    label="Number available"
+                    v-model="promotion.statistics.limit"
+                    value=""
+                    color="#DFA937"
+                  ></v-text-field>
+                <v-text-field
+                    label="New Price"
                     v-model="promotion.price"
+                    value=""
+                    color="#DFA937"
+                    prefix="¥"
+                  ></v-text-field>
+                  <v-text-field
+                    label="Old Price"
+                    v-model="promotion.original_price"
                     value=""
                     color="#DFA937"
                     prefix="¥"
