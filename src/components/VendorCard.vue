@@ -37,7 +37,7 @@
               max-width="290">
               <v-card>
                 <v-layout row class="mx-auto">
-                  <v-card-title class="headline">Promotion</v-card-title>
+                  <v-card-title class="headline">{{ $t('promo') }}</v-card-title>
                   <v-spacer></v-spacer>
                     <v-btn icon @click="promotion.dialog3 = false">
                       <v-icon>mdi-close</v-icon>
@@ -63,18 +63,23 @@
                     <template v-slot:activator="{ on }">
                       <v-text-field
                         v-model="start_date"
-                        label="Start Date"
                         prepend-icon="mdi-calendar"
                         readonly
                         v-on="on"
                         color="#DFA937"
                         required
                         :rules="[v => !!v || 'You must add start date!']"
-                      ></v-text-field>
+                      >
+                        <template v-slot:label>
+                          <div>
+                            {{ $t('startDate') }}
+                          </div>
+                        </template>
+                      </v-text-field>
                     </template>
                     <v-date-picker v-model="promotion.start_date" no-title scrollable color="#DFA937">
                       <v-spacer></v-spacer>
-                      <v-btn text color="#DFA937" @click="menu3 = false">Cancel</v-btn>
+                      <v-btn text color="#DFA937" @click="menu3 = false">{{ $t('cancel') }}</v-btn>
                       <v-btn text color="#DFA937" @click="saveToToggle('start_date', promotion.start_date),menu3 = false">OK</v-btn>
                     </v-date-picker>
                   </v-menu>
@@ -91,18 +96,23 @@
                     <template v-slot:activator="{ on }">
                       <v-text-field
                         v-model="end_date"
-                        label="End Date"
                         prepend-icon="mdi-calendar"
                         readonly
                         v-on="on"
                         color="#DFA937"
                         required
                         :rules="[v => !!v || 'You must add end date!']"
-                      ></v-text-field>
+                      >
+                        <template v-slot:label>
+                          <div>
+                            {{ $t('endDate') }}
+                          </div>
+                        </template>
+                      </v-text-field>
                     </template>
                     <v-date-picker v-model="promotion.end_date" no-title scrollable color="#DFA937">
                       <v-spacer></v-spacer>
-                      <v-btn text color="#DFA937" @click="menu4 = false">Cancel</v-btn>
+                      <v-btn text color="#DFA937" @click="menu4 = false">{{ $t('cancel') }}</v-btn>
                       <v-btn text color="#DFA937" @click="saveToToggle('end_date', promotion.end_date),menu4 = false">OK</v-btn>
                     </v-date-picker>
                   </v-menu>
@@ -132,25 +142,41 @@
                     v-model="promotion.statistics.limit"
                     value=""
                     color="#DFA937"
-                  ></v-text-field>
+                  >
+                    <template v-slot:label>
+                      <div>
+                        {{ $t('numberOfDeals') }}
+                      </div>
+                    </template>
+                  </v-text-field>
                 <v-text-field
-                    label="New Price"
                     v-model="promotion.price"
                     value=""
                     color="#DFA937"
                     prefix="¥"
-                  ></v-text-field>
+                  >
+                     <template v-slot:label>
+                      <div>
+                        {{ $t('newPrice') }}
+                      </div>
+                    </template>
+                  </v-text-field>
                   <v-text-field
-                    label="Old Price"
                     v-model="promotion.original_price"
                     value=""
                     color="#DFA937"
                     prefix="¥"
-                  ></v-text-field>
+                  >
+                     <template v-slot:label>
+                      <div>
+                        {{ $t('oldPrice') }}
+                      </div>
+                    </template>
+                  </v-text-field>
                 <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn
                     width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion), promotion.dialog3 = false">
-                    Reactivate
+                    {{ $t('reactivate') }}
                   </v-btn>
                 </v-card-actions>
                 </v-form>
@@ -173,18 +199,22 @@
                     <template v-slot:activator="{ on }">
                       <v-text-field
                         v-model="start_date"
-                        label="Start Date"
                         prepend-icon="mdi-calendar"
-                        readonly
                         v-on="on"
                         color="#DFA937"
                         required
                         :rules="[v => !!v || 'You must add start date!']"
-                      ></v-text-field>
+                      >
+                        <template v-slot:label>
+                          <div>
+                              {{ $t('startDate') }}
+                          </div>
+                        </template>
+                      </v-text-field>
                     </template>
                     <v-date-picker v-model="promotion.start_date" no-title scrollable color="#DFA937">
                       <v-spacer></v-spacer>
-                      <v-btn text color="#DFA937" @click="menu3 = false">Cancel</v-btn>
+                      <v-btn text color="#DFA937" @click="menu3 = false">{{ $t('cancel') }}</v-btn>
                       <v-btn text color="#DFA937" @click="saveToToggle('start_date', promotion.start_date),menu3 = false">OK</v-btn>
                     </v-date-picker>
                   </v-menu>
@@ -201,18 +231,22 @@
                     <template v-slot:activator="{ on }">
                       <v-text-field
                         v-model="end_date"
-                        label="End Date"
                         prepend-icon="mdi-calendar"
-                        readonly
                         v-on="on"
                         color="#DFA937"
                         required
                         :rules="[v => !!v || 'You must add end date!']"
-                      ></v-text-field>
+                      >
+                        <template v-slot:label>
+                          <div>
+                              {{ $t('endDate') }}
+                          </div>
+                        </template>
+                      </v-text-field>
                     </template>
                     <v-date-picker v-model="promotion.end_date" no-title scrollable color="#DFA937">
                       <v-spacer></v-spacer>
-                      <v-btn text color="#DFA937" @click="menu4 = false">Cancel</v-btn>
+                      <v-btn text color="#DFA937" @click="menu4 = false">{{ $t('cancel') }}</v-btn>
                       <v-btn text color="#DFA937" @click="saveToToggle('end_date', promotion.end_date),menu4 = false">OK</v-btn>
                     </v-date-picker>
                   </v-menu>
@@ -238,29 +272,44 @@
                   :change="saveToToggle('end_time', end_time)">
                 </el-time-select>
                 <v-text-field
-                    label="Number available"
                     v-model="promotion.statistics.limit"
                     value=""
                     color="#DFA937"
-                  ></v-text-field>
+                  >
+                    <template v-slot:label>
+                      <div>
+                        {{ $t('numberOfDeals') }}
+                      </div>
+                    </template>
+                  </v-text-field>
                 <v-text-field
-                    label="New Price"
                     v-model="promotion.price"
                     value=""
                     color="#DFA937"
                     prefix="¥"
-                  ></v-text-field>
+                  >
+                    <template v-slot:label>
+                      <div>
+                        {{ $t('newPrice') }}
+                      </div>
+                    </template>
+                  </v-text-field>
                   <v-text-field
-                    label="Old Price"
                     v-model="promotion.original_price"
                     value=""
                     color="#DFA937"
                     prefix="¥"
-                  ></v-text-field>
+                  >
+                    <template v-slot:label>
+                      <div>
+                        {{ $t('oldPrice') }}
+                      </div>
+                    </template>
+                  </v-text-field>
                 <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn 
                     width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion), promotion.dialog3 = false">
-                    Activate
+                    {{ $t('activate') }}
                   </v-btn>
                 </v-card-actions>
                 </v-form>
@@ -269,7 +318,7 @@
                   <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn
                     width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion), promotion.dialog3 = false">
-                    archive
+                    {{ $t('archive') }}
                   </v-btn>
                   </v-card-actions>
                 </v-form>
@@ -280,7 +329,7 @@
             <v-dialog v-model="promotion.dialog2" max-width="290">
               <v-card>
                 <v-layout row class="mx-auto">
-                  <v-card-title class="headline">Edit promotion</v-card-title>
+                  <v-card-title class="headline">{{ $t('editDeal') }}</v-card-title>
                   <v-spacer></v-spacer>
                   <v-btn icon @click="promotion.dialog2 = false">
                     <v-icon>mdi-close</v-icon>
@@ -292,26 +341,22 @@
                         class="mx-5">
 
                   <v-text-field v-model="promotion.title"
-                                label="Title"
-                                required
-                                color="#DFA937">
+                    required
+                    color="#DFA937">
+                      <template v-slot:label>
+                        <div>
+                        {{ $t('title') }}
+                      </div>
+                    </template>
                   </v-text-field>
                   <v-textarea v-model="promotion.description"
                               color="#DFA937">
                     <template v-slot:label>
                       <div>
-                        Description
+                        {{ $t('description') }}
                       </div>
                     </template>
                   </v-textarea>
-                  <!-- <v-textarea v-model="promotion.disclaimer"
-                              color="#DFA937">
-                    <template v-slot:label>
-                      <div>
-                        Disclaimer
-                      </div>
-                    </template>
-                  </v-textarea> -->
                   <el-upload
                     v-model="image"
                     action="http://localhost:3000/api/v1/promotions/images/upload"
@@ -320,37 +365,52 @@
                     :on-change="handleChange"
                     :file-list="fileList"
                     :auto-upload="false">
-                    <el-button slot="trigger" size="small" type="primary">  select file</el-button>
+                    <el-button slot="trigger" size="small" type="primary">  {{ $t('selectFile') }}</el-button>
                   </el-upload>
                   <v-text-field
-                    label="Number available"
                     v-model="promotion.statistics.limit"
                     value=""
                     color="#DFA937"
-                  ></v-text-field>
+                  >
+                    <template v-slot:label>
+                      <div>
+                        {{ $t('numberOfDeals') }}
+                      </div>
+                    </template>
+                  </v-text-field>
                 <v-text-field
-                    label="New Price"
                     v-model="promotion.price"
                     value=""
                     color="#DFA937"
                     prefix="¥"
-                  ></v-text-field>
+                  >
+                    <template v-slot:label>
+                      <div>
+                        {{ $t('newPrice') }}
+                      </div>
+                    </template>
+                  </v-text-field>
                   <v-text-field
-                    label="Old Price"
                     v-model="promotion.original_price"
                     value=""
                     color="#DFA937"
                     prefix="¥"
-                  ></v-text-field>
+                  >
+                    <template v-slot:label>
+                      <div>
+                        {{ $t('oldPrice') }}
+                      </div>
+                    </template>
+                  </v-text-field>
                 </v-form>
                 <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn
                     width="50%" dark color="#DFA937" tile class="buttons" depressed @click="editPromotion(promotion);">
-                    save
+                    {{ $t('save') }}
                   </v-btn>
                   <v-btn
                     width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="promotion.dialog2 = false">
-                    cancel
+                    {{ $t('cancel') }}
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -358,17 +418,17 @@
             <v-dialog v-model="promotion.dialogstats" max-width="290">
               <v-card>
                 <v-layout row class="mx-auto">
-                  <v-card-title class="headline">Statistics</v-card-title>
+                  <v-card-title class="headline">{{ $t('stats') }}</v-card-title>
                   <v-spacer></v-spacer>
                   <v-btn icon @click="promotion.dialogstats = false">
                     <v-icon>mdi-close</v-icon>
                   </v-btn>
                 </v-layout>
                 <v-card-text>
-                  Verified: {{ promotion.statistics.verified }}
+                  {{ $t('verified') }} {{ promotion.statistics.verified }}
                 </v-card-text>
                 <v-card-text>
-                  Claimed: {{ promotion.statistics.issued }}
+                  {{ $t('claimed') }} {{ promotion.statistics.issued }}
                 </v-card-text>
               </v-card>
             </v-dialog>
@@ -377,18 +437,18 @@
               max-width="290">
               <v-card>
                 <v-layout row class="mx-auto">
-                  <v-card-title class="headline">Delete promotion</v-card-title>
+                  <v-card-title class="headline">{{ $t('deletePromo') }}</v-card-title>
                   <v-spacer></v-spacer>
                   <v-btn icon @click="promotion.dialog = false">
                     <v-icon>mdi-close</v-icon>
                   </v-btn>
                 </v-layout>
                 <v-card-text>
-                  Are you sure you want to cancel this promotion? This action is permanent.
+                  {{ $t('areYouSure') }}
                 </v-card-text>
                 <v-card-actions class="d-flex justify-center pb-3">
                   <v-btn width="80%" dark color="#DFA937" tile class="buttons" depressed @click="remove(promotion)">
-                    yes, i am sure
+                    {{ $t('yesIamSure') }}
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -406,6 +466,7 @@
 	export default {
 		name: 'VendorCard',
 		props: {
+      msg: String,
 			vendorId: {
 				type: Number,
 				default: 0

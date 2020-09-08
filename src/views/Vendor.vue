@@ -13,13 +13,13 @@
 						<v-icon right>mdi-logout</v-icon>
 					</v-btn>
 				</v-layout>
-				<v-btn depressed dark class="button mb-2" width="80%" @click="dialog = true">add new deal
+				<v-btn depressed dark class="button mb-2" width="80%" @click="dialog = true">{{ $t('addNewDeal') }}
 
 				</v-btn>
-				<v-btn depressed dark class="buttonst mb-2" width="80%" @click="dialog1 = true">verify coupon
+				<v-btn depressed dark class="buttonst mb-2" width="80%" @click="dialog1 = true">{{ $t('verifyCou') }}
 
 				</v-btn>
-				<v-btn depressed dark class="buttonst mb-6" width="80%" @click="dialogtotalstat = true">monthly statistics
+				<v-btn depressed dark class="buttonst mb-6" width="80%" @click="dialogtotalstat = true">{{ $t('monthStat') }}
 
 				</v-btn>
 				<p class="headline font-weight-medium mb-0">{{ vendor.name }}</p>
@@ -32,7 +32,7 @@
 					<v-dialog v-model="dialog" max-width="350">
 						<v-card>
 							<v-layout row class="mx-auto">
-								<v-card-title class="headline">Add new Deal</v-card-title>
+								<v-card-title class="headline">{{ $t('addNewDeal') }}</v-card-title>
 								<v-spacer></v-spacer>
 								<v-btn icon @click="dialog = false">
 									<v-icon>mdi-close</v-icon>
@@ -45,22 +45,26 @@
 							class="mx-5"
 							id="example-3">
 								<v-text-field v-model="newPromotion.title"
-									label="Title"
 									required
-									color="#DFA937">
-								</v-text-field>
-								<v-textarea v-model="newPromotion.description"
-									color="#DFA937"
-									label="Description">
-								</v-textarea>
-								<!-- <v-textarea v-model="newPromotion.disclaimer"
 									color="#DFA937">
 									<template v-slot:label>
 										<div>
-											Disclaimer
+											{{ $t('title') }}
 										</div>
 									</template>
+								</v-text-field>
+								<!-- <v-textarea v-model="newPromotion.description"
+									color="#DFA937"
+									label="Description">
 								</v-textarea> -->
+								<v-textarea v-model="newPromotion.description"
+									color="#DFA937">
+									<template v-slot:label>
+										<div>
+											{{ $t('description') }}
+										</div>
+									</template>
+								</v-textarea>
 								<v-menu
 							        ref="menu"
 							        v-model="menu"
@@ -74,16 +78,21 @@
 							        <template v-slot:activator="{ on }">
 							          <v-text-field
 							            v-model="start_date"
-							            label="Start Date"
 							            prepend-icon="mdi-calendar"
-							            readonly
+							            
 							            v-on="on"
 							            color="#DFA937"
-							          ></v-text-field>
+							          >
+							          	<template v-slot:label>
+											<div>
+												{{ $t('startDate') }}
+											</div>
+										</template>
+							          </v-text-field>
 							        </template>
 							        <v-date-picker v-model="newPromotion.start_date" no-title scrollable color="#DFA937">
 							          <v-spacer></v-spacer>
-							          <v-btn text color="#DFA937" @click="menu = false">Cancel</v-btn>
+							          <v-btn text color="#DFA937" @click="menu = false">{{ $t('cancel') }}</v-btn>
 							          <v-btn text color="#DFA937" @click="$refs.menu.save(start_date)">OK</v-btn>
 							        </v-date-picker>
 							      </v-menu>
@@ -100,16 +109,20 @@
 							        <template v-slot:activator="{ on }">
 							          <v-text-field
 							            v-model="end_date"
-							            label="End Date"
 							            prepend-icon="mdi-calendar"
-							            readonly
 							            v-on="on"
 							            color="#DFA937"
-							          ></v-text-field>
+							          >
+							          	<template v-slot:label>
+											<div>
+												{{ $t('endDate') }}
+											</div>
+										</template>
+							          </v-text-field>
 							        </template>
 							        <v-date-picker v-model="newPromotion.end_date" no-title scrollable color="#DFA937">
 							          <v-spacer></v-spacer>
-							          <v-btn text color="#DFA937" @click="menu1 = false">Cancel</v-btn>
+							          <v-btn text color="#DFA937" @click="menu1 = false">{{ $t('cancel') }}</v-btn>
 							          <v-btn text color="#DFA937" @click="$refs.menu1.save(end_date)">OK</v-btn>
 							        </v-date-picker>
 							      </v-menu>
@@ -140,40 +153,47 @@
 		              :on-change="handleChange"
 		              :file-list="fileList"
 									  :auto-upload="false">
-									<el-button slot="trigger" size="small" type="primary">select file</el-button>
+									<el-button slot="trigger" size="small" type="primary">{{ $t('selectFile') }}</el-button>
 								</el-upload>
-								<v-text-field
-				                    label="Number available"
-				                    v-model="newPromotion.max_of_total"
-				                    value=""
-				                    color="#DFA937"
-				                ></v-text-field>
-								<v-text-field
-						          label="New Price"
-						          v-model="newPromotion.price"
-						          value=""
-						          color="#DFA937"
-						          prefix="¥"
-						        ></v-text-field>
-						        <v-text-field
-						          label="Old Price"
-						          v-model="newPromotion.original_price"
-						          value=""
-						          color="#DFA937"
-						          prefix="¥"
-						        ></v-text-field>
-								<!-- <v-checkbox
-								v-model="newPromotion.status"
-								color="#DFA937"
-								label="Click box to Post Now">
-								</v-checkbox> -->
+								<v-text-field v-model="newPromotion.max_of_total"
+									required
+									color="#DFA937"
+									value="">
+									<template v-slot:label>
+										<div>
+											{{ $t('numberOfDeals') }}
+										</div>
+									</template>
+								</v-text-field>
+								<v-text-field v-model="newPromotion.price"
+									required
+									color="#DFA937"
+									value=""
+									prefix="¥">
+									<template v-slot:label>
+										<div>
+											{{ $t('newPrice') }}
+										</div>
+									</template>
+								</v-text-field>
+								<v-text-field v-model="newPromotion.original_price"
+									required
+									color="#DFA937"
+									value=""
+									prefix="¥">
+									<template v-slot:label>
+										<div>
+											{{ $t('oldPrice') }}
+										</div>
+									</template>
+								</v-text-field>
 							</v-form>
 							<v-card-actions class="d-flex justify-space-around pb-3">
 								<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="createPromotion('onsale');">
-									save & post
+									{{ $t('saveNPost') }}
 								</v-btn>
 								<v-btn width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="createPromotion('draft');">
-									save
+									{{ $t('save') }}
 								</v-btn>
 							</v-card-actions>
 						</v-card>
@@ -181,7 +201,7 @@
 					<v-dialog v-model="dialog1" max-width="290">
 						<v-card>
 							<v-layout row class="mx-auto">
-								<v-card-title class="headline">Verify Coupon</v-card-title>
+								<v-card-title class="headline">{{ $t('verifyCou') }}</v-card-title>
 								<v-spacer></v-spacer>
 								<v-btn icon @click="dialog1 = false">
 									<v-icon>mdi-close</v-icon>
@@ -192,14 +212,19 @@
 							lazy-validation
 							class="mx-5">
 								<v-text-field v-model="token"
-									label="Coupon Code"
+									
 									required
 									color="#DFA937">
+									<template v-slot:label>
+										<div>
+											{{ $t('couponCode') }}
+										</div>
+									</template>
 								</v-text-field>
 							</v-form>
 							<v-card-actions class="d-flex justify-space-around pb-3">
 								<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="verify(token), snackbar = true">
-									verify
+									{{ $t('verify') }}
 								</v-btn>
 							</v-card-actions>
 						</v-card>
@@ -215,7 +240,7 @@
 						<p class="black--text" v-else-if="tokenFailed">
 							{{text.error}}</p>
 						<v-btn text color="#DFA937" @click="snackbar = false">
-							close
+							{{ $t('close') }}
 						</v-btn>
 					</v-snackbar>
 
@@ -235,21 +260,30 @@
 							lazy-validation
 							class="mx-5">
 								<v-text-field v-model="vendor.name"
-									label="Company Name"
 									required
 									color="#DFA937">
+									<template v-slot:label>
+										<div>
+											{{ $t('newVendorName') }}
+										</div>
+									</template>
 								</v-text-field>
 								<v-text-field v-model="vendor.address"
-									label="Address"
+									
 									required
 									color="#DFA937">
+									<template v-slot:label>
+										<div>
+											{{ $t('address') }}
+										</div>
+									</template>
 								</v-text-field>
 								<v-textarea v-model="vendor.description"
 									required
 									color="#DFA937">
 									<template v-slot:label>
 										<div>
-											Company description
+											{{ $t('companyDesc') }}
 										</div>
 									</template>
 								</v-textarea>
@@ -257,9 +291,14 @@
 									v-model="vendor.vendor_type"
 									:items="items"
 									attach
-									label="Type of Establishment"
 									color="#DFA937"
-								></v-select>
+								>
+									<template v-slot:label>
+										<div>
+											{{ $t('newVendorType') }}
+										</div>
+									</template>
+								</v-select>
 
 								<el-upload
 									v-model="mainimage"
@@ -269,7 +308,7 @@
 		              :on-change="handleChangeMain"
 		              :file-list="fileList"
 									  :auto-upload="false">
-									<el-button slot="trigger" size="small" type="primary">Upload Vendor Image</el-button>
+									<el-button slot="trigger" size="small" type="primary">{{ $t('uploadVenIm') }}</el-button>
 								</el-upload>
 
 								<el-upload
@@ -280,15 +319,15 @@
 		              :on-change="handleChangeLogo"
 		              :file-list="fileList"
 									  :auto-upload="false">
-									<el-button slot="trigger" size="small" type="primary">Upload Logo</el-button>
+									<el-button slot="trigger" size="small" type="primary">{{ $t('uploadVenLo') }}</el-button>
 								</el-upload>
 							</v-form>
 							<v-card-actions class="d-flex justify-space-around pb-3">
 								<v-btn width="50%" dark color="#DFA937" tile class="buttons" depressed @click="editVendor();">
-									save
+									{{ $t('save') }}
 								</v-btn>
 								<v-btn width="40%" dark color="#DFA937" tile class="buttonst" depressed @click="dialog2 = false">
-									cancel
+									{{ $t('cancel') }}
 								</v-btn>
 							</v-card-actions>
 						</v-card>
@@ -296,27 +335,27 @@
 					<v-dialog v-model="dialogtotalstat" max-width="350">
 						<v-card>
 							<v-layout row class="mx-auto">
-								<v-card-title class="headline">Monthly Statistics</v-card-title>
+								<v-card-title class="headline">{{ $t('monthStat') }}</v-card-title>
 								<v-spacer></v-spacer>
 								<v-btn icon @click="dialogtotalstat = false">
 									<v-icon>mdi-close</v-icon>
 								</v-btn>
 							</v-layout>
 							<v-card-title class="title font-weight-regular mb-1 mt-n4">
-								Coupons claimed:
+								{{ $t('couponsClaimed') }}
 							</v-card-title>
 							<v-card-text class="body1 font-weight-regular mb-3">
 								{{vendor.statistics.issued}}
 							</v-card-text>
 							<v-card-title class="title font-weight-regular mb-1 mt-n4">
-								Coupons verified:
+								{{ $t('couponsVerified') }}
 							</v-card-title>
 							<v-card-text class="body1 font-weight-regular mb-3">
 								{{vendor.statistics.verified}}
 							</v-card-text>
 							<v-card-actions class="d-flex justify-space-around pb-3">
 								<v-btn width="90%" dark color="#DFA937" tile class="buttons" depressed @click="dialogtotalstat = false">
-									close
+									{{ $t('close') }}
 								</v-btn>
 							</v-card-actions>
 						</v-card>
@@ -326,14 +365,14 @@
 				<v-layout row class="mx-auto">
 					<v-list-item>
 						<v-list-item-content>
-							<v-list-item-title class="title font-weight-bold mb-1 mt-n4">Description</v-list-item-title>
+							<v-list-item-title class="title font-weight-bold mb-1 mt-n4">{{ $t('description') }}</v-list-item-title>
 							<v-list-item-subtitle class="body1 font-weight-regular mb-3">
 								{{ vendor.address }}
 							</v-list-item-subtitle>
 							<v-list-item-subtitle class="body1 font-weight-regular mb-3 text-wrap">
 								{{ vendor.description }}
 							</v-list-item-subtitle>
-							<v-list-item-title class="title font-weight-bold">Saved Deals</v-list-item-title>
+							<v-list-item-title class="title font-weight-bold">{{ $t('savedDeals') }}</v-list-item-title>
 						</v-list-item-content>
 					</v-list-item>
 				</v-layout>
@@ -356,7 +395,7 @@
 					color="#DFA937"
 					tile
 					class="buttons mb-3 mt-6"
-					depressed>Register vendor account
+					depressed>{{ $t('registerVendor') }}
 					</v-btn>
 				</v-col>
 			<!-- </v-layout> -->
@@ -373,16 +412,21 @@
 						<!-- <v-col> -->
 						<v-layout row class="mx-5">
 							
-							<v-card-title class="title mt-n3">Register Vendor Account</v-card-title>
+							<v-card-title class="title mt-n3">{{ $t('registerVendor') }}</v-card-title>
 							</v-layout>
 								<v-form ref="form" v-model="valid" lazy-validation class="mx-8">
 									<v-text-field
 											v-model="newVendorProfile.name"
-											label="Name of Establishment"
 											:rules="nameRules"
 											required
 											color="#DFA937"
-										></v-text-field>
+										>
+											<template v-slot:label>
+												<div>
+													{{ $t('newVendorName') }}
+												</div>
+											</template>
+										</v-text-field>
 
 										<v-select
 											v-model="newVendorProfile.vendor_type"
@@ -390,68 +434,93 @@
 											required
 											:rules="[v => !!v || 'Type is required!']"
 											attach
-											label="Type of Establishment"
 											color="#DFA937"
-										></v-select>
+										>
+											<template v-slot:label>
+												<div>
+													{{ $t('newVendorType') }}
+												</div>
+											</template>
+										</v-select>
 
 										<v-textarea v-model="newVendorProfile.description"
 											required
 											color="#DFA937">
 											<template v-slot:label>
 												<div>
-													Company description
+													{{ $t('companyDesc') }}
 												</div>
 											</template>
 										</v-textarea>
 
 										<v-text-field
 											v-model="newVendorProfile.address"
-											label="Address"
 											required
 											:rules="[v => !!v || 'Address is required!']"
 											color="#DFA937"
-										></v-text-field>
+										>
+											<template v-slot:label>
+												<div>
+													{{ $t('address') }}
+												</div>
+											</template>
+										</v-text-field>
 										<v-select
 											:rules="[v => !!v || 'Area is required!']"
 											v-model="newVendorProfile.area"
 											:items="areas"
-											label="Area"
 											required
 											color="#DFA937"
-										></v-select>
+										>
+											<template v-slot:label>
+												<div>
+													{{ $t('area') }}
+												</div>
+											</template>
+										</v-select>
 
 										<v-text-field
 											v-model="newVendorProfile.contact_number"
-											label="Phone Number"
 											required
 											:rules="[v => !!v || 'Phone number is required!']"
 											color="#DFA937"
-										></v-text-field>
+										>
+											<template v-slot:label>
+												<div>
+													{{ $t('phoneNumber') }}
+												</div>
+											</template>
+										</v-text-field>
 										<v-checkbox
 											v-model="checkbox"
-											label="Agree with terms of service"
 											required
 											:rules="[v => !!v || 'You must agree to continue!']"
-										></v-checkbox>
+										>
+											<template v-slot:label>
+												<div>
+													{{ $t('agreeToS') }}
+												</div>
+											</template>
+										</v-checkbox>
 										<v-btn dark
 										text
 										color="#DFA937"
 										tile
 										class="mt-n3 ml-0 mb-3 caption"
 										@click.stop="dialogtos = true"
-										depressed>Read terms of service here
+										depressed>{{ $t('readToS') }}
 										</v-btn>
 								</v-form>
 									<v-dialog v-model="dialogtos" scrollable>
 										<v-card>
 									        <v-card-title>
-									          <span class="headline">Terms Of Service</span>
+									          <span class="headline">{{ $t('tos') }}</span>
 									        </v-card-title>
 									        <v-card-text>Lorem ipsum dolor sit amet, semper quis, sapien id natoque elit. Nostra urna at, magna at neque sed sed ante imperdiet, dolor mauris cursus velit, velit non, sem nec. Volutpat sem ridiculus placerat leo, augue in, duis erat proin condimentum in a eget, sed fermentum sed vestibulum varius ac, vestibulum volutpat orci ut elit eget tortor. Ultrices nascetur nulla gravida ante arcu. Pharetra rhoncus morbi ipsum, nunc tempor debitis, ipsum pellentesque, vitae id quam ut mauris dui tempor, aptent non. Quisque turpis. Phasellus quis lectus luctus orci eget rhoncus. Amet donec vestibulum mattis commodo, nulla aliquet, nibh praesent, elementum nulla. Sit lacus pharetra tempus magna neque pellentesque, nulla vel erat.
 									         </v-card-text>
 									        <v-card-actions>
 									          <v-spacer></v-spacer>
-									          <v-btn color="#DFA937" text @click="dialogtos = false">Close</v-btn>
+									          <v-btn color="#DFA937" text @click="dialogtos = false">{{ $t('close') }}</v-btn>
 									        </v-card-actions>
 									      </v-card>
 									</v-dialog>
@@ -465,7 +534,7 @@
 											depressed
 											@click="createVendor()"
 										>
-										submit for approval
+										{{ $t('submitFA') }}
 										</v-btn>
 									</v-layout>
 					<!-- </v-col> -->
@@ -480,7 +549,7 @@
 				         </v-card-text>
 				        <v-card-actions>
 				          <v-spacer></v-spacer>
-				          <v-btn color="#DFA937" text @click="confirm = false">Close</v-btn>
+				          <v-btn color="#DFA937" text @click="confirm = false">{{ $t('close') }}</v-btn>
 				        </v-card-actions>
 				      </v-card>
 				</v-dialog> 
