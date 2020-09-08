@@ -41,43 +41,6 @@
 	      <v-col cols="12">
 	        <v-row justify="center">
 
-	        	<!-- <v-card
-		    		class="ma-1"
-		    		max-width="45%"
-		    		v-for="promotion in details"
-					:key="promotion.id">
-				    <v-card-title style="font-size:.8rem;">
-				      {{ promotion.title }}
-				    </v-card-title>
-				    <v-card-subtitle style="font-size:.6rem;">
-				      {{ promotion.time_slot }}
-				    </v-card-subtitle>
-				    <v-card-subtitle class="pt-0 mt-n3" style="font-size:.6rem;">
-				      {{ promotion.statistics.available }} - {{ $t('available') }}
-				    </v-card-subtitle>
-
-		    		<v-list-item class="mt-n3">
-						<v-list-item-avatar size="32" color="grey">
-							<v-img :src="promotion.vendor.logo_img" alt="Logo" />
-						</v-list-item-avatar>
-						<v-list-item-content>
-							<v-list-item-title class="body" style="font-size:.8rem;">{{promotion.vendor.name}}</v-list-item-title>
-						</v-list-item-content>
-					</v-list-item>
-				    <v-card-actions class="mt-n3">
-				    	<v-btn @click.stop="getCoupon(promotion)"
-						tile
-						small
-						depressed
-						dark
-						style="border-radius: 5px;
-						background-color: rgb(223, 169, 55) !important; font-size:.6rem;
-						color: !important;"
-						>
-							{{ $t('claim') }}
-						</v-btn> -->
-						<!-- <v-dialog v-model="promotion.dialog" max-width="290"> -->
-
 		    <v-col
 	          cols="12"
 	        >
@@ -104,7 +67,7 @@
               			<v-row align="end" justify="center">
               				<v-card-title class="subtitle-2 white--text align-end justify-center pb-1">
 					      		<v-icon small class="white--text align-end justify-center pb-1">mdi-noodles</v-icon>
-					      	{{ promotion.statistics.available }}份
+					      	{{ promotion.statistics.available }}{{ $t('avi') }}
 							</v-card-title>
 						</v-row>
               		</v-img>
@@ -140,16 +103,14 @@
 					    <v-dialog v-model="promotion.dialog" max-width="290">
 							<v-card>
 								<v-layout row class="mx-auto">
-									<v-card-title class="headline">Success!</v-card-title>
+									<v-card-title class="headline">{{ $t('suc') }}</v-card-title>
 									<v-spacer></v-spacer>
 									<v-btn icon @click="promotion.dialog = false">
 										<v-icon>mdi-close</v-icon>
 									</v-btn>
 								</v-layout>
 								<v-card-text>
-									You have successfully claimed this promotion! Make sure
-									you read the disclaimer and note the time when the
-									coupon can be claimed.
+									{{ $t('sucmes') }}
 								</v-card-text>
 								<v-card-actions class="d-flex justify-center pb-3">
 									<v-btn
@@ -161,7 +122,7 @@
 										depressed
 										to="/profile"
 									>
-										see in profile
+										{{ $t('sip') }}
 									</v-btn>
 								</v-card-actions>
 							</v-card>
@@ -189,7 +150,7 @@
 									          <v-icon small>mdi-noodles</v-icon>
 									        </v-list-item-icon>
 
-									        <v-list-item-title class="font-weight-bold" style="font-size:.8rem;">{{ promotion.statistics.available }} 份</v-list-item-title>
+									        <v-list-item-title class="font-weight-bold" style="font-size:.8rem;">{{ promotion.statistics.available }}{{ $t('avi') }}</v-list-item-title>
 									    </v-list-item>
 								
 								<v-spacer></v-spacer>
@@ -208,7 +169,7 @@
 										depressed
 										@click.stop="getCoupon(promotion)"
 									>
-										claim
+										{{ $t('claim') }}
 									</v-btn>
 								</v-card-actions>
 								<v-layout row class="mx-5">
@@ -250,57 +211,6 @@
 	            </div>
 	          </v-card>
 	        </v-col>
-	        	<!-- <v-card
-		    		class="ma-1"
-		    		max-width="45%"
-		    		v-for="promotion in details"
-					:key="promotion.id">
-				    <v-card-title style="font-size:.8rem;">
-				      {{ promotion.title }}
-				    </v-card-title>
-				    <v-card-subtitle style="font-size:.6rem;">
-				      {{ promotion.time_slot }}
-				    </v-card-subtitle>
-				    <v-card-subtitle class="pt-0 mt-n3" style="font-size:.6rem;">
-				      {{ promotion.statistics.available }} - available
-				    </v-card-subtitle>
-
-		    		<v-list-item class="mt-n3">
-						<v-list-item-avatar size="32" color="grey">
-							<v-img :src="promotion.vendor.logo_img" alt="Logo" />
-						</v-list-item-avatar>
-						<v-list-item-content>
-							<v-list-item-title class="body" style="font-size:.8rem;">{{promotion.vendor.name}}</v-list-item-title>
-						</v-list-item-content>
-					</v-list-item>
-				    <v-card-actions class="mt-n3">
-				    	<v-btn @click.stop="getCoupon(promotion)"
-						tile
-						small
-						depressed
-						dark
-						style="border-radius: 5px;
-						background-color: rgb(223, 169, 55) !important; font-size:.6rem;
-						color: !important;"
-						>
-							Claim
-						</v-btn>
-						
-				    	<v-btn
-				    	class="pa-.5 ml-n1"
-				        dark
-				        small
-						color="#DFA937"
-				        text
-						style="font-size:.6rem;"
-				        
-				    	>
-				        	details
-				    	</v-btn>
-				    	
-			    	<v-spacer></v-spacer>
-			    </v-card-actions>
-			  </v-card> -->
 	        </v-row>
 	      </v-col>
 
