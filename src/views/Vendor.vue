@@ -248,7 +248,7 @@
 					<v-dialog v-model="dialog2" max-width="290">
 						<v-card>
 							<v-layout row class="mx-auto">
-								<v-card-title class="headline">Edit Profile</v-card-title>
+								<v-card-title class="headline">{{ $t('editProfile') }}</v-card-title>
 								<v-spacer></v-spacer>
 								<v-btn icon @click="dialog2 = false">
 									<v-icon>mdi-close</v-icon>
