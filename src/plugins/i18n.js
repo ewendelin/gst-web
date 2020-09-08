@@ -79,7 +79,10 @@ const messages = {
         sip: 'see in profile',
         suc: 'Success!',
         tos: 'Terms of Service',
-        sucmes: 'You have successfully claimed this promotion! Make sure to note the pickup time.'
+        sucmes: 'You have successfully claimed this promotion! Make sure to note the pickup time.',
+        heifren: 'Hey friend, it looks like you do not have a vendor account set up yet. Create a vendor account and submit for approval.',
+        confi: 'Submitted!',
+        hassub: 'Your application has been submitted. An account manager will contact you shortly and verify your account. You can start creating your vendor profile and create deals but they will not be visiable until after you have been verified.'
     },
     'zh_CN': {
         fba: '区域',
@@ -156,7 +159,10 @@ const messages = {
         whyYouSay: '你可能会好奇这些食品为什么最终来到了我们这儿?',
         sip: '查看我的订单',
         suc: '领取成功！',
-        sucmes: '请注意取货的时间哦!'
+        sucmes: '请注意取货的时间哦!',
+        heifren: '嘿，您好像还未注册商家账户哦，请创建商家用户并提交审核。',
+        confi: '提交成功！',
+        hassub: '您的申请已提交，账户经理会立刻联系您并验证账户。您可以开始创建您的商户档案及优惠食品，信息均会在验证结束后显示。'
     }
 };
 

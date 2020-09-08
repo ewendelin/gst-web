@@ -385,7 +385,7 @@
 	            md="6"
 	            lg="6">
 					<p class="font-weight-medium text-center pt-12">
-					Hey friend, it looks like you do not have a vendor account set up yet. Create a vendor account and submit for approval.
+					{{ $t('heifren') }}
 					</p>
 				
 					<v-btn
@@ -543,9 +543,9 @@
 				<v-dialog v-model="confirm">
 					<v-card>
 				        <v-card-title>
-				          <span class="headline">Confirmation!</span>
+				          <span class="headline">{{ $t('confi') }}</span>
 				        </v-card-title>
-				        <v-card-text>Your application has been submitted. An account manager will contact you shortly and verify your account. You can start creating your vendor profile and create deals but they will not be visiable until after you have been verified.
+				        <v-card-text>{{ $t('hassub') }}
 				         </v-card-text>
 				        <v-card-actions>
 				          <v-spacer></v-spacer>
