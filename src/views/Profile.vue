@@ -50,7 +50,7 @@
 						<v-dialog v-model="deal.dialog3" max-width="290">
 							<v-card>
 								<v-layout row class="mx-auto">
-									<v-card-title class="headline">Coupon Code</v-card-title>
+									<v-card-title class="headline">{{ $t('couponCode') }}</v-card-title>
 									<v-spacer></v-spacer>
 									<v-btn icon @click="deal.dialog3 = false">
 										<v-icon>mdi-close</v-icon>
@@ -70,7 +70,7 @@
 						<v-dialog v-model="deal.dialog" max-width="290">
 							<v-card>
 								<v-layout row class="mx-auto">
-									<v-card-title class="headline">Cancel coupon?</v-card-title>
+									<v-card-title class="headline">{{ $t('cancel') }}?</v-card-title>
 									<v-spacer></v-spacer>
 									<v-btn icon @click="deal.dialog = false">
 										<v-icon>mdi-close</v-icon>
@@ -78,7 +78,7 @@
 								</v-layout>
 
 								<v-card-text>
-									Are you sure you want to cancel this deal?
+									{{ $t('areYouSureProfile') }}
 								</v-card-text>
 
 								<v-card-actions class="d-flex justify-center pb-3">
@@ -91,7 +91,7 @@
 										depressed
 										@click="remove(deal)"
 									>
-										yes, i am sure
+										{{ $t('yesIamSure') }}
 									</v-btn>
 								</v-card-actions>
 							</v-card>
@@ -113,7 +113,7 @@
 				depressed
 				to="/deals"
 			>
-				browse deals
+				{{ $t('findDeal') }}
 			</v-btn>
 		</v-layout>
 	</div>
