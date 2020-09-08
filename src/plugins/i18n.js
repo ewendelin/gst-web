@@ -74,7 +74,10 @@ const messages = {
         yesIamSure: 'Yes, I am sure',
         claim: 'Claim',
         details: 'Details',
-        available: 'available'
+        avi: ' available',
+        sip: 'see in profile',
+        suc: 'Success!',
+        sucmes: 'You have successfully claimed this promotion! Make sure to note the pickup time.'
     },
     'zh_CN': {
         fba: '区域',
@@ -144,9 +147,12 @@ const messages = {
         yesIamSure: '是的，我确定',
         claim: '领取',
         details: '详情',
-        available: '份',
+        avi: '份',
         findDeal: '来看看今日的折扣食物！',
         whyYouSay: '你可能会好奇这些食品为什么最终来到了我们这儿?',
+        sip: '查看我的订单',
+        suc: '领取成功！',
+        sucmes: '请注意取货的时间哦!'
     }
 };
 
