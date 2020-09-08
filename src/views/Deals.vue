@@ -15,22 +15,31 @@
       					<v-list>
   							<v-select
 					          v-model="filter.checkedAreas"
-					          :items="areas"
-					          label="Filter by area"
-					          multiple
+					          :items="areas"					          multiple
 					          chips
 					          color="#DFA937"
                     @change="filterDeals"
-					        ></v-select>
+					        >
+					        	<template v-slot:label>
+										<div>
+											{{ $t('fba') }}
+										</div>
+									</template>
+					        </v-select>
 					        <v-select
 					          v-model="filter.checkedTypes"
 					          :items="vendor_type"
-					          label="Filter by venue"
 					          multiple
 					          chips
 					          color="#DFA937"
                     @change="filterDeals"
-					        ></v-select>
+					        >
+					        	<template v-slot:label>
+										<div>
+											{{ $t('fbt') }}
+										</div>
+									</template>
+					        </v-select>
         				</v-list>
     				</v-col>
   				</v-row>

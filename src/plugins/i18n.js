@@ -150,7 +150,6 @@ const messages = {
         claimed: '领取',
         deletePromo: '删除促销',
         areYouSure: '您确定要删除促销吗? 一经操作无法撤回',
-        areYouSureProfile: '您确定要删除促销吗?',
         yesIamSure: '是的，我确定',
         claim: '领取',
         details: '详情',
@@ -162,7 +161,8 @@ const messages = {
         sucmes: '请注意取货的时间哦!',
         heifren: '嘿，您好像还未注册商家账户哦，请创建商家账户并提交审核。',
         confi: '提交成功！',
-        hassub: '您的申请已提交，账户经理会立刻联系您并验证账户。您可以开始创建您的商户档案及优惠食品，信息均会在验证结束后显示。'
+        hassub: '您的申请已提交，账户经理会立刻联系您并验证账户。您可以开始创建您的商户档案及优惠食品，信息均会在验证结束后显示。',
+        areYouSureProfile: '您确定取消该笔订单吗？'
     }
 };
 
