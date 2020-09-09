@@ -113,7 +113,7 @@
 				depressed
 				to="/deals"
 			>
-				{{ $t('findDeal') }}
+				{{ $t('browseDeals') }}
 			</v-btn>
 		</v-layout>
 	</div>
