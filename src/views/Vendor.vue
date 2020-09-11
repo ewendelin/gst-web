@@ -79,7 +79,7 @@
 							          <v-text-field
 							            v-model="start_date"
 							            prepend-icon="mdi-calendar"
-							            
+
 							            v-on="on"
 							            color="#DFA937"
 							          >
@@ -90,7 +90,7 @@
 										</template>
 							          </v-text-field>
 							        </template>
-							        <v-date-picker v-model="newPromotion.start_date" no-title scrollable color="#DFA937">
+							        <v-date-picker v-model="start_date" no-title scrollable color="#DFA937">
 							          <v-spacer></v-spacer>
 							          <v-btn text color="#DFA937" @click="menu = false">{{ $t('cancel') }}</v-btn>
 							          <v-btn text color="#DFA937" @click="$refs.menu.save(start_date)">OK</v-btn>
@@ -120,7 +120,7 @@
 										</template>
 							          </v-text-field>
 							        </template>
-							        <v-date-picker v-model="newPromotion.end_date" no-title scrollable color="#DFA937">
+							        <v-date-picker v-model="end_date" no-title scrollable color="#DFA937">
 							          <v-spacer></v-spacer>
 							          <v-btn text color="#DFA937" @click="menu1 = false">{{ $t('cancel') }}</v-btn>
 							          <v-btn text color="#DFA937" @click="$refs.menu1.save(end_date)">OK</v-btn>
@@ -212,7 +212,7 @@
 							lazy-validation
 							class="mx-5">
 								<v-text-field v-model="token"
-									
+
 									required
 									color="#DFA937">
 									<template v-slot:label>
@@ -269,7 +269,7 @@
 									</template>
 								</v-text-field>
 								<v-text-field v-model="vendor.address"
-									
+
 									required
 									color="#DFA937">
 									<template v-slot:label>
@@ -387,9 +387,9 @@
 					<p class="font-weight-medium text-center pt-12">
 					{{ $t('heifren') }}
 					</p>
-				
+
 					<v-btn
-					@click.stop="dialogra = true" 
+					@click.stop="dialogra = true"
 					dark
 					width="95%"
 					color="#DFA937"
@@ -399,8 +399,8 @@
 					</v-btn>
 				</v-col>
 			<!-- </v-layout> -->
-				
-				
+
+
 				<v-dialog v-model="dialogra" max-width="350">
 					<v-card center class="pt-12 pb-12">
 						<v-layout row class="mx-auto mb-n4 mt-n4">
@@ -411,7 +411,7 @@
 							</v-layout>
 						<!-- <v-col> -->
 						<v-layout row class="mx-5">
-							
+
 							<v-card-title class="title mt-n3">{{ $t('registerVendor') }}</v-card-title>
 							</v-layout>
 								<v-form ref="form" v-model="valid" lazy-validation class="mx-8">
@@ -552,7 +552,7 @@
 				          <v-btn color="#DFA937" text @click="confirm = false">{{ $t('close') }}</v-btn>
 				        </v-card-actions>
 				      </v-card>
-				</v-dialog> 
+				</v-dialog>
 					<!-- <VNav /> -->
 			</v-col>
 			<!-- </v-layout>  -->
@@ -599,7 +599,7 @@ export default {
         .catch(e => {
           this.error.push(e);
     });
-    } 
+    }
   },
   data() {
     return {
@@ -607,9 +607,9 @@ export default {
       dialogra: false,
       valid: true,
       valid1: true,
-	  valid2: true,
-	  valid3: true,
-	  confirm: false,
+	    valid2: true,
+	    valid3: true,
+	    confirm: false,
       nameRules: [
         v => !!v || 'Name is required',
       ],
@@ -649,12 +649,12 @@ export default {
       areas: ['Xuhui', 'Jingan', 'Huangpu', 'Changning', 'Hongkou', 'Yangpu', 'Putuo', 'Pudong', 'Other'],
       coupon: {token: ''},
       newPromotion: {
-		title: '',
-		description: '',
-		disclaimer: '',
-		start_date: '',
-		end_date: '',
-		start_time: '08:30',
+		    title: '',
+		    description: '',
+		    disclaimer: '',
+		    start_date: '',
+		    end_date: '',
+		    start_time: '08:30',
       	end_time: '23:00',
       	status: '',
       	price: '',
@@ -664,15 +664,15 @@ export default {
       updateVendor: {
       },
       newVendorProfile: {
-  		name: '',
-  		vendor_type: '',
-  		description: '',
-  		contact_number: '',
-  		address: '',
-  		area: '',
-  		logo_img: '',
-  		main_img: '',
-		}
+  		  name: '',
+  		  vendor_type: '',
+  		  description: '',
+  		  contact_number: '',
+  		  address: '',
+  		  area: '',
+  		  logo_img: '',
+  		  main_img: '',
+		  }
     };
   },
   methods: {
@@ -730,7 +730,7 @@ export default {
       	this.dialog2 = false;
         location.reload();
       }
-      
+
     },
     handleChange(file, fileList) {
       this.fileList = fileList.slice(-3);
@@ -749,9 +749,9 @@ export default {
     },
     createPromotion(status) {
       let promotion = this.newPromotion;
-      // promotion["status"] = status;
-      promotion['vendor_profile_id'] = this.vendor.id
-      // promotion['title'] = this.data.title
+      promotion.start_date = this.start_date
+      promotion.end_date = this.end_date
+      promotion.vendor_profile_id = this.vendor.id
       promotion.status = status;
       this.$api
         .post(`/promotions`, {
@@ -802,7 +802,7 @@ export default {
     		.post(`/vendor_profiles/${id}`,
     			{vendor: updated_vendor})
     		.then( () => {
-    			
+
     			this.updateVendor = {};
     			this.dialog2 = false;
     			this.submitUploadVendorLogo(id);
