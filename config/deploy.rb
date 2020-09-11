@@ -14,12 +14,8 @@ set :forward_agent, true     # SSH forward_agent.
 set :application_name, 'gast-web'
 set :domain, 'gast.world'
 set :deploy_to, '/home/production/web'
-
-# set :repository, 'git@gitee.com:ellenwendelin/gst-web.git'
-# set :branch, 'newcards'
-
 set :repository, 'git@github.com:ewendelin/gst-web.git'
-# set :branch, 'production'
+set :branch, 'working'
 
 # Optional settings:
 #   set :user, 'foobar'          # Username in the server to SSH to.
