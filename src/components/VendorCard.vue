@@ -77,7 +77,7 @@
                         </template>
                       </v-text-field>
                     </template>
-                    <v-date-picker v-model="promotion.start_date" no-title scrollable color="#DFA937">
+                    <v-date-picker v-model="start_date" no-title scrollable color="#DFA937">
                       <v-spacer></v-spacer>
                       <v-btn text color="#DFA937" @click="menu3 = false">{{ $t('cancel') }}</v-btn>
                       <v-btn text color="#DFA937" @click="saveToToggle('start_date', promotion.start_date),menu3 = false">OK</v-btn>
@@ -110,7 +110,7 @@
                         </template>
                       </v-text-field>
                     </template>
-                    <v-date-picker v-model="promotion.end_date" no-title scrollable color="#DFA937">
+                    <v-date-picker v-model="end_date" no-title scrollable color="#DFA937">
                       <v-spacer></v-spacer>
                       <v-btn text color="#DFA937" @click="menu4 = false">{{ $t('cancel') }}</v-btn>
                       <v-btn text color="#DFA937" @click="saveToToggle('end_date', promotion.end_date),menu4 = false">OK</v-btn>
@@ -251,6 +251,7 @@
                     </v-date-picker>
                   </v-menu>
                   <el-time-select
+                  class="endtime"
                   v-model="start_time"
                   :picker-options="{
                     start: '00:00',
@@ -307,13 +308,13 @@
                     </template>
                   </v-text-field>
                 <v-card-actions class="d-flex justify-space-around pb-3">
-                  <v-btn 
+                  <v-btn
                     width="90%" dark color="#DFA937" tile class="buttons" depressed @click="update(promotion), promotion.dialog3 = false">
                     {{ $t('activate') }}
                   </v-btn>
                 </v-card-actions>
                 </v-form>
-                
+
                 <v-form class="mx-5" v-else-if="promotion.status == 'onsale'">
                   <v-card-actions class="d-flex justify-space-around pb-3">
                   <v-btn
@@ -568,12 +569,14 @@
       update(promotion) {
         let id = promotion.id
         let updatedPromotion = {}
-        updatedPromotion.start_date = this.togglePromotion.start_date
-        updatedPromotion.end_date = this.togglePromotion.end_date
+        // updatedPromotion.start_date = this.togglePromotion.start_date
+        updatedPromotion.start_date = this.start_date
+        // updatedPromotion.end_date = this.togglePromotion.end_date
+        updatedPromotion.end_date = this.end_date
         updatedPromotion.start_time = this.togglePromotion.start_time
         updatedPromotion.end_time = this.togglePromotion.end_time
         updatedPromotion.price = promotion.price
-        
+
         // this.$api.post(`/promotions/${id}/state`, {promotion: updatedPromotion})
         //   .then(
         //     // alert('post'),
