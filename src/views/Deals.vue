@@ -56,6 +56,7 @@
 	          <v-card
 				class="mb-2 mx-auto px-0"
 	            light
+	            style="max-width: 30rem;"
 	            v-for="promotion in details"
 				:key="promotion.id"
 				@click.native="promotion.deets = true"
