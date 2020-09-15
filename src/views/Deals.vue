@@ -103,7 +103,7 @@
               				fab 
               				x-small
               				depressed
-              				color="#dfa937"
+              				color="#FFB300"
               				@click.stop="getCoupon(promotion)">
 					        	<v-icon>mdi-cart-plus
 					        	</v-icon>
@@ -125,7 +125,7 @@
 									<v-btn
 										width="80%"
 										dark
-										color="#DFA937"
+										color="#FFB300"
 										tile
 										class="buttons"
 										depressed
@@ -172,7 +172,7 @@
 									<v-btn
 										width="80%"
 										dark
-										color="#DFA937"
+										color="#FFB300"
 										tile
 										class="buttons"
 										depressed
