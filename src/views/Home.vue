@@ -54,8 +54,7 @@
 			        </v-list-item-subtitle>
 			      </v-list-item-content>
 			    </v-list-item>
-        	</v-col>
-        	<v-col cols="12">
+        	
             	<v-list-item three-line>
 			    	<v-list-item-icon>
             			<v-icon size="62">mdi-silverware-fork-knife</v-icon>
@@ -67,8 +66,7 @@
 			        </v-list-item-subtitle>
 			      </v-list-item-content>
 			    </v-list-item>
-        	</v-col>
-        	<v-col cols="12">
+        	
             	<v-list-item three-line>
 			    	<v-list-item-icon>
             			<v-img class="logo1" src="../assets/logo.png"></v-img>
