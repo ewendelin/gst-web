@@ -4,33 +4,21 @@
 		<v-btn class="" text color="grey" to="/vendor"	>{{ $t('forVendors') }}
 			<v-icon class="pl-1">mdi-store</v-icon>
 		</v-btn>
-		<v-layout row class="mx-0 my-8">
-			<v-col cols="12"
-	            sm="12"
-	            md="12"
-	            lg="12"
-	            style=""
-	            class="">
-				<v-img height="200px" src="http://qgn108sp2.hd-bkt.clouddn.com/PastaL.png"></v-img>
-			</v-col>
-				<v-col cols="12"
-	            sm="12"
-	            md="12"
-	            lg="12"
-	            style=""
-	            class="">
+		<v-img height="200px" src="http://qgn108sp2.hd-bkt.clouddn.com/PastaL.png"></v-img>
+		<v-layout row class="mx-0 my-1">
+				<v-col cols="12">
             	<h1 class="text-center font-weight-bold" style="color:#FFCD00; font-size: 3rem;">Hungry?</h1>
             	<p class="text-center" subtitle-1 style="color:#424242;">Find good deals on food that needs to be consumed.</p>
-            	<v-row
-        		class="ma-0"
+            	<v-layout row
+        		class="ma-1"
           		align="center"
-          		justify="center">
+          		>
 	            	<v-btn
 					width="20rem"
 					dark
 					color="#FFCD00"
 					tile
-					class="buttons ma-5"
+					class="buttons mx-5"
 					depressed
 					to="/deals"
 						>{{ $t('browseDeals') }}
@@ -42,18 +30,18 @@
 						dark
 						color="#FFCD00"
 						tile
-						class="buttonst"
+						class="buttonst mx-5 mt-3"
 						depressed
 						@click="wxLogin()"
 					>{{ $t('userLogin') }}
 						<v-icon right>mdi-wechat</v-icon>
 					</v-btn>
-			</v-row>
+			</v-layout>
         	</v-col>
         
 		</v-layout>
 
-		<v-layout row class="mx-0">
+		<v-layout row class="mx-1">
 			<v-col cols="12"
 			xs="12"
             sm="12"
