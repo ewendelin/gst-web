@@ -5,12 +5,12 @@
 			<v-icon class="pl-1">mdi-store</v-icon>
 		</v-btn>
 		<v-img height="200px" src="http://qgn108sp2.hd-bkt.clouddn.com/PastaL.png"></v-img>
-		<v-layout row class="mx-0 my-1">
+		<v-layout row class="mx-0 mt-n12">
 				<v-col cols="12">
             	<h1 class="text-center font-weight-bold" style="color:#FFB300; font-size: 3rem;">Hungry?</h1>
             	<p class="text-center" subtitle-1 style="color:#424242;">Find good deals on food that needs to be consumed.</p>
             	<v-layout row
-        		class="ma-1"
+        		class="ma-1 mt-n4"
           		align="center"
           		>
           		<v-col>
@@ -40,7 +40,6 @@
 				</v-col>
 			</v-layout>
         	</v-col>
-        
 		</v-layout>
 
 		<v-layout row class="mx-1">
