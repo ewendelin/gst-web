@@ -19,7 +19,7 @@
 					dark
 					color="#FFB300"
 					tile
-					class="buttons mx-5"
+					class="buttons"
 					depressed
 					to="/deals"
 						>{{ $t('browseDeals') }}
@@ -31,7 +31,7 @@
 						dark
 						color="#FFCD00"
 						tile
-						class="buttonst mx-5 mt-3"
+						class="buttonst mt-3"
 						depressed
 						@click="wxLogin()"
 					>{{ $t('userLogin') }}
