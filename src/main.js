@@ -14,7 +14,7 @@ const apiURLProd =  'https://api.gast.world/api/v1';
 const apiURLDev =  'http://localhost:3000/api/v1';
 
 const apiURL = ENV == 'production' ? apiURLProd : apiURLDev ;
-const loginURL =  'https://www.gast.world';
+const loginURL =  'https://www.gast.world/deals';
 // login logic,
 var api = axios.create({
   baseURL: apiURL
