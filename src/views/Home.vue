@@ -5,7 +5,14 @@
 			<v-icon class="pl-1">mdi-store</v-icon>
 		</v-btn>
 		<v-layout row class="mx-0 my-8">
-			<v-img height="200px" src="http://qgn108sp2.hd-bkt.clouddn.com/PastaL.png"></v-img>
+			<v-col cols="12"
+	            sm="12"
+	            md="12"
+	            lg="12"
+	            style=""
+	            class="">
+				<v-img height="200px" src="http://qgn108sp2.hd-bkt.clouddn.com/PastaL.png"></v-img>
+			</v-col>
 				<v-col cols="12"
 	            sm="12"
 	            md="12"
