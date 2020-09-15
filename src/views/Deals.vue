@@ -247,7 +247,8 @@
 				valid: '',
 				show: false,
 				areas: ['Xuhui', 'Jingan', 'Huangpu', 'Changning', 'Hongkou', 'Yangpu', 'Putuo', 'Pudong', 'Other'],
-				vendor_type: ['Restaurant', 'Bar', 'Cafe', 'Store']
+				vendor_type: ['Restaurant', 'Bar', 'Cafe', 'Store'],
+				login: !(sessionStorage.getItem('token') != undefined && sessionStorage.getItem('token') != 'logout'),
 			};
 		},
 		methods: {
@@ -294,7 +295,7 @@
 	    //   if (storedToken != undefined || storedToken != null) {
 	    //     this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
 			  // }
-						let storedToken = sessionStorage.getItem('token');
+			let storedToken = sessionStorage.getItem('token');
 
 			let login = !(storedToken != undefined && storedToken != 'logout')
 			this.login = login;

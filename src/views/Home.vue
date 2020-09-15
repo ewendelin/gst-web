@@ -71,7 +71,7 @@
         	
             	<v-list-item three-line>
 			    	<v-list-item-icon>
-            			<v-img class="logo1" src="../assets/logo.png"></v-img>
+            			<v-img class="logo1" src="../assets/21.png"></v-img>
           			</v-list-item-icon>
 			      <v-list-item-content>
 			        <v-list-item-title>So, why 寻饱XunBao?</v-list-item-title>
