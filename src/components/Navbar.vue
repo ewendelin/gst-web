@@ -1,48 +1,19 @@
 <template>
 	<nav>
-		<!-- <v-layout>
-
-			<v-app-bar app text prominent hide-on-scroll class="mb-5" >
-				<v-layout col style="margin-top: 1rem;">
-					<v-btn color="#FFF" icon x-large to="/">
-						<Gast class="lgb"/>
-					</v-btn>
-				</v-layout>
-				<v-flex class="justify-space-around">
-
-				</v-flex>
-				<v-spacer></v-spacer>
-
-				<v-spacer></v-spacer>
-				<v-btn text to="/deals">
-						<span>Browse Coupons</span>
-						<v-icon right>mdi-sale</v-icon>
-					</v-btn>
-
-					<v-btn text to="/profile">
-						<span>Profile</span>
-						<v-icon right>mdi-account</v-icon>
-					</v-btn>
-
-			</v-app-bar>
-		</v-layout> -->
-
-
 		<v-bottom-navigation
 			grow
 			fixed
-			color="#DFA937"
+			color="#FFCD00"
 			width
 			height
-
 		>
 			<v-btn to="/deals">
 				<span>{{ $t('deals') }}</span>
 				<v-icon>mdi-sale</v-icon>
 			</v-btn>
 			<v-btn to="/">
-        <img class="logo" src="http://gast-vendor.gast.world/logo.png" />
-				<!-- <Gast class="logo" /> -->
+        <!-- <img class="logo" src="http://gast-vendor.gast.world/logo.png" /> -->
+				<Gast class="logo" />
 			</v-btn>
 			<v-btn to="/profile">
 				<span>{{ $t('profile') }}</span>
@@ -53,11 +24,11 @@
 </template>
 
 <script>
-  // import Gast from '../assets/logo.svg';
-	// import Gast from '../assets/logo.svg';
+  // import Gast from '../assets/xunbaologo.svg';
+	import Gast from '../assets/logo.svg';
 	export default {
 		name: 'Navbar',
-		components: { },
+		components: { Gast },
 		props: {
             msg: String
         },
