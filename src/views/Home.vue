@@ -7,16 +7,17 @@
 		<v-img height="200px" src="http://qgn108sp2.hd-bkt.clouddn.com/PastaL.png"></v-img>
 		<v-layout row class="mx-0 my-1">
 				<v-col cols="12">
-            	<h1 class="text-center font-weight-bold" style="color:#FFCD00; font-size: 3rem;">Hungry?</h1>
+            	<h1 class="text-center font-weight-bold" style="color:#FFB300; font-size: 3rem;">Hungry?</h1>
             	<p class="text-center" subtitle-1 style="color:#424242;">Find good deals on food that needs to be consumed.</p>
             	<v-layout row
         		class="ma-1"
           		align="center"
           		>
+          		<v-col>
 	            	<v-btn
 					width="20rem"
 					dark
-					color="#FFCD00"
+					color="#FFB300"
 					tile
 					class="buttons mx-5"
 					depressed
@@ -36,6 +37,7 @@
 					>{{ $t('userLogin') }}
 						<v-icon right>mdi-wechat</v-icon>
 					</v-btn>
+				</v-col>
 			</v-layout>
         	</v-col>
         
@@ -148,7 +150,7 @@
 	}
 	.buttonst {
 		border-radius: 5px;
-		background-color: #FF8D00 !important;
+		background-color: #FFCD00 !important;
 		color: #FFF !important;
 	}
 	.log {
