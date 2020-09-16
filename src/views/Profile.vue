@@ -18,7 +18,7 @@
 						
 						<v-btn fab text @click="logout()"
 						>
-							<v-icon>mdi-logout</v-icon>
+							<v-icon>mdi-cog</v-icon>
 						</v-btn>
 					</v-list-item-icon>
 				</v-list-item>
@@ -173,7 +173,7 @@
 	        </v-row>
 	      </v-col>
 		</v-layout>
-		<h3 class="mx-4 mt-3">Past Orders</h3>
+		<h3 class="mx-4 mt-3 mb-n3">Past Orders</h3>
 		<v-layout row class="mx-auto" style="max-width: 100vw;" align-center justify-center>
 		<!-- <v-row> -->
 	      <v-col cols="12">
