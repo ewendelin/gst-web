@@ -1,110 +1,91 @@
 <template>
 	<div class="home">
 		<Navbar />
-		<v-layout>
-			<v-img height="150px" src="https://gast-dev.gast.world/Rice.png"></v-img>
-		</v-layout>
-		<v-layout col>
-		<v-spacer></v-spacer>
-		<v-btn class="my-n5 py-0 mb-n12 mt-n8" text color="grey" to="/vendor">{{ $t('forVendors') }}
+		<v-btn class="" text color="grey" to="/vendor"	>{{ $t('forVendors') }}
 			<v-icon class="pl-1">mdi-store</v-icon>
 		</v-btn>
-		</v-layout>
-	
-		<v-layout row class="mx-8 my-8" justify-center align-center>
-
-		<v-col cols="12"
-            sm="8"
-            md="6"
-            lg="6">
-            <p class="font-weight-medium text-center">
-				{{ $t('findDeal') }}
-			</p>
-			<v-btn
-				width="95%"
-				dark
-				color="#DFA937"
-				tile
-				class="buttons"
-				depressed
-				to="/deals"
-			>{{ $t('browseDeals') }}
-				<v-icon right>mdi-sale</v-icon>
-			</v-btn>
-			<v-btn
-				v-if="login"
-				width="95%"
-				dark
-				color="#DFA937"
-				tile
-				class="buttonst"
-				depressed
-				@click="wxLogin()"
-			>{{ $t('userLogin') }}
-				<v-icon right>mdi-wechat</v-icon>
-			</v-btn>			
-			<!-- <v-btn tile class="buttonst" width="95%" depressed to="/vendor">
-				for vendors
-				<v-icon right>mdi-store</v-icon>
-			</v-btn> -->
-
-			<v-list>
-				<p class="font-weight-medium mt-5 text-center">
-					{{ $t('whyYouSay') }}
-				</p>
-				<v-row>
-			      <v-col cols="12">
-			        <!-- <v-row
-			        class="mt-4"
-			          align="center"
-			          justify="space-around"
-			        >
-			        	<div class="item">
-    						<v-icon large>mdi-pot-steam</v-icon>
-    						<span class="caption">Made Fresh</span>
-						</div>
-			        	<div class="item">
-    						<v-icon large>mdi-check-decagram</v-icon>
-    						<span class="caption">Verified vendors</span>
-						</div>
-			        </v-row> -->
-			        <v-row
-			        class="mt-12"
-			          align="center"
-			          justify="space-around"
-			        >
-			        	<div class="item">
-    						<v-icon large>mdi-factory</v-icon>
-    						<span class="caption">{{ $t('overProduction') }}</span>
-						</div>
-			        	<div class="item">
-    						<v-icon large>mdi-clock-alert</v-icon>
-    						<span class="caption">{{ $t('ssll') }}</span>
-						</div>
-			        </v-row>
-					<v-row
-					  class="mt-12"
-			          align="center"
-			          justify="space-around"
-			        >
-			        	<div class="item">
-    						<v-icon large>mdi-barley</v-icon>
-    						<span class="caption ">{{ $t('seasonSpec') }}</span>
-						</div>
-			        	<div class="item">
-    						<v-icon large>mdi-package-variant</v-icon>
-    						<span class="caption ">{{ $t('packageDef') }}</span>
-						</div>
-			        </v-row>
-			      </v-col>
-			    </v-row>
-			</v-list>
-		</v-col>
+		<v-img height="200px" src="http://qgn108sp2.hd-bkt.clouddn.com/PastaL.png"></v-img>
+		<v-layout row class="mx-0 mt-n12">
+				<v-col cols="12">
+            	<h1 class="text-center font-weight-bold" style="color:#FFB300; font-size: 3rem;">Hungry?</h1>
+            	<p class="text-center" subtitle-1 style="color:#424242;">Find good deals on food that needs to be consumed.</p>
+            	<v-layout row
+        		class="ma-1 mt-n4"
+          		align="center"
+          		>
+          		<v-col>
+	            	<v-btn
+					width="20rem"
+					dark
+					color="#FFB300"
+					tile
+					class="buttons"
+					depressed
+					to="/deals"
+						>{{ $t('browseDeals') }}
+						<v-icon right>mdi-sale</v-icon>
+					</v-btn>
+					<v-btn
+						v-if="login"
+						width="20rem"
+						dark
+						color="#FFCD00"
+						tile
+						class="buttonst mt-3"
+						depressed
+						@click="wxLogin()"
+					>{{ $t('userLogin') }}
+						<v-icon right>mdi-wechat</v-icon>
+					</v-btn>
+				</v-col>
+			</v-layout>
+        	</v-col>
 		</v-layout>
 
+		<v-layout row class="mx-1">
+			<v-col cols="12">
+			    <v-list-item three-line>
+			    	<v-list-item-icon>
+            			<v-icon size="62" color="#5BB452">mdi-check-decagram</v-icon>
+          			</v-list-item-icon>
+			      <v-list-item-content>
+			        <v-list-item-title>Verified Vendors</v-list-item-title>
+			        <v-list-item-subtitle>
+			          Vendors have been verified and kitchens follow strict hygene rules
+			        </v-list-item-subtitle>
+			      </v-list-item-content>
+			    </v-list-item>
+        	
+            	<v-list-item three-line>
+			    	<v-list-item-icon>
+            			<v-icon size="62">mdi-silverware-fork-knife</v-icon>
+          			</v-list-item-icon>
+			      <v-list-item-content>
+			        <v-list-item-title>Made Fresh</v-list-item-title>
+			        <v-list-item-subtitle>
+			          Food is fresh and has been prepared by professional chefs
+			        </v-list-item-subtitle>
+			      </v-list-item-content>
+			    </v-list-item>
+        	
+            	<v-list-item three-line>
+			    	<v-list-item-icon>
+            			<v-img class="logo1" src="../assets/21.png"></v-img>
+          			</v-list-item-icon>
+			      <v-list-item-content>
+			        <v-list-item-title>So, why 寻饱XunBao?</v-list-item-title>
+			        <v-list-item-subtitle>
+			          Overproduction, approaching expiry dates, package deformation etc
+			        </v-list-item-subtitle>
+			      </v-list-item-content>
+			    </v-list-item>
+        	</v-col>
+		</v-layout>
+		<v-img height="200px" src="https://xunbao-assets.gast.world/RiceRcopy.png"></v-img>
 	</div>
 </template>
 <script>
+	// import Gast from '../assets/logo.svg';
 	import Navbar from '../components/Navbar';
 	
 	export default {
@@ -115,17 +96,6 @@
         },
 		data() {
 			return {
-				items: [
-					{ icon: true, title: 'Overproduction' },
-					{ icon: true, title: 'Short time until best before date' },
-					{ icon: true, title: 'Season specific food' },
-					{ icon: true, title: 'Packaging deformation' },
-					{ icon: true, title: 'Production mistakes' }
-				],
-				items1: [
-					{ icon: true, title: 'Spoiled food' },
-					{ icon: true, title: 'Food waste' }
-				],
 				dialog2: false,
 				dialog1: false,
 				snackbar: false,
@@ -138,36 +108,39 @@
 			}
 		},
 		created() {
-
 			let storedToken = sessionStorage.getItem('token');
+	   		if (storedToken != undefined || storedToken != null) {
+	    	this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+			  
+			// let storedToken = sessionStorage.getItem('token');
 
-			let login = !(storedToken != undefined && storedToken != 'logout')
-			this.login = login;
+			// let login = !(storedToken != undefined && storedToken != 'logout')
+			// this.login = login;
 
-			if ((storedToken != null || storedToken != undefined) && storedToken != 'logout') {
-        		this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-				// redirect('/deals')
-			}
-			if (this.$route.query.code != null || this.$route.query.code != undefined) {
-               this.$api
-				.get(
-					`/users/login/wx_web_login?code=${this.$route.query.code}`
-				)
-				.then((res) => {
-              this.$api.defaults.headers.common['X-Auth-Token'] = res.data.user.token
-              sessionStorage.setItem('token', res.data.user.token);
-              sessionStorage.setItem('user', JSON.stringify(res.data.user));
+			// if ((storedToken != null || storedToken != undefined) && storedToken != 'logout') {
+   //      		this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+			// 	// redirect('/deals')
+			// }
+			// if (this.$route.query.code != null || this.$route.query.code != undefined) {
+   //             this.$api
+			// 	.get(
+			// 		`/users/login/wx_web_login?code=${this.$route.query.code}`
+			// 	)
+			// 	.then((res) => {
+   //            this.$api.defaults.headers.common['X-Auth-Token'] = res.data.user.token
+   //            sessionStorage.setItem('token', res.data.user.token);
+   //            sessionStorage.setItem('user', JSON.stringify(res.data.user));
 
               // Vue.prototype.$api = this.$api;
-              window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
-            })
-						.catch(() => {
-              window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
-            });
-	  		}
-
-		 },
-	};
+     //          window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
+     //        })
+					// 	.catch(() => {
+     //          window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
+     //        });
+	  		// }
+		}
+	}
+}
 </script>
 
 <style scoped>
@@ -179,12 +152,16 @@
 	}
 	.buttonst {
 		border-radius: 5px;
-		background-color: rgba(223, 169, 55, 20%) !important;
-		color: #dfa937 !important;
+		background-color: #07C160 !important;
+		color: #FFF !important;
 	}
 	.log {
 		width: 10rem;
 		height: 10rem;
+	}
+	.logo1 {
+		width: 4rem;
+		height: 4rem;
 	}
 	div.item {
     vertical-align: top;

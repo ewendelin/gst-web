@@ -42,7 +42,7 @@
 </template>
 
 <script>
-	import Gast from '../assets/rac1.svg';
+	import Gast from '../assets/logo.svg';
 	export default {
 		name: 'VNav',
 		components: { Gast },

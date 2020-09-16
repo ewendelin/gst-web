@@ -103,7 +103,7 @@
               				fab 
               				x-small
               				depressed
-              				color="#dfa937"
+              				color="#FFB300"
               				@click.stop="getCoupon(promotion)">
 					        	<v-icon>mdi-cart-plus
 					        	</v-icon>
@@ -125,7 +125,7 @@
 									<v-btn
 										width="80%"
 										dark
-										color="#DFA937"
+										color="#FFB300"
 										tile
 										class="buttons"
 										depressed
@@ -172,7 +172,7 @@
 									<v-btn
 										width="80%"
 										dark
-										color="#DFA937"
+										color="#FFB300"
 										tile
 										class="buttons"
 										depressed
@@ -247,7 +247,8 @@
 				valid: '',
 				show: false,
 				areas: ['Xuhui', 'Jingan', 'Huangpu', 'Changning', 'Hongkou', 'Yangpu', 'Putuo', 'Pudong', 'Other'],
-				vendor_type: ['Restaurant', 'Bar', 'Cafe', 'Store']
+				vendor_type: ['Restaurant', 'Bar', 'Cafe', 'Store'],
+				login: !(sessionStorage.getItem('token') != undefined && sessionStorage.getItem('token') != 'logout'),
 			};
 		},
 		methods: {
@@ -290,10 +291,37 @@
       }
 		},
 	  created () {
-	      let storedToken = sessionStorage.getItem('token');
-	      if (storedToken != undefined || storedToken != null) {
-	        this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-			  }
+	    //   let storedToken = sessionStorage.getItem('token');
+	    //   if (storedToken != undefined || storedToken != null) {
+	    //     this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+			  // }
+			let storedToken = sessionStorage.getItem('token');
+
+			let login = !(storedToken != undefined && storedToken != 'logout')
+			this.login = login;
+
+			if ((storedToken != null || storedToken != undefined) && storedToken != 'logout') {
+        		this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+				// redirect('/deals')
+			}
+			if (this.$route.query.code != null || this.$route.query.code != undefined) {
+               this.$api
+				.get(
+					`/users/login/wx_web_login?code=${this.$route.query.code}`
+				)
+				.then((res) => {
+              this.$api.defaults.headers.common['X-Auth-Token'] = res.data.user.token
+              sessionStorage.setItem('token', res.data.user.token);
+              sessionStorage.setItem('user', JSON.stringify(res.data.user));
+
+              // Vue.prototype.$api = this.$api;
+              window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
+            })
+						.catch(() => {
+              window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
+            });
+	  		}
+
   			this.$api
   				.get(`/promotions`)
   					.then(response => {
@@ -324,6 +352,11 @@
   	    // }
 	  };
 </script>
+
+{
+
+
+		},
 
 <style scoped>
 	.home {
