@@ -51,8 +51,8 @@
 									<v-row
 									class="mt-3 ml-1 mb-n12 pb-n12">
 					        			
-					        			<!-- <v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{deal.promotion.price}}</v-card-title>
-					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{deal.promotion.original_price}}</v-card-title> -->
+					        			<v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{deal.promotion.price}}</v-card-title>
+					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{deal.promotion.original_price}}</v-card-title>
 					    			</v-row>
 									<v-card-actions class="mx-n1 mt-7 cols-3 mb-n2">
 								    	<v-btn small
@@ -101,9 +101,9 @@
 													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.promotion.time_slot }}</v-list-item-title>
 													</v-list-item>
 													<v-spacer></v-spacer>
-													<!-- <v-card-text class="py-0">
+													<v-card-text class="py-0">
 														{{ deal.promotion.description }}
-													</v-card-text> -->
+													</v-card-text>
 												</v-list>
 											</v-layout>
 												<v-layout row class="mx-5">
@@ -113,26 +113,26 @@
 																<v-img src="https://cdn.vuetifyjs.com/images/cards/cooking.png" alt="Logo" />
 															</v-list-item-avatar>
 															<v-list-item-content>
-																<v-list-item-title>{{ deal.vendor_name }}</v-list-item-title>
+																<v-list-item-title>{{ deal.promotion.vendor.name }}</v-list-item-title>
 															</v-list-item-content>
 														</v-list-item>
-														<!-- <v-list-item class="mt-1 mb-n3">
+														<v-list-item class="mt-1 mb-n3">
 													        <v-list-item-icon class="pr-0 mr-0">
 													          <v-icon small>mdi-home</v-icon>
 													        </v-list-item-icon>
 
-													        <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.vendor.address }}</v-list-item-title>
-													    </v-list-item> -->
-														<!-- <v-list-item class="mb-0 pb-0">
+													        <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.promotion.vendor.address }}</v-list-item-title>
+													    </v-list-item>
+														<v-list-item class="mb-0 pb-0">
 													        <v-list-item-icon class="pr-0 mr-0">
 													          <v-icon small>mdi-phone</v-icon>
 													        </v-list-item-icon>
 
-													        <v-list-item-title class="font-weight-bold" style="font-size:.8rem;">{{ deal.vendor.contact_number }}</v-list-item-title>
+													        <v-list-item-title class="font-weight-bold" style="font-size:.8rem;">{{ deal.promotion.vendor.contact_number }}</v-list-item-title>
 													    </v-list-item>
 														<v-card-text class="mb-1 mt-0 pt-0">
-															{{ deal.vendor.description }}
-														</v-card-text> -->
+															{{ deal.promotion.vendor.description }}
+														</v-card-text>
 													</v-list>
 												</v-layout>
 											</v-card>
