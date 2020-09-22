@@ -213,6 +213,9 @@
 	export default {
 		name: 'Profile',
 		components: { Navbar },
+		props: {
+            msg: String
+        },
 		
 		created() {
       		let storedToken = sessionStorage.getItem('token');
