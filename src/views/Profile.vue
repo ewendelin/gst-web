@@ -42,24 +42,24 @@
 			              			</v-img>
 				                </v-avatar>
 	              				<div>
-	                				<!-- <v-card-title class="mt-n1 pr-0 cols-3 text-truncate" style="font-size:1.1rem;"
-	                				>{{ deal.promotion.title }}</v-card-title> -->
 	                				<v-card-title class="mt-n1 pr-0 cols-3 text-truncate" style="font-size:1.1rem;"
-	                				>{{ deal.title }}</v-card-title>
-              						<v-card-subtitle class="caption justify-center mb-n9 pr-0 cols-5 text-truncate" style="font-size:.5rem;">
+	                				>{{ deal.promotion.title }}</v-card-title>
+	                				<!-- <v-card-title class="mt-n1 pr-0 cols-3 text-truncate" style="font-size:1.1rem;"
+	                				>{{ deal.title }}</v-card-title> -->
+              						<!-- <v-card-subtitle class="caption justify-center mb-n9 pr-0 cols-5 text-truncate" style="font-size:.5rem;">
 					      				<v-icon small class="align-end justify-center mr-1">mdi-clock-outline</v-icon>
 					      					{{ deal.time_slot }}
-									</v-card-subtitle>
-									<!-- <v-card-subtitle class="caption justify-center mb-n9 pr-0 cols-5 text-truncate" style="font-size:.5rem;">
+									</v-card-subtitle> -->
+									<v-card-subtitle class="caption justify-center mb-n9 pr-0 cols-5 text-truncate" style="font-size:.5rem;">
 					      				<v-icon small class="align-end justify-center mr-1">mdi-clock-outline</v-icon>
 					      					{{ deal.promotion.time_slot }}
-									</v-card-subtitle> -->
+									</v-card-subtitle>
 									<v-row
 									class="mt-3 ml-1 mb-n12 pb-n12">
-					        			<v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{deal.price}}</v-card-title>
-					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{deal.original_price}}</v-card-title>
-					        			<!-- <v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{deal.promotion.price}}</v-card-title>
-					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{deal.promotion.original_price}}</v-card-title> -->
+					        			<!-- <v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{deal.price}}</v-card-title>
+					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{deal.original_price}}</v-card-title> -->
+					        			<v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{deal.promotion.price}}</v-card-title>
+					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{deal.promotion.original_price}}</v-card-title>
 					    			</v-row>
 									<v-card-actions class="mx-n1 mt-7 cols-3 mb-n2">
 								    	<v-btn small
@@ -98,26 +98,26 @@
 												</v-img>
 											<v-layout row class="ml-3 mr-3 px-1 pt-0">
 												<v-list>
-													<v-card-title class="mb-n2 pb-0">
-														{{ deal.title }}
-													</v-card-title>
 													<!-- <v-card-title class="mb-n2 pb-0">
-														{{ deal.promotion.title }}
+														{{ deal.title }}
 													</v-card-title> -->
+													<v-card-title class="mb-n2 pb-0">
+														{{ deal.promotion.title }}
+													</v-card-title>
 													<v-list-item class="mt-1 mb-n3">
 													    <v-list-item-icon class="pr-0 mr-0">
 													        <v-icon small>mdi-clock</v-icon>
 													    </v-list-item-icon>
-													    <!-- <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.promotion.time_slot }}</v-list-item-title> -->
-													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.time_slot }}</v-list-item-title>
+													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.promotion.time_slot }}</v-list-item-title>
+													    <!-- <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.time_slot }}</v-list-item-title> -->
 													</v-list-item>
 													<v-spacer></v-spacer>
-													<!-- <v-card-text class="py-0">
-														{{ deal.promotion.description }}
-													</v-card-text> -->
 													<v-card-text class="py-0">
-														{{ deal.description }}
+														{{ deal.promotion.description }}
 													</v-card-text>
+													<!-- <v-card-text class="py-0">
+														{{ deal.description }}
+													</v-card-text> -->
 												</v-list>
 											</v-layout>
 												<v-layout row class="mx-5">
