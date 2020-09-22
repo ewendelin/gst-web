@@ -44,12 +44,6 @@
 	              				<div>
 	                				<v-card-title class="mt-n1 pr-0 cols-3 text-truncate" style="font-size:1.1rem;"
 	                				>{{ deal.promotion.title }}</v-card-title>
-	                				<!-- <v-card-title class="mt-n1 pr-0 cols-3 text-truncate" style="font-size:1.1rem;"
-	                				>{{ deal.title }}</v-card-title> -->
-              						<!-- <v-card-subtitle class="caption justify-center mb-n9 pr-0 cols-5 text-truncate" style="font-size:.5rem;">
-					      				<v-icon small class="align-end justify-center mr-1">mdi-clock-outline</v-icon>
-					      					{{ deal.time_slot }}
-									</v-card-subtitle> -->
 									<v-card-subtitle class="caption justify-center mb-n9 pr-0 cols-5 text-truncate" style="font-size:.5rem;">
 					      				<v-icon small class="align-end justify-center mr-1">mdi-clock-outline</v-icon>
 					      					{{ deal.promotion.time_slot }}
@@ -66,7 +60,7 @@
 								    	class="white--text"
 								    	color="#FFB300"
 								    	@click.stop="deal.dia = true">redeem</v-btn>
-											<v-dialog v-model="dia" max-width="290">
+											<v-dialog v-model="deal.dia" max-width="290">
 												<v-card>
 													<v-layout row class="mx-auto">
 														<v-card-title class="headline">{{ $t('couponCode') }}</v-card-title>
@@ -97,9 +91,6 @@
 												</v-img>
 											<v-layout row class="ml-3 mr-3 px-1 pt-0">
 												<v-list>
-													<!-- <v-card-title class="mb-n2 pb-0">
-														{{ deal.title }}
-													</v-card-title> -->
 													<v-card-title class="mb-n2 pb-0">
 														{{ deal.promotion.title }}
 													</v-card-title>
@@ -108,7 +99,6 @@
 													        <v-icon small>mdi-clock</v-icon>
 													    </v-list-item-icon>
 													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.promotion.time_slot }}</v-list-item-title>
-													    <!-- <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.time_slot }}</v-list-item-title> -->
 													</v-list-item>
 													<v-spacer></v-spacer>
 													<!-- <v-card-text class="py-0">
