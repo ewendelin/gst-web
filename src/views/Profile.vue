@@ -29,8 +29,8 @@
 	          			<v-card
 						class="mb-2 mx-auto px-0"
 			            light
-			            v-for="promotion in deals"
-			            :key="promotion.id">
+			            v-for="(deal, index) in deals"
+						:key="index">
 	            			<div class="d-flex flex-no-wrap">
 				            	<v-avatar
 				                class=""
@@ -43,16 +43,16 @@
 				                </v-avatar>
 	              				<div>
 	                				<v-card-title class="mt-n1 pr-0 cols-3 text-truncate" style="font-size:1.1rem;"
-	                				>{{ promotion.title }}</v-card-title>
+	                				>{{ deal.promotion.title }}</v-card-title>
 									<v-card-subtitle class="caption justify-center mb-n9 pr-0 cols-5 text-truncate" style="font-size:.5rem;">
 					      				<v-icon small class="align-end justify-center mr-1">mdi-clock-outline</v-icon>
-					      					{{ promotion.time_slot }}
+					      					{{ deal.promotion.time_slot }}
 									</v-card-subtitle>
 									<v-row
 									class="mt-3 ml-1 mb-n12 pb-n12">
 					        			
-					        			<v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{promotion.price}}</v-card-title>
-					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{promotion.original_price}}</v-card-title>
+					        			<!-- <v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{deal.promotion.price}}</v-card-title>
+					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{deal.promotion.original_price}}</v-card-title> -->
 					    			</v-row>
 									<v-card-actions class="mx-n1 mt-7 cols-3 mb-n2">
 								    	<v-btn small
@@ -92,18 +92,18 @@
 											<v-layout row class="ml-3 mr-3 px-1 pt-0">
 												<v-list>
 													<v-card-title class="mb-n2 pb-0">
-														{{ promotion.title }}
+														{{ deal.promotion.title }}
 													</v-card-title>
 													<v-list-item class="mt-1 mb-n3">
 													    <v-list-item-icon class="pr-0 mr-0">
 													        <v-icon small>mdi-clock</v-icon>
 													    </v-list-item-icon>
-													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ promotion.time_slot }}</v-list-item-title>
+													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.promotion.time_slot }}</v-list-item-title>
 													</v-list-item>
 													<v-spacer></v-spacer>
-													<v-card-text class="py-0">
-														{{ promotion.description }}
-													</v-card-text>
+													<!-- <v-card-text class="py-0">
+														{{ deal.promotion.description }}
+													</v-card-text> -->
 												</v-list>
 											</v-layout>
 												<v-layout row class="mx-5">
@@ -113,26 +113,26 @@
 																<v-img src="https://cdn.vuetifyjs.com/images/cards/cooking.png" alt="Logo" />
 															</v-list-item-avatar>
 															<v-list-item-content>
-																<v-list-item-title>{{ promotion.vendor.name }}</v-list-item-title>
+																<v-list-item-title>{{ deal.vendor_name }}</v-list-item-title>
 															</v-list-item-content>
 														</v-list-item>
-														<v-list-item class="mt-1 mb-n3">
+														<!-- <v-list-item class="mt-1 mb-n3">
 													        <v-list-item-icon class="pr-0 mr-0">
 													          <v-icon small>mdi-home</v-icon>
 													        </v-list-item-icon>
 
-													        <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ promotion.vendor.address }}</v-list-item-title>
-													    </v-list-item>
-														<v-list-item class="mb-0 pb-0">
+													        <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.vendor.address }}</v-list-item-title>
+													    </v-list-item> -->
+														<!-- <v-list-item class="mb-0 pb-0">
 													        <v-list-item-icon class="pr-0 mr-0">
 													          <v-icon small>mdi-phone</v-icon>
 													        </v-list-item-icon>
 
-													        <v-list-item-title class="font-weight-bold" style="font-size:.8rem;">{{ promotion.vendor.contact_number }}</v-list-item-title>
+													        <v-list-item-title class="font-weight-bold" style="font-size:.8rem;">{{ deal.vendor.contact_number }}</v-list-item-title>
 													    </v-list-item>
 														<v-card-text class="mb-1 mt-0 pt-0">
-															{{ promotion.vendor.description }}
-														</v-card-text>
+															{{ deal.vendor.description }}
+														</v-card-text> -->
 													</v-list>
 												</v-layout>
 											</v-card>
@@ -213,6 +213,9 @@
 	export default {
 		name: 'Profile',
 		components: { Navbar },
+		props: {
+            msg: String
+        },
 		
 		created() {
       		let storedToken = sessionStorage.getItem('token');
