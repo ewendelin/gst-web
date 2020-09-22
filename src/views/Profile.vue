@@ -51,8 +51,8 @@
 									<v-row
 									class="mt-3 ml-1 mb-n12 pb-n12">
 					        			
-					        			<!-- <v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{deal.promotion.price}}</v-card-title>
-					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{deal.promotion.original_price}}</v-card-title> -->
+					        			<v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{deal.promotion.price}}</v-card-title>
+					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{deal.promotion.original_price}}</v-card-title>
 					    			</v-row>
 									<v-card-actions class="mx-n1 mt-7 cols-3 mb-n2">
 								    	<v-btn small
