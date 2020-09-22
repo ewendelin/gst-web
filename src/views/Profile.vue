@@ -38,7 +38,7 @@
 				                height=""
 				                tile>
 				                	<v-img 
-			              			src="https://cdn.vuetifyjs.com/images/cards/cooking.png">
+			              			:src="deal.promotion.image">
 			              			</v-img>
 				                </v-avatar>
 	              				<div>
@@ -101,9 +101,9 @@
 													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.promotion.time_slot }}</v-list-item-title>
 													</v-list-item>
 													<v-spacer></v-spacer>
-													<!-- <v-card-text class="py-0">
+													<v-card-text class="py-0">
 														{{ deal.promotion.description }}
-													</v-card-text> -->
+													</v-card-text>
 												</v-list>
 											</v-layout>
 												<v-layout row class="mx-5">
