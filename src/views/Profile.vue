@@ -29,7 +29,8 @@
 	          			<v-card
 						class="mb-2 mx-auto px-0"
 			            light
-			            v-for="promotion in deals">
+			            v-for="promotion in deals"
+			            :key="promotion.id">
 	            			<div class="d-flex flex-no-wrap">
 				            	<v-avatar
 				                class=""
