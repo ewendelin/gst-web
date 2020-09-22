@@ -87,7 +87,7 @@
 									<v-dialog v-model="deal.dets" width="290">
 							    		<v-layout>
 											<v-card width="290">
-												<v-img src="https://cdn.vuetifyjs.com/images/cards/cooking.png" height="250px">
+												<v-img :src="deal.promotion.image" height="250px">
 												</v-img>
 											<v-layout row class="ml-3 mr-3 px-1 pt-0">
 												<v-list>
