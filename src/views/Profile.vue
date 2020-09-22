@@ -38,7 +38,7 @@
 				                height=""
 				                tile>
 				                	<v-img 
-			              			:src="deal.promotion.image">
+			              			src="https://cdn.vuetifyjs.com/images/cards/cooking.png">
 			              			</v-img>
 				                </v-avatar>
 	              				<div>
