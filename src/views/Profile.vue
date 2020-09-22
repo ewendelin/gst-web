@@ -116,14 +116,14 @@
 																<v-list-item-title>{{ deal.vendor_name }}</v-list-item-title>
 															</v-list-item-content>
 														</v-list-item>
-														<!-- <v-list-item class="mt-1 mb-n3">
+														<v-list-item class="mt-1 mb-n3">
 													        <v-list-item-icon class="pr-0 mr-0">
 													          <v-icon small>mdi-home</v-icon>
 													        </v-list-item-icon>
 
 													        <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.vendor.address }}</v-list-item-title>
-													    </v-list-item> -->
-														<!-- <v-list-item class="mb-0 pb-0">
+													    </v-list-item>
+														<v-list-item class="mb-0 pb-0">
 													        <v-list-item-icon class="pr-0 mr-0">
 													          <v-icon small>mdi-phone</v-icon>
 													        </v-list-item-icon>
@@ -132,7 +132,7 @@
 													    </v-list-item>
 														<v-card-text class="mb-1 mt-0 pt-0">
 															{{ deal.vendor.description }}
-														</v-card-text> -->
+														</v-card-text>
 													</v-list>
 												</v-layout>
 											</v-card>
