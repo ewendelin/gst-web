@@ -15,7 +15,7 @@ set :application_name, 'gast-web'
 set :domain, 'gast.world'
 set :deploy_to, '/home/production/web'
 set :repository, 'git@github.com:ewendelin/gst-web.git'
-set :branch, 'newlanding'
+set :branch, 'newprof'
 
 # Optional settings:
 #   set :user, 'foobar'          # Username in the server to SSH to.
