@@ -38,7 +38,7 @@
 				                height=""
 				                tile>
 				                	<v-img 
-			              			src="https://cdn.vuetifyjs.com/images/cards/cooking.png">
+			              			:src="deal.promotion.image">
 			              			</v-img>
 				                </v-avatar>
 	              				<div>
@@ -51,8 +51,8 @@
 									<v-row
 									class="mt-3 ml-1 mb-n12 pb-n12">
 					        			
-					        			<!-- <v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{deal.promotion.price}}</v-card-title>
-					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{deal.promotion.original_price}}</v-card-title> -->
+					        			<v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{deal.promotion.price}}</v-card-title>
+					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{deal.promotion.original_price}}</v-card-title>
 					    			</v-row>
 									<v-card-actions class="mx-n1 mt-7 cols-3 mb-n2">
 								    	<v-btn small
@@ -87,7 +87,7 @@
 									<v-dialog v-model="deal.dets" width="290">
 							    		<v-layout>
 											<v-card width="290">
-												<v-img src="https://cdn.vuetifyjs.com/images/cards/cooking.png" height="250px">
+												<v-img :src="deal.promotion.image" height="250px">
 												</v-img>
 											<v-layout row class="ml-3 mr-3 px-1 pt-0">
 												<v-list>
@@ -101,9 +101,9 @@
 													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.promotion.time_slot }}</v-list-item-title>
 													</v-list-item>
 													<v-spacer></v-spacer>
-													<!-- <v-card-text class="py-0">
+													<v-card-text class="py-0">
 														{{ deal.promotion.description }}
-													</v-card-text> -->
+													</v-card-text>
 												</v-list>
 											</v-layout>
 												<v-layout row class="mx-5">
@@ -116,14 +116,14 @@
 																<v-list-item-title>{{ deal.vendor_name }}</v-list-item-title>
 															</v-list-item-content>
 														</v-list-item>
-														<!-- <v-list-item class="mt-1 mb-n3">
+														<v-list-item class="mt-1 mb-n3">
 													        <v-list-item-icon class="pr-0 mr-0">
 													          <v-icon small>mdi-home</v-icon>
 													        </v-list-item-icon>
 
 													        <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.vendor.address }}</v-list-item-title>
-													    </v-list-item> -->
-														<!-- <v-list-item class="mb-0 pb-0">
+													    </v-list-item>
+														<v-list-item class="mb-0 pb-0">
 													        <v-list-item-icon class="pr-0 mr-0">
 													          <v-icon small>mdi-phone</v-icon>
 													        </v-list-item-icon>
@@ -132,7 +132,7 @@
 													    </v-list-item>
 														<v-card-text class="mb-1 mt-0 pt-0">
 															{{ deal.vendor.description }}
-														</v-card-text> -->
+														</v-card-text>
 													</v-list>
 												</v-layout>
 											</v-card>
