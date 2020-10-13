@@ -45,6 +45,8 @@
 							class="mx-5"
 							id="example-3">
 								<v-text-field v-model="newPromotion.title"
+									:rules="titleRules"
+            						:counter="15"
 									required
 									color="#DFA937">
 									<template v-slot:label>
@@ -610,6 +612,10 @@ export default {
 	    valid2: true,
 	    valid3: true,
 	    confirm: false,
+	    titleRules: [
+        v => !!v || 'Title is required',
+        v => v.length <= 10 || 'Title must be less than 10 characters',
+      ],
       nameRules: [
         v => !!v || 'Name is required',
       ],

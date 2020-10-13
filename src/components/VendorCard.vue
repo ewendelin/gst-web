@@ -342,6 +342,8 @@
                         class="mx-5">
 
                   <v-text-field v-model="promotion.title"
+                    :rules="titleRules"
+                    :counter="15"
                     required
                     color="#DFA937">
                       <template v-slot:label>
@@ -609,6 +611,10 @@
         menu3: false,
         menu4: false,
         fileList: [],
+        titleRules: [
+        v => !!v || 'Title is required',
+        v => v.length <= 15 || 'Title must be less than 15 characters',
+      ],
         formData: new FormData(),
         togglePromotion: {
         },
