@@ -44,6 +44,23 @@
   				</v-row>
       		</div>
     	</v-expand-transition>
+    	<!-- if nothing has been added, dont show the button-->
+    	<v-layout row class="mx-auto" align-center justify-center>
+    		<v-btn 
+    			align-center
+    			width="60%" 
+    			justify-center 
+    			dark
+				color="#FFB300"
+				tile
+				class="buttons"
+				depressed
+				style="position: fixed; bottom: 60px; z-index: 5;">checkout
+				<v-icon right dark>
+        			mdi-cart
+     			</v-icon>
+	    	</v-btn>
+	    </v-layout>
 		<v-layout row class="mx-auto" style="max-width: 100vw;" align-center justify-center>
 	    	<v-col cols="12">
 	        	<v-row justify="center">
@@ -87,13 +104,14 @@
 								        <v-spacer></v-spacer>
 								        <v-btn class="white--text mr-n1 mb-7 pa-0" bottom
 			              				right
+			              				style="z-index: 3;"
 			              				absolute 
 			              				fab 
 			              				x-small
 			              				depressed
 			              				color="#FFB300"
 			              				@click.stop="getCoupon(promotion)">
-								        	<v-icon>mdi-cart-plus
+								        	<v-icon>mdi-plus
 								        	</v-icon>
 								        </v-btn>
 								    </v-row>
