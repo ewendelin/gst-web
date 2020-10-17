@@ -2,7 +2,7 @@
 	<div class="checkout">
 		<!-- <Navbar /> -->
 		<v-btn class="mt-n8" icon>
-			<v-icon color="black">mdi-chevron-left
+			<v-icon to="/deals" color="black">mdi-chevron-left
 			</v-icon>
 		</v-btn>
 		<h3 class="mx-5">Checkout</h3>
@@ -27,6 +27,8 @@
 	          			<v-card
 						class="mb-2 mx-auto px-0"
 			            light
+			            v-for="(deal, index) in coupons"
+						:key="index"
 			            >
 	            			<div class="d-flex flex-no-wrap">
 				            	<v-avatar
@@ -35,21 +37,21 @@
 				                height=""
 				                tile>
 				                	<v-img 
-              							src="https://cdn.vuetifyjs.com/images/cards/cooking.png">
+              							:src="deal.image">
               						</v-img>
 				                </v-avatar>
 	              				<div>
 	                				<v-card-title class="mt-n1 mb-3 pr-0 cols-3 text-truncate" style="font-size:1.1rem;"
-	                				>Title</v-card-title>
+	                				>{{deal.title}}</v-card-title>
 									<v-card-subtitle class="caption justify-center mb-n9 pr-0 cols-5 text-truncate mb-3" style="font-size:.5rem;">
 					      				<v-icon small class="align-end justify-center mr-1">mdi-clock-outline</v-icon>
-					      					12/3 12:33 - 5/4 43:34
+					      					{{deal.timeslot}}
 									</v-card-subtitle>
 									<v-row
 									class="mt-3 ml-1">
 					        			
-					        			<v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥32</v-card-title>
-					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥43</v-card-title>
+					        			<v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{deal.price}}</v-card-title>
+					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{deal.original_price}}</v-card-title>
 					    			</v-row>
 					    			
 									<v-row class="mb-n12">
@@ -62,9 +64,10 @@
 								            absolute
 								            bottom
 				              				depressed
+				              				@click="remove(deal)"
 				              				>
-								        		<v-icon>mdi-trash-can-outline
-								        		</v-icon>
+								        	<v-icon>mdi-trash-can-outline
+								        	</v-icon>
 								        </v-btn>
 						    		</v-row>
 				            	</div>
@@ -74,6 +77,7 @@
 				</v-row>
 			</v-col>
 		</v-layout>
+		<h3 class="mx-5">Total: ¥{{deal.total.price}}</h3>
 		<div class="disc">
 			<h5 class="mx-5">Disclaimer:</h5>
 			<p class="mx-5 caption" font-size=".7rem">
@@ -87,7 +91,35 @@
 	
 	export default {
 		name: 'Checkout',
-		components: { }
+		components: { },
+
+		methods: {
+
+			remove(deal) {
+				// this.$api(this.deals, index);
+					this.$api.post(
+						`/coupons/${deal.id}`,
+					)
+					.then(response => {
+						this.canceled = response
+
+						this.res = this.deals.filter((x) => {
+							return x.id != deal.id
+						});
+						this.deals = this.res;
+
+						// this.deals = this.deals.map(deals => ({
+						// 	...deals,
+						// 	dialog: false,
+						// 	dialog3: false
+						// }));
+
+					})
+					.catch(function(error) {
+						alert('fail' + error);
+					});
+			}
+		}
 	}
 </script>
 

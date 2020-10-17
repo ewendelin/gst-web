@@ -55,6 +55,7 @@
 				tile
 				class="buttons"
 				depressed
+				to="/checkout"
 				style="position: fixed; bottom: 60px; z-index: 5;">checkout
 				<v-icon right dark>
         			mdi-cart
