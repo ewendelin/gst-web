@@ -21,7 +21,7 @@ set :repository, 'git@github.com:ewendelin/gst-web.git'
 # ====== deploy to production =======
 
 # ====== deploy to staging for test =======
-set :application_name, 'gast-web'
+set :application_name, 'gast-web-staging'
 set :deploy_to, '/home/staging/web'
 set :branch, 'titlelength'
 # ====== deploy to staging for test =======
@@ -56,7 +56,7 @@ end
 desc "Deploys the current version to the server."
 task :deploy do
   # uncomment this line to make sure you pushed your local branch to the remote origin
-  # invoke :'git:ensure_pushed'
+  invoke :'git:ensure_pushed'
   deploy do
     # Put things that will set up an empty directory into a fully set-up
     # instance of your project.
