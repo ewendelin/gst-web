@@ -109,7 +109,8 @@
         });
       }
       else {
-        window.location.href = "https://gast.world"
+        // window.location.href = "https://gast.world"
+        window.location.href = `https://${window.location.host}`
       }
     },
 
