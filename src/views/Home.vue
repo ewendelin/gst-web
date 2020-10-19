@@ -55,7 +55,7 @@
 			        </v-list-item-subtitle>
 			      </v-list-item-content>
 			    </v-list-item>
-        	
+
             	<v-list-item three-line>
 			    	<v-list-item-icon>
             			<v-icon size="62">mdi-silverware-fork-knife</v-icon>
@@ -67,7 +67,7 @@
 			        </v-list-item-subtitle>
 			      </v-list-item-content>
 			    </v-list-item>
-        	
+
             	<v-list-item three-line>
 			    	<v-list-item-icon>
             			<v-img class="logo1" src="../assets/21.png"></v-img>
@@ -87,7 +87,7 @@
 <script>
 	// import Gast from '../assets/logo.svg';
 	import Navbar from '../components/Navbar';
-	
+
 	export default {
 		name: 'Home',
 		components: { Navbar },
@@ -104,6 +104,7 @@
 		},
 		methods: {
 			wxLogin() {
+        alert('loginUrl ' + this.$config.loginUrl);
 			  window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.$config.appID}&redirect_uri=${encodeURIComponent(this.$config.loginUrl)}&response_type=code&scope=snsapi_userinfo&state=${new Date().getTime()}`
 			}
 		},
@@ -111,7 +112,7 @@
 			let storedToken = sessionStorage.getItem('token');
 	   		if (storedToken != undefined || storedToken != null) {
 	    	this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-			  
+
 			// let storedToken = sessionStorage.getItem('token');
 
 			// let login = !(storedToken != undefined && storedToken != 'logout')
