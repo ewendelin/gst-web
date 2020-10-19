@@ -77,7 +77,9 @@ task :deploy do
         command %{npm install}
         # command %{npm audit fix}
         # command %{yarn upgrade}
-        command %{NODE_ENV=production npm run build}
+        # command %{NODE_ENV=production npm run build}
+        # deploy to staging
+        command %{NODE_ENV=staging npm run build}
       end
     end
   end
