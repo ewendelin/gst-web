@@ -105,7 +105,7 @@
           // alert('this.orders' + this.orders.length + ' == ' + this.coupons.length);
         })
         .catch(function(error) {
-          alert('fail' + error);
+          // alert('fail' + error);
         });
       }
       else {
@@ -145,13 +145,13 @@
 
 					})
 					.catch(function(error) {
-						alert('fail' + error);
+						// alert('fail' + error);
 					});
       },
       pay(id) {
         this.$api.post(`/orders/pay`, {id: id}).then( response => {
           let payment = response.data.data.payment;
-          alert('in pay' + payment)
+          // alert('in pay' + payment)
           this.wxPay(payment);
         })
       },
@@ -170,12 +170,12 @@
           wx.checkJsApi({
             jsApiList: ['chooseWXPay'],
             success:function(res){
-              alert(res)
+              // alert(res)
               // console.log("seccess")
               // console.log('hskdjskjk', res)
             },
             fail:function(res){
-              alert(res)
+              // alert(res)
               // console.log("fail");
               // console.log(res)
             }
@@ -188,11 +188,11 @@
             signType: data.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
             paySign: data.paySign, // 支付签名
             success: function (res) {  // 支付成功后的回调函数
-              alert(res.errorMsg)
+              // alert(res.errorMsg)
             },
             fail: function (res) {
-              alert("支付失败");
-              alert(res.errMsg);
+              // alert("支付失败");
+              // alert(res.errMsg);
             }
           })
         })

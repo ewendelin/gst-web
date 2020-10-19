@@ -112,38 +112,35 @@
       let storedToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMSwiZXhwIjoxNjA1Njg5ODAwfQ.DGdVD04iA-AUnNHHZyjQSygxTpm-rSMJQY1IzKuZNs4";
       sessionStorage.setItem('token', storedToken);
 			// let storedToken = sessionStorage.getItem('token');
-	   		if (storedToken != undefined || storedToken != null) {
+	   	if (storedToken != undefined || storedToken != null) {
 	    	this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
 
-			// let storedToken = sessionStorage.getItem('token');
+			  // let storedToken = sessionStorage.getItem('token');
 
-			// let login = !(storedToken != undefined && storedToken != 'logout')
-			// this.login = login;
+			  // let login = !(storedToken != undefined && storedToken != 'logout')
+			  // this.login = login;
 
-			// if ((storedToken != null || storedToken != undefined) && storedToken != 'logout') {
-   //      		this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-			// 	// redirect('/deals')
-			// }
-			// if (this.$route.query.code != null || this.$route.query.code != undefined) {
-   //             this.$api
-			// 	.get(
-			// 		`/users/login/wx_web_login?code=${this.$route.query.code}`
-			// 	)
-			// 	.then((res) => {
-   //            this.$api.defaults.headers.common['X-Auth-Token'] = res.data.user.token
-   //            sessionStorage.setItem('token', res.data.user.token);
-   //            sessionStorage.setItem('user', JSON.stringify(res.data.user));
-
-              // Vue.prototype.$api = this.$api;
-     //          window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
-     //        })
-					// 	.catch(() => {
-     //          window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
-     //        });
-	  		// }
-		}
-	}
-}
+  			if (storedToken != 'logout') {
+          this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+  				redirect('/deals')
+  			}
+		  }
+      // login logic
+      if (this.$route.query.code != null || this.$route.query.code != undefined) {
+        this.$api.get(`/users/login/wx_web_login?code=${this.$route.query.code}`).then((res) => {
+          this.$api.defaults.headers.common['X-Auth-Token'] = res.data.user.token
+          this.login = true;
+          sessionStorage.setItem('token', res.data.user.token);
+          sessionStorage.setItem('user', JSON.stringify(res.data.user));
+          Vue.prototype.$api = this.$api;
+          window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
+        })
+        .catch(() => {
+          window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
+        });
+      }
+	  }
+  }
 </script>
 
 <style scoped>
