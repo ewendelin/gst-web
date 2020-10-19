@@ -89,7 +89,8 @@
 </template>
 
 <script>
-
+  // import wx from 'weixin-js-sdk';
+  import wx from 'weixin-jsapi';
 	export default {
 		name: 'Checkout',
 		components: { },
@@ -148,42 +149,58 @@
       },
       pay(id) {
         this.$api.post(`/orders/pay`, {id: id}).then( response => {
-          this.payment = response.data.payment;
-          this.wxPay();
+          let payment = response.data.data.payment;
+          alert('in pay' + payment)
+          this.wxPay(payment);
         })
       },
-      weixinPay: function(data) {
-        if (typeof WeixinJSBridge == "undefined") {
-            if (document.addEventListener) {
-                document.addEventListener("WeixinJSBridgeReady", this.onBridgeReady(data),false);
-            } else if (document.attachEvent) {
-                document.attachEvent("WeixinJSBridgeReady", this.onBridgeReady(data));
-                document.attachEvent("onWeixinJSBridgeReady", this.onBridgeReady(data));
-            }
-        } else {
-          this.onBridgeReady(data);
-        }
-      },
-      onBridgeReady: function(data){
-        WeixinJSBridge.invoke(
-            "getBrandWCPayRequest",
-            {
-                appId: data.appId, //公众号名称，由商户传入
-                timeStamp: data.timeStamp, //时间戳，自1970年以来的秒数
-                nonceStr: data.nonceStr, //随机串
-                package: data.package, //订单详情扩展字符串
-                signType: data.signType, //微信签名方式：
-                paySign: data.paySign, //微信签名
+      wxPay(data) {
+        // alert(data)
+        wx.config({
+          debug: true, // 这里一般在测试阶段先用ture，等打包给后台的时候就改回false,
+          appId: data.appId, // 必填，公众号的唯一标识
+          timestamp: data.timeStamp, // 必填，生成签名的时间戳
+          nonceStr: data.nonceStr, // 必填，生成签名的随机串
+          signature: data.paySign, // 必填，签名
+          jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表
+        })
+
+        wx.ready(() => {
+          wx.checkJsApi({
+            jsApiList: ['chooseWXPay'],
+            success:function(res){
+              alert(res)
+              // console.log("seccess")
+              // console.log('hskdjskjk', res)
             },
-            function(res) {
-                if(res.err_msg == "get_brand_wcpay_request:ok"){
-                  // ...
-                }else{
-                  alert("支付失败！");
-                }
+            fail:function(res){
+              alert(res)
+              // console.log("fail");
+              // console.log(res)
             }
-        );
+          })
+
+          wx.chooseWXPay({
+            timestamp: data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+            nonceStr: data.nonceStr, // 支付签名随机串，不长于 32 位
+            package: data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
+            signType: data.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+            paySign: data.paySign, // 支付签名
+            success: function (res) {  // 支付成功后的回调函数
+              alert(res.errorMsg)
+            },
+            fail: function (res) {
+              alert("支付失败");
+              alert(res.errMsg);
+            }
+          })
+        })
+
+        wx.error(err => {
+          alert(err)
+        })
       }
+
 		}
 	}
 </script>
