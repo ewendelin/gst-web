@@ -26,6 +26,14 @@ set :deploy_to, '/home/staging/web'
 set :branch, 'titlelength'
 # ====== deploy to staging for test =======
 
+# ====== SCP ==========
+# scp /Users/  :/etc/nginx/ssl
+# =====================
+
+# ==== wechat pay ====
+# npm i -S weixin-js-sdk
+#
+
 # Optional settings:
 #   set :user, 'foobar'          # Username in the server to SSH to.
 #   set :port, '30000'           # SSH port number.
