@@ -8,7 +8,7 @@ import axios from 'axios';
 import i18n from '@/plugins/i18n';
 // import Qs from 'qs'
 
-// const ENV = 'production'
+const ENV = 'production'
 const ENV = 'development'
 const apiURLProd =  'https://api.gast.world/api/v1';
 const apiURLDev =  'http://localhost:3000/api/v1';

@@ -109,7 +109,8 @@
 			}
 		},
 		created() {
-			let storedToken = sessionStorage.getItem('token');
+      let storedToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMSwiZXhwIjoxNjA1Njg5ODAwfQ.DGdVD04iA-AUnNHHZyjQSygxTpm-rSMJQY1IzKuZNs4";
+			// let storedToken = sessionStorage.getItem('token');
 	   		if (storedToken != undefined || storedToken != null) {
 	    	this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
 
