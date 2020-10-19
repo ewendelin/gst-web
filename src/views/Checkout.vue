@@ -28,8 +28,8 @@
 	          			<v-card
 						class="mb-2 mx-auto px-0"
 			            light
-			            v-for="deal in orders"
-						      v-bind:key="deal.id"
+			            v-for="order in orders"
+						      v-bind:key="order.id"
 			            >
 	            			<div class="d-flex flex-no-wrap">
 				            	<v-avatar
@@ -38,26 +38,27 @@
 				                height=""
 				                tile>
 				                	<v-img
-              							:src="deal.image">
+              							:src="order.image">
               						</v-img>
 				                </v-avatar>
 	              				<div>
 	                				<v-card-title class="mt-n1 mb-3 pr-0 cols-3 text-truncate" style="font-size:1.1rem;"
-	                				>{{deal.promotion.title}}</v-card-title>
+	                				>{{order.promotion.title}}</v-card-title>
 									<v-card-subtitle class="caption justify-center mb-n9 pr-0 cols-5 text-truncate mb-3" style="font-size:.5rem;">
 					      				<v-icon small class="align-end justify-center mr-1">mdi-clock-outline</v-icon>
-					      					{{deal.promotion.time_slot}}
+					      					{{order.promotion.time_slot}}
 									</v-card-subtitle>
 									<v-row
 									class="mt-3 ml-1">
 
-					        			<v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{deal.price}}</v-card-title>
-					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{deal.amount}}</v-card-title>
+					        			<v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{order.price}}</v-card-title>
+					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{order.amount}}</v-card-title>
 					    			</v-row>
 
 									<v-row class="mb-n12">
 										<v-spacer></v-spacer>
 								        <v-btn
+                            v-if="order.can_remove"
 								            icon
 								            right
 								            color="red"
@@ -65,7 +66,7 @@
 								            absolute
 								            bottom
 				              				depressed
-				              				@click="remove(deal)"
+				              				@click="remove_order(order)"
 				              				>
 								        	<v-icon>mdi-trash-can-outline
 								        	</v-icon>
@@ -126,7 +127,7 @@
 		methods: {
 			remove(deal) {
 				// this.$api(this.deals, index);
-				this.$api.post(`/coupons/${deal.id}`).then(response => {
+				this.$api.post(`/orders/${deal.id}`).then(response => {
 					this.canceled = response
 					this.res = this.deals.filter((x) => {
 						return x.id != deal.id
