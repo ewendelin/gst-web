@@ -122,7 +122,8 @@
 
   			if (storedToken != 'logout') {
           this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-  				redirect('/deals')
+  				window.location.href = window.location.origin + '/deals'
+          // redirect('/deals')
   			}
 		  }
       // login logic
@@ -132,7 +133,6 @@
           this.login = true;
           sessionStorage.setItem('token', res.data.user.token);
           sessionStorage.setItem('user', JSON.stringify(res.data.user));
-          Vue.prototype.$api = this.$api;
           window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
         })
         .catch(() => {

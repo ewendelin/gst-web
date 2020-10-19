@@ -104,13 +104,13 @@
           // this.coupons = response.data.map(item => item.coupon);
           // alert('this.orders' + this.orders.length + ' == ' + this.coupons.length);
         })
-        .catch(function(error) {
+        .catch(function() {
           // alert('fail' + error);
         });
       }
       else {
         // window.location.href = "https://gast.world"
-        window.location.href = `https://${window.location.host}`
+        window.location.href = window.location.origin
       }
     },
 
@@ -126,27 +126,16 @@
 		methods: {
 			remove(deal) {
 				// this.$api(this.deals, index);
-					this.$api.post(
-						`/coupons/${deal.id}`,
-					)
-					.then(response => {
-						this.canceled = response
-
-						this.res = this.deals.filter((x) => {
-							return x.id != deal.id
-						});
-						this.deals = this.res;
-
-						// this.deals = this.deals.map(deals => ({
-						// 	...deals,
-						// 	dialog: false,
-						// 	dialog3: false
-						// }));
-
-					})
-					.catch(function(error) {
-						// alert('fail' + error);
+				this.$api.post(`/coupons/${deal.id}`).then(response => {
+					this.canceled = response
+					this.res = this.deals.filter((x) => {
+						return x.id != deal.id
 					});
+					this.deals = this.res;
+				})
+				.catch(function() {
+					// alert('fail' + error);
+				});
       },
       pay(id) {
         this.$api.post(`/orders/pay`, {id: id}).then( response => {
@@ -169,12 +158,12 @@
         wx.ready(() => {
           wx.checkJsApi({
             jsApiList: ['chooseWXPay'],
-            success:function(res){
+            success:function(){
               // alert(res)
               // console.log("seccess")
               // console.log('hskdjskjk', res)
             },
-            fail:function(res){
+            fail:function(){
               // alert(res)
               // console.log("fail");
               // console.log(res)
@@ -187,18 +176,18 @@
             package: data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
             signType: data.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
             paySign: data.paySign, // 支付签名
-            success: function (res) {  // 支付成功后的回调函数
+            success: function () {  // 支付成功后的回调函数
               // alert(res.errorMsg)
             },
-            fail: function (res) {
+            fail: function () {
               // alert("支付失败");
               // alert(res.errMsg);
             }
           })
         })
 
-        wx.error(err => {
-          alert(err)
+        wx.error( function() {
+          // alert()
         })
       }
 
