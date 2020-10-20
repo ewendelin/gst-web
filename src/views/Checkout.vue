@@ -24,7 +24,7 @@
 		<v-layout row class="mx-auto" style="max-width: 100vw;" align-center justify-center>
 	    	<v-col cols="12">
 	        <v-row justify="center">
-		    		<v-col cols="12">
+		    		<v-col cols="12" class="scroll">
 	          	<v-card
 						      class="mb-2 mx-auto px-0"
 			            light
@@ -48,12 +48,10 @@
 					      				<v-icon small class="align-end justify-center mr-1">mdi-clock-outline</v-icon>
 					      					{{order.promotion.time_slot}}
 									</v-card-subtitle>
-									<v-row
-									class="mt-3 ml-1">
-
-					        			<v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{order.promotion.original_price}}</v-card-title>
-					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{order.amount}}</v-card-title>
-					    			</v-row>
+									<v-row class="mt-3 ml-1">
+			        			<v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{order.amount}}</v-card-title>
+			        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{order.promotion.original_price}}</v-card-title>
+				    			</v-row>
 
 									<v-row class="mb-n12">
 										<v-spacer></v-spacer>
@@ -116,11 +114,13 @@
 </template>
 
 <script>
+  // import Navbar from '../components/Navbar';
   // import wx from 'weixin-js-sdk';
   import wx from 'weixin-jsapi';
 	export default {
 		name: 'Checkout',
-		components: { },
+    // components: { Navbar },
+    components: {  },
 
     created() {
       let storedToken = sessionStorage.getItem('token');
@@ -238,4 +238,7 @@
 	.buttons {
 		border-radius: 5px;
 	}
+  .scroll{
+    overflow: scroll !important;
+  }
 </style>

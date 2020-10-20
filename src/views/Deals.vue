@@ -45,11 +45,11 @@
       		</div>
     	</v-expand-transition>
     	<!-- if nothing has been added, dont show the button-->
-    	<v-layout row class="mx-auto" align-center justify-center>
-    		<v-btn 
+    	<v-layout row class="mx-auto" align-center justify-center v-if="claimed">
+    		<v-btn
     			align-center
-    			width="60%" 
-    			justify-center 
+    			width="60%"
+    			justify-center
     			dark
 				color="#FFB300"
 				tile
@@ -79,7 +79,7 @@
 				                size="145"
 				                height=""
 				                tile>
-					                <v-img 
+					                <v-img
 						            class="white--text"
 					              	gradient="to bottom, rgba(0,0,0,0), rgba(0,0,0,.5)"
 					              	:src="promotion.image">
@@ -106,8 +106,8 @@
 								        <v-btn class="white--text mr-n1 mb-7 pa-0" bottom
 			              				right
 			              				style="z-index: 3;"
-			              				absolute 
-			              				fab 
+			              				absolute
+			              				fab
 			              				x-small
 			              				depressed
 			              				color="#FFB300"
@@ -237,10 +237,11 @@
 				details: [],
 				filter: {
 					checkedAreas: [],
-        			checkedTypes: []
+        	checkedTypes: []
 				},
 				valid: '',
 				show: false,
+        claimed: false,
 				areas: ['Xuhui', 'Jingan', 'Huangpu', 'Changning', 'Hongkou', 'Yangpu', 'Putuo', 'Pudong', 'Other'],
 				vendor_type: ['Restaurant', 'Bar', 'Cafe', 'Store'],
 				login: !(sessionStorage.getItem('token') != undefined && sessionStorage.getItem('token') != 'logout'),
@@ -248,13 +249,15 @@
 		},
 		methods: {
 			getCoupon(promotion) {
+        let page = this;
 				this.$api
 					.post(
 						`/promotions/${promotion.id}/claim_coupon`
 					)
 					.then(function() {
 						promotion.deets = false;
-						promotion.dialog = true;
+						promotion.dialog = false;
+            page.claimed = true;
 					})
 					.catch(function(error) {
 						alert('fail' + error);
