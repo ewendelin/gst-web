@@ -283,11 +283,9 @@
 		},
 		data() {
 			return {
-				customerID: 1,
 				deals: [],
 				res: [],
 				snackbar: false,
-
 				//what is the data we get from the api? to put the username and avatar?
 				user: JSON.parse(sessionStorage.getItem('user'))
 			};
@@ -307,7 +305,7 @@
         window.location.href = window.location.origin + '/deals'
       },
       toCheckout() {
-        window.location.href = window.location.origin + '/checkout'
+        window.location.href = window.location.origin + '/checkout' + `?time=${new Date().getTime()}`;
       },
 			remove(deal) {
 				// this.$api(this.deals, index);

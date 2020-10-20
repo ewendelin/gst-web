@@ -112,19 +112,9 @@
       let storedToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMSwiZXhwIjoxNjA1Njg5ODAwfQ.DGdVD04iA-AUnNHHZyjQSygxTpm-rSMJQY1IzKuZNs4";
       sessionStorage.setItem('token', storedToken);
 			// let storedToken = sessionStorage.getItem('token');
-	   	if (storedToken != undefined || storedToken != null) {
+	   	if (storedToken != undefined || storedToken != null || storedToken != 'logout') {
 	    	this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-
-			  // let storedToken = sessionStorage.getItem('token');
-
-			  // let login = !(storedToken != undefined && storedToken != 'logout')
-			  // this.login = login;
-
-  			if (storedToken != 'logout') {
-          this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-  				// window.location.href = window.location.origin + '/deals'
-          // redirect('/deals')
-  			}
+			  this.login = true;
 		  }
       // login logic
       if (this.$route.query.code != null || this.$route.query.code != undefined) {
