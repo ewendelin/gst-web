@@ -38,6 +38,7 @@ Vue.config.productionTip = false;
 Vue.prototype.$config = {};
 Vue.prototype.$config.appID = 'wx8d177cf445f8365e';
 Vue.prototype.$config.loginUrl = `${loginURL}`;
+Vue.prototype.$config.debug = false;
 Vue.use(ElementUI);
 Vue.prototype.$api = api;
 

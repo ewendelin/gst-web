@@ -109,10 +109,15 @@
 			}
 		},
 		created() {
-      let storedToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMSwiZXhwIjoxNjA1Njg5ODAwfQ.DGdVD04iA-AUnNHHZyjQSygxTpm-rSMJQY1IzKuZNs4";
-      sessionStorage.setItem('token', storedToken);
-			// let storedToken = sessionStorage.getItem('token');
-	   	if (storedToken != undefined || storedToken != null || storedToken != 'logout') {
+      let storedToken;
+      if (this.$config.debug) {
+        storedToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMSwiZXhwIjoxNjA1Njg5ODAwfQ.DGdVD04iA-AUnNHHZyjQSygxTpm-rSMJQY1IzKuZNs4";
+        sessionStorage.setItem('token', storedToken);
+      } else {
+        storedToken = sessionStorage.getItem('token');
+      }
+
+      if (storedToken != undefined || storedToken != null || storedToken != 'logout') {
 	    	this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
 			  this.login = true;
 		  }
