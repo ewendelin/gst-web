@@ -151,14 +151,14 @@
     },
 
 		methods: {
-			remove(deal) {
+			remove_order(order) {
 				// this.$api(this.deals, index);
-				this.$api.post(`/orders/${deal.id}`).then(response => {
+				this.$api.delete(`/orders/${order.id}`).then(response => {
 					this.canceled = response
-					this.res = this.deals.filter((x) => {
-						return x.id != deal.id
+					this.res = this.orders.filter((x) => {
+						return x.id != order.id
 					});
-					this.deals = this.res;
+					this.orders = this.res;
 				})
 				.catch(function() {
 					// alert('fail' + error);
