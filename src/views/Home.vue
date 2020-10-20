@@ -119,13 +119,13 @@
 
       if (storedToken != undefined || storedToken != null || storedToken != 'logout') {
 	    	this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-			  this.login = true;
+			  this.login = false;
 		  }
       // login logic
       if (this.$route.query.code != null || this.$route.query.code != undefined) {
         this.$api.get(`/users/login/wx_web_login?code=${this.$route.query.code}`).then((res) => {
           this.$api.defaults.headers.common['X-Auth-Token'] = res.data.user.token
-          this.login = true;
+          this.login = false;
           sessionStorage.setItem('token', res.data.user.token);
           sessionStorage.setItem('user', JSON.stringify(res.data.user));
           window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
