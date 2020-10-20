@@ -15,15 +15,15 @@ set :domain, 'gast.world'
 set :repository, 'git@github.com:ewendelin/gst-web.git'
 
 # ====== deploy to production =======
-# set :deploy_to, '/home/production/web'
-# set :application_name, 'gast-web'
-# set :branch, 'titlelength' # default is master
+set :deploy_to, '/home/production/web'
+set :application_name, 'gast-web'
+set :branch, 'titlelength' # default is master
 # ====== deploy to production =======
 
 # ====== deploy to staging for test =======
-set :application_name, 'gast-web-staging'
-set :deploy_to, '/home/staging/web'
-set :branch, 'titlelength'
+# set :application_name, 'gast-web-staging'
+# set :deploy_to, '/home/staging/web'
+# set :branch, 'titlelength'
 # ====== deploy to staging for test =======
 
 # ====== SCP ==========
