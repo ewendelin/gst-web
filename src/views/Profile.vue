@@ -5,10 +5,10 @@
 			<v-list>
 				<v-list-item>
 					<v-list-item-avatar size="54" color="grey">
-						<img :src="user.wx_avatar" />
+						<img :src="user.wx_avatar" v-if="user" />
 					</v-list-item-avatar>
 					<v-list-item-content>
-						<v-list-item-title class="headline">{{
+						<v-list-item-title class="headline" v-if="user">{{
 							user.wx_nickname
 						}}</v-list-item-title>
 					</v-list-item-content>
@@ -37,7 +37,7 @@
 				                size="145"
 				                height=""
 				                tile>
-				                	<v-img 
+				                	<v-img
 			              			:src="deal.promotion.image">
 			              			</v-img>
 				                </v-avatar>
@@ -50,16 +50,24 @@
 									</v-card-subtitle>
 									<v-row
 									class="mt-3 ml-1 mb-n12 pb-n12">
-					        			
+
 					        			<v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{deal.promotion.price}}</v-card-title>
 					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{deal.promotion.original_price}}</v-card-title>
 					    			</v-row>
 									<v-card-actions class="mx-n1 mt-7 cols-3 mb-n2">
 								    	<v-btn small
+                      v-if="deal.paid"
 								    	depressed
 								    	class="white--text"
-								    	color="#FFB300"
+								    	color="#07C160"
 								    	@click.stop="deal.dia = true">redeem</v-btn>
+                      <v-btn small
+                      width="78"
+                      v-if="deal.paid == false"
+                      depressed
+                      class="white--text"
+                      color="#FFB300"
+                      @click="toCheckout">Pay</v-btn>
 											<v-dialog v-model="deal.dia" max-width="290">
 												<v-card>
 													<v-layout row class="mx-auto">
@@ -145,6 +153,40 @@
 				</v-row>
 			</v-col>
 		</v-layout>
+
+    <!-- buttons to deals or checkout -->
+    <v-layout row class="mx-auto" align-center justify-center>
+      <v-btn
+        v-if="deals.length > 0"
+        align-center
+        width="60%"
+        justify-center
+        dark
+        color="#FFB300"
+        tile
+        class="buttons"
+        depressed
+        to="/checkout"
+        style="position: fixed; bottom: 60px; z-index: 5;">checkout
+      <v-icon right dark>
+            mdi-cart
+        </v-icon>
+      </v-btn>
+
+      <v-btn
+        v-if="deals.length == 0"
+        width="20rem"
+        dark
+        color="#07C160"
+        tile
+        class="buttons"
+        depressed
+        @click="toDeals"
+        >{{ $t('browseDeals') }}
+        <v-icon right>mdi-sale</v-icon>
+      </v-btn>
+    </v-layout>
+
 		<!-- <h3 class="mx-4 mt-3 mb-n3">Past Orders</h3>
 		<v-layout row class="mx-auto" style="max-width: 100vw;" align-center justify-center>
 	      <v-col cols="12">
@@ -160,7 +202,7 @@
 	                size="145"
 	                height=""
 	                tile>
-	                <v-img 
+	                <v-img
               		src="https://cdn.vuetifyjs.com/images/cards/cooking.png">
               		</v-img>
 	              </v-avatar>
@@ -216,33 +258,28 @@
 		props: {
             msg: String
         },
-		
-		created() {
-      		let storedToken = sessionStorage.getItem('token');
-		    if ((storedToken != undefined || storedToken != null) && storedToken != 'logout') {
-		        this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-		        this.$api
-				.get(
-					`/coupons`
-				)
-				.then(response => {
-					this.deals = response.data;
-					this.deals = this.deals.map(deals => ({
-						...deals,
-						dialog: false,
-						dialog3: false,
-						dia: false,
-						dets: false
-					}));
-				})
-				.catch(function(error) {
-					alert('fail' + error);
-				});
-		    } else {
-				window.location.href = "https://gast.world"
-		    }
 
-			
+		created() {
+      let storedToken = sessionStorage.getItem('token');
+	    if ((storedToken != undefined || storedToken != null) && storedToken != 'logout') {
+	     this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+	     this.$api.get(`/coupons`).then(response => {
+				this.deals = response.data;
+        this.user = this.deals[0].user;
+				this.deals = this.deals.map(deals => ({
+					...deals,
+					dialog: false,
+					dialog3: false,
+					dia: false,
+					dets: false
+				}));
+			})
+			.catch(function(error) {
+				alert('fail' + error);
+			});
+	    } else {
+			  window.location.href = "https://gast.world"
+	    }
 		},
 		data() {
 			return {
@@ -250,7 +287,7 @@
 				deals: [],
 				res: [],
 				snackbar: false,
-				
+
 				//what is the data we get from the api? to put the username and avatar?
 				user: JSON.parse(sessionStorage.getItem('user'))
 			};
@@ -259,13 +296,19 @@
 			// @@@FIXME - CAN I DO THIS???? @@@@
 			logout() {
 				// sessionStorage.clear();
-              	sessionStorage.setItem('token', 'logout');
+        sessionStorage.setItem('token', 'logout');
 				window.location.href = "https://gast.world"
 				// redirect('/');
 			},
 			// getProfileInfo() {
 
 			// },
+      toDeals() {
+        window.location.href = window.location.origin + '/deals'
+      },
+      toCheckout() {
+        window.location.href = window.location.origin + '/checkout'
+      },
 			remove(deal) {
 				// this.$api(this.deals, index);
 					this.$api.post(

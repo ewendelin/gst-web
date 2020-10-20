@@ -1,32 +1,32 @@
 <template>
 	<div class="checkout">
 		<!-- <Navbar /> -->
-		<v-btn class="mt-n8" icon>
+		<v-btn class="mt-n8" icon @click="toDeals">
 			<v-icon to="/deals" color="black">mdi-chevron-left
 			</v-icon>
 		</v-btn>
 		<h3 class="mx-5">Checkout</h3>
 		<v-layout row class="mx-auto" align-center justify-center>
-    		<v-btn
-    			align-center
-    			width="60%"
-    			justify-center
-    			dark
-				color="#07C160"
-				tile
-				class="buttons"
-				depressed
+  		<v-btn
+        v-if="orders.length > 0"
+  			align-center
+  			width="60%"
+  			justify-center
+  			dark
+			  color="#07C160"
+			  tile
+			  class="buttons"
+			  depressed
         @click="pay(orders[0].id)"
-				style="position: fixed; bottom: 10px; z-index: 5;">WeChat pay
-	    	</v-btn>
-	    </v-layout>
+			  style="position: fixed; bottom: 10px; z-index: 5;">WeChat Pay
+    	</v-btn>
+	   </v-layout>
 		<v-layout row class="mx-auto" style="max-width: 100vw;" align-center justify-center>
 	    	<v-col cols="12">
-	        	<v-row justify="center">
-		    		<v-col
-	          		cols="12">
-	          			<v-card
-						class="mb-2 mx-auto px-0"
+	        <v-row justify="center">
+		    		<v-col cols="12">
+	          	<v-card
+						      class="mb-2 mx-auto px-0"
 			            light
 			            v-for="order in orders"
 						      v-bind:key="order.id"
@@ -38,7 +38,7 @@
 				                height=""
 				                tile>
 				                	<v-img
-              							:src="order.image">
+              							:src="order.promotion.image">
               						</v-img>
 				                </v-avatar>
 	              				<div>
@@ -51,7 +51,7 @@
 									<v-row
 									class="mt-3 ml-1">
 
-					        			<v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{order.price}}</v-card-title>
+					        			<v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{order.promotion.original_price}}</v-card-title>
 					        			<v-card-title class="body-2 ml-n5 text--disabled under">¥{{order.amount}}</v-card-title>
 					    			</v-row>
 
@@ -65,8 +65,8 @@
 								            small
 								            absolute
 								            bottom
-				              				depressed
-				              				@click="remove_order(order)"
+				              			depressed
+				              			@click="remove_order(order)"
 				              				>
 								        	<v-icon>mdi-trash-can-outline
 								        	</v-icon>
@@ -75,15 +75,41 @@
 				            	</div>
 				        	</div>
 				    	</v-card>
-					</v-col>
-				</v-row>
-			</v-col>
+					  </v-col>
+				  </v-row>
+			  </v-col>
 		</v-layout>
-		<h3 class="mx-5">Total: ¥ {{orders[0].amount}}</h3>
+
+    <v-layout row class="mx-0 mt-n12" v-if="orders.length == 0" align="center">
+      <v-col cols="12" >
+        <h1 class="text-center font-weight-bold" style="color:#FFB300; font-size: 3rem;">No orders yet ...</h1>
+        <p class="text-center" subtitle-1 style="color:#424242;">Find good deals on food that needs to be consumed.</p>
+        <v-layout
+          class="ma-1 mt-n4"
+          align="center"
+        >
+          <v-col cols="12" >
+            <v-btn
+              width="20rem"
+              dark
+              color="#07C160"
+              tile
+              class="buttons"
+              depressed
+              @click="toDeals"
+              >{{ $t('browseDeals') }}
+              <v-icon right>mdi-sale</v-icon>
+            </v-btn>
+          </v-col>
+        </v-layout>
+      </v-col>
+    </v-layout>
+
+		<h3 class="mx-5" v-if="orders.length > 0">Total: ¥ {{orders[0].amount}}</h3>
 		<div class="disc">
 			<h5 class="mx-5">Disclaimer:</h5>
 			<p class="mx-5 caption" font-size=".7rem">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus magni, iusto pariatur possimus ipsam quae rem consequatur error repellendus, inventore, aut officiis at. Necessitatibus, delectus. Doloribus reprehenderit, debitis officia mollitia.
+			Comming soon ...
 			</p>
 		</div>
 	</div>
@@ -138,6 +164,9 @@
 					// alert('fail' + error);
 				});
       },
+      toDeals() {
+        window.location.href = window.location.origin + '/deals'
+      },
       pay(id) {
         this.$api.post(`/orders/pay`, {id: id}).then( response => {
           let payment = response.data.data.payment;
@@ -148,7 +177,7 @@
       wxPay(data) {
         // alert(data)
         wx.config({
-          debug: true, // 这里一般在测试阶段先用ture，等打包给后台的时候就改回false,
+          debug: false, // 这里一般在测试阶段先用ture，等打包给后台的时候就改回false,
           appId: data.appId, // 必填，公众号的唯一标识
           timestamp: data.timeStamp, // 必填，生成签名的时间戳
           nonceStr: data.nonceStr, // 必填，生成签名的随机串
