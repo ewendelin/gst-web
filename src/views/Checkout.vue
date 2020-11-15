@@ -56,7 +56,6 @@
 					    			
 									<v-row class="mb-n12">
 										<v-btn class="white--text plmn mt-4 mb-n12 pb-n12" bottom style="z-index: 3;"
-			              				
 			              				fab 
 			              				x-small
 			              				depressed
@@ -68,7 +67,6 @@
 								        <v-btn class="white--text plmn mt-4 mb-n12 pb-n12" bottom style="z-index: 3;"
 			              				@click.stop="getCoupon(promotion)"
 			              				fab
-
 			              				x-small
 			              				depressed
 			              				color="#FFB300">
