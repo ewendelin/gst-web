@@ -103,7 +103,27 @@
 								        <v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{promotion.price}}</v-card-title>
 								        <v-card-title class="body-2 ml-n5 text--disabled under">¥{{promotion.original_price}}</v-card-title>
 								        <v-spacer></v-spacer>
-								        <v-btn class="white--text mr-n1 mb-7 pa-0" bottom
+								        <v-btn class="white--text plmn mt-4 mb-n12 pb-n12" bottom style="z-index: 3;"
+			              				
+			              				fab 
+			              				x-small
+			              				depressed
+			              				color="#FFB300">
+								        	<v-icon>mdi-minus
+								        	</v-icon>
+								        </v-btn>
+								        <v-card-title class="body-1 ma-0 pa-0" style="font-size:1rem;">0</v-card-title>
+								        <v-btn class="white--text plmn mt-4 mb-n12 pb-n12" bottom style="z-index: 3;"
+			              				@click.stop="getCoupon(promotion)"
+			              				fab
+
+			              				x-small
+			              				depressed
+			              				color="#FFB300">
+								        	<v-icon>mdi-plus
+								        	</v-icon>
+								        </v-btn>
+								        <!-- <v-btn class="white--text mr-n1 mb-7 pa-0" bottom
 			              				right
 			              				style="z-index: 3;"
 			              				absolute 
@@ -114,7 +134,8 @@
 			              				@click.stop="getCoupon(promotion)">
 								        	<v-icon>mdi-plus
 								        	</v-icon>
-								        </v-btn>
+								        </v-btn> -->
+
 								    </v-row>
 								    <v-dialog v-model="promotion.dialog" max-width="290">
 										<v-card>
@@ -362,6 +383,11 @@
 	}
 	.under {
 		text-decoration: line-through;
+	}
+	.plmn {
+		min-width: 22px;
+		height: 22px;
+
 	}
 	/*.buttonst {
 		border-radius: 5px;

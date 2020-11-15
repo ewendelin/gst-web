@@ -55,6 +55,26 @@
 					    			</v-row>
 					    			
 									<v-row class="mb-n12">
+										<v-btn class="white--text plmn mt-4 mb-n12 pb-n12" bottom style="z-index: 3;"
+			              				
+			              				fab 
+			              				x-small
+			              				depressed
+			              				color="#FFB300">
+								        	<v-icon>mdi-minus
+								        	</v-icon>
+								        </v-btn>
+								        <v-card-title class="body-1 ma-0 pa-0" style="font-size:1rem;">0</v-card-title>
+								        <v-btn class="white--text plmn mt-4 mb-n12 pb-n12" bottom style="z-index: 3;"
+			              				@click.stop="getCoupon(promotion)"
+			              				fab
+
+			              				x-small
+			              				depressed
+			              				color="#FFB300">
+								        	<v-icon>mdi-plus
+								        	</v-icon>
+								        </v-btn>
 										<v-spacer></v-spacer>
 								        <v-btn
 								            icon
