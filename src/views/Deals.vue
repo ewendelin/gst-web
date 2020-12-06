@@ -44,6 +44,24 @@
   				</v-row>
       		</div>
     	</v-expand-transition>
+    	<!-- if nothing has been added, dont show the button-->
+    	<v-layout row class="mx-auto" align-center justify-center v-if="claimed">
+    		<v-btn
+    			align-center
+    			width="60%"
+    			justify-center
+    			dark
+				color="#FFB300"
+				tile
+				class="buttons"
+				depressed
+				to="/checkout"
+				style="position: fixed; bottom: 60px; z-index: 5;">checkout
+				<v-icon right dark>
+        			mdi-cart
+     			</v-icon>
+	    	</v-btn>
+	    </v-layout>
 		<v-layout row class="mx-auto" style="max-width: 100vw;" align-center justify-center>
 	    	<v-col cols="12">
 	        	<v-row justify="center">
@@ -61,7 +79,7 @@
 				                size="145"
 				                height=""
 				                tile>
-					                <v-img 
+					                <v-img
 						            class="white--text"
 					              	gradient="to bottom, rgba(0,0,0,0), rgba(0,0,0,.5)"
 					              	:src="promotion.image">
@@ -87,13 +105,14 @@
 								        <v-spacer></v-spacer>
 								        <v-btn class="white--text mr-n1 mb-7 pa-0" bottom
 			              				right
-			              				absolute 
-			              				fab 
+			              				style="z-index: 3;"
+			              				absolute
+			              				fab
 			              				x-small
 			              				depressed
 			              				color="#FFB300"
 			              				@click.stop="getCoupon(promotion)">
-								        	<v-icon>mdi-cart-plus
+								        	<v-icon>mdi-plus
 								        	</v-icon>
 								        </v-btn>
 								    </v-row>
@@ -218,10 +237,11 @@
 				details: [],
 				filter: {
 					checkedAreas: [],
-        			checkedTypes: []
+        	checkedTypes: []
 				},
 				valid: '',
 				show: false,
+        claimed: false,
 				areas: ['Xuhui', 'Jingan', 'Huangpu', 'Changning', 'Hongkou', 'Yangpu', 'Putuo', 'Pudong', 'Other'],
 				vendor_type: ['Restaurant', 'Bar', 'Cafe', 'Store'],
 				login: !(sessionStorage.getItem('token') != undefined && sessionStorage.getItem('token') != 'logout'),
@@ -229,13 +249,15 @@
 		},
 		methods: {
 			getCoupon(promotion) {
+        let page = this;
 				this.$api
 					.post(
 						`/promotions/${promotion.id}/claim_coupon`
 					)
 					.then(function() {
 						promotion.deets = false;
-						promotion.dialog = true;
+						promotion.dialog = false;
+            page.claimed = true;
 					})
 					.catch(function(error) {
 						alert('fail' + error);

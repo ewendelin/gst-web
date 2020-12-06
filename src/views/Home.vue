@@ -55,7 +55,7 @@
 			        </v-list-item-subtitle>
 			      </v-list-item-content>
 			    </v-list-item>
-        	
+
             	<v-list-item three-line>
 			    	<v-list-item-icon>
             			<v-icon size="62">mdi-silverware-fork-knife</v-icon>
@@ -67,7 +67,7 @@
 			        </v-list-item-subtitle>
 			      </v-list-item-content>
 			    </v-list-item>
-        	
+
             	<v-list-item three-line>
 			    	<v-list-item-icon>
             			<v-img class="logo1" src="../assets/21.png"></v-img>
@@ -87,7 +87,7 @@
 <script>
 	// import Gast from '../assets/logo.svg';
 	import Navbar from '../components/Navbar';
-	
+
 	export default {
 		name: 'Home',
 		components: { Navbar },
@@ -104,43 +104,38 @@
 		},
 		methods: {
 			wxLogin() {
+        // alert('loginUrl ' + this.$config.loginUrl);
 			  window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.$config.appID}&redirect_uri=${encodeURIComponent(this.$config.loginUrl)}&response_type=code&scope=snsapi_userinfo&state=${new Date().getTime()}`
 			}
 		},
 		created() {
-			let storedToken = sessionStorage.getItem('token');
-	   		if (storedToken != undefined || storedToken != null) {
+      let storedToken;
+      if (this.$config.debug) {
+        storedToken = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMSwiZXhwIjoxNjA1Njg5ODAwfQ.DGdVD04iA-AUnNHHZyjQSygxTpm-rSMJQY1IzKuZNs4";
+        sessionStorage.setItem('token', storedToken);
+      } else {
+        storedToken = sessionStorage.getItem('token');
+      }
+
+      if (storedToken != undefined || storedToken != null || storedToken != 'logout') {
 	    	this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-			  
-			// let storedToken = sessionStorage.getItem('token');
-
-			// let login = !(storedToken != undefined && storedToken != 'logout')
-			// this.login = login;
-
-			// if ((storedToken != null || storedToken != undefined) && storedToken != 'logout') {
-   //      		this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-			// 	// redirect('/deals')
-			// }
-			// if (this.$route.query.code != null || this.$route.query.code != undefined) {
-   //             this.$api
-			// 	.get(
-			// 		`/users/login/wx_web_login?code=${this.$route.query.code}`
-			// 	)
-			// 	.then((res) => {
-   //            this.$api.defaults.headers.common['X-Auth-Token'] = res.data.user.token
-   //            sessionStorage.setItem('token', res.data.user.token);
-   //            sessionStorage.setItem('user', JSON.stringify(res.data.user));
-
-              // Vue.prototype.$api = this.$api;
-     //          window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
-     //        })
-					// 	.catch(() => {
-     //          window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
-     //        });
-	  		// }
-		}
-	}
-}
+			  this.login = false;
+		  }
+      // login logic
+      if (this.$route.query.code != null || this.$route.query.code != undefined) {
+        this.$api.get(`/users/login/wx_web_login?code=${this.$route.query.code}`).then((res) => {
+          this.$api.defaults.headers.common['X-Auth-Token'] = res.data.user.token
+          this.login = false;
+          sessionStorage.setItem('token', res.data.user.token);
+          sessionStorage.setItem('user', JSON.stringify(res.data.user));
+          window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
+        })
+        .catch(() => {
+          window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
+        });
+      }
+	  }
+  }
 </script>
 
 <style scoped>
