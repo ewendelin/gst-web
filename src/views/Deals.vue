@@ -111,7 +111,7 @@
 								        	<v-icon>mdi-minus
 								        	</v-icon>
 								        </v-btn>
-								        <v-card-title class="body-1 ma-0 pa-0" style="font-size:1rem;">0</v-card-title>
+								        <v-card-title class="body-1 ma-0 pa-0" style="font-size:1rem;">{{promotion.coupon.qty}}</v-card-title>
 								        <v-btn class="white--text plmn mt-4 mb-n12 pb-n12" bottom style="z-index: 3;"
 			              				@click.stop="getCoupon(promotion)"
 			              				fab

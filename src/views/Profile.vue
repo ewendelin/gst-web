@@ -235,8 +235,8 @@
 						dets: false
 					}));
 				})
-				.catch(function(error) {
-					alert('fail' + error);
+				.catch(function() {
+					// alert('fail' + error);
 				});
 		    } else {
 				window.location.href = "https://gast.world"
