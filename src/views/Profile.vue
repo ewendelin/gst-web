@@ -13,12 +13,101 @@
 						}}</v-list-item-title>
 					</v-list-item-content>
 					<!-- <v-list-item-icon>
-						<v-btn fab text @click="logout()">
-							<v-icon>mdi-cog</v-icon>
+						<v-btn fab text @click="editdelivery()">
+							<v-icon>mdi-pencil</v-icon>
 						</v-btn>
 					</v-list-item-icon> -->
 				</v-list-item>
 			</v-list>
+		</v-layout>
+		<h3 class="mx-5">Delivery Address</h3>
+		<p class="mx-5">addess</p>
+		<p class="mx-5 mt-n4">delivery name</p>
+		<p class="mx-5 mt-n4">number</p>
+		<v-layout row class="mx-auto" align-center justify-center>
+			<v-btn 
+    			align-center
+    			width="60%" 
+    			justify-center 
+    			dark
+				color="#FFB300"
+				tile
+				class="buttons mt-4 mb-8"
+				depressed>Edit Delivery Address
+			</v-btn>
+						<v-dialog v-model="dialogdelivery" max-width="350">
+						<v-card center class="pt-12 pb-12">
+							<v-layout row class="mx-auto mb-n4 mt-n4">
+							<v-spacer></v-spacer>
+								<v-btn class="mt-n4" icon @click="dialogdelivery = false">
+										<v-icon>mdi-close</v-icon>
+									</v-btn>
+								</v-layout>
+							<!-- <v-col> -->
+							<v-layout row class="mx-5">
+
+								<v-card-title class="title mt-n3">Delivery Address</v-card-title>
+								</v-layout>
+									<v-form ref="form" v-model="valid" lazy-validation class="mx-8">
+										<v-text-field
+												v-model="delivery.name"
+												:rules="[v => !!v || 'Name is required!']"
+												required
+												color="#DFA937"
+											>
+												<template v-slot:label>
+													<div>
+														{{ $t('newVendorName') }}
+													</div>
+												</template>
+											</v-text-field>
+
+
+											<v-text-field
+												v-model="delivery.address"
+												required
+												:rules="[v => !!v || 'Address is required!']"
+												color="#DFA937"
+											>
+												<template v-slot:label>
+													<div>
+														{{ $t('address') }}
+													</div>
+												</template>
+											</v-text-field>
+
+
+											<v-text-field
+												v-model="delivery.contact_number"
+												required
+												:rules="[v => !!v || 'Phone number is required!']"
+												color="#DFA937"
+											>
+												<template v-slot:label>
+													<div>
+														{{ $t('phoneNumber') }}
+													</div>
+												</template>
+											</v-text-field>
+
+									</v-form>
+
+									<v-layout class="align-center justify-center">
+										<v-btn
+											dark
+											width="80%"
+											color="#DFA937"
+											tile
+											class="buttons mb-3"
+											depressed
+
+										>
+										Save address
+										</v-btn>
+									</v-layout>
+
+					</v-card>
+				</v-dialog>
 		</v-layout>
 		<h3 class="mx-4 mt-3 mb-n3">{{ $t('todayOrder') }}</h3>
 		<v-layout row class="mx-auto" style="max-width: 100vw;" align-center justify-center>
@@ -286,6 +375,7 @@
 				deals: [],
 				res: [],
 				snackbar: false,
+				dialogdelivery: false,
 				//what is the data we get from the api? to put the username and avatar?
 				user: JSON.parse(sessionStorage.getItem('user'))
 			};
