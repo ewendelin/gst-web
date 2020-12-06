@@ -185,10 +185,10 @@
 				</v-dialog>
 		</v-layout>
 		<v-checkbox
+			v-model="delivery"
             class="mx-5"
             label="Add delivery ¥12"
             color="FFB300"
-            value="red"
         ></v-checkbox>
 		<h3 class="mx-5">Total: ¥{{deal.total.price}}</h3>
 		<div class="disc">
@@ -205,6 +205,12 @@
 	export default {
 		name: 'Checkout',
 		components: { },
+		data() {
+			return {
+				dialogdelivery: false,
+				delivery: true
+			};
+		},
 
 		methods: {
 
