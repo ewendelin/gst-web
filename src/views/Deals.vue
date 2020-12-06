@@ -103,18 +103,26 @@
 								        <v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{promotion.price}}</v-card-title>
 								        <v-card-title class="body-2 ml-n5 text--disabled under">¥{{promotion.original_price}}</v-card-title>
 								        <v-spacer></v-spacer>
-								        <v-btn class="white--text mr-n1 mb-7 pa-0" bottom
-			              				right
-			              				style="z-index: 3;"
-			              				absolute
+								        <!--@@ plus and minus button and the quantity display area -->
+								        <v-btn class="white--text plmn mt-4 mb-n12 pb-n12" bottom style="z-index: 3;"
+			              				fab 
+			              				x-small
+			              				depressed
+			              				color="#FFB300">
+								        	<v-icon>mdi-minus
+								        	</v-icon>
+								        </v-btn>
+								        <v-card-title class="body-1 ma-0 pa-0" style="font-size:1rem;">{{promotion.coupon.qty}}</v-card-title>
+								        <v-btn class="white--text plmn mt-4 mb-n12 pb-n12" bottom style="z-index: 3;"
+			              				@click.stop="getCoupon(promotion)"
 			              				fab
 			              				x-small
 			              				depressed
-			              				color="#FFB300"
-			              				@click.stop="getCoupon(promotion)">
+			              				color="#FFB300">
 								        	<v-icon>mdi-plus
 								        	</v-icon>
 								        </v-btn>
+								        <!--@@ plus and minus button and the quantity display area -->
 								    </v-row>
 								    <v-dialog v-model="promotion.dialog" max-width="290">
 										<v-card>
