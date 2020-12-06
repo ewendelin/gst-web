@@ -8,7 +8,7 @@
 		<h3 class="mx-5">Checkout</h3>
 		<v-layout row class="mx-auto" align-center justify-center>
   		<v-btn
-        v-if="order"
+        v-if="order.id"
   			align-center
   			width="60%"
   			justify-center
@@ -17,7 +17,7 @@
 			  tile
 			  class="buttons"
 			  depressed
-        @click="pay(order.id)"
+        @click="pay"
 			  style="position: fixed; bottom: 10px; z-index: 5;">WeChat Pay
     	</v-btn>
 	   </v-layout>
@@ -28,6 +28,7 @@
 	          	<v-card
 						      class="mb-2 mx-auto px-0"
 			            light
+                  v-if="order.id"
 			            >
 	            			<div class="d-flex flex-no-wrap">
 				            	<v-avatar
@@ -76,7 +77,7 @@
 			  </v-col>
 		</v-layout>
 
-    <v-layout row class="mx-0 mt-n12" v-if="!order" align="center">
+    <v-layout row class="mx-0 mt-n12" v-if="!order.id" align="center">
       <v-col cols="12" >
         <h1 class="text-center font-weight-bold" style="color:#FFB300; font-size: 3rem;">No orders yet ...</h1>
         <p class="text-center" subtitle-1 style="color:#424242;">Find good deals on food that needs to be consumed.</p>
@@ -101,7 +102,7 @@
       </v-col>
     </v-layout>
 
-		<h3 class="mx-5" v-if="orders.length > 0">Total: ¥ {{orders[0].amount}}</h3>
+		<h3 class="mx-5" v-if="order.id">Total: ¥ {{order.total_amount}} for {{order.quantity}} {{order.quantity > 1 ? 'sets' : 'set'}}</h3>
 		<div class="disc">
 			<h5 class="mx-5">Disclaimer:</h5>
 			<p class="mx-5 caption" font-size=".7rem">
@@ -124,17 +125,7 @@
       let storedToken = sessionStorage.getItem('token');
       if ((storedToken != undefined || storedToken != null) && storedToken != 'logout') {
         this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-
-        let order_id = this.$route.query.id;
-        // alert(order_id)
-        this.$api.get(`/orders`).then(response => {
-          // this.orders = response.data;
-          let o = response.data.find(e => { return e.id == order_id})
-          this.order = o
-        })
-        .catch(function() {
-          // alert('fail' + error);
-        });
+        this.fetchOrders(this.$route.query.id)
       }
       else {
         // window.location.href = "https://gast.world"
@@ -148,19 +139,35 @@
         orders: [],
         total: 1,
         payment: {},
-        order: {}
+        order: {
+          promotion: {}
+        }
       };
     },
 
 		methods: {
+      fetchOrders(id = undefined) {
+        // alert(order_id)
+        let url = id === undefined ? `orders` : `orders/${id}`
+        this.$api.get(url).then(response => {
+          if (id === undefined) {
+            this.order = response.data[0]
+          } else {
+            this.order = response.data.data
+          }
+        })
+        .catch(function() {
+          // alert('fail' + error);
+        });
+      },
 			remove_order(order) {
 				// this.$api(this.deals, index);
 				this.$api.delete(`/orders/${order.id}`).then(response => {
 					this.canceled = response
-					this.res = this.orders.filter((x) => {
-						return x.id != order.id
-					});
-					this.orders = this.res;
+					this.orders = this.orders.filter((x) => {
+            return x.id != order.id
+          });
+          this.order = {promotion: {}}
 				})
 				.catch(function() {
 					// alert('fail' + error);
@@ -169,8 +176,8 @@
       toDeals() {
         window.location.href = window.location.origin + '/deals'
       },
-      pay(id) {
-        this.$api.post(`/orders/pay`, {id: id}).then( response => {
+      pay() {
+        this.$api.post(`/orders/pay`, {id: this.order.id}).then( response => {
           let payment = response.data.data.payment;
           // alert('in pay' + payment)
           this.wxPay(payment);

@@ -49,9 +49,9 @@
 
 								<v-card-title class="title mt-n3">Delivery Address</v-card-title>
 								</v-layout>
-									<v-form ref="form" v-model="user" lazy-validation class="mx-8">
+									<v-form ref="form" v-model="addressInfo" lazy-validation class="mx-8">
 										<v-text-field
-												v-model="user.name"
+												v-model="addressInfo.name"
 												:rules="[v => !!v || 'Name is required!']"
 												required
 												color="#DFA937"
@@ -65,7 +65,7 @@
 
 
 											<v-text-field
-												v-model="user.primary_address"
+												v-model="addressInfo.address"
 												required
 												:rules="[v => !!v || 'Address is required!']"
 												color="#DFA937"
@@ -79,7 +79,7 @@
 
 
 											<v-text-field
-												v-model="user.mobile_phone"
+												v-model="addressInfo.mobile_phone"
 												required
 												:rules="[v => !!v || 'Phone number is required!']"
 												color="#DFA937"
@@ -109,7 +109,7 @@
 					</v-card>
 				</v-dialog>
 		</v-layout>
-		<h3 class="mx-4 mt-3 mb-n3">{{ $t('todayOrder') }}</h3>
+		<h3 class="mx-4 mt-3 mb-n3" v-if="deals.length > 0">{{ $t('todayOrder') }}</h3>
 		<v-layout row class="mx-auto" style="max-width: 100vw;" align-center justify-center>
 	    	<v-col cols="12">
 	        	<v-row justify="center">
@@ -132,7 +132,7 @@
 				                </v-avatar>
 	              				<div>
 	                				<v-card-title class="mt-n1 pr-0 cols-3 text-truncate" style="font-size:1.1rem;"
-	                				>{{ deal.promotion.title }}</v-card-title>
+	                				>{{ deal.promotion.title }} {{deal.order.quantity}} {{deal.order.quantity > 1 ? 'sets' : 'set'}}</v-card-title>
 									<v-card-subtitle class="caption justify-center mb-n9 pr-0 cols-5 text-truncate" style="font-size:.5rem;">
 					      				<v-icon small class="align-end justify-center mr-1">mdi-clock-outline</v-icon>
 					      					{{ deal.promotion.time_slot }}
@@ -357,6 +357,11 @@
 				res: [],
 				snackbar: false,
 				dialogdelivery: false,
+        addressInfo: {
+          name: '',
+          address: '',
+          mobile_phone: ''
+        }
 				//what is the data we get from the api? to put the username and avatar?
 				// user: JSON.parse(sessionStorage.getItem('user')) || {}
 			};
@@ -393,7 +398,6 @@
       fetchCoupons() {
         this.$api.get(`/coupons`).then(response => {
           let deals = response.data;
-          this.user = deals[0].user;
           this.deals = deals.map(deals => ({
             ...deals,
             dialog: false,
@@ -402,13 +406,17 @@
             dets: false
           }))
           // store the user in session
-          sessionStorage.setItem('user', JSON.stringify(this.user));
+          if (deals[0] && deals[0].user) {
+            sessionStorage.setItem('user', JSON.stringify(this.user));
+          }
         }).catch(function(error) {
           alert('fail' + error);
         });
       },
       updateAddress() {
-        this.$api.post(`/users/address`).then(response => {
+        // alert(this.addressInfo.name)
+        // no data passed to API
+        this.$api.post(`/users/add_address`, {name: this.addressInfo.name, address: this.addressInfo.address, mobile_phone: this.addressInfo.mobile_phone}).then(response => {
           this.user = response.data
           sessionStorage.setItem('user', JSON.stringify(this.user));
         })
