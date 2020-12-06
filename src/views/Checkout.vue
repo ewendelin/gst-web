@@ -8,7 +8,7 @@
 		<h3 class="mx-5">Checkout</h3>
 		<v-layout row class="mx-auto" align-center justify-center>
   		<v-btn
-        v-if="orders.length > 0"
+        v-if="order"
   			align-center
   			width="60%"
   			justify-center
@@ -17,7 +17,7 @@
 			  tile
 			  class="buttons"
 			  depressed
-        @click="pay(orders[0].id)"
+        @click="pay(order.id)"
 			  style="position: fixed; bottom: 10px; z-index: 5;">WeChat Pay
     	</v-btn>
 	   </v-layout>
@@ -28,8 +28,6 @@
 	          	<v-card
 						      class="mb-2 mx-auto px-0"
 			            light
-			            v-for="order in orders"
-						      v-bind:key="order.id"
 			            >
 	            			<div class="d-flex flex-no-wrap">
 				            	<v-avatar
@@ -78,7 +76,7 @@
 			  </v-col>
 		</v-layout>
 
-    <v-layout row class="mx-0 mt-n12" v-if="orders.length == 0" align="center">
+    <v-layout row class="mx-0 mt-n12" v-if="!order" align="center">
       <v-col cols="12" >
         <h1 class="text-center font-weight-bold" style="color:#FFB300; font-size: 3rem;">No orders yet ...</h1>
         <p class="text-center" subtitle-1 style="color:#424242;">Find good deals on food that needs to be consumed.</p>
@@ -126,10 +124,13 @@
       let storedToken = sessionStorage.getItem('token');
       if ((storedToken != undefined || storedToken != null) && storedToken != 'logout') {
         this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+
+        let order_id = this.$route.query.id;
+        // alert(order_id)
         this.$api.get(`/orders`).then(response => {
-          this.orders = response.data;
-          // this.coupons = response.data.map(item => item.coupon);
-          // alert('this.orders' + this.orders.length + ' == ' + this.coupons.length);
+          // this.orders = response.data;
+          let o = response.data.find(e => { return e.id == order_id})
+          this.order = o
         })
         .catch(function() {
           // alert('fail' + error);
@@ -146,7 +147,8 @@
         coupons: [],
         orders: [],
         total: 1,
-        payment: {}
+        payment: {},
+        order: {}
       };
     },
 

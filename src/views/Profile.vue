@@ -20,16 +20,17 @@
 				</v-list-item>
 			</v-list>
 		</v-layout>
-		<h3 class="mx-5">Delivery Address</h3>
-		<p class="mx-5">addess</p>
-		<p class="mx-5 mt-n4">delivery name</p>
-		<p class="mx-5 mt-n4">number</p>
+		<h3 class="mx-5">Delivery Info</h3>
+		<p class="mx-5">{{user.primary_address}}</p>
+		<p class="mx-5 mt-n4">{{user.name}}</p>
+		<p class="mx-5 mt-n4">{{user.mobile_phone}}</p>
 		<v-layout row class="mx-auto" align-center justify-center>
-			<v-btn 
-    			align-center
-    			width="60%" 
-    			justify-center 
-    			dark
+			<v-btn
+        @click="dialogdelivery = true"
+  			align-center
+  			width="60%"
+  			justify-center
+  			dark
 				color="#FFB300"
 				tile
 				class="buttons mt-4 mb-8"
@@ -48,44 +49,44 @@
 
 								<v-card-title class="title mt-n3">Delivery Address</v-card-title>
 								</v-layout>
-									<v-form ref="form" v-model="valid" lazy-validation class="mx-8">
+									<v-form ref="form" v-model="user" lazy-validation class="mx-8">
 										<v-text-field
-												v-model="delivery.name"
+												v-model="user.name"
 												:rules="[v => !!v || 'Name is required!']"
 												required
 												color="#DFA937"
 											>
 												<template v-slot:label>
 													<div>
-														{{ $t('newVendorName') }}
+														{{ $t('deliveryName') }}
 													</div>
 												</template>
 											</v-text-field>
 
 
 											<v-text-field
-												v-model="delivery.address"
+												v-model="user.primary_address"
 												required
 												:rules="[v => !!v || 'Address is required!']"
 												color="#DFA937"
 											>
 												<template v-slot:label>
 													<div>
-														{{ $t('address') }}
+														{{ $t('deliveryAddress') }}
 													</div>
 												</template>
 											</v-text-field>
 
 
 											<v-text-field
-												v-model="delivery.contact_number"
+												v-model="user.mobile_phone"
 												required
 												:rules="[v => !!v || 'Phone number is required!']"
 												color="#DFA937"
 											>
 												<template v-slot:label>
 													<div>
-														{{ $t('phoneNumber') }}
+														{{ $t('deliveryMobile') }}
 													</div>
 												</template>
 											</v-text-field>
@@ -94,15 +95,14 @@
 
 									<v-layout class="align-center justify-center">
 										<v-btn
+                      @click="updateAddress"
 											dark
 											width="80%"
 											color="#DFA937"
 											tile
 											class="buttons mb-3"
 											depressed
-
-										>
-										Save address
+										>Save
 										</v-btn>
 									</v-layout>
 
@@ -156,7 +156,7 @@
                       depressed
                       class="white--text"
                       color="#FFB300"
-                      @click="toCheckout">Pay</v-btn>
+                      @click="toCheckout(deal)">Pay</v-btn>
 											<v-dialog v-model="deal.dia" max-width="290">
 												<v-card>
 													<v-layout row class="mx-auto">
@@ -337,36 +337,17 @@
 <script>
 	// import axios from 'axios';
 	import Navbar from '../components/Navbar';
-	// axios.defaults.headers.common['X-Auth-Token'] = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJleHAiOjE1ODkxODUyMTl9.yCeUHSSHkqET1Rbr9wznhKmE_nw62Iztu4RW3H3IBi4";
-	// axios.defaults.headers.common['API-key'] = 'gastbyellenapikey';
-  // this.$api.defaults.headers.common['X-Auth-Token'] = sessionStorage.getItem('token');
-
 	export default {
 		name: 'Profile',
 		components: { Navbar },
-		props: {
-            msg: String
-        },
-
+		props: { msg: String },
 		created() {
+      this.user = JSON.parse(sessionStorage.getItem('user')) || {}
       let storedToken = sessionStorage.getItem('token');
 	    if ((storedToken != undefined || storedToken != null) && storedToken != 'logout') {
 	     this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-	     this.$api.get(`/coupons`).then(response => {
-				this.deals = response.data;
-        this.user = this.deals[0].user;
-				this.deals = this.deals.map(deals => ({
-					...deals,
-					dialog: false,
-					dialog3: false,
-					dia: false,
-					dets: false
-				}));
-			})
-			.catch(function(error) {
-				alert('fail' + error);
-			});
-	    } else {
+	     this.fetchCoupons()
+      } else {
 			  window.location.href = "https://gast.world"
 	    }
 		},
@@ -377,7 +358,7 @@
 				snackbar: false,
 				dialogdelivery: false,
 				//what is the data we get from the api? to put the username and avatar?
-				user: JSON.parse(sessionStorage.getItem('user'))
+				// user: JSON.parse(sessionStorage.getItem('user')) || {}
 			};
 		},
 		methods: {
@@ -386,41 +367,55 @@
 				// sessionStorage.clear();
         sessionStorage.setItem('token', 'logout');
 				window.location.href = "https://gast.world"
-				// redirect('/');
 			},
-			// getProfileInfo() {
+			getProfileInfo() {
 
-			// },
+			},
       toDeals() {
         window.location.href = window.location.origin + '/deals'
       },
-      toCheckout() {
-        window.location.href = window.location.origin + '/checkout' + `?time=${new Date().getTime()}`;
+      toCheckout(deal) {
+        window.location.href = window.location.origin + '/checkout' + `?id=${deal.order.id}`;
       },
 			remove(deal) {
 				// this.$api(this.deals, index);
-					this.$api.post(
-						`/coupons/${deal.id}`,
-					)
-					.then(response => {
-						this.canceled = response
-
-						this.res = this.deals.filter((x) => {
-							return x.id != deal.id
-						});
-						this.deals = this.res;
-
-						// this.deals = this.deals.map(deals => ({
-						// 	...deals,
-						// 	dialog: false,
-						// 	dialog3: false
-						// }));
-
-					})
-					.catch(function(error) {
-						alert('fail' + error);
+				this.$api.post(`/coupons/${deal.id}`,).then(response => {
+					this.canceled = response
+					this.res = this.deals.filter((x) => {
+						return x.id != deal.id
 					});
-			}
+					this.deals = this.res;
+				})
+				.catch(function(error) {
+					alert('fail' + error);
+				});
+			},
+      fetchCoupons() {
+        this.$api.get(`/coupons`).then(response => {
+          let deals = response.data;
+          this.user = deals[0].user;
+          this.deals = deals.map(deals => ({
+            ...deals,
+            dialog: false,
+            dialog3: false,
+            dia: false,
+            dets: false
+          }))
+          // store the user in session
+          sessionStorage.setItem('user', JSON.stringify(this.user));
+        }).catch(function(error) {
+          alert('fail' + error);
+        });
+      },
+      updateAddress() {
+        this.$api.post(`/users/address`).then(response => {
+          this.user = response.data
+          sessionStorage.setItem('user', JSON.stringify(this.user));
+        })
+        .catch(function(error) {
+          alert('fail' + error);
+        });
+      },
 		}
 	};
 </script>
