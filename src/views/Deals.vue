@@ -57,9 +57,7 @@
 				depressed
 				to="/checkout"
 				style="position: fixed; bottom: 60px; z-index: 5;">checkout
-				<v-icon right dark>
-        			mdi-cart
-     			</v-icon>
+				<v-icon right dark>mdi-cart</v-icon>
 	    	</v-btn>
 	    </v-layout>
 		<v-layout row class="mx-auto" style="max-width: 100vw;" align-center justify-center>
@@ -105,16 +103,17 @@
 								        <v-spacer></v-spacer>
 								        <!--@@ plus and minus button and the quantity display area -->
 								        <v-btn class="white--text plmn mt-4 mb-n12 pb-n12" bottom style="z-index: 3;"
-			              				fab 
+			              				@click.stop="minusQty(promotion)"
+                            fab
 			              				x-small
 			              				depressed
 			              				color="#FFB300">
 								        	<v-icon>mdi-minus
 								        	</v-icon>
 								        </v-btn>
-								        <v-card-title class="body-1 ma-0 pa-0" style="font-size:1rem;">{{promotion.coupon.qty}}</v-card-title>
+								        <v-card-title class="body-1 ma-0 pa-0" style="font-size:1rem;">{{promotion.qty}}</v-card-title>
 								        <v-btn class="white--text plmn mt-4 mb-n12 pb-n12" bottom style="z-index: 3;"
-			              				@click.stop="getCoupon(promotion)"
+			              				@click.stop="plusQty(promotion)"
 			              				fab
 			              				x-small
 			              				depressed
@@ -122,6 +121,15 @@
 								        	<v-icon>mdi-plus
 								        	</v-icon>
 								        </v-btn>
+
+                        <v-btn class="white--text plmn mt-4 mb-n12 pb-n12" bottom style="z-index: 3;"
+                            @click.stop="getCoupon(promotion)"
+                            fab
+                            x-small
+                            depressed
+                            color="#FFB300">
+                          <v-icon dark>mdi-cart</v-icon>
+                        </v-btn>
 								        <!--@@ plus and minus button and the quantity display area -->
 								    </v-row>
 								    <v-dialog v-model="promotion.dialog" max-width="290">
@@ -237,9 +245,7 @@
 	export default {
 		name: 'Deals',
 		components: { Navbar },
-		props: {
-            msg: String
-        },
+		props: { msg: String },
 		data() {
 			return {
 				details: [],
@@ -258,17 +264,13 @@
 		methods: {
 			getCoupon(promotion) {
         let page = this;
-				this.$api
-					.post(
-						`/promotions/${promotion.id}/claim_coupon`
-					)
-					.then(function() {
-						promotion.deets = false;
-						promotion.dialog = false;
-            page.claimed = true;
-					})
-					.catch(function(error) {
-						alert('fail' + error);
+				this.$api.post(`/promotions/${promotion.id}/claim_coupon`, {quantity: promotion.qty}).then(function() {
+					promotion.deets = false;
+					promotion.dialog = false;
+          page.claimed = true;
+				})
+				.catch(function(error) {
+					alert('fail' + error);
 				});
 			},
 			submitUpload() {
@@ -293,76 +295,59 @@
         }
         // filtedDetails could be empty, add fallback tell users this
         this.details = filtedDetails
-
+      },
+      fetchDeals() {
+        this.$api.get(`/promotions`).then(response => {
+          this.details = response.data;
+          this.details = this.details.map(details => ({
+            ...details,
+            show: false,
+            deets: false,
+            dialog: false,
+            dialograting: false,
+            qty: 1
+          }));
+          // backup all deals
+          this.allDetails = this.details;
+        }).catch(e => {
+          this.error.push(e);
+        });
+      },
+      plusQty(promotion) {
+        promotion.qty += 1
+        this.promotion = promotion
+      },
+      minusQty(promotion) {
+        if (promotion.qty > 1) {
+          promotion.qty -= 1
+          this.promotion = promotion
+        }
       }
 		},
 	  created () {
-	    //   let storedToken = sessionStorage.getItem('token');
-	    //   if (storedToken != undefined || storedToken != null) {
-	    //     this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-			  // }
 			let storedToken = sessionStorage.getItem('token');
-
 			let login = !(storedToken != undefined && storedToken != 'logout')
 			this.login = login;
 
 			if ((storedToken != null || storedToken != undefined) && storedToken != 'logout') {
-        		this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-				// redirect('/deals')
+        this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
 			}
+
 			if (this.$route.query.code != null || this.$route.query.code != undefined) {
-               this.$api
-				.get(
-					`/users/login/wx_web_login?code=${this.$route.query.code}`
-				)
-				.then((res) => {
-              this.$api.defaults.headers.common['X-Auth-Token'] = res.data.user.token
-              sessionStorage.setItem('token', res.data.user.token);
-              sessionStorage.setItem('user', JSON.stringify(res.data.user));
-
-              // Vue.prototype.$api = this.$api;
-              window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
-            })
-						.catch(() => {
-              window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
-            });
-	  		}
-
-  			this.$api
-  				.get(`/promotions`)
-  					.then(response => {
-  						this.details = response.data;
-  						this.details = this.details.map(details => ({
-  							...details,
-  							show: false,
-  							deets: false,
-  							dialog: false,
-  							dialograting: false,
-  						}));
-              // backup all deals
-              this.allDetails = this.details;
-  				})
-  				.catch(e => {
-  					this.error.push(e);
-  				});
-  	    },
-  	    // computed: {
-  	    // 	filteredPromotions: function(){
-  	    // 		return this.details.filter((promotion) => {
-  	    // 			return promotion.area.match(this.filter)
-  	    // 		});
-  	    // 	}
-  	    // }
-  	    // mounted () {
-
-  	    // }
-	  };
+        this.$api.get(`/users/login/wx_web_login?code=${this.$route.query.code}`).then((res) => {
+          this.$api.defaults.headers.common['X-Auth-Token'] = res.data.user.token
+          sessionStorage.setItem('token', res.data.user.token);
+          sessionStorage.setItem('user', JSON.stringify(res.data.user));
+            // Vue.prototype.$api = this.$api;
+            window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
+        }).catch(() => {
+          window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
+        });
+	  	}
+      this.fetchDeals();
+  	}
+	};
 </script>
-
-{
-
-
-		},
 
 <style scoped>
 	.home {
