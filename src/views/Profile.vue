@@ -20,12 +20,13 @@
 				</v-list-item>
 			</v-list>
 		</v-layout>
-		<h3 class="mx-5">Delivery Info</h3>
-		<p class="mx-5">{{user.primary_address}}</p>
-		<p class="mx-5 mt-n4">{{user.name}}</p>
-		<p class="mx-5 mt-n4">{{user.mobile_phone}}</p>
+		<h3 class="mx-5" v-if="displayAddressButton">Delivery Info</h3>
+		<p class="mx-5" v-if="displayAddressButton">{{user.primary_address}}</p>
+		<p class="mx-5 mt-n4" v-if="displayAddressButton">{{user.name}}</p>
+		<p class="mx-5 mt-n4" v-if="displayAddressButton">{{user.mobile_phone}}</p>
 		<v-layout class="mx-auto" align-center justify-center>
 			<v-btn
+        v-if="displayAddressButton"
         @click.stop="dialogdelivery = true"
   			align-center
   			width="60%"
@@ -276,7 +277,7 @@
       </v-btn>
     </v-layout>
 
-		
+
 	</div>
 </template>
 <script>
@@ -287,14 +288,18 @@
 		components: { Navbar },
 		props: { msg: String },
 		created() {
-      this.user = JSON.parse(sessionStorage.getItem('user')) || {}
+      let u = sessionStorage.getItem('user')
+      if (u && u != 'undefined') {
+        this.user = JSON.parse(sessionStorage.getItem('user'))
+      }
       let storedToken = sessionStorage.getItem('token');
 	    if ((storedToken != undefined || storedToken != null) && storedToken != 'logout') {
 	     this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
 	     this.fetchCoupons()
-      } else {
-			  window.location.href = "https://gast.world"
-	    }
+      }
+     //  else {
+			  // window.location.href = "https://gast.world"
+	    // }
 		},
 		data() {
 			return {
@@ -302,6 +307,8 @@
 				res: [],
 				snackbar: false,
 				dialogdelivery: false,
+        displayAddressButton: false,
+        user: {},
         addressInfo: {
           name: '',
           address: '',
