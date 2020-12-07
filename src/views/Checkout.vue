@@ -106,7 +106,12 @@
 		<div class="disc">
 			<h5 class="mx-5">Disclaimer:</h5>
 			<p class="mx-5 caption" font-size=".7rem">
-			Comming soon ...
+			亲爱的寻饱伙伴们，
+
+			小饱诚挚地感谢您的陪伴及您的耐心，小饱每天都在努力地发展平台，与此同时，小饱也期待听到您的意见或建议。如果您对寻饱平台有任何好的想法，欢迎您联系我们：ellenwendelin@gmail.com  小饱期待与您一起成长！
+
+			Dear Xunbao customers. 
+			We want to begin by thanking you for your support early on in our journey and we are asking you to please be patient with us. We are still figuring things out and working hard every day to be better. If you have any feedback or issues, email at ellenwendelin@gmail.com and we will do our best to help.
 			</p>
 		</div>
 	</div>
@@ -239,10 +244,11 @@
 		background-color: #E5E5E5;
 		margin:2rem;
 		padding:1rem;
+		
 	}
 	.checkout {
 		background-color: white;
-		height: 100vh;
+		/*height: 100vh;*/
 	}
 	.buttons {
 		border-radius: 5px;

@@ -24,9 +24,9 @@
 		<p class="mx-5">{{user.primary_address}}</p>
 		<p class="mx-5 mt-n4">{{user.name}}</p>
 		<p class="mx-5 mt-n4">{{user.mobile_phone}}</p>
-		<v-layout row class="mx-auto" align-center justify-center>
+		<v-layout class="mx-auto" align-center justify-center>
 			<v-btn
-        @click="dialogdelivery = true"
+        @click.stop="dialogdelivery = true"
   			align-center
   			width="60%"
   			justify-center
@@ -95,7 +95,7 @@
 
 									<v-layout class="align-center justify-center">
 										<v-btn
-                      @click="updateAddress"
+                      @click="updateAddress()"
 											dark
 											width="80%"
 											color="#DFA937"
@@ -276,62 +276,7 @@
       </v-btn>
     </v-layout>
 
-		<!-- <h3 class="mx-4 mt-3 mb-n3">Past Orders</h3>
-		<v-layout row class="mx-auto" style="max-width: 100vw;" align-center justify-center>
-	      <v-col cols="12">
-	        <v-row justify="center">
-		    <v-col
-	          cols="12">
-	          <v-card
-				class="mb-2 mx-auto px-0"
-	            light>
-	            <div class="d-flex flex-no-wrap">
-	            	<v-avatar
-	                class=""
-	                size="145"
-	                height=""
-	                tile>
-	                <v-img
-              		src="https://cdn.vuetifyjs.com/images/cards/cooking.png">
-              		</v-img>
-	              </v-avatar>
-	              <div>
-	                <v-card-title class="mt-n1 pr-0 cols-3 text-truncate" style="font-size:1.1rem;"
-	                >{{ deal.promotion.title }}</v-card-title>
-              			<v-card-subtitle class="caption justify-center mb-n9 pr-0 cols-5 text-truncate" style="font-size:.5rem;">
-					      	<v-icon small class="align-end justify-center mr-1">mdi-clock-outline</v-icon>
-					      	{{ deal.promotion.time_slot }}
-						</v-card-subtitle>
-
-						<v-row
-						class="mt-3 ml-1 mb-n12 pb-n12"
-					        >
-					        <v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥54</v-card-title>
-					        <v-card-title class="body-2 ml-n5 text--disabled under">¥43</v-card-title>
-					    </v-row>
-						<v-card-actions class="mx-n1 mt-7 cols-3 mb-n2">
-						    <v-btn small
-						    depressed
-						    class="white--text"
-						    color="#FFB300"
-						    disabled>redeem</v-btn>
-
-						    <v-btn
-						    depressed
-						    color="#FFB300"
-						    small
-						    outlined
-						    disabled>
-						        Details
-						    </v-btn>
-						</v-card-actions>
-					</div>
-	            </div>
-	          </v-card>
-	        </v-col>
-	        </v-row>
-	      </v-col>
-		</v-layout> -->
+		
 	</div>
 </template>
 <script>
@@ -414,18 +359,34 @@
         });
       },
       updateAddress() {
+      	// let newAddress = this.addressInfo;
+      	this.$api.post(`/users/add_address`, {
+      		name: this.addressInfo.name, address: this.addressInfo.address, mobile_phone: this.addressInfo.mobile_phone
+      	})
+      	.then(res => {
+      		this.user = res.data.data
+      		sessionStorage.setItem('user', JSON.stringify(this.user));
+      	})
+      	.catch(e => {
+		    	this.error.push(e);
+		    });
+      	this.addressInfo = {};
+      	this.dialogdelivery = false;
         // alert(this.addressInfo.name)
         // no data passed to API
-        this.$api.post(`/users/add_address`, {name: this.addressInfo.name, address: this.addressInfo.address, mobile_phone: this.addressInfo.mobile_phone}).then(response => {
-          this.user = response.data
-          sessionStorage.setItem('user', JSON.stringify(this.user));
-        })
-        .catch(function(error) {
-          alert('fail' + error);
-        });
-      },
-		}
-	};
+  //       this.$api.post(`/users/add_address`, {name: this.addressInfo.name, address: this.addressInfo.address, mobile_phone: this.addressInfo.mobile_phone}).then(response => {
+  //         this.user = response.data
+  //         sessionStorage.setItem('user', JSON.stringify(this.user));
+  //       })
+  //       .catch(function(error) {
+  //         alert('fail' + error);
+  //       });
+  //       this.addressInfo = {};
+		// this.dialogdelivery = false;
+  //     },
+	},
+	}
+}
 </script>
 
 <style scoped>
