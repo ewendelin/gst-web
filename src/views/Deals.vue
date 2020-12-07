@@ -96,8 +96,7 @@
 								      	<v-icon small class="align-end justify-center mr-1">mdi-clock-outline</v-icon>
 								      	{{ promotion.time_slot }}
 									</v-card-subtitle>
-									<v-row
-									class="mt-4 ml-1 mb-n12 pb-n12">
+									<v-row class="mt-4 ml-1 mb-n12 pb-n12">
 								        <v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{promotion.price}}</v-card-title>
 								        <v-card-title class="body-2 ml-n5 text--disabled under">¥{{promotion.original_price}}</v-card-title>
 								        <v-spacer></v-spacer>
