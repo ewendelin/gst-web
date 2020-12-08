@@ -21,9 +21,9 @@
 			</v-list>
 		</v-layout>
 		<h3 class="mx-5">Delivery Info</h3>
-		<p class="mx-5">{{user.primary_address}}</p>
-		<p class="mx-5 mt-n4">{{user.name}}</p>
-		<p class="mx-5 mt-n4">{{user.mobile_phone}}</p>
+		<p v-if="user" text-wrap class="mx-5">{{user.primary_address}}</p>
+		<p v-if="user" class="mx-5 mt-n4">{{user.name}}</p>
+		<p v-if="user" class="mx-5 mt-n4">{{user.mobile_phone}}</p>
 		<v-layout class="mx-auto" align-center justify-center>
 			<v-btn
         @click.stop="dialogdelivery = true"
@@ -65,7 +65,7 @@
 
 
 											<v-text-field
-												v-model="addressInfo.address"
+												v-model="addressInfo.primary_address"
 												required
 												:rules="[v => !!v || 'Address is required!']"
 												color="#DFA937"
@@ -304,7 +304,7 @@
 				dialogdelivery: false,
         addressInfo: {
           name: '',
-          address: '',
+          primary_address: '',
           mobile_phone: ''
         }
 				//what is the data we get from the api? to put the username and avatar?
@@ -359,12 +359,21 @@
         });
       },
       updateAddress() {
-      	// let newAddress = this.addressInfo;
+      	// let delivery = this.addressInfo;
+      	// this.$api.post(`/users/add_address` {
+		//    info: delivery
+		//  })
+		// .then(res => {
+      	//	this.user = res.data.data
+      	// this.createdNewAddress = res.data
+
+      	let delivery = this.addressInfo
       	this.$api.post(`/users/add_address`, {
-      		name: this.addressInfo.name, address: this.addressInfo.address, mobile_phone: this.addressInfo.mobile_phone
+      		info: delivery
       	})
       	.then(res => {
       		this.user = res.data.data
+      		this.createdNewAddress = res.data.data
       		sessionStorage.setItem('user', JSON.stringify(this.user));
       	})
       	.catch(e => {
@@ -372,10 +381,13 @@
 		    });
       	this.addressInfo = {};
       	this.dialogdelivery = false;
+      }
+
+
         // alert(this.addressInfo.name)
         // no data passed to API
-  //       this.$api.post(`/users/add_address`, {name: this.addressInfo.name, address: this.addressInfo.address, mobile_phone: this.addressInfo.mobile_phone}).then(response => {
-  //         this.user = response.data
+  //       this.$api.post(`/users/add_address`, {name: this.addressInfo.name, address: this.addressInfo.primary_address, mobile_phone: this.addressInfo.mobile_phone}).then(response => {
+  //         this.user = response.data.data
   //         sessionStorage.setItem('user', JSON.stringify(this.user));
   //       })
   //       .catch(function(error) {
@@ -385,7 +397,7 @@
 		// this.dialogdelivery = false;
   //     },
 	},
-	}
+	
 }
 </script>
 
