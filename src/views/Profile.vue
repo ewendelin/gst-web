@@ -26,7 +26,6 @@
 		<p v-if="user" class="mx-5 mt-n4">{{user.mobile_phone}}</p>
 		<v-layout class="mx-auto" align-center justify-center>
 			<v-btn
-        v-if="displayAddressButton"
         @click.stop="dialogdelivery = true"
   			align-center
   			width="60%"
@@ -50,53 +49,33 @@
 
 								<v-card-title class="title mt-n3">Delivery Address</v-card-title>
 								</v-layout>
-									<v-form ref="form" v-model="addressInfo" lazy-validation class="mx-8">
-										<v-text-field
-												v-model="addressInfo.name"
-												:rules="[v => !!v || 'Name is required!']"
-												required
-												color="#DFA937"
-											>
-												<template v-slot:label>
-													<div>
-														{{ $t('deliveryName') }}
-													</div>
-												</template>
-											</v-text-field>
+									<v-form ref="form" lazy-validation class="mx-8">
+                      <el-input
+                        class="mb-8"
+                        placeholder="Your name"
+                        v-model.trim="user.name"
+                        clearable>
+                      </el-input>
 
+                      <el-input
+                        class="mb-8"
+                        type="textarea"
+                        :autosize="{ minRows: 3, maxRows: 5}"
+                        placeholder="Detailed delivery address"
+                        v-model="user.primary_address">
+                      </el-input>
 
-											<v-text-field
-												v-model="addressInfo.primary_address"
-												required
-												:rules="[v => !!v || 'Address is required!']"
-												color="#DFA937"
-											>
-												<template v-slot:label>
-													<div>
-														{{ $t('deliveryAddress') }}
-													</div>
-												</template>
-											</v-text-field>
-
-
-											<v-text-field
-												v-model="addressInfo.mobile_phone"
-												required
-												:rules="[v => !!v || 'Phone number is required!']"
-												color="#DFA937"
-											>
-												<template v-slot:label>
-													<div>
-														{{ $t('deliveryMobile') }}
-													</div>
-												</template>
-											</v-text-field>
-
+                      <el-input
+                        class="mb-8"
+                        placeholder="Phone number for delivery"
+                        v-model.trim="user.mobile_phone"
+                        clearable>
+                      </el-input>
 									</v-form>
 
 									<v-layout class="align-center justify-center">
 										<v-btn
-                      @click="updateAddress()"
+                      @click="updateAddress"
 											dark
 											width="80%"
 											color="#DFA937"
@@ -295,6 +274,7 @@
       let storedToken = sessionStorage.getItem('token');
 	    if ((storedToken != undefined || storedToken != null) && storedToken != 'logout') {
 	     this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+       this.fetchUser()
 	     this.fetchCoupons()
       }
      //  else {
@@ -307,7 +287,6 @@
 				res: [],
 				snackbar: false,
 				dialogdelivery: false,
-        displayAddressButton: false,
         user: {},
         addressInfo: {
           name: '',
@@ -365,22 +344,28 @@
           alert('fail' + error);
         });
       },
+      fetchUser() {
+        this.$api.get('/users/user_info').then(response => {
+          let user = response.data.user;
+          // alert(user.id)
+          this.user = user
+          // store the user in session
+          sessionStorage.setItem('user', JSON.stringify(user));
+        }).catch(function(error) {
+          alert('fail' + error);
+        });
+      },
       updateAddress() {
-      	// let delivery = this.addressInfo;
-      	// this.$api.post(`/users/add_address` {
-		//    info: delivery
-		//  })
-		// .then(res => {
-      	//	this.user = res.data.data
-      	// this.createdNewAddress = res.data
-
-      	let delivery = this.addressInfo
+      	let info = this.user
+        // alert(info.name)
       	this.$api.post(`/users/add_address`, {
-      		info: delivery
+      		name: info.name,
+          primary_address: info.primary_address,
+          mobile_phone: info.mobile_phone
       	})
       	.then(res => {
-      		this.user = res.data.data
-      		this.createdNewAddress = res.data.data
+      		this.user = res.data.user
+          // alert(res.data.user.id)
       		sessionStorage.setItem('user', JSON.stringify(this.user));
       	})
       	.catch(e => {
@@ -389,20 +374,6 @@
       	this.addressInfo = {};
       	this.dialogdelivery = false;
       }
-
-
-        // alert(this.addressInfo.name)
-        // no data passed to API
-  //       this.$api.post(`/users/add_address`, {name: this.addressInfo.name, address: this.addressInfo.primary_address, mobile_phone: this.addressInfo.mobile_phone}).then(response => {
-  //         this.user = response.data.data
-  //         sessionStorage.setItem('user', JSON.stringify(this.user));
-  //       })
-  //       .catch(function(error) {
-  //         alert('fail' + error);
-  //       });
-  //       this.addressInfo = {};
-		// this.dialogdelivery = false;
-  //     },
 	},
 
 }
