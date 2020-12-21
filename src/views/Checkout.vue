@@ -102,6 +102,22 @@
       </v-col>
     </v-layout>
 
+		<p v-if="order.id" text-wrap class="mx-5">{{order.user_id.primary_address}}</p>
+		<p v-if="order.id" class="mx-5 mt-n4">{{order.user_id.name}}</p>
+		<p v-if="order.id" class="mx-5 mt-n4">{{order.user_id.mobile_phone}}</p>
+		<v-layout class="mx-auto" align-center justify-center>
+		<v-btn
+        to="/profile"
+  			align-center
+  			width="60%"
+  			justify-center
+  			dark
+				color="#FFB300"
+				tile
+				class="buttons mt-4 mb-8"
+				depressed>Edit Delivery Address
+			</v-btn>
+		</v-layout>
 		<h3 class="mx-5" v-if="order.id">Total: ¥ {{order.total_amount}} for {{order.quantity}} {{order.quantity > 1 ? 'sets' : 'set'}}</h3>
 		<div class="disc">
 			<h5 class="mx-5">Disclaimer:</h5>
@@ -127,6 +143,11 @@
     components: {  },
 
     created() {
+    	// let u = sessionStorage.getItem('user')
+     //  if (u && u != 'undefined') {
+     //    this.user = JSON.parse(sessionStorage.getItem('user'))
+     //  }
+
       let storedToken = sessionStorage.getItem('token');
       if ((storedToken != undefined || storedToken != null) && storedToken != 'logout') {
         this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
@@ -165,6 +186,7 @@
           // alert('fail' + error);
         });
       },
+
 			remove_order(order) {
 				// this.$api(this.deals, index);
 				this.$api.delete(`/orders/${order.id}`).then(response => {
