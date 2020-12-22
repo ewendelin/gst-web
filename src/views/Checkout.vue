@@ -1,14 +1,14 @@
 <template>
 	<div class="checkout">
-		<!-- <Navbar /> -->
+		<Navbar />
 		<v-btn class="mt-n8" icon @click="toDeals">
 			<v-icon to="/deals" color="black">mdi-chevron-left
 			</v-icon>
 		</v-btn>
-		<h3 class="mx-5">Checkout</h3>
+		<h3 class="mx-5">{{ $t('checkout') }}</h3>
 		<v-layout row class="mx-auto" align-center justify-center>
   		<v-btn
-        v-if="orders.length > 0"
+        v-if="order.id"
   			align-center
   			width="60%"
   			justify-center
@@ -17,8 +17,8 @@
 			  tile
 			  class="buttons"
 			  depressed
-        @click="pay(orders[0].id)"
-			  style="position: fixed; bottom: 10px; z-index: 5;">WeChat Pay
+        @click="pay"
+			  style="position: fixed; bottom: 80px; z-index: 5;">{{ $t('wxpay') }}
     	</v-btn>
 	   </v-layout>
 		<v-layout row class="mx-auto" style="max-width: 100vw;" align-center justify-center>
@@ -28,8 +28,7 @@
 	          	<v-card
 						      class="mb-2 mx-auto px-0"
 			            light
-			            v-for="order in orders"
-						      v-bind:key="order.id"
+                  v-if="order.id"
 			            >
 	            			<div class="d-flex flex-no-wrap">
 				            	<v-avatar
@@ -78,7 +77,7 @@
 			  </v-col>
 		</v-layout>
 
-    <v-layout row class="mx-0 mt-n12" v-if="orders.length == 0" align="center">
+    <v-layout row class="mx-0 mt-n12" v-if="!order.id" align="center">
       <v-col cols="12" >
         <h1 class="text-center font-weight-bold" style="color:#FFB300; font-size: 3rem;">No orders yet ...</h1>
         <p class="text-center" subtitle-1 style="color:#424242;">Find good deals on food that needs to be consumed.</p>
@@ -103,37 +102,110 @@
       </v-col>
     </v-layout>
 
-		<h3 class="mx-5" v-if="orders.length > 0">Total: ¥ {{orders[0].amount}}</h3>
+		<h3 class="mx-5">{{ $t('delin') }}</h3>
+    <p v-if="user" text-wrap class="mx-5">{{user.primary_address}}</p>
+    <p v-if="user" class="mx-5 mt-n4">{{user.name}}</p>
+    <p v-if="user" class="mx-5 mt-n4">{{user.mobile_phone}}</p>
+    <v-layout class="mx-auto" align-center justify-center>
+      <v-btn
+        @click.stop="dialogdelivery = true"
+        align-center
+        width="60%"
+        justify-center
+        dark
+        color="#FFB300"
+        tile
+        class="buttons mt-4 mb-8"
+        depressed>{{ $t('editdelin') }}
+      </v-btn>
+      <v-dialog v-model="dialogdelivery" max-width="350">
+        <v-card center class="pt-12 pb-12">
+          <v-layout row class="mx-auto mb-n4 mt-n4">
+            <v-spacer></v-spacer>
+            <v-btn class="mt-n4" icon @click="dialogdelivery = false">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-layout>
+          <v-layout row class="mx-5">
+            <v-card-title class="title mt-n3">Delivery Address</v-card-title>
+          </v-layout>
+          <v-form ref="form" lazy-validation class="mx-8">
+            <el-input
+              class="mb-8"
+              placeholder="Your name 姓名"
+              v-model.trim="user.name"
+              clearable>
+            </el-input>
+
+            <el-input
+              class="mb-8"
+              type="textarea"
+              :autosize="{ minRows: 3, maxRows: 5}"
+              placeholder="Detailed delivery address 地址"
+              v-model="user.primary_address">
+            </el-input>
+
+            <el-input
+              class="mb-8"
+              placeholder="Phone number for delivery 电话"
+              v-model.trim="user.mobile_phone"
+              clearable>
+            </el-input>
+          </v-form>
+
+          <v-layout class="align-center justify-center">
+            <v-btn
+              @click="updateAddress"
+              dark
+              width="80%"
+              color="#DFA937"
+              tile
+              class="buttons mb-3"
+              depressed
+            >{{ $t('save') }}
+            </v-btn>
+          </v-layout>
+        </v-card>
+      </v-dialog>
+    </v-layout>
+
+		<h3 class="mx-5" v-if="order.id">Total: ¥ {{order.total_amount}} for {{order.quantity}} {{order.quantity > 1 ? 'sets' : 'set'}}</h3>
 		<div class="disc">
 			<h5 class="mx-5">Disclaimer:</h5>
 			<p class="mx-5 caption" font-size=".7rem">
-			Comming soon ...
+			亲爱的寻饱伙伴们，
+
+			小饱诚挚地感谢您的陪伴及您的耐心，小饱每天都在努力地发展平台，与此同时，小饱也期待听到您的意见或建议。如果您对寻饱平台有任何好的想法，欢迎您联系我们：ellenwendelin@gmail.com  小饱期待与您一起成长！
+
+			Dear Xunbao customers.
+			We want to begin by thanking you for your support early on in our journey and we are asking you to please be patient with us. We are still figuring things out and working hard every day to be better. If you have any feedback or issues, email at ellenwendelin@gmail.com and we will do our best to help.
 			</p>
 		</div>
 	</div>
 </template>
 
 <script>
+  import Navbar from '../components/Navbar';
   // import Navbar from '../components/Navbar';
+
   // import wx from 'weixin-js-sdk';
   import wx from 'weixin-jsapi';
 	export default {
 		name: 'Checkout',
-    // components: { Navbar },
-    components: {  },
+    components: { Navbar },
+    // components: {  },
 
     created() {
+    	// let u = sessionStorage.getItem('user')
+     //  if (u && u != 'undefined') {
+     //    this.user = JSON.parse(sessionStorage.getItem('user'))
+     //  }
+
       let storedToken = sessionStorage.getItem('token');
       if ((storedToken != undefined || storedToken != null) && storedToken != 'logout') {
         this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-        this.$api.get(`/orders`).then(response => {
-          this.orders = response.data;
-          // this.coupons = response.data.map(item => item.coupon);
-          // alert('this.orders' + this.orders.length + ' == ' + this.coupons.length);
-        })
-        .catch(function() {
-          // alert('fail' + error);
-        });
+        this.fetchOrders(this.$route.query.id)
+        this.fetchUser()
       }
       else {
         // window.location.href = "https://gast.world"
@@ -146,19 +218,39 @@
         coupons: [],
         orders: [],
         total: 1,
-        payment: {}
+        payment: {},
+        user: {},
+        dialogdelivery: false,
+        order: {
+          promotion: {}
+        }
       };
     },
 
 		methods: {
+      fetchOrders(id = undefined) {
+        // alert(order_id)
+        let url = id === undefined ? `orders` : `orders/${id}`
+        this.$api.get(url).then(response => {
+          if (id === undefined) {
+            this.order = response.data[0]
+          } else {
+            this.order = response.data.data
+          }
+        })
+        .catch(function() {
+          // alert('fail' + error);
+        });
+      },
+
 			remove_order(order) {
 				// this.$api(this.deals, index);
 				this.$api.delete(`/orders/${order.id}`).then(response => {
 					this.canceled = response
-					this.res = this.orders.filter((x) => {
-						return x.id != order.id
-					});
-					this.orders = this.res;
+					this.orders = this.orders.filter((x) => {
+            return x.id != order.id
+          });
+          this.order = {promotion: {}}
 				})
 				.catch(function() {
 					// alert('fail' + error);
@@ -167,8 +259,8 @@
       toDeals() {
         window.location.href = window.location.origin + '/deals'
       },
-      pay(id) {
-        this.$api.post(`/orders/pay`, {id: id}).then( response => {
+      pay() {
+        this.$api.post(`/orders/pay`, {id: this.order.id}).then( response => {
           let payment = response.data.data.payment;
           // alert('in pay' + payment)
           this.wxPay(payment);
@@ -219,8 +311,39 @@
         wx.error( function() {
           // alert()
         })
-      }
+      },
 
+      fetchUser() {
+        this.$api.get('/users/user_info').then(response => {
+          let user = response.data.user;
+          // alert(user.id)
+          this.user = user
+          // store the user in session
+          sessionStorage.setItem('user', JSON.stringify(user));
+        }).catch(function(error) {
+          alert('fail' + error);
+        });
+      },
+
+      updateAddress() {
+        let info = this.user
+        // alert(info.name)
+        this.$api.post(`/users/add_address`, {
+          name: info.name,
+          primary_address: info.primary_address,
+          mobile_phone: info.mobile_phone
+        })
+        .then(res => {
+          this.user = res.data.user
+          // alert(res.data.user.id)
+          sessionStorage.setItem('user', JSON.stringify(this.user));
+        })
+        .catch(e => {
+          this.error.push(e);
+        });
+        this.addressInfo = {};
+        this.dialogdelivery = false;
+      }
 		}
 	}
 </script>
@@ -230,10 +353,11 @@
 		background-color: #E5E5E5;
 		margin:2rem;
 		padding:1rem;
+
 	}
 	.checkout {
 		background-color: white;
-		height: 100vh;
+		/*height: 100vh;*/
 	}
 	.buttons {
 		border-radius: 5px;

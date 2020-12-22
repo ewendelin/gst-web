@@ -82,7 +82,14 @@ const messages = {
         sucmes: 'You have successfully claimed this promotion! Make sure to note the pickup time.',
         heifren: 'Hey friend, it looks like you do not have a vendor account set up yet. Create a vendor account and submit for approval.',
         confi: 'Submitted!',
-        hassub: 'Your application has been submitted. An account manager will contact you shortly and verify your account. You can start creating your vendor profile and create deals but they will not be visiable until after you have been verified.'
+        hassub: 'Your application has been submitted. An account manager will contact you shortly and verify your account. You can start creating your vendor profile and create deals but they will not be visiable until after you have been verified.',
+        deliveryName: 'Your name',
+        deliveryAddress: 'Your delivery address',
+        deliveryMobile: 'Mobile phone',
+        checkout: "Checkout",
+        wxpay: "Wechat Pay",
+        delin: "Delivery Info",
+        editdelin: "Edit Delivery Info"
     },
     'zh_CN': {
         fba: '区域',
@@ -162,13 +169,21 @@ const messages = {
         heifren: '嘿，您好像还未注册商家账户哦，请创建商家账户并提交审核。',
         confi: '提交成功！',
         hassub: '您的申请已提交，账户经理会立刻联系您并验证账户。您可以开始创建您的商户档案及优惠食品，信息均会在验证结束后显示。',
-        areYouSureProfile: '您确定取消该笔订单吗？'
+        areYouSureProfile: '您确定取消该笔订单吗？',
+        deliveryName: '收货人',
+        deliveryAddress: '收货地址',
+        deliveryMobile: '联系电话',
+        checkout: "点击购买",
+        wxpay: "微信支付",
+        delin: "配送",
+        editdelin: "编辑配送"
+
     }
 };
 
 const i18n = new VueI18n({
-    locale: 'en', // set locale
-    fallbackLocale: 'zh_CN', // set fallback locale
+    locale: 'zh_CN', // set locale
+    fallbackLocale: 'en', // set fallback locale
     messages, // set locale messages
 });
 

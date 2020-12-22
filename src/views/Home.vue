@@ -91,9 +91,7 @@
 	export default {
 		name: 'Home',
 		components: { Navbar },
-		props: {
-            msg: String
-        },
+		props: { msg: String },
 		data() {
 			return {
 				dialog2: false,

@@ -13,14 +13,83 @@
 						}}</v-list-item-title>
 					</v-list-item-content>
 					<!-- <v-list-item-icon>
-						<v-btn fab text @click="logout()">
-							<v-icon>mdi-cog</v-icon>
+						<v-btn fab text @click="editdelivery()">
+							<v-icon>mdi-pencil</v-icon>
 						</v-btn>
 					</v-list-item-icon> -->
 				</v-list-item>
 			</v-list>
 		</v-layout>
-		<h3 class="mx-4 mt-3 mb-n3">{{ $t('todayOrder') }}</h3>
+		<h3 class="mx-5">Delivery Info</h3>
+		<p v-if="user" text-wrap class="mx-5">{{user.primary_address}}</p>
+		<p v-if="user" class="mx-5 mt-n4">{{user.name}}</p>
+		<p v-if="user" class="mx-5 mt-n4">{{user.mobile_phone}}</p>
+		<v-layout class="mx-auto" align-center justify-center>
+			<v-btn
+        @click.stop="dialogdelivery = true"
+  			align-center
+  			width="60%"
+  			justify-center
+  			dark
+				color="#FFB300"
+				tile
+				class="buttons mt-4 mb-8"
+				depressed>Edit Delivery Address
+			</v-btn>
+						<v-dialog v-model="dialogdelivery" max-width="350">
+						<v-card center class="pt-12 pb-12">
+							<v-layout row class="mx-auto mb-n4 mt-n4">
+							<v-spacer></v-spacer>
+								<v-btn class="mt-n4" icon @click="dialogdelivery = false">
+										<v-icon>mdi-close</v-icon>
+									</v-btn>
+								</v-layout>
+							<!-- <v-col> -->
+							<v-layout row class="mx-5">
+
+								<v-card-title class="title mt-n3">Delivery Address</v-card-title>
+								</v-layout>
+									<v-form ref="form" lazy-validation class="mx-8">
+                      <el-input
+                        class="mb-8"
+                        placeholder="Your name"
+                        v-model.trim="user.name"
+                        clearable>
+                      </el-input>
+
+                      <el-input
+                        class="mb-8"
+                        type="textarea"
+                        :autosize="{ minRows: 3, maxRows: 5}"
+                        placeholder="Detailed delivery address"
+                        v-model="user.primary_address">
+                      </el-input>
+
+                      <el-input
+                        class="mb-8"
+                        placeholder="Phone number for delivery"
+                        v-model.trim="user.mobile_phone"
+                        clearable>
+                      </el-input>
+									</v-form>
+
+									<v-layout class="align-center justify-center">
+										<v-btn
+                      @click="updateAddress"
+											dark
+											width="80%"
+											color="#DFA937"
+											tile
+											class="buttons mb-3"
+											depressed
+										>Save
+										</v-btn>
+									</v-layout>
+
+					</v-card>
+				</v-dialog>
+		</v-layout>
+		<h3 class="mx-4 mt-3 mb-n3" v-if="deals.length > 0">{{ $t('todayOrder') }}</h3>
 		<v-layout row class="mx-auto" style="max-width: 100vw;" align-center justify-center>
 	    	<v-col cols="12">
 	        	<v-row justify="center">
@@ -43,7 +112,7 @@
 				                </v-avatar>
 	              				<div>
 	                				<v-card-title class="mt-n1 pr-0 cols-3 text-truncate" style="font-size:1.1rem;"
-	                				>{{ deal.promotion.title }}</v-card-title>
+	                				>{{ deal.promotion.title }} {{deal.order.quantity}} {{deal.order.quantity > 1 ? 'sets' : 'set'}}</v-card-title>
 									<v-card-subtitle class="caption justify-center mb-n9 pr-0 cols-5 text-truncate" style="font-size:.5rem;">
 					      				<v-icon small class="align-end justify-center mr-1">mdi-clock-outline</v-icon>
 					      					{{ deal.promotion.time_slot }}
@@ -67,7 +136,7 @@
                       depressed
                       class="white--text"
                       color="#FFB300"
-                      @click="toCheckout">Pay</v-btn>
+                      @click="toCheckout(deal)">Pay</v-btn>
 											<v-dialog v-model="deal.dia" max-width="290">
 												<v-card>
 													<v-layout row class="mx-auto">
@@ -187,107 +256,45 @@
       </v-btn>
     </v-layout>
 
-		<!-- <h3 class="mx-4 mt-3 mb-n3">Past Orders</h3>
-		<v-layout row class="mx-auto" style="max-width: 100vw;" align-center justify-center>
-	      <v-col cols="12">
-	        <v-row justify="center">
-		    <v-col
-	          cols="12">
-	          <v-card
-				class="mb-2 mx-auto px-0"
-	            light>
-	            <div class="d-flex flex-no-wrap">
-	            	<v-avatar
-	                class=""
-	                size="145"
-	                height=""
-	                tile>
-	                <v-img
-              		src="https://cdn.vuetifyjs.com/images/cards/cooking.png">
-              		</v-img>
-	              </v-avatar>
-	              <div>
-	                <v-card-title class="mt-n1 pr-0 cols-3 text-truncate" style="font-size:1.1rem;"
-	                >{{ deal.promotion.title }}</v-card-title>
-              			<v-card-subtitle class="caption justify-center mb-n9 pr-0 cols-5 text-truncate" style="font-size:.5rem;">
-					      	<v-icon small class="align-end justify-center mr-1">mdi-clock-outline</v-icon>
-					      	{{ deal.promotion.time_slot }}
-						</v-card-subtitle>
 
-						<v-row
-						class="mt-3 ml-1 mb-n12 pb-n12"
-					        >
-					        <v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥54</v-card-title>
-					        <v-card-title class="body-2 ml-n5 text--disabled under">¥43</v-card-title>
-					    </v-row>
-						<v-card-actions class="mx-n1 mt-7 cols-3 mb-n2">
-						    <v-btn small
-						    depressed
-						    class="white--text"
-						    color="#FFB300"
-						    disabled>redeem</v-btn>
-
-						    <v-btn
-						    depressed
-						    color="#FFB300"
-						    small
-						    outlined
-						    disabled>
-						        Details
-						    </v-btn>
-						</v-card-actions>
-					</div>
-	            </div>
-	          </v-card>
-	        </v-col>
-	        </v-row>
-	      </v-col>
-		</v-layout> -->
 	</div>
 </template>
 <script>
 	// import axios from 'axios';
 	import Navbar from '../components/Navbar';
-	// axios.defaults.headers.common['X-Auth-Token'] = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJleHAiOjE1ODkxODUyMTl9.yCeUHSSHkqET1Rbr9wznhKmE_nw62Iztu4RW3H3IBi4";
-	// axios.defaults.headers.common['API-key'] = 'gastbyellenapikey';
-  // this.$api.defaults.headers.common['X-Auth-Token'] = sessionStorage.getItem('token');
-
 	export default {
 		name: 'Profile',
 		components: { Navbar },
-		props: {
-            msg: String
-        },
-
+		props: { msg: String },
 		created() {
+      let u = sessionStorage.getItem('user')
+      if (u && u != 'undefined') {
+        this.user = JSON.parse(sessionStorage.getItem('user'))
+      }
       let storedToken = sessionStorage.getItem('token');
 	    if ((storedToken != undefined || storedToken != null) && storedToken != 'logout') {
 	     this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-	     this.$api.get(`/coupons`).then(response => {
-				this.deals = response.data;
-        this.user = this.deals[0].user;
-				this.deals = this.deals.map(deals => ({
-					...deals,
-					dialog: false,
-					dialog3: false,
-					dia: false,
-					dets: false
-				}));
-			})
-			.catch(function(error) {
-				alert('fail' + error);
-			});
-	    } else {
-			  window.location.href = "https://gast.world"
-	    }
+       this.fetchUser()
+	     this.fetchCoupons()
+      }
+     //  else {
+			  // window.location.href = "https://gast.world"
+	    // }
 		},
 		data() {
 			return {
 				deals: [],
 				res: [],
 				snackbar: false,
+				dialogdelivery: false,
+        user: {},
+        addressInfo: {
+          name: '',
+          primary_address: '',
+          mobile_phone: ''
+        }
 				//what is the data we get from the api? to put the username and avatar?
-				user: JSON.parse(sessionStorage.getItem('user'))
+				// user: JSON.parse(sessionStorage.getItem('user')) || {}
 			};
 		},
 		methods: {
@@ -296,43 +303,80 @@
 				// sessionStorage.clear();
         sessionStorage.setItem('token', 'logout');
 				window.location.href = "https://gast.world"
-				// redirect('/');
 			},
-			// getProfileInfo() {
+			getProfileInfo() {
 
-			// },
+			},
       toDeals() {
         window.location.href = window.location.origin + '/deals'
       },
-      toCheckout() {
-        window.location.href = window.location.origin + '/checkout' + `?time=${new Date().getTime()}`;
+      toCheckout(deal) {
+        window.location.href = window.location.origin + '/checkout' + `?id=${deal.order.id}`;
       },
 			remove(deal) {
 				// this.$api(this.deals, index);
-					this.$api.post(
-						`/coupons/${deal.id}`,
-					)
-					.then(response => {
-						this.canceled = response
-
-						this.res = this.deals.filter((x) => {
-							return x.id != deal.id
-						});
-						this.deals = this.res;
-
-						// this.deals = this.deals.map(deals => ({
-						// 	...deals,
-						// 	dialog: false,
-						// 	dialog3: false
-						// }));
-
-					})
-					.catch(function(error) {
-						alert('fail' + error);
+				this.$api.post(`/coupons/${deal.id}`,).then(response => {
+					this.canceled = response
+					this.res = this.deals.filter((x) => {
+						return x.id != deal.id
 					});
-			}
-		}
-	};
+					this.deals = this.res;
+				})
+				.catch(function(error) {
+					alert('fail' + error);
+				});
+			},
+      fetchCoupons() {
+        this.$api.get(`/coupons`).then(response => {
+          let deals = response.data;
+          this.deals = deals.map(deals => ({
+            ...deals,
+            dialog: false,
+            dialog3: false,
+            dia: false,
+            dets: false
+          }))
+          // store the user in session
+          if (deals[0] && deals[0].user) {
+            sessionStorage.setItem('user', JSON.stringify(this.user));
+          }
+        }).catch(function(error) {
+          alert('fail' + error);
+        });
+      },
+      fetchUser() {
+        this.$api.get('/users/user_info').then(response => {
+          let user = response.data.user;
+          // alert(user.id)
+          this.user = user
+          // store the user in session
+          sessionStorage.setItem('user', JSON.stringify(user));
+        }).catch(function(error) {
+          alert('fail' + error);
+        });
+      },
+      updateAddress() {
+      	let info = this.user
+        // alert(info.name)
+      	this.$api.post(`/users/add_address`, {
+      		name: info.name,
+          primary_address: info.primary_address,
+          mobile_phone: info.mobile_phone
+      	})
+      	.then(res => {
+      		this.user = res.data.user
+          // alert(res.data.user.id)
+      		sessionStorage.setItem('user', JSON.stringify(this.user));
+      	})
+      	.catch(e => {
+		    	this.error.push(e);
+		    });
+      	this.addressInfo = {};
+      	this.dialogdelivery = false;
+      }
+	},
+
+}
 </script>
 
 <style scoped>
