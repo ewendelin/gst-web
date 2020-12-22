@@ -86,7 +86,7 @@ const messages = {
         deliveryName: 'Your name',
         deliveryAddress: 'Your delivery address',
         deliveryMobile: 'Mobile phone',
-        checkout: "Checkout"，
+        checkout: "Checkout",
         wxpay: "Wechat Pay",
         delin: "Delivery Info",
         editdelin: "Edit Delivery Info"
@@ -173,7 +173,7 @@ const messages = {
         deliveryName: '收货人',
         deliveryAddress: '收货地址',
         deliveryMobile: '联系电话',
-        checkout: "点击购买"，
+        checkout: "点击购买",
         wxpay: "微信支付",
         delin: "配送",
         editdelin: "编辑配送"
