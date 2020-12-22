@@ -1,6 +1,6 @@
 <template>
 	<div class="checkout">
-		<!-- <Navbar /> -->
+		<Navbar />
 		<v-btn class="mt-n8" icon @click="toDeals">
 			<v-icon to="/deals" color="black">mdi-chevron-left
 			</v-icon>
@@ -18,7 +18,7 @@
 			  class="buttons"
 			  depressed
         @click="pay"
-			  style="position: fixed; bottom: 10px; z-index: 5;">WeChat Pay
+			  style="position: fixed; bottom: 80px; z-index: 5;">WeChat Pay
     	</v-btn>
 	   </v-layout>
 		<v-layout row class="mx-auto" style="max-width: 100vw;" align-center justify-center>
@@ -102,22 +102,73 @@
       </v-col>
     </v-layout>
 
-		<p v-if="order.id" text-wrap class="mx-5">{{order.user_id.primary_address}}</p>
-		<p v-if="order.id" class="mx-5 mt-n4">{{order.user_id.name}}</p>
-		<p v-if="order.id" class="mx-5 mt-n4">{{order.user_id.mobile_phone}}</p>
-		<v-layout class="mx-auto" align-center justify-center>
-		<v-btn
-        to="/profile"
-  			align-center
-  			width="60%"
-  			justify-center
-  			dark
-				color="#FFB300"
-				tile
-				class="buttons mt-4 mb-8"
-				depressed>Edit Delivery Address
-			</v-btn>
-		</v-layout>
+		<h3 class="mx-5">Delivery Info</h3>
+    <p v-if="user" text-wrap class="mx-5">{{user.primary_address}}</p>
+    <p v-if="user" class="mx-5 mt-n4">{{user.name}}</p>
+    <p v-if="user" class="mx-5 mt-n4">{{user.mobile_phone}}</p>
+    <v-layout class="mx-auto" align-center justify-center>
+      <v-btn
+        @click.stop="dialogdelivery = true"
+        align-center
+        width="60%"
+        justify-center
+        dark
+        color="#FFB300"
+        tile
+        class="buttons mt-4 mb-8"
+        depressed>Edit Delivery Address
+      </v-btn>
+      <v-dialog v-model="dialogdelivery" max-width="350">
+        <v-card center class="pt-12 pb-12">
+          <v-layout row class="mx-auto mb-n4 mt-n4">
+            <v-spacer></v-spacer>
+            <v-btn class="mt-n4" icon @click="dialogdelivery = false">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-layout>
+          <v-layout row class="mx-5">
+            <v-card-title class="title mt-n3">Delivery Address</v-card-title>
+          </v-layout>
+          <v-form ref="form" lazy-validation class="mx-8">
+            <el-input
+              class="mb-8"
+              placeholder="Your name"
+              v-model.trim="user.name"
+              clearable>
+            </el-input>
+
+            <el-input
+              class="mb-8"
+              type="textarea"
+              :autosize="{ minRows: 3, maxRows: 5}"
+              placeholder="Detailed delivery address"
+              v-model="user.primary_address">
+            </el-input>
+
+            <el-input
+              class="mb-8"
+              placeholder="Phone number for delivery"
+              v-model.trim="user.mobile_phone"
+              clearable>
+            </el-input>
+          </v-form>
+
+          <v-layout class="align-center justify-center">
+            <v-btn
+              @click="updateAddress"
+              dark
+              width="80%"
+              color="#DFA937"
+              tile
+              class="buttons mb-3"
+              depressed
+            >Save
+            </v-btn>
+          </v-layout>
+        </v-card>
+      </v-dialog>
+    </v-layout>
+
 		<h3 class="mx-5" v-if="order.id">Total: ¥ {{order.total_amount}} for {{order.quantity}} {{order.quantity > 1 ? 'sets' : 'set'}}</h3>
 		<div class="disc">
 			<h5 class="mx-5">Disclaimer:</h5>
@@ -126,7 +177,7 @@
 
 			小饱诚挚地感谢您的陪伴及您的耐心，小饱每天都在努力地发展平台，与此同时，小饱也期待听到您的意见或建议。如果您对寻饱平台有任何好的想法，欢迎您联系我们：ellenwendelin@gmail.com  小饱期待与您一起成长！
 
-			Dear Xunbao customers. 
+			Dear Xunbao customers.
 			We want to begin by thanking you for your support early on in our journey and we are asking you to please be patient with us. We are still figuring things out and working hard every day to be better. If you have any feedback or issues, email at ellenwendelin@gmail.com and we will do our best to help.
 			</p>
 		</div>
@@ -134,13 +185,15 @@
 </template>
 
 <script>
+  import Navbar from '../components/Navbar';
   // import Navbar from '../components/Navbar';
+
   // import wx from 'weixin-js-sdk';
   import wx from 'weixin-jsapi';
 	export default {
 		name: 'Checkout',
-    // components: { Navbar },
-    components: {  },
+    components: { Navbar },
+    // components: {  },
 
     created() {
     	// let u = sessionStorage.getItem('user')
@@ -152,6 +205,7 @@
       if ((storedToken != undefined || storedToken != null) && storedToken != 'logout') {
         this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
         this.fetchOrders(this.$route.query.id)
+        this.fetchUser()
       }
       else {
         // window.location.href = "https://gast.world"
@@ -165,6 +219,8 @@
         orders: [],
         total: 1,
         payment: {},
+        user: {},
+        dialogdelivery: false,
         order: {
           promotion: {}
         }
@@ -255,8 +311,39 @@
         wx.error( function() {
           // alert()
         })
-      }
+      },
 
+      fetchUser() {
+        this.$api.get('/users/user_info').then(response => {
+          let user = response.data.user;
+          // alert(user.id)
+          this.user = user
+          // store the user in session
+          sessionStorage.setItem('user', JSON.stringify(user));
+        }).catch(function(error) {
+          alert('fail' + error);
+        });
+      },
+
+      updateAddress() {
+        let info = this.user
+        // alert(info.name)
+        this.$api.post(`/users/add_address`, {
+          name: info.name,
+          primary_address: info.primary_address,
+          mobile_phone: info.mobile_phone
+        })
+        .then(res => {
+          this.user = res.data.user
+          // alert(res.data.user.id)
+          sessionStorage.setItem('user', JSON.stringify(this.user));
+        })
+        .catch(e => {
+          this.error.push(e);
+        });
+        this.addressInfo = {};
+        this.dialogdelivery = false;
+      }
 		}
 	}
 </script>
@@ -266,7 +353,7 @@
 		background-color: #E5E5E5;
 		margin:2rem;
 		padding:1rem;
-		
+
 	}
 	.checkout {
 		background-color: white;
