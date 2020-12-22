@@ -18,7 +18,7 @@ set :repository, 'git@github.com:ewendelin/gst-web.git'
 set :deploy_to, '/home/production/web'
 set :application_name, 'gast-web'
 # set :branch, 'titlelength' # the last deployed branch
-set :branch, 'pro-fix' # default is master
+set :branch, '1206' # default is master
 # ====== deploy to production =======
 
 # ====== deploy to staging for test =======

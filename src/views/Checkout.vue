@@ -5,7 +5,7 @@
 			<v-icon to="/deals" color="black">mdi-chevron-left
 			</v-icon>
 		</v-btn>
-		<h3 class="mx-5">Checkout</h3>
+		<h3 class="mx-5">{{ $t('checkout') }}</h3>
 		<v-layout row class="mx-auto" align-center justify-center>
   		<v-btn
         v-if="order.id"
@@ -18,7 +18,7 @@
 			  class="buttons"
 			  depressed
         @click="pay"
-			  style="position: fixed; bottom: 80px; z-index: 5;">WeChat Pay
+			  style="position: fixed; bottom: 80px; z-index: 5;">{{ $t('wxpay') }}
     	</v-btn>
 	   </v-layout>
 		<v-layout row class="mx-auto" style="max-width: 100vw;" align-center justify-center>
@@ -102,7 +102,7 @@
       </v-col>
     </v-layout>
 
-		<h3 class="mx-5">Delivery Info</h3>
+		<h3 class="mx-5">{{ $t('delin') }}</h3>
     <p v-if="user" text-wrap class="mx-5">{{user.primary_address}}</p>
     <p v-if="user" class="mx-5 mt-n4">{{user.name}}</p>
     <p v-if="user" class="mx-5 mt-n4">{{user.mobile_phone}}</p>
@@ -116,7 +116,7 @@
         color="#FFB300"
         tile
         class="buttons mt-4 mb-8"
-        depressed>Edit Delivery Address
+        depressed>{{ $t('editdelin') }}
       </v-btn>
       <v-dialog v-model="dialogdelivery" max-width="350">
         <v-card center class="pt-12 pb-12">
@@ -132,7 +132,7 @@
           <v-form ref="form" lazy-validation class="mx-8">
             <el-input
               class="mb-8"
-              placeholder="Your name"
+              placeholder="Your name 姓名"
               v-model.trim="user.name"
               clearable>
             </el-input>
@@ -141,13 +141,13 @@
               class="mb-8"
               type="textarea"
               :autosize="{ minRows: 3, maxRows: 5}"
-              placeholder="Detailed delivery address"
+              placeholder="Detailed delivery address 地址"
               v-model="user.primary_address">
             </el-input>
 
             <el-input
               class="mb-8"
-              placeholder="Phone number for delivery"
+              placeholder="Phone number for delivery 电话"
               v-model.trim="user.mobile_phone"
               clearable>
             </el-input>
@@ -162,7 +162,7 @@
               tile
               class="buttons mb-3"
               depressed
-            >Save
+            >{{ $t('save') }}
             </v-btn>
           </v-layout>
         </v-card>

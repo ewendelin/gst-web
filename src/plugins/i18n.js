@@ -85,7 +85,11 @@ const messages = {
         hassub: 'Your application has been submitted. An account manager will contact you shortly and verify your account. You can start creating your vendor profile and create deals but they will not be visiable until after you have been verified.',
         deliveryName: 'Your name',
         deliveryAddress: 'Your delivery address',
-        deliveryMobile: 'Mobile phone'
+        deliveryMobile: 'Mobile phone',
+        checkout: "Checkout"，
+        wxpay: "Wechat Pay",
+        delin: "Delivery Info",
+        editdelin: "Edit Delivery Info"
     },
     'zh_CN': {
         fba: '区域',
@@ -168,7 +172,12 @@ const messages = {
         areYouSureProfile: '您确定取消该笔订单吗？',
         deliveryName: '收货人',
         deliveryAddress: '收货地址',
-        deliveryMobile: '联系电话'
+        deliveryMobile: '联系电话',
+        checkout: "点击购买"，
+        wxpay: "微信支付",
+        delin: "配送",
+        editdelin: "编辑配送"
+
     }
 };
 
