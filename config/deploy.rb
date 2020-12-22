@@ -15,10 +15,15 @@ set :domain, 'gast.world'
 set :repository, 'git@github.com:ewendelin/gst-web.git'
 
 # ====== deploy to production =======
+# merge your working branch to master
+# git pull origin master
+# git checkout production
+# git merge master
+# git push origin production
+# mina deploy -v
 set :deploy_to, '/home/production/web'
 set :application_name, 'gast-web'
-# set :branch, 'titlelength' # the last deployed branch
-set :branch, '1206' # default is master
+set :branch, 'production' # default is master
 # ====== deploy to production =======
 
 # ====== deploy to staging for test =======
