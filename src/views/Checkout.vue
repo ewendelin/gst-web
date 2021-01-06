@@ -169,8 +169,8 @@
       </v-dialog>
     </v-layout>
 
-    <div class="disc">
-		  <h4 class="mx-5" v-if="order.promotion.delivered && !user.delivery_info_verified">{{ $t('inputAddressInfo') }}</h4>
+    <div class="disc" v-if="order.promotion.delivered && !user.delivery_info_verified">
+		  <h4 class="mx-5">{{ $t('inputAddressInfo') }}</h4>
     </div>
     <h3 class="mx-5" v-if="order.id">Total: ¥ {{order.total_amount}} for {{order.quantity}} {{order.quantity > 1 ? 'sets' : 'set'}}</h3>
 		<div class="disc">
