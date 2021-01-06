@@ -75,7 +75,6 @@ task :deploy do
     # Put things that will set up an empty directory into a fully set-up
     # instance of your project.
     invoke :'git:clone'
-    invoke :'deploy:cleanup'
 
     on :launch do
       in_path(fetch(:current_path)) do
@@ -86,6 +85,8 @@ task :deploy do
         command %{NODE_ENV=production npm run build}
       end
     end
+
+    invoke :'deploy:cleanup'
   end
 
   # you can use `run :local` to run tasks on local machine before of after the deploy scripts
