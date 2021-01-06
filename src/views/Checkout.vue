@@ -8,7 +8,7 @@
 		<h3 class="mx-5">{{ $t('checkout') }}</h3>
 		<v-layout row class="mx-auto" align-center justify-center>
   		<v-btn
-        v-if="order.id"
+        v-if="order.promotion.delivered && user.delivery_info_verified || !order.promotion.delivered"
   			align-center
   			width="60%"
   			justify-center
@@ -169,7 +169,10 @@
       </v-dialog>
     </v-layout>
 
-		<h3 class="mx-5" v-if="order.id">Total: ¥ {{order.total_amount}} for {{order.quantity}} {{order.quantity > 1 ? 'sets' : 'set'}}</h3>
+    <div class="disc">
+		  <h4 class="mx-5" v-if="order.promotion.delivered && !user.delivery_info_verified">{{ $t('inputAddressInfo') }}</h4>
+    </div>
+    <h3 class="mx-5" v-if="order.id">Total: ¥ {{order.total_amount}} for {{order.quantity}} {{order.quantity > 1 ? 'sets' : 'set'}}</h3>
 		<div class="disc">
 			<h5 class="mx-5">Disclaimer:</h5>
 			<p class="mx-5 caption" font-size=".7rem">

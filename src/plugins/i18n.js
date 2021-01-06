@@ -89,7 +89,8 @@ const messages = {
         checkout: "Checkout",
         wxpay: "Wechat Pay",
         delin: "Delivery Info",
-        editdelin: "Edit Delivery Info"
+        editdelin: "Edit Delivery Info",
+        inputAddressInfo: "Pls input your receiving address before pay!"
     },
     'zh_CN': {
         fba: '区域',
@@ -176,8 +177,8 @@ const messages = {
         checkout: "点击购买",
         wxpay: "微信支付",
         delin: "配送",
-        editdelin: "编辑配送"
-
+        editdelin: "编辑配送",
+        inputAddressInfo: "付款之前请先确认配送地址"
     }
 };
 
