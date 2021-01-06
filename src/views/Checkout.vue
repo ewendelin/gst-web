@@ -8,7 +8,7 @@
 		<h3 class="mx-5">{{ $t('checkout') }}</h3>
 		<v-layout row class="mx-auto" align-center justify-center>
   		<v-btn
-        v-if="order.id && (order.promotion.delivered && user.delivery_info_verified || !order.promotion.delivered)"
+        v-if="order.promotion.delivered && user.delivery_info_verified || !order.promotion.delivered"
   			align-center
   			width="60%"
   			justify-center
