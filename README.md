@@ -1,3 +1,9 @@
+#### branches and deploy
+
+- merge a-working-branch to master in github, then merge master to production
+
+- always deploy production to production server
+
 # components-vue
 
 ## Project setup
