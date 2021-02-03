@@ -97,7 +97,7 @@
 				dialog2: false,
 				dialog1: false,
 				snackbar: false,
-				login: !(sessionStorage.getItem('token') != undefined && sessionStorage.getItem('token') != 'logout'),
+				login: !(sessionStorage.getItem('token') != undefined && sessionStorage.getItem('token') != 'undefined' && sessionStorage.getItem('token') != 'logout'),
 			};
 		},
 		methods: {
@@ -115,7 +115,7 @@
         storedToken = sessionStorage.getItem('token');
       }
 
-      if (storedToken != undefined || storedToken != null || storedToken != 'logout') {
+      if (storedToken != null && storedToken != 'undefined' && storedToken != 'logout') {
 	    	this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
 			  this.login = false;
 		  }
