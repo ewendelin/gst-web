@@ -272,14 +272,14 @@
         this.user = JSON.parse(sessionStorage.getItem('user'))
       }
       let storedToken = sessionStorage.getItem('token');
-	    if ((storedToken != undefined || storedToken != null) && storedToken != 'logout') {
+	    if ((storedToken != null && storedToken != 'undefined' && storedToken != 'logout') {
 	     this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
        this.fetchUser()
 	     this.fetchCoupons()
       }
-     //  else {
-			  // window.location.href = "https://gast.world"
-	    // }
+      else {
+			  window.location.href = "https://gast.world"
+	    }
 		},
 		data() {
 			return {
