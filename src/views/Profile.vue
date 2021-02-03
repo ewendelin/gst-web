@@ -272,7 +272,7 @@
         this.user = JSON.parse(sessionStorage.getItem('user'))
       }
       let storedToken = sessionStorage.getItem('token');
-	    if ((storedToken != null && storedToken != 'undefined' && storedToken != 'logout') {
+	    if (storedToken != null && storedToken != 'undefined' && storedToken != 'logout') {
 	     this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
        this.fetchUser()
 	     this.fetchCoupons()
