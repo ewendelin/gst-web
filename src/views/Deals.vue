@@ -101,7 +101,7 @@
 								        <v-card-title class="body-2 ml-n5 text--disabled under">¥{{promotion.original_price}}</v-card-title>
 								        <v-spacer></v-spacer>
 								        <!--@@ plus and minus button and the quantity display area -->
-								        
+
 								        <!--@@ plus and minus button and the quantity display area -->
 								    </v-row>
 								    <v-row class="mt-4 ml-1 mb-n10 pb-n10">
@@ -162,11 +162,17 @@
 											</v-card-actions>
 										</v-card>
 									</v-dialog>
-									<v-dialog v-model="promotion.deets" width="290">
+									<v-dialog v-model="promotion.deets" width="90%">
 							    		<v-layout>
-											<v-card width="290">
-												<v-img :src="promotion.image" height="250px">
-												</v-img>
+											<v-card width="90%">
+												<v-img :src="promotion.image" height="350" v-if="promotion.images == undefined || promotion.images && promotion.images.length == 0"></v-img>
+
+                        <el-carousel indicator-position="outside" height="350" v-if="promotion.images && promotion.images.length > 0">
+                          <el-carousel-item v-for="img in promotion.images" :key="img">
+                            <v-img :src="img" mode="aspectFit"></v-img>
+                          </el-carousel-item>
+                        </el-carousel>
+
 												<v-layout row class="mx-3 px-1 mb-0 pb-0">
 													<v-card-title class="mb-0 pb-0">
 														{{ promotion.title }}
@@ -309,7 +315,8 @@
             deets: false,
             dialog: false,
             dialograting: false,
-            qty: 1
+            qty: 1,
+            // images: [details.image, details.image]
           }));
           // backup all deals
           this.allDetails = this.details;
@@ -363,6 +370,19 @@
 	.under {
 		text-decoration: line-through;
 	}
+  /*.img {
+    color: #475669;
+    font-size: 18px;
+    opacity: 0.75;
+    line-height: 125px;
+    margin: 0;
+  }*/
+  /*.el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }*/
 	/*.buttonst {
 		border-radius: 5px;
 		background-color: rgba(223, 169, 55, 20%) !important;
