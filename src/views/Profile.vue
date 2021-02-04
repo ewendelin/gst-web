@@ -5,26 +5,33 @@
 			<v-list>
 				<v-list-item>
 					<v-list-item-avatar size="54" color="grey">
-						<img :src="user.wx_avatar" v-if="user" />
+            <img v-if="loggedIn" :src="user.wx_avatar"/>
 					</v-list-item-avatar>
 					<v-list-item-content>
-						<v-list-item-title class="headline" v-if="user">{{
+						<v-list-item-title class="headline" v-if="loggedIn">{{
 							user.wx_nickname
 						}}</v-list-item-title>
+            <v-list-item-title class="headline" v-if="loggedIn">
+              <v-btn
+                width="6rem"
+                dark
+                color="#07C160"
+                tile
+                class="buttons"
+                depressed
+                @click="logout()"
+              >{{ $t('userLogout') }}</v-btn>
+            </v-list-item-title>
 					</v-list-item-content>
-					<!-- <v-list-item-icon>
-						<v-btn fab text @click="editdelivery()">
-							<v-icon>mdi-pencil</v-icon>
-						</v-btn>
-					</v-list-item-icon> -->
 				</v-list-item>
 			</v-list>
 		</v-layout>
-		<h3 class="mx-5">Delivery Info</h3>
-		<p v-if="user" text-wrap class="mx-5">{{user.primary_address}}</p>
-		<p v-if="user" class="mx-5 mt-n4">{{user.name}}</p>
-		<p v-if="user" class="mx-5 mt-n4">{{user.mobile_phone}}</p>
-		<v-layout class="mx-auto" align-center justify-center>
+
+		<h3 v-if="loggedIn" class="mx-5">Delivery Info</h3>
+		<p v-if="loggedIn" text-wrap class="mx-5">{{user.primary_address}}</p>
+		<p v-if="loggedIn" class="mx-5 mt-n4">{{user.name}}</p>
+		<p v-if="loggedIn" class="mx-5 mt-n4">{{user.mobile_phone}}</p>
+		<v-layout v-if="loggedIn" class="mx-auto" align-center justify-center>
 			<v-btn
         @click.stop="dialogdelivery = true"
   			align-center
@@ -255,8 +262,6 @@
         <v-icon right>mdi-sale</v-icon>
       </v-btn>
     </v-layout>
-
-
 	</div>
 </template>
 <script>
@@ -266,43 +271,44 @@
 		name: 'Profile',
 		components: { Navbar },
 		props: { msg: String },
-		created() {
-      let u = sessionStorage.getItem('user')
-      if (u && u != 'undefined') {
-        this.user = JSON.parse(sessionStorage.getItem('user'))
-      }
-      let storedToken = sessionStorage.getItem('token');
-	    if (storedToken != null && storedToken != 'undefined' && storedToken != 'logout') {
-	     this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
-       this.fetchUser()
-	     this.fetchCoupons()
-      }
-      else {
-			  window.location.href = "https://gast.world"
-	    }
-		},
-		data() {
-			return {
-				deals: [],
-				res: [],
-				snackbar: false,
-				dialogdelivery: false,
+    data() {
+      return {
+        deals: [],
+        res: [],
+        snackbar: false,
+        dialogdelivery: false,
         user: {},
+        loggedIn: false,
         addressInfo: {
           name: '',
           primary_address: '',
           mobile_phone: ''
         }
-				//what is the data we get from the api? to put the username and avatar?
-				// user: JSON.parse(sessionStorage.getItem('user')) || {}
-			};
+      };
+    },
+		created() {
+      // let u = sessionStorage.getItem('user')
+      // if (u && u != 'undefined') {
+      //   this.user = JSON.parse(sessionStorage.getItem('user'))
+      // }
+      let storedToken = sessionStorage.getItem('token');
+	    if (storedToken != null && storedToken != 'undefined' && storedToken != 'logout') {
+       this.loggedIn = true
+	     this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+       this.fetchUser()
+	     this.fetchCoupons()
+      }
+      else {
+			  // window.location.href = window.location.origin //"https://gast.world"
+	    }
 		},
 		methods: {
 			// @@@FIXME - CAN I DO THIS???? @@@@
 			logout() {
 				// sessionStorage.clear();
         sessionStorage.setItem('token', 'logout');
-				window.location.href = "https://gast.world"
+        this.loggedIn = false
+				window.location.href = window.location.origin //"https://gast.world"
 			},
 			getProfileInfo() {
 
@@ -327,6 +333,7 @@
 				});
 			},
       fetchCoupons() {
+        let page = this
         this.$api.get(`/coupons`).then(response => {
           let deals = response.data;
           this.deals = deals.map(deals => ({
@@ -341,10 +348,13 @@
             sessionStorage.setItem('user', JSON.stringify(this.user));
           }
         }).catch(function(error) {
-          alert('fail' + error);
+          if (error.message == 'Request failed with status code 401') {
+            page.logout()
+          }
         });
       },
       fetchUser() {
+        let page = this
         this.$api.get('/users/user_info').then(response => {
           let user = response.data.user;
           // alert(user.id)
@@ -352,7 +362,9 @@
           // store the user in session
           sessionStorage.setItem('user', JSON.stringify(user));
         }).catch(function(error) {
-          alert('fail' + error);
+          if (error.message == 'Request failed with status code 401') {
+            page.logout()
+          }
         });
       },
       updateAddress() {

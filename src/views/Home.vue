@@ -4,7 +4,7 @@
 		<v-btn class="" text color="grey" to="/vendor"	>{{ $t('forVendors') }}
 			<v-icon class="pl-1">mdi-store</v-icon>
 		</v-btn>
-		<v-img height="200px" src="http://qgn108sp2.hd-bkt.clouddn.com/PastaL.png"></v-img>
+		<!-- <v-img height="200px" src="http://qgn108sp2.hd-bkt.clouddn.com/PastaL.png"></v-img> -->
 		<v-layout row class="mx-0 mt-n12">
 				<v-col cols="12">
             	<h1 class="text-center font-weight-bold" style="color:#FFB300; font-size: 3rem;">Hungry?</h1>
@@ -103,8 +103,22 @@
 		methods: {
 			wxLogin() {
         // alert('loginUrl ' + this.$config.loginUrl);
-			  window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.$config.appID}&redirect_uri=${encodeURIComponent(this.$config.loginUrl)}&response_type=code&scope=snsapi_userinfo&state=${new Date().getTime()}`
-			}
+			  window.location.href = this.weChatLoginUrl();
+			},
+      weChatLoginUrl() {
+        let userAgent = navigator.userAgent;
+        if (userAgent.includes('MicroMessenger')) {
+          // 'inside iOS or Android Wechat APP'
+          return `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.$config.appID}&redirect_uri=${encodeURIComponent(this.$config.loginUrl)}&response_type=code&scope=snsapi_userinfo&state=${new Date().getTime()}`
+        } else if (userAgent.includes('Mobile') && !userAgent.includes('MicroMessenger')) {
+          //'mobile browsers'
+          return `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.$config.appID}&redirect_uri=${encodeURIComponent(this.$config.loginUrl)}&response_type=code&scope=snsapi_userinfo&state=${new Date().getTime()}`
+        } else if (userAgent.includes('Intel') || userAgent.includes('Amd')) {
+          //'Intel OR AMD device, desktop'
+          // alert('desktop')
+          return `https://open.weixin.qq.com/connect/qrconnect?appid=${this.$config.webAppID}&redirect_uri=${encodeURIComponent(this.$config.loginUrl)}&response_type=code&scope=snsapi_login&state=desktop#wechat_redirect`
+        }
+      }
 		},
 		created() {
       let storedToken;
@@ -121,15 +135,15 @@
 		  }
       // login logic
       if (this.$route.query.code != null || this.$route.query.code != undefined) {
-        this.$api.get(`/users/login/wx_web_login?code=${this.$route.query.code}`).then((res) => {
+        this.$api.get(`/users/login/wx_web_login?code=${this.$route.query.code}&state=${this.$route.query.state}`).then((res) => {
           this.$api.defaults.headers.common['X-Auth-Token'] = res.data.user.token
           this.login = false;
           sessionStorage.setItem('token', res.data.user.token);
           sessionStorage.setItem('user', JSON.stringify(res.data.user));
-          window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
+          // window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
         })
         .catch(() => {
-          window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
+          // window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
         });
       }
 	  }
