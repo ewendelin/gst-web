@@ -15,8 +15,8 @@ const apiURLDev =  'http://localhost:3000/api/v1';
 
 const apiURL = ENV == 'production' ? apiURLProd : apiURLDev ;
 
-const loginURLProd =  'https://gast.world';
-const loginURLMobile =  'https://www.gast.world';
+const loginURLProd =  'https://www.gast.world';
+const loginURLDesktop =  'https://gast.world';
 const loginURLStaging =  'https://staging.gast.world';
 const loginURL = ENV == 'production' ? loginURLProd : loginURLStaging;
 // login logic,
@@ -40,7 +40,7 @@ Vue.prototype.$config = {};
 Vue.prototype.$config.appID = 'wx8d177cf445f8365e';
 Vue.prototype.$config.webAppID = 'wx97cb695ab516891e';
 Vue.prototype.$config.loginUrl = loginURL;
-Vue.prototype.$config.loginUrl = loginURLMobile;
+Vue.prototype.$config.loginURLDesktop = loginURLDesktop;
 Vue.prototype.$config.debug = false;
 Vue.use(ElementUI);
 Vue.prototype.$api = api;
