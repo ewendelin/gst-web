@@ -109,10 +109,10 @@
         let userAgent = navigator.userAgent;
         if (userAgent.includes('MicroMessenger')) {
           // 'inside iOS or Android Wechat APP'
-          return `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.$config.appID}&redirect_uri=${encodeURIComponent(this.$config.loginUrl)}&response_type=code&scope=snsapi_userinfo&state=${new Date().getTime()}`
+          return `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.$config.appID}&redirect_uri=${encodeURIComponent(this.$config.loginURLMobile)}&response_type=code&scope=snsapi_userinfo&state=${new Date().getTime()}`
         } else if (userAgent.includes('Mobile') && !userAgent.includes('MicroMessenger')) {
           //'mobile browsers'
-          return `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.$config.appID}&redirect_uri=${encodeURIComponent(this.$config.loginUrl)}&response_type=code&scope=snsapi_userinfo&state=${new Date().getTime()}`
+          return `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.$config.appID}&redirect_uri=${encodeURIComponent(this.$config.loginURLMobile)}&response_type=code&scope=snsapi_userinfo&state=${new Date().getTime()}`
         } else if (userAgent.includes('Intel') || userAgent.includes('Amd')) {
           //'Intel OR AMD device, desktop'
           // alert('desktop')

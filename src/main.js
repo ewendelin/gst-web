@@ -16,6 +16,7 @@ const apiURLDev =  'http://localhost:3000/api/v1';
 const apiURL = ENV == 'production' ? apiURLProd : apiURLDev ;
 
 const loginURLProd =  'https://gast.world';
+const loginURLMobile =  'https://www.gast.world';
 const loginURLStaging =  'https://staging.gast.world';
 const loginURL = ENV == 'production' ? loginURLProd : loginURLStaging;
 // login logic,
