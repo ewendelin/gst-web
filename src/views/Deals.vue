@@ -81,12 +81,12 @@
 						            class="white--text"
 					              	gradient="to bottom, rgba(0,0,0,0), rgba(0,0,0,.5)"
 					              	:src="promotion.image">
-				              			<v-row align="end" justify="center">
+				              			<!-- <v-row align="end" justify="center">
 			              					<v-card-title class="subtitle-2 white--text align-end justify-center pb-1">
 								      			<v-icon small class="white--text align-end justify-center pb-1">mdi-noodles</v-icon>
 								      				{{ promotion.statistics.available }}{{ $t('avi') }}
 											</v-card-title>
-										</v-row>
+										</v-row> -->
 			              			</v-img>
 				            	</v-avatar>
 				            	<div>
@@ -180,12 +180,12 @@
 													    </v-list-item-icon>
 													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ promotion.time_slot }}</v-list-item-title>
 													</v-list-item>
-													<v-list-item class="mb-0 pb-0">
+													<!-- <v-list-item class="mb-0 pb-0">
 													    <v-list-item-icon class="pr-0 mr-0">
 													        <v-icon small>mdi-noodles</v-icon>
 													    </v-list-item-icon>
 													    <v-list-item-title class="font-weight-bold" style="font-size:.8rem;">{{ promotion.statistics.available }}{{ $t('avi') }}</v-list-item-title>
-													    </v-list-item>
+													    </v-list-item> -->
 													<v-spacer></v-spacer>
 													<v-card-text class="py-0">
 														{{ promotion.description }}
@@ -273,9 +273,14 @@
 					promotion.dialog = false;
           page.claimed = true;
 				})
-				.catch(function(error) {
-					alert('fail' + error);
-				});
+				// .catch(function(error) {
+				// 	// alert('fail' + error);
+				// 	alert("Whoops! Seems like you are not logged in yet, please login through the home page, or profile page before adding items to cart! " + error);
+				// 	
+				// });
+				.catch(() => {
+          		window.location.href = window.location.origin + '/profile'
+        });
 			},
 			submitUpload() {
 		    this.$refs.upload.submit();
