@@ -78,8 +78,6 @@
 				                height=""
 				                tile>
 					                <v-img
-						            class="white--text"
-					              	gradient="to bottom, rgba(0,0,0,0), rgba(0,0,0,.5)"
 					              	:src="promotion.image">
 				              			<!-- <v-row align="end" justify="center">
 			              					<v-card-title class="subtitle-2 white--text align-end justify-center pb-1">
