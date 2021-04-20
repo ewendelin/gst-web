@@ -11,7 +11,7 @@ require 'mina/deploy'
 
 set :user, 'deploy'          # Username in the server to SSH to.
 set :forward_agent, true     # SSH forward_agent.
-set :domain, 'web-server.gast.world'
+set :domain, 'www.gast.world'
 set :repository, 'git@github.com:ewendelin/gst-web.git'
 
 # ====== deploy to production =======
@@ -23,6 +23,7 @@ set :repository, 'git@github.com:ewendelin/gst-web.git'
 # mina deploy -v
 set :deploy_to, '/home/deploy/production/gast-web'
 set :application_name, 'gast-web'
+# set :branch, ENV['BRANCH'] || `git symbolic-ref --short HEAD`.strip # current branch
 set :branch, 'production' # default is master
 # ====== deploy to production =======
 

@@ -10,7 +10,7 @@ import i18n from '@/plugins/i18n';
 
 const ENV = 'production'
 // const ENV = 'development'
-const apiURLProd =  'https://server.gast.world/api/v1';
+const apiURLProd =  'https://api.gast.world/api/v1';
 const apiURLDev =  'http://localhost:3000/api/v1';
 
 const apiURL = ENV == 'production' ? apiURLProd : apiURLDev ;
