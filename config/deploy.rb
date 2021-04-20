@@ -9,9 +9,9 @@ require 'mina/deploy'
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :user, 'root'          # Username in the server to SSH to.
+set :user, 'deploy'          # Username in the server to SSH to.
 set :forward_agent, true     # SSH forward_agent.
-set :domain, 'gast.world'
+set :domain, 'www.gast.world'
 set :repository, 'git@github.com:ewendelin/gst-web.git'
 
 # ====== deploy to production =======
@@ -21,8 +21,9 @@ set :repository, 'git@github.com:ewendelin/gst-web.git'
 # git merge master
 # git push origin production
 # mina deploy -v
-set :deploy_to, '/home/production/web'
+set :deploy_to, '/home/deploy/production/gast-web'
 set :application_name, 'gast-web'
+# set :branch, ENV['BRANCH'] || `git symbolic-ref --short HEAD`.strip # current branch
 set :branch, 'production' # default is master
 # ====== deploy to production =======
 
