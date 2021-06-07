@@ -178,7 +178,7 @@
 													    <v-list-item-icon class="pr-0 mr-0">
 													        <v-icon small>mdi-alert-circle</v-icon>
 													    </v-list-item-icon>
-													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">Expiry date: {{ promotion.end_date }}</v-list-item-title>
+													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ $t('exp') }}{{ promotion.end_date }}</v-list-item-title>
 													</v-list-item>
 													<v-list-item class="mb-0 pb-0">
 													    <v-list-item-icon class="pr-0 mr-0">
