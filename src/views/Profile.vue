@@ -173,9 +173,9 @@
 													</v-card-title>
 													<v-list-item class="mt-1 mb-n3">
 													    <v-list-item-icon class="pr-0 mr-0">
-													        <v-icon small>mdi-clock</v-icon>
+													        <v-icon small>mdi-alert-circle</v-icon>
 													    </v-list-item-icon>
-													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.promotion.time_slot }}</v-list-item-title>
+													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.promotion.end_date }}</v-list-item-title>
 													</v-list-item>
 													<v-spacer></v-spacer>
 													<v-card-text class="py-0">
