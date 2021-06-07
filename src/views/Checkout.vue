@@ -46,8 +46,6 @@
 									<v-card-subtitle class="caption justify-center mb-n9 pr-0 cols-5 text-truncate mb-3" style="font-size:.5rem;">
 					      				<v-icon small class="align-end justify-center mr-1">mdi-alert-circle</v-icon> {{ $t('exp') }}
 					      					{{order.promotion.end_date}}
-                        }
-                        }
 									</v-card-subtitle>
 									<v-row class="mt-3 ml-1">
 			        			<v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{order.amount}}</v-card-title>

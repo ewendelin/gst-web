@@ -115,7 +115,7 @@
 	                				>{{ deal.promotion.title }} {{deal.order.quantity}} {{deal.order.quantity > 1 ? 'sets' : 'set'}}</v-card-title>
 									<v-card-subtitle class="caption justify-center mb-n9 pr-0 cols-5 text-truncate" style="font-size:.5rem;">
 					      				<v-icon small class="align-end justify-center mr-1">mdi-clock-outline</v-icon>
-					      					{{ deal.promotion.time_slot }}
+					      					{{$t('exp')}} {{ deal.promotion.end_date }}
 									</v-card-subtitle>
 									<v-row
 									class="mt-3 ml-1 mb-n12 pb-n12">
@@ -175,7 +175,7 @@
 													    <v-list-item-icon class="pr-0 mr-0">
 													        <v-icon small>mdi-alert-circle</v-icon>
 													    </v-list-item-icon>
-													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ deal.promotion.end_date }}</v-list-item-title>
+													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{$t('exp')}} {{ deal.promotion.end_date }}</v-list-item-title>
 													</v-list-item>
 													<v-spacer></v-spacer>
 													<v-card-text class="py-0">
