@@ -93,8 +93,8 @@
 				                	<v-card-title class="mt-n1 mb-2 pr-0 cols-3 text-truncate" style="font-size:1.1rem;">{{ promotion.title }}</v-card-title>
 									<!-- <v-spacer></v-spacer> -->
 			              			<v-card-subtitle class="caption align-end justify-center mb-n8 pr-0 cols-5 text-truncate" style="font-size:.5rem;">
-								      	<v-icon small class="align-end justify-center mr-1">mdi-clock-outline</v-icon>
-								      	{{ promotion.time_slot }}
+								      	<v-icon small class="align-end justify-center mr-1">mdi-alert-circle</v-icon>{{ $t('exp') }}{{ promotion.end_date }}
+								      	
 									</v-card-subtitle>
 									<v-row class="mt-3 ml-1 mb-n12 pb-n12">
 								        <v-card-title class="body-1 deep-orange--text" style="font-size:1.1rem; font-weight: bold;">¥{{promotion.price}}</v-card-title>
@@ -176,9 +176,9 @@
 												<v-list>
 													<v-list-item class="mt-1 mb-n3">
 													    <v-list-item-icon class="pr-0 mr-0">
-													        <v-icon small>mdi-clock-time-four</v-icon>
+													        <v-icon small>mdi-alert-circle</v-icon>
 													    </v-list-item-icon>
-													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">{{ promotion.time_slot }}</v-list-item-title>
+													    <v-list-item-title class="text-wrap font-weight-bold" style="font-size:.8rem;">Expiry date: {{ promotion.end_date }}</v-list-item-title>
 													</v-list-item>
 													<v-list-item class="mb-0 pb-0">
 													    <v-list-item-icon class="pr-0 mr-0">

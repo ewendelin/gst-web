@@ -90,6 +90,7 @@ const messages = {
         wxpay: "Wechat Pay",
         delin: "Delivery Info",
         editdelin: "Edit Delivery Info",
+        exp: "Expiry Date: ",
         inputAddressInfo: "Pls input your receiving address before pay!"
     },
     'zh_CN': {
@@ -178,6 +179,7 @@ const messages = {
         wxpay: "微信支付",
         delin: "配送",
         editdelin: "编辑配送",
+        exp: "保质期: ",
         inputAddressInfo: "付款之前请先确认配送地址"
     }
 };

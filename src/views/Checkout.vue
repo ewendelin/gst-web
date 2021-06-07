@@ -177,11 +177,10 @@
 			<h5 class="mx-5">Disclaimer:</h5>
 			<p class="mx-5 caption" font-size=".7rem">
 			亲爱的寻饱伙伴们，
-
-			小饱诚挚地感谢您的陪伴及您的耐心，小饱每天都在努力地发展平台，与此同时，小饱也期待听到您的意见或建议。如果您对寻饱平台有任何好的想法，欢迎您联系我们：ellenwendelin@gmail.com  小饱期待与您一起成长！
+			周四发货，请在周三下午 6 点前下单。周五发货，请在周四下午 5 点前下单。
 
 			Dear Xunbao customers.
-			We want to begin by thanking you for your support early on in our journey and we are asking you to please be patient with us. We are still figuring things out and working hard every day to be better. If you have any feedback or issues, email at ellenwendelin@gmail.com and we will do our best to help.
+			Orders placed before 18:00 on Wednesday will be delivered next day Thursday. Orders placed before 17:00 on Thursday will be delivered next day Friday.
 			</p>
 		</div>
 	</div>
