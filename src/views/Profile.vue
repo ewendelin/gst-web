@@ -183,7 +183,7 @@
 													</v-card-text>
 												</v-list>
 											</v-layout>
-												<v-layout row class="mx-5">
+												<!-- <v-layout row class="mx-5">
 													<v-list>
 														<v-list-item>
 															<v-list-item-avatar size="42" color="grey">
@@ -211,7 +211,7 @@
 															{{ deal.vendor.description }}
 														</v-card-text>
 													</v-list>
-												</v-layout>
+												</v-layout> -->
 											</v-card>
 										</v-layout>
 									</v-dialog>

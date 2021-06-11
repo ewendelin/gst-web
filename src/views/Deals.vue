@@ -204,7 +204,7 @@
 														{{ $t('claim') }}
 													</v-btn>
 												</v-card-actions>
-												<v-layout row class="mx-5">
+												<!-- <v-layout row class="mx-5">
 													<v-list>
 														<v-list-item>
 															<v-list-item-avatar size="42" color="grey">
@@ -228,7 +228,7 @@
 													    </v-list-item>
 														<v-card-text class="mb-1 mt-0 pt-0">{{ promotion.vendor.description }}</v-card-text>
 													</v-list>
-												</v-layout>
+												</v-layout> -->
 											</v-card>
 										</v-layout>
 									</v-dialog>
