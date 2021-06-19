@@ -326,7 +326,11 @@
           promotion.qty -= 1
           this.promotion = promotion
         }
-      }
+      },
+      wxLogin() {
+	      alert('loginUrl ' + this.$config.loginUrl);
+			  window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.$config.appID}&redirect_uri=${encodeURIComponent(this.$config.loginUrl)}&response_type=code&scope=snsapi_userinfo&state=${new Date().getTime()}`
+			}
 		},
 	  created () {
 			let storedToken = sessionStorage.getItem('token');
@@ -348,6 +352,7 @@
           window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
         });
 	  	}
+	  	this.wxLogin();
       this.fetchDeals();
   	}
 	};
