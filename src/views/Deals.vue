@@ -328,17 +328,20 @@
         }
       },
       wxLogin() {
-	      alert('loginUrl ' + this.$config.loginUrl);
+	      // alert('loginUrl ' + this.$config.loginUrl);
 			  window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.$config.appID}&redirect_uri=${encodeURIComponent(this.$config.loginUrl)}&response_type=code&scope=snsapi_userinfo&state=${new Date().getTime()}`
 			}
 		},
 	  created () {
 			let storedToken = sessionStorage.getItem('token');
-			let login = !(storedToken != undefined && storedToken != 'logout')
+			let login = !(storedToken != undefined && storedToken != null && storedToken != 'logout' && storedToken != '')
 			this.login = login;
 
-			if ((storedToken != null || storedToken != undefined) && storedToken != 'logout') {
-        this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+			if (login) {
+				this.wxLogin();
+			} else {
+				this.$api.defaults.headers.common['X-Auth-Token'] = storedToken
+				this.fetchDeals();
 			}
 
 			if (this.$route.query.code != null || this.$route.query.code != undefined) {
@@ -352,8 +355,6 @@
           window.location.href = window.location.origin + `?time=${new Date().getTime()}`;
         });
 	  	}
-	  	this.wxLogin();
-      this.fetchDeals();
   	}
 	};
 </script>
